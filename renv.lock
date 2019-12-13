@@ -8,9 +8,18 @@
       }
     ]
   },
-  "Packages": [],
   "Python": {
     "Version": "3.7.5",
-    "Type": "virtualenv"
+    "Type": "virtualenv",
+    "Name": null
+  },
+  "Packages": {
+    "renv": {
+      "Package": "renv",
+      "Version": "0.8.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4ee3e91b679fbd7102c1fd51f9a4bc59"
+    }
   }
 }
