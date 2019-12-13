@@ -9,8 +9,8 @@
     ]
   },
   "Python": {
-    "Version": "3.7.5",
-    "Type": "virtualenv",
+    "Version": "3.6.9 :: Anaconda, Inc.",
+    "Type": "conda",
     "Name": null
   },
   "Packages": {
@@ -194,6 +194,18 @@
       "RemotePkgType": "macos",
       "RemoteSha": "1.4-1",
       "Hash": "c25d49739abb6ebf4b3d0c3565574226"
+    },
+    "conflicted": {
+      "Package": "conflicted",
+      "Version": "1.0.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemoteRef": "conflicted",
+      "RemoteRepos": "https://cran.rstudio.com",
+      "RemotePkgType": "macos",
+      "RemoteSha": "1.0.4",
+      "Hash": "4d85496bf78919616ac1bb981032b625"
     },
     "crayon": {
       "Package": "crayon",
@@ -588,6 +600,18 @@
       "RemotePkgType": "macos",
       "RemoteSha": "1.1",
       "Hash": "80e1f73841614fa35f82a85d66fb41da"
+    },
+    "memoise": {
+      "Package": "memoise",
+      "Version": "1.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemoteRef": "memoise",
+      "RemoteRepos": "https://cran.rstudio.com",
+      "RemotePkgType": "macos",
+      "RemoteSha": "1.1.0",
+      "Hash": "22ca9b285c10f5dd8c4d1e90231ce558"
     },
     "mgcv": {
       "Package": "mgcv",
