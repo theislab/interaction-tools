@@ -17,19 +17,61 @@ Introduction {.unnumbered}
 ============
 
 In this document we are going to run through the example analysis for the
-CellPhoneDB tool and have a look at the output it produces.
+**CellPhoneDB** tool and have a look at the output it produces. More information
+about **CellPhoneDB** can be found at https://www.cellphonedb.org/.
 
-CellPhoneDB
-===========
+Input
+=====
 
-CellPhoneDB is designed to be a command line tool so we will run the following
-commands in a BASH shell. CellPhoneDB takes two input files, a table of
-metadata for each cell and a counts matrix. The test dataset has 10 cells and
-17198 genes.
+**CellPhoneDB** takes two input files, a table of metadata for each cell and a
+counts matrix.
+
+test_meta.txt
+-------------
+
+This file contains cell type assignments for each cell in the dataset.
+
+```{r input-meta}
+meta <- read_tsv(
+    fs::path(PATHS$cellphonedb_in, "test_meta.txt"),
+    col_types = cols(
+        Cell      = col_character(),
+        cell_type = col_character()
+    )
+)
+
+skim(meta)
+```
+
+test_counts.txt
+-------------
+
+This file contains the count expression matrix.
+
+```{r input-counts}
+counts <- read_tsv(
+    fs::path(PATHS$cellphonedb_in, "test_counts.txt"),
+    col_types = cols(
+        .default = col_double(),
+        Gene     = col_character()
+    )
+)
+
+skim(counts)
+```
+
+The small test dataset contains `r nrow(counts)` genes and `r nrow(counts)`
+cells.
+
+Analysis
+========
+
+**CellPhoneDB** is designed to be a command line tool so we will run the
+following commands in a BASH shell. Here we run it with the full statistical 
+analysis.
 
 ```{r export-conda-path}
-conda_env <- reticulate::conda_list()[1, 2]
-conda_env <- fs::path_dir(fs::path_dir(conda_env))
+conda_env <- fs::path(renv::project(), "renv/python/condaenvs/renv-python")
 Sys.setenv(conda_env = conda_env)
 ```
 
@@ -42,6 +84,124 @@ cellphonedb method statistical_analysis \
     --threads 1 \
     data/cellphonedb/test_meta.txt \
     data/cellphonedb/test_counts.txt
+```
+
+Output
+======
+
+**CellPhoneDB** produces four output files. Let's have a look at each of these
+and see what they contain:
+
+deconvoluted.txt
+----------------
+
+According to the **CellPhoneDB** documentation this file provides additional
+information about the interacting pairs. Specifically it descibes relationships
+between genes, complexes and expression in cell types.
+
+```{r output-deconvoluted}
+deconvoluted <- read_tsv(
+    fs::path(OUT_DIR, "deconvoluted.txt"),
+    col_types = cols(
+        gene_name         = col_character(),
+        uniprot           = col_character(),
+        is_complex        = col_logical(),
+        protein_name      = col_character(),
+        complex_name      = col_character(),
+        id_cp_interaction = col_character(),
+        Myeloid           = col_double(),
+        NKcells_0         = col_double(),
+        NKcells_1         = col_double(),
+        Tcells            = col_double()
+    )
+)
+
+skim(deconvoluted)
+```
+
+means.txt
+---------
+
+This file contains mean values for each ligand-receptor interaction.
+
+```{r output-means}
+means <- read_tsv(
+    fs::path(OUT_DIR, "means.txt"),
+    col_types = cols(
+        .default            = col_double(),
+        id_cp_interaction   = col_character(),
+        interacting_pair    = col_character(),
+        partner_a           = col_character(),
+        partner_b           = col_character(),
+        gene_a              = col_character(),
+        gene_b              = col_character(),
+        secreted            = col_logical(),
+        receptor_a          = col_logical(),
+        receptor_b          = col_logical(),
+        annotation_strategy = col_character(),
+        is_integrin         = col_logical()
+    )
+)
+
+skim(means)
+```
+
+It includes information about each ligand-receptor pair as well as scores for
+each pair of cell types.
+
+pvalues.txt
+-----------
+
+This file is similar to `means.txt` but contains p-values from the statistical
+test instead of scores.
+
+```{r output-pvalues}
+pvalues <- read_tsv(
+    fs::path(OUT_DIR, "pvalues.txt"),
+    col_types = cols(
+        .default = col_double(),
+        id_cp_interaction   = col_character(),
+        interacting_pair    = col_character(),
+        partner_a           = col_character(),
+        partner_b           = col_character(),
+        gene_a              = col_character(),
+        gene_b              = col_character(),
+        secreted            = col_logical(),
+        receptor_a          = col_logical(),
+        receptor_b          = col_logical(),
+        annotation_strategy = col_character(),
+        is_integrin         = col_logical()
+    )
+)
+
+skim(pvalues)
+```
+
+significant_means.txt
+---------------------
+
+This file contains mean values for signitificant ligand-receptor interactions.
+
+```{r output-sig-means}
+sig_means <- read_tsv(
+    fs::path(OUT_DIR, "significant_means.txt"),
+    col_types = cols(
+        .default            = col_double(),
+        id_cp_interaction   = col_character(),
+        interacting_pair    = col_character(),
+        partner_a           = col_character(),
+        partner_b           = col_character(),
+        gene_a              = col_character(),
+        gene_b              = col_character(),
+        secreted            = col_logical(),
+        receptor_a          = col_logical(),
+        receptor_b          = col_logical(),
+        annotation_strategy = col_character(),
+        is_integrin         = col_logical()
+    )
+)
+
+skim(sig_means)
 ```
 
 Summary {.unnumbered}

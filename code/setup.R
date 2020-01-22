@@ -11,6 +11,7 @@ suppressPackageStartupMessages({
     # Presentation
     library("knitr")
     library("jsonlite")
+    library("skimr")
     # Tidyverse
     library("tidyverse")
 })
@@ -72,5 +73,5 @@ theme_set(theme_minimal())
 #==============================================================================#
 
 PATHS <- list(
-
+    cellphonedb_in = here("data", "cellphonedb")
 )
