@@ -343,10 +343,28 @@ and _Save Link As..._ to download the results.
 ```{r output}
 kable(data.frame(
     File = c(
-        download_link("parameters.json", OUT_DIR)
+        download_link("parameters.json", OUT_DIR),
+        download_link("deconvoluted.txt", OUT_DIR),
+        download_link("means.txt", OUT_DIR),
+        download_link("pvalues.txt", OUT_DIR),
+        download_link("significant_means.txt", OUT_DIR),
+        download_link("dotplot.png", OUT_DIR),
+        download_link("heatmap_counts.png", OUT_DIR),
+        download_link("heatmap_logcounts.png", OUT_DIR),
+        download_link("count_network.txt", OUT_DIR),
+        download_link("interactions_count.txt", OUT_DIR)
     ),
     Description = c(
-        "Parameters set and used in this analysis"
+        "Parameters set and used in this analysis",
+        "Deconvoluted output from CellPhoneDB",
+        "Means output from CellPhoneDB",
+        "P-values output from CellPhoneDB",
+        "Significant means output from CellPhoneDB",
+        "Dotplot plot from CellPhoneDB",
+        "Counts heatmap plot from CellPhoneDB",
+        "Log-counts heatmap plot from CellPhoneDB",
+        "Count network output from CellPhoneDB",
+        "Interactions count output from CellPhoneDB"
     )
 ))
 ```
