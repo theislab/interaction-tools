@@ -70,14 +70,9 @@ Analysis
 following commands in a BASH shell. Here we run it with the full statistical 
 analysis.
 
-```{r export-conda-path}
-conda_env <- fs::path(renv::project(), "renv/python/condaenvs/renv-python")
-Sys.setenv(conda_env = conda_env)
-```
-
-```{bash cellphonedb, echo = TRUE}
+```{bash cellphonedb}
 eval "$(conda shell.bash hook)"
-conda activate $conda_env
+conda activate $CONDA_ENV
 
 cellphonedb method statistical_analysis \
     --output-path output/11-cellphonedb.Rmd \
@@ -202,6 +197,125 @@ sig_means <- read_tsv(
 )
 
 skim(sig_means)
+```
+
+Plotting
+========
+
+**CellPhoneDB** also has some plotting functions.
+
+Dotplot
+-------
+
+```{bash make-dotplot}
+eval "$(conda shell.bash hook)"
+conda activate $CONDA_ENV
+
+cellphonedb plot dot_plot \
+    --means-path output/11-CellPhoneDB.Rmd/means.txt \
+    --pvalues-path output/11-CellPhoneDB.Rmd/pvalues.txt \
+    --output-path output/11-CellPhoneDB.Rmd/ \
+    --output-name dotplot.png
+```
+
+This is a dotplot of the mean expression of the ligand-receptor pair in each
+pair of cell types.
+
+```{r dotplot}
+fig_dir <- here("docs", "figure", DOCNAME)
+fs::dir_create(fig_dir)
+fs::file_copy(
+    fs::path(OUT_DIR, "dotplot.png"),
+    fs::path(fig_dir, "dotplot.png"),
+    overwrite = TRUE
+)
+
+include_graphics(fs::path("figure", DOCNAME, "dotplot.png"))
+```
+
+Heatmap
+-------
+**CellPhoneDB** also has a heatmap plotting function. This function also
+produces some additional output files.
+
+```{bash make-heatmap}
+eval "$(conda shell.bash hook)"
+conda activate $CONDA_ENV
+
+cellphonedb plot heatmap_plot \
+    --pvalues-path output/11-CellPhoneDB.Rmd/pvalues.txt \
+    --output-path output/11-CellPhoneDB.Rmd/ \
+    --count-name heatmap_counts.png \
+    --log-name heatmap_logcounts.png \
+    --count-network-name count_network.txt \
+    --interaction-count-name interactions_count.txt \
+    data/cellphonedb/test_meta.txt
+```
+
+### Counts
+
+This is a heatmap of the count of interactions between cell types.
+
+```{r heatmap-counts}
+fig_dir <- here("docs", "figure", DOCNAME)
+fs::dir_create(fig_dir)
+fs::file_copy(
+    fs::path(OUT_DIR, "heatmap_counts.png"),
+    fs::path(fig_dir, "heatmap_counts.png"),
+    overwrite = TRUE
+)
+
+include_graphics(fs::path("figure", DOCNAME, "heatmap_counts.png"))
+```
+
+### Log-counts
+
+This is a heatmap of the log-count of interactions between cell types.
+
+```{r heatmap-logcounts}
+fig_dir <- here("docs", "figure", DOCNAME)
+fs::dir_create(fig_dir)
+fs::file_copy(
+    fs::path(OUT_DIR, "heatmap_logcounts.png"),
+    fs::path(fig_dir, "heatmap_logcounts.png"),
+    overwrite = TRUE
+)
+
+include_graphics(fs::path("figure", DOCNAME, "heatmap_logcounts.png"))
+```
+
+### count_network.txt
+
+This file contains a count of the directional interactions between different
+cell types used to create the heatmaps.
+
+```{r heatmap-network}
+network <- read_tsv(
+    fs::path(OUT_DIR, "count_network.txt"),
+    col_types = cols(
+        SOURCE = col_character(),
+        TARGET = col_character(),
+        count  = col_double()
+    )
+)
+
+skim(network)
+```
+
+### interactions_count.txt
+
+This file contains a count of total number of interactions for each cell type.
+
+```{r heatmap-interactions}
+interactions <- read_tsv(
+    fs::path(OUT_DIR, "interactions_count.txt"),
+    col_types = cols(
+        X1 = col_character(),
+        all_sum = col_double()
+    )
+)
+
+skim(interactions)
 ```
 
 Summary {.unnumbered}
