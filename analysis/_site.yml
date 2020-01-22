@@ -19,4 +19,5 @@ output:
     theme: cosmo
     highlight: textmate
     code_folding: hide
+    code_download: true
     df_print: paged
