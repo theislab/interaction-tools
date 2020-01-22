@@ -1,0 +1,3164 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>CellPhoneDB example</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Interaction tools</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/lazappi/interaction-tools">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">CellPhoneDB example</h1>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-01-22
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>interaction-tools/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20191213code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20191213)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20191213code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20191213)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreeeb2444175817c7c6680a0c2f91f78e46307c3033targetblankeb24441a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/eb2444175817c7c6680a0c2f91f78e46307c3033" target="_blank">eb24441</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreeeb2444175817c7c6680a0c2f91f78e46307c3033targetblankeb24441a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    .drake/
+    Ignored:    data/cellphonedb/
+    Ignored:    renv/library/
+    Ignored:    renv/python/
+    Ignored:    renv/staging/
+
+Untracked files:
+    Untracked:  output/11-CellPhoneDB.Rmd/
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/eb2444175817c7c6680a0c2f91f78e46307c3033/analysis/11-CellPhoneDB.Rmd" target="_blank">eb24441</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-01-22
+</td>
+<td>
+Add output links
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/dbeb3cdd36f9a8ab98d52e8a7bcb5f7977932a66/analysis/11-CellPhoneDB.Rmd" target="_blank">dbeb3cd</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-01-22
+</td>
+<td>
+Add plot to CellPhoneDB
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/2335199de1cc87422707e6e2ff1883414429797a/analysis/11-CellPhoneDB.Rmd" target="_blank">2335199</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-01-22
+</td>
+<td>
+Add input and output to CellPhoneDB
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/1ba068333e30fb01d3bd36ce23b50897e4b24d8d/analysis/11-CellPhoneDB.Rmd" target="_blank">1ba0683</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2019-12-13
+</td>
+<td>
+Set up CellPhoneDB test
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code># Setup document
+source(here::here(&quot;code&quot;, &quot;setup.R&quot;))
+
+# Function dependencies
+invisible(drake::readd(download_link))</code></pre>
+<div id="introduction" class="section level1 unnumbered">
+<h1>Introduction</h1>
+<p>In this document we are going to run through the example analysis for the <strong>CellPhoneDB</strong> tool and have a look at the output it produces. More information about <strong>CellPhoneDB</strong> can be found at <a href="https://www.cellphonedb.org/" class="uri">https://www.cellphonedb.org/</a>.</p>
+</div>
+<div id="input" class="section level1">
+<h1><span class="header-section-number">1</span> Input</h1>
+<p><strong>CellPhoneDB</strong> takes two input files, a table of metadata for each cell and a counts matrix.</p>
+<div id="test_meta.txt" class="section level2">
+<h2><span class="header-section-number">1.1</span> test_meta.txt</h2>
+<p>This file contains cell type assignments for each cell in the dataset.</p>
+<pre class="r"><code>meta &lt;- read_tsv(
+    fs::path(PATHS$cellphonedb_in, &quot;test_meta.txt&quot;),
+    col_types = cols(
+        Cell      = col_character(),
+        cell_type = col_character()
+    )
+)
+
+skim(meta)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">meta</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">10</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Cell</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">22</td>
+<td align="right">22</td>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">cell_type</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="test_counts.txt" class="section level2">
+<h2><span class="header-section-number">1.2</span> test_counts.txt</h2>
+<p>This file contains the count expression matrix.</p>
+<pre class="r"><code>counts &lt;- read_tsv(
+    fs::path(PATHS$cellphonedb_in, &quot;test_counts.txt&quot;),
+    col_types = cols(
+        .default = col_double(),
+        Gene     = col_character()
+    )
+)
+
+skim(counts)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">counts</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">17198</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">11</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">10</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gene</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">17198</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">d-pos_AAACCTGAGCAGGTCA</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.14</td>
+<td align="right">0.50</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6.31</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">d-pos_AAACCTGGTACCGAGA</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.17</td>
+<td align="right">0.49</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">5.86</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">d-pos_AAACCTGTCGCCATAA</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.15</td>
+<td align="right">0.50</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6.09</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">d-pos_AAACGGGTCAGTTGAC</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.15</td>
+<td align="right">0.50</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6.07</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">d-pos_AAAGATGCATTGAGCT</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.19</td>
+<td align="right">0.46</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6.01</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">d-pos_AAAGATGTCCAAAGTC</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.16</td>
+<td align="right">0.50</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6.27</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">d-pos_AAAGCAAAGAGGACGG</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.14</td>
+<td align="right">0.46</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">7.16</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">d-pos_AAAGCAACACATTCGA</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.15</td>
+<td align="right">0.50</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6.62</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">d-pos_AAAGTAGAGAGCCCAA</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.17</td>
+<td align="right">0.49</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">5.86</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">d-pos_AAAGTAGCAAGCTGAG</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.17</td>
+<td align="right">0.49</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6.17</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<p>The small test dataset contains 17198 genes and 17198 cells.</p>
+</div>
+</div>
+<div id="analysis" class="section level1">
+<h1><span class="header-section-number">2</span> Analysis</h1>
+<p><strong>CellPhoneDB</strong> is designed to be a command line tool so we will run the following commands in a BASH shell. Here we run it with the full statistical analysis.</p>
+<pre class="bash"><code>eval &quot;$(conda shell.bash hook)&quot;
+conda activate $CONDA_ENV
+
+cellphonedb method statistical_analysis \
+    --output-path output/11-cellphonedb.Rmd \
+    --threads 1 \
+    data/cellphonedb/test_meta.txt \
+    data/cellphonedb/test_counts.txt</code></pre>
+<pre><code>[ ][APP][22/01/20-16:00:29][WARNING] Latest local available version is `v2.0.0`, using it
+[ ][APP][22/01/20-16:00:29][WARNING] User selected downloaded database `v2.0.0` is available, using it
+[ ][CORE][22/01/20-16:00:29][INFO] Initializing SqlAlchemy CellPhoneDB Core
+[ ][CORE][22/01/20-16:00:29][INFO] Using custom database at /Users/Luke/.cpdb/releases/v2.0.0/cellphone.db
+[ ][APP][22/01/20-16:00:29][INFO] Launching Method cpdb_statistical_analysis_local_method_launcher
+[ ][APP][22/01/20-16:00:29][INFO] Launching Method _set_paths
+[ ][APP][22/01/20-16:00:29][WARNING] Output directory (output/11-cellphonedb.Rmd) exist and is not empty. Result can overwrite old results
+[ ][APP][22/01/20-16:00:29][INFO] Launching Method _load_meta_counts
+[ ][CORE][22/01/20-16:00:29][INFO] Launching Method cpdb_statistical_analysis_launcher
+[ ][CORE][22/01/20-16:00:29][INFO] Launching Method _counts_validations
+[ ][CORE][22/01/20-16:00:30][INFO] [Cluster Statistical Analysis Simple] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
+[ ][CORE][22/01/20-16:00:30][INFO] Running Simple Prefilters
+[ ][CORE][22/01/20-16:00:30][INFO] Running Real Simple Analysis
+[ ][CORE][22/01/20-16:00:30][INFO] Running Statistical Analysis
+/Users/Luke/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
+  warnings.warn(message, FutureWarning)
+[ ][CORE][22/01/20-16:02:43][INFO] Building Pvalues result
+[ ][CORE][22/01/20-16:02:47][INFO] Building Simple results
+[ ][CORE][22/01/20-16:02:47][INFO] [Cluster Statistical Analysis Complex] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
+[ ][CORE][22/01/20-16:02:47][INFO] Running Complex Prefilters
+[ ][CORE][22/01/20-16:02:49][INFO] Running Real Complex Analysis
+[ ][CORE][22/01/20-16:02:49][INFO] Running Statistical Analysis
+[ ][CORE][22/01/20-16:05:30][INFO] Building Pvalues result
+[ ][CORE][22/01/20-16:05:32][INFO] Building Complex results</code></pre>
+</div>
+<div id="output" class="section level1">
+<h1><span class="header-section-number">3</span> Output</h1>
+<p><strong>CellPhoneDB</strong> produces four output files. Let’s have a look at each of these and see what they contain:</p>
+<div id="deconvoluted.txt" class="section level2">
+<h2><span class="header-section-number">3.1</span> deconvoluted.txt</h2>
+<p>According to the <strong>CellPhoneDB</strong> documentation this file provides additional information about the interacting pairs. Specifically it descibes relationships between genes, complexes and expression in cell types.</p>
+<pre class="r"><code>deconvoluted &lt;- read_tsv(
+    fs::path(OUT_DIR, &quot;deconvoluted.txt&quot;),
+    col_types = cols(
+        gene_name         = col_character(),
+        uniprot           = col_character(),
+        is_complex        = col_logical(),
+        protein_name      = col_character(),
+        complex_name      = col_character(),
+        id_cp_interaction = col_character(),
+        Myeloid           = col_double(),
+        NKcells_0         = col_double(),
+        NKcells_1         = col_double(),
+        Tcells            = col_double()
+    )
+)
+
+skim(deconvoluted)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">deconvoluted</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">483</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">10</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">5</td>
+</tr>
+<tr class="odd">
+<td align="left">logical</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">gene_name</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">183</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">uniprot</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">4</td>
+<td align="right">7</td>
+<td align="right">0</td>
+<td align="right">183</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">protein_name</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">4</td>
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">183</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">complex_name</td>
+<td align="right">277</td>
+<td align="right">0.43</td>
+<td align="right">10</td>
+<td align="right">17</td>
+<td align="right">0</td>
+<td align="right">17</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">id_cp_interaction</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">190</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: logical</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">is_complex</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.43</td>
+<td align="left">FAL: 277, TRU: 206</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Myeloid</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.57</td>
+<td align="right">0.90</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">1.13</td>
+<td align="right">4.01</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.78</td>
+<td align="right">0.86</td>
+<td align="right">0</td>
+<td align="right">0.08</td>
+<td align="right">0.35</td>
+<td align="right">1.41</td>
+<td align="right">4.22</td>
+<td align="left">▇▂▂▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.63</td>
+<td align="right">0.82</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">0.36</td>
+<td align="right">1.16</td>
+<td align="right">4.61</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">Tcells</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.71</td>
+<td align="right">1.02</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">1.95</td>
+<td align="right">4.26</td>
+<td align="left">▇▁▂▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="means.txt" class="section level2">
+<h2><span class="header-section-number">3.2</span> means.txt</h2>
+<p>This file contains mean values for each ligand-receptor interaction.</p>
+<pre class="r"><code>means &lt;- read_tsv(
+    fs::path(OUT_DIR, &quot;means.txt&quot;),
+    col_types = cols(
+        .default            = col_double(),
+        id_cp_interaction   = col_character(),
+        interacting_pair    = col_character(),
+        partner_a           = col_character(),
+        partner_b           = col_character(),
+        gene_a              = col_character(),
+        gene_b              = col_character(),
+        secreted            = col_logical(),
+        receptor_a          = col_logical(),
+        receptor_b          = col_logical(),
+        annotation_strategy = col_character(),
+        is_integrin         = col_logical()
+    )
+)
+
+skim(means)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">means</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">190</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">27</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">7</td>
+</tr>
+<tr class="odd">
+<td align="left">logical</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">16</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">id_cp_interaction</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">190</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">interacting_pair</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">7</td>
+<td align="right">24</td>
+<td align="right">0</td>
+<td align="right">190</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">partner_a</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">11</td>
+<td align="right">25</td>
+<td align="right">0</td>
+<td align="right">116</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">partner_b</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">13</td>
+<td align="right">21</td>
+<td align="right">0</td>
+<td align="right">81</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">gene_a</td>
+<td align="right">9</td>
+<td align="right">0.95</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">109</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">gene_b</td>
+<td align="right">94</td>
+<td align="right">0.51</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">71</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">annotation_strategy</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">3</td>
+<td align="right">28</td>
+<td align="right">0</td>
+<td align="right">13</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: logical</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">secreted</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.73</td>
+<td align="left">TRU: 138, FAL: 52</td>
+</tr>
+<tr class="even">
+<td align="left">receptor_a</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.33</td>
+<td align="left">FAL: 127, TRU: 63</td>
+</tr>
+<tr class="odd">
+<td align="left">receptor_b</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.29</td>
+<td align="left">FAL: 135, TRU: 55</td>
+</tr>
+<tr class="even">
+<td align="left">is_integrin</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.49</td>
+<td align="left">FAL: 96, TRU: 94</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Myeloid|Myeloid</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.23</td>
+<td align="right">0.60</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.70</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">Myeloid|NKcells_0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.40</td>
+<td align="right">0.70</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.72</td>
+<td align="right">2.70</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Myeloid|NKcells_1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.30</td>
+<td align="right">0.64</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.69</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">Myeloid|Tcells</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.20</td>
+<td align="right">0.62</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.94</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_0|Myeloid</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.22</td>
+<td align="right">0.52</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.39</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_0|NKcells_0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.34</td>
+<td align="right">0.59</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.51</td>
+<td align="right">2.73</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_0|NKcells_1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.29</td>
+<td align="right">0.60</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.29</td>
+<td align="right">2.80</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_0|Tcells</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.18</td>
+<td align="right">0.50</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.65</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_1|Myeloid</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.13</td>
+<td align="right">0.45</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.36</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_1|NKcells_0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.25</td>
+<td align="right">0.59</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.86</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_1|NKcells_1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.21</td>
+<td align="right">0.58</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.93</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_1|Tcells</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.13</td>
+<td align="right">0.47</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.61</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Tcells|Myeloid</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.13</td>
+<td align="right">0.47</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.56</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">Tcells|NKcells_0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.21</td>
+<td align="right">0.56</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.88</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Tcells|NKcells_1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.18</td>
+<td align="right">0.56</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.95</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">Tcells|Tcells</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.07</td>
+<td align="right">0.36</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">2.33</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<p>It includes information about each ligand-receptor pair as well as scores for each pair of cell types.</p>
+</div>
+<div id="pvalues.txt" class="section level2">
+<h2><span class="header-section-number">3.3</span> pvalues.txt</h2>
+<p>This file is similar to <code>means.txt</code> but contains p-values from the statistical test instead of scores.</p>
+<pre class="r"><code>pvalues &lt;- read_tsv(
+    fs::path(OUT_DIR, &quot;pvalues.txt&quot;),
+    col_types = cols(
+        .default = col_double(),
+        id_cp_interaction   = col_character(),
+        interacting_pair    = col_character(),
+        partner_a           = col_character(),
+        partner_b           = col_character(),
+        gene_a              = col_character(),
+        gene_b              = col_character(),
+        secreted            = col_logical(),
+        receptor_a          = col_logical(),
+        receptor_b          = col_logical(),
+        annotation_strategy = col_character(),
+        is_integrin         = col_logical()
+    )
+)
+
+skim(pvalues)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">pvalues</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">190</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">27</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">7</td>
+</tr>
+<tr class="odd">
+<td align="left">logical</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">16</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">id_cp_interaction</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">190</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">interacting_pair</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">7</td>
+<td align="right">24</td>
+<td align="right">0</td>
+<td align="right">190</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">partner_a</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">11</td>
+<td align="right">25</td>
+<td align="right">0</td>
+<td align="right">116</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">partner_b</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">13</td>
+<td align="right">21</td>
+<td align="right">0</td>
+<td align="right">81</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">gene_a</td>
+<td align="right">9</td>
+<td align="right">0.95</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">109</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">gene_b</td>
+<td align="right">94</td>
+<td align="right">0.51</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">71</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">annotation_strategy</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">3</td>
+<td align="right">28</td>
+<td align="right">0</td>
+<td align="right">13</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: logical</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">secreted</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.73</td>
+<td align="left">TRU: 138, FAL: 52</td>
+</tr>
+<tr class="even">
+<td align="left">receptor_a</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.33</td>
+<td align="left">FAL: 127, TRU: 63</td>
+</tr>
+<tr class="odd">
+<td align="left">receptor_b</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.29</td>
+<td align="left">FAL: 135, TRU: 55</td>
+</tr>
+<tr class="even">
+<td align="left">is_integrin</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.49</td>
+<td align="left">FAL: 96, TRU: 94</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Myeloid|Myeloid</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.87</td>
+<td align="right">0.33</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">Myeloid|NKcells_0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.76</td>
+<td align="right">0.39</td>
+<td align="right">0.00</td>
+<td align="right">0.56</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▂▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">Myeloid|NKcells_1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.84</td>
+<td align="right">0.34</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">Myeloid|Tcells</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.91</td>
+<td align="right">0.28</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_0|Myeloid</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.85</td>
+<td align="right">0.33</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_0|NKcells_0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.71</td>
+<td align="right">0.38</td>
+<td align="right">0.00</td>
+<td align="right">0.34</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▂▂▁▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_0|NKcells_1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.81</td>
+<td align="right">0.33</td>
+<td align="right">0.00</td>
+<td align="right">0.69</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_0|Tcells</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.89</td>
+<td align="right">0.29</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_1|Myeloid</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.94</td>
+<td align="right">0.21</td>
+<td align="right">0.03</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_1|NKcells_0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.87</td>
+<td align="right">0.29</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_1|NKcells_1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.89</td>
+<td align="right">0.27</td>
+<td align="right">0.03</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_1|Tcells</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.94</td>
+<td align="right">0.21</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">Tcells|Myeloid</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.93</td>
+<td align="right">0.25</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">Tcells|NKcells_0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.89</td>
+<td align="right">0.27</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">Tcells|NKcells_1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.91</td>
+<td align="right">0.25</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">Tcells|Tcells</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.97</td>
+<td align="right">0.15</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▁▁▁▁▇</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="significant_means.txt" class="section level2">
+<h2><span class="header-section-number">3.4</span> significant_means.txt</h2>
+<p>This file contains mean values for signitificant ligand-receptor interactions.</p>
+<pre class="r"><code>sig_means &lt;- read_tsv(
+    fs::path(OUT_DIR, &quot;significant_means.txt&quot;),
+    col_types = cols(
+        .default            = col_double(),
+        id_cp_interaction   = col_character(),
+        interacting_pair    = col_character(),
+        partner_a           = col_character(),
+        partner_b           = col_character(),
+        gene_a              = col_character(),
+        gene_b              = col_character(),
+        secreted            = col_logical(),
+        receptor_a          = col_logical(),
+        receptor_b          = col_logical(),
+        annotation_strategy = col_character(),
+        is_integrin         = col_logical()
+    )
+)
+
+skim(sig_means)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">sig_means</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">190</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">28</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">7</td>
+</tr>
+<tr class="odd">
+<td align="left">logical</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">17</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">id_cp_interaction</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">190</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">interacting_pair</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">7</td>
+<td align="right">24</td>
+<td align="right">0</td>
+<td align="right">190</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">partner_a</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">11</td>
+<td align="right">25</td>
+<td align="right">0</td>
+<td align="right">116</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">partner_b</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">13</td>
+<td align="right">21</td>
+<td align="right">0</td>
+<td align="right">81</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">gene_a</td>
+<td align="right">9</td>
+<td align="right">0.95</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">109</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">gene_b</td>
+<td align="right">94</td>
+<td align="right">0.51</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">71</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">annotation_strategy</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">3</td>
+<td align="right">28</td>
+<td align="right">0</td>
+<td align="right">13</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: logical</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">secreted</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.73</td>
+<td align="left">TRU: 138, FAL: 52</td>
+</tr>
+<tr class="even">
+<td align="left">receptor_a</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.33</td>
+<td align="left">FAL: 127, TRU: 63</td>
+</tr>
+<tr class="odd">
+<td align="left">receptor_b</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.29</td>
+<td align="left">FAL: 135, TRU: 55</td>
+</tr>
+<tr class="even">
+<td align="left">is_integrin</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.49</td>
+<td align="left">FAL: 96, TRU: 94</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">rank</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">0.64</td>
+<td align="right">0.55</td>
+<td align="right">0.06</td>
+<td align="right">0.06</td>
+<td align="right">0.69</td>
+<td align="right">1.19</td>
+<td align="right">1.19</td>
+<td align="left">▇▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">Myeloid|Myeloid</td>
+<td align="right">169</td>
+<td align="right">0.11</td>
+<td align="right">1.65</td>
+<td align="right">0.49</td>
+<td align="right">1.13</td>
+<td align="right">1.38</td>
+<td align="right">1.55</td>
+<td align="right">1.94</td>
+<td align="right">2.70</td>
+<td align="left">▇▂▃▂▂</td>
+</tr>
+<tr class="odd">
+<td align="left">Myeloid|NKcells_0</td>
+<td align="right">163</td>
+<td align="right">0.14</td>
+<td align="right">1.40</td>
+<td align="right">0.67</td>
+<td align="right">0.61</td>
+<td align="right">0.81</td>
+<td align="right">1.13</td>
+<td align="right">2.01</td>
+<td align="right">2.70</td>
+<td align="left">▇▃▂▅▂</td>
+</tr>
+<tr class="even">
+<td align="left">Myeloid|NKcells_1</td>
+<td align="right">178</td>
+<td align="right">0.06</td>
+<td align="right">1.05</td>
+<td align="right">0.25</td>
+<td align="right">0.74</td>
+<td align="right">0.93</td>
+<td align="right">1.03</td>
+<td align="right">1.08</td>
+<td align="right">1.60</td>
+<td align="left">▃▇▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Myeloid|Tcells</td>
+<td align="right">180</td>
+<td align="right">0.05</td>
+<td align="right">1.95</td>
+<td align="right">0.75</td>
+<td align="right">1.11</td>
+<td align="right">1.37</td>
+<td align="right">1.77</td>
+<td align="right">2.71</td>
+<td align="right">2.94</td>
+<td align="left">▇▁▂▂▅</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_0|Myeloid</td>
+<td align="right">181</td>
+<td align="right">0.05</td>
+<td align="right">1.14</td>
+<td align="right">0.46</td>
+<td align="right">0.61</td>
+<td align="right">0.90</td>
+<td align="right">0.98</td>
+<td align="right">1.27</td>
+<td align="right">2.00</td>
+<td align="left">▃▇▂▁▃</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_0|NKcells_0</td>
+<td align="right">178</td>
+<td align="right">0.06</td>
+<td align="right">0.52</td>
+<td align="right">0.38</td>
+<td align="right">0.12</td>
+<td align="right">0.23</td>
+<td align="right">0.42</td>
+<td align="right">0.71</td>
+<td align="right">1.19</td>
+<td align="left">▇▁▃▁▂</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_0|NKcells_1</td>
+<td align="right">184</td>
+<td align="right">0.03</td>
+<td align="right">1.39</td>
+<td align="right">0.88</td>
+<td align="right">0.22</td>
+<td align="right">0.98</td>
+<td align="right">1.19</td>
+<td align="right">1.98</td>
+<td align="right">2.63</td>
+<td align="left">▃▇▃▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_0|Tcells</td>
+<td align="right">182</td>
+<td align="right">0.04</td>
+<td align="right">1.12</td>
+<td align="right">0.56</td>
+<td align="right">0.59</td>
+<td align="right">0.81</td>
+<td align="right">0.96</td>
+<td align="right">1.27</td>
+<td align="right">2.34</td>
+<td align="left">▇▃▂▁▂</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_1|Myeloid</td>
+<td align="right">188</td>
+<td align="right">0.01</td>
+<td align="right">1.28</td>
+<td align="right">0.46</td>
+<td align="right">0.95</td>
+<td align="right">1.11</td>
+<td align="right">1.28</td>
+<td align="right">1.44</td>
+<td align="right">1.60</td>
+<td align="left">▇▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_1|NKcells_0</td>
+<td align="right">182</td>
+<td align="right">0.04</td>
+<td align="right">1.20</td>
+<td align="right">1.00</td>
+<td align="right">0.22</td>
+<td align="right">0.30</td>
+<td align="right">0.98</td>
+<td align="right">1.82</td>
+<td align="right">2.86</td>
+<td align="left">▇▅▂▁▅</td>
+</tr>
+<tr class="even">
+<td align="left">NKcells_1|NKcells_1</td>
+<td align="right">187</td>
+<td align="right">0.02</td>
+<td align="right">0.84</td>
+<td align="right">0.43</td>
+<td align="right">0.39</td>
+<td align="right">0.63</td>
+<td align="right">0.87</td>
+<td align="right">1.06</td>
+<td align="right">1.25</td>
+<td align="left">▇▁▇▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">NKcells_1|Tcells</td>
+<td align="right">186</td>
+<td align="right">0.02</td>
+<td align="right">1.52</td>
+<td align="right">0.72</td>
+<td align="right">0.76</td>
+<td align="right">1.19</td>
+<td align="right">1.41</td>
+<td align="right">1.74</td>
+<td align="right">2.50</td>
+<td align="left">▇▇▇▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">Tcells|Myeloid</td>
+<td align="right">181</td>
+<td align="right">0.05</td>
+<td align="right">1.72</td>
+<td align="right">0.52</td>
+<td align="right">1.11</td>
+<td align="right">1.37</td>
+<td align="right">1.67</td>
+<td align="right">2.04</td>
+<td align="right">2.56</td>
+<td align="left">▇▇▁▂▅</td>
+</tr>
+<tr class="odd">
+<td align="left">Tcells|NKcells_0</td>
+<td align="right">186</td>
+<td align="right">0.02</td>
+<td align="right">0.97</td>
+<td align="right">0.31</td>
+<td align="right">0.62</td>
+<td align="right">0.79</td>
+<td align="right">0.94</td>
+<td align="right">1.12</td>
+<td align="right">1.36</td>
+<td align="left">▇▇▇▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">Tcells|NKcells_1</td>
+<td align="right">187</td>
+<td align="right">0.02</td>
+<td align="right">2.04</td>
+<td align="right">0.53</td>
+<td align="right">1.46</td>
+<td align="right">1.81</td>
+<td align="right">2.17</td>
+<td align="right">2.33</td>
+<td align="right">2.50</td>
+<td align="left">▇▁▁▇▇</td>
+</tr>
+<tr class="odd">
+<td align="left">Tcells|Tcells</td>
+<td align="right">189</td>
+<td align="right">0.01</td>
+<td align="right">1.10</td>
+<td align="right">NA</td>
+<td align="right">1.10</td>
+<td align="right">1.10</td>
+<td align="right">1.10</td>
+<td align="right">1.10</td>
+<td align="right">1.10</td>
+<td align="left">▁▁▇▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="plotting" class="section level1">
+<h1><span class="header-section-number">4</span> Plotting</h1>
+<p><strong>CellPhoneDB</strong> also has some plotting functions.</p>
+<div id="dotplot" class="section level2">
+<h2><span class="header-section-number">4.1</span> Dotplot</h2>
+<pre class="bash"><code>eval &quot;$(conda shell.bash hook)&quot;
+conda activate $CONDA_ENV
+
+cellphonedb plot dot_plot \
+    --means-path output/11-CellPhoneDB.Rmd/means.txt \
+    --pvalues-path output/11-CellPhoneDB.Rmd/pvalues.txt \
+    --output-path output/11-CellPhoneDB.Rmd/ \
+    --output-name dotplot.png</code></pre>
+<pre><code>* Project &#39;~/Documents/Projects/interaction-tools&#39; loaded. [renv 0.8.3]
+/Users/Luke/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
+  warnings.warn(message, FutureWarning)</code></pre>
+<p>This is a dotplot of the mean expression of the ligand-receptor pair in each pair of cell types.</p>
+<pre class="r"><code>fig_dir &lt;- here(&quot;docs&quot;, &quot;figure&quot;, DOCNAME)
+fs::dir_create(fig_dir)
+fs::file_copy(
+    fs::path(OUT_DIR, &quot;dotplot.png&quot;),
+    fs::path(fig_dir, &quot;dotplot.png&quot;),
+    overwrite = TRUE
+)
+
+include_graphics(fs::path(&quot;figure&quot;, DOCNAME, &quot;dotplot.png&quot;))</code></pre>
+<p><img src="figure/11-CellPhoneDB.Rmd/dotplot.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="heatmap" class="section level2">
+<h2><span class="header-section-number">4.2</span> Heatmap</h2>
+<p><strong>CellPhoneDB</strong> also has a heatmap plotting function. This function also produces some additional output files.</p>
+<pre class="bash"><code>eval &quot;$(conda shell.bash hook)&quot;
+conda activate $CONDA_ENV
+
+cellphonedb plot heatmap_plot \
+    --pvalues-path output/11-CellPhoneDB.Rmd/pvalues.txt \
+    --output-path output/11-CellPhoneDB.Rmd/ \
+    --count-name heatmap_counts.png \
+    --log-name heatmap_logcounts.png \
+    --count-network-name count_network.txt \
+    --interaction-count-name interactions_count.txt \
+    data/cellphonedb/test_meta.txt</code></pre>
+<pre><code>* Project &#39;~/Documents/Projects/interaction-tools&#39; loaded. [renv 0.8.3]
+/Users/Luke/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
+  warnings.warn(message, FutureWarning)</code></pre>
+<div id="counts" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Counts</h3>
+<p>This is a heatmap of the count of interactions between cell types.</p>
+<pre class="r"><code>fig_dir &lt;- here(&quot;docs&quot;, &quot;figure&quot;, DOCNAME)
+fs::dir_create(fig_dir)
+fs::file_copy(
+    fs::path(OUT_DIR, &quot;heatmap_counts.png&quot;),
+    fs::path(fig_dir, &quot;heatmap_counts.png&quot;),
+    overwrite = TRUE
+)
+
+include_graphics(fs::path(&quot;figure&quot;, DOCNAME, &quot;heatmap_counts.png&quot;))</code></pre>
+<p><img src="figure/11-CellPhoneDB.Rmd/heatmap_counts.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="log-counts" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Log-counts</h3>
+<p>This is a heatmap of the log-count of interactions between cell types.</p>
+<pre class="r"><code>fig_dir &lt;- here(&quot;docs&quot;, &quot;figure&quot;, DOCNAME)
+fs::dir_create(fig_dir)
+fs::file_copy(
+    fs::path(OUT_DIR, &quot;heatmap_logcounts.png&quot;),
+    fs::path(fig_dir, &quot;heatmap_logcounts.png&quot;),
+    overwrite = TRUE
+)
+
+include_graphics(fs::path(&quot;figure&quot;, DOCNAME, &quot;heatmap_logcounts.png&quot;))</code></pre>
+<p><img src="figure/11-CellPhoneDB.Rmd/heatmap_logcounts.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="count_network.txt" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> count_network.txt</h3>
+<p>This file contains a count of the directional interactions between different cell types used to create the heatmaps.</p>
+<pre class="r"><code>network &lt;- read_tsv(
+    fs::path(OUT_DIR, &quot;count_network.txt&quot;),
+    col_types = cols(
+        SOURCE = col_character(),
+        TARGET = col_character(),
+        count  = col_double()
+    )
+)
+
+skim(network)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">network</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">16</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">SOURCE</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">TARGET</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">count</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">15.06</td>
+<td align="right">9.83</td>
+<td align="right">1</td>
+<td align="right">10.75</td>
+<td align="right">14</td>
+<td align="right">19</td>
+<td align="right">36</td>
+<td align="left">▅▇▃▁▂</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="interactions_count.txt" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> interactions_count.txt</h3>
+<p>This file contains a count of total number of interactions for each cell type.</p>
+<pre class="r"><code>interactions &lt;- read_tsv(
+    fs::path(OUT_DIR, &quot;interactions_count.txt&quot;),
+    col_types = cols(
+        X1 = col_character(),
+        all_sum = col_double()
+    )
+)
+
+skim(interactions)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">interactions</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">X1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">all_sum</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">60.25</td>
+<td align="right">25.95</td>
+<td align="right">38</td>
+<td align="right">38.75</td>
+<td align="right">56.5</td>
+<td align="right">78</td>
+<td align="right">90</td>
+<td align="left">▇▁▁▃▃</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="summary" class="section level1 unnumbered">
+<h1>Summary</h1>
+<div id="parameters" class="section level2 unnumbered">
+<h2>Parameters</h2>
+<p>This table describes parameters used and set in this document.</p>
+<pre class="r"><code>params &lt;- list(
+    
+)
+params &lt;- toJSON(params, pretty = TRUE)
+kable(fromJSON(params))</code></pre>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="output-files" class="section level2 unnumbered">
+<h2>Output files</h2>
+<p>This table describes the output files produced by this document. Right click and <em>Save Link As…</em> to download the results.</p>
+<pre class="r"><code>kable(data.frame(
+    File = c(
+        download_link(&quot;parameters.json&quot;, OUT_DIR),
+        download_link(&quot;deconvoluted.txt&quot;, OUT_DIR),
+        download_link(&quot;means.txt&quot;, OUT_DIR),
+        download_link(&quot;pvalues.txt&quot;, OUT_DIR),
+        download_link(&quot;significant_means.txt&quot;, OUT_DIR),
+        download_link(&quot;dotplot.png&quot;, OUT_DIR),
+        download_link(&quot;heatmap_counts.png&quot;, OUT_DIR),
+        download_link(&quot;heatmap_logcounts.png&quot;, OUT_DIR),
+        download_link(&quot;count_network.txt&quot;, OUT_DIR),
+        download_link(&quot;interactions_count.txt&quot;, OUT_DIR)
+    ),
+    Description = c(
+        &quot;Parameters set and used in this analysis&quot;,
+        &quot;Deconvoluted output from CellPhoneDB&quot;,
+        &quot;Means output from CellPhoneDB&quot;,
+        &quot;P-values output from CellPhoneDB&quot;,
+        &quot;Significant means output from CellPhoneDB&quot;,
+        &quot;Dotplot plot from CellPhoneDB&quot;,
+        &quot;Counts heatmap plot from CellPhoneDB&quot;,
+        &quot;Log-counts heatmap plot from CellPhoneDB&quot;,
+        &quot;Count network output from CellPhoneDB&quot;,
+        &quot;Interactions count output from CellPhoneDB&quot;
+    )
+))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="NA/raw/master/output/11-CellPhoneDB.Rmd/parameters.json">parameters.json</a></td>
+<td align="left">Parameters set and used in this analysis</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="NA/raw/master/output/11-CellPhoneDB.Rmd/deconvoluted.txt">deconvoluted.txt</a></td>
+<td align="left">Deconvoluted output from CellPhoneDB</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="NA/raw/master/output/11-CellPhoneDB.Rmd/means.txt">means.txt</a></td>
+<td align="left">Means output from CellPhoneDB</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="NA/raw/master/output/11-CellPhoneDB.Rmd/pvalues.txt">pvalues.txt</a></td>
+<td align="left">P-values output from CellPhoneDB</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="NA/raw/master/output/11-CellPhoneDB.Rmd/significant_means.txt">significant_means.txt</a></td>
+<td align="left">Significant means output from CellPhoneDB</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="NA/raw/master/output/11-CellPhoneDB.Rmd/dotplot.png">dotplot.png</a></td>
+<td align="left">Dotplot plot from CellPhoneDB</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="NA/raw/master/output/11-CellPhoneDB.Rmd/heatmap_counts.png">heatmap_counts.png</a></td>
+<td align="left">Counts heatmap plot from CellPhoneDB</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="NA/raw/master/output/11-CellPhoneDB.Rmd/heatmap_logcounts.png">heatmap_logcounts.png</a></td>
+<td align="left">Log-counts heatmap plot from CellPhoneDB</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="NA/raw/master/output/11-CellPhoneDB.Rmd/count_network.txt">count_network.txt</a></td>
+<td align="left">Count network output from CellPhoneDB</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="NA/raw/master/output/11-CellPhoneDB.Rmd/interactions_count.txt">interactions_count.txt</a></td>
+<td align="left">Interactions count output from CellPhoneDB</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="session-information" class="section level2 unnumbered">
+<h2>Session information</h2>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessioninfo::session_info()</code></pre>
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value                       
+ version  R version 3.6.1 (2019-07-05)
+ os       macOS Mojave 10.14          
+ system   x86_64, darwin15.6.0        
+ ui       X11                         
+ language (EN)                        
+ collate  en_US.UTF-8                 
+ ctype    en_US.UTF-8                 
+ tz       Europe/Berlin               
+ date     2020-01-22                  
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ ! package     * version date       lib source             
+ P assertthat    0.2.1   2019-03-21 [?] CRAN (R 3.6.0)     
+ P backports     1.1.5   2019-10-02 [?] CRAN (R 3.6.0)     
+ P base64enc     0.1-3   2015-07-28 [?] CRAN (R 3.6.0)     
+   base64url     1.4     2018-05-14 [1] standard (@1.4)    
+   broom         0.5.2   2019-04-07 [1] standard (@0.5.2)  
+   cellranger    1.1.0   2016-07-27 [1] standard (@1.1.0)  
+ P cli           2.0.0   2019-12-09 [?] CRAN (R 3.6.0)     
+   colorspace    1.4-1   2019-03-18 [1] standard (@1.4-1)  
+   conflicted  * 1.0.4   2019-06-21 [1] standard (@1.0.4)  
+ P crayon        1.3.4   2017-09-16 [?] CRAN (R 3.6.0)     
+   DBI           1.0.0   2018-05-02 [1] standard (@1.0.0)  
+   dbplyr        1.4.2   2019-06-17 [1] standard (@1.4.2)  
+ P digest        0.6.23  2019-11-23 [?] CRAN (R 3.6.0)     
+   dplyr       * 0.8.3   2019-07-04 [1] standard (@0.8.3)  
+   drake         7.8.0   2019-12-02 [1] standard (@7.8.0)  
+   evaluate      0.14    2019-05-28 [1] standard (@0.14)   
+ P fansi         0.4.0   2018-10-05 [?] CRAN (R 3.6.0)     
+ P filelock      1.0.2   2018-10-05 [?] CRAN (R 3.6.0)     
+   forcats     * 0.4.0   2019-02-17 [1] standard (@0.4.0)  
+   fs          * 1.3.1   2019-05-06 [1] standard (@1.3.1)  
+   generics      0.0.2   2018-11-29 [1] standard (@0.0.2)  
+   ggplot2     * 3.2.1   2019-08-10 [1] standard (@3.2.1)  
+   git2r         0.26.1  2019-06-29 [1] standard (@0.26.1) 
+ P glue          1.3.1   2019-03-12 [?] CRAN (R 3.6.0)     
+   gtable        0.3.0   2019-03-25 [1] standard (@0.3.0)  
+   haven         2.2.0   2019-11-08 [1] standard (@2.2.0)  
+   here        * 0.1     2017-05-28 [1] standard (@0.1)    
+   highr         0.8     2019-03-20 [1] standard (@0.8)    
+ P hms           0.5.2   2019-10-30 [?] CRAN (R 3.6.0)     
+   htmltools     0.4.0   2019-10-04 [1] standard (@0.4.0)  
+   httpuv        1.5.2   2019-09-11 [1] standard (@1.5.2)  
+   httr          1.4.1   2019-08-05 [1] standard (@1.4.1)  
+   igraph        1.2.4.2 2019-11-27 [1] standard (@1.2.4.2)
+ P jsonlite    * 1.6     2018-12-07 [?] CRAN (R 3.6.0)     
+   knitr       * 1.26    2019-11-12 [1] standard (@1.26)   
+   later         1.0.0   2019-10-04 [1] standard (@1.0.0)  
+   lattice       0.20-38 2018-11-04 [1] standard (@0.20-38)
+   lazyeval      0.2.2   2019-03-15 [1] standard (@0.2.2)  
+   lifecycle     0.1.0   2019-08-01 [1] standard (@0.1.0)  
+   lubridate     1.7.4   2018-04-11 [1] standard (@1.7.4)  
+ P magrittr      1.5     2014-11-22 [?] CRAN (R 3.6.0)     
+   Matrix        1.2-18  2019-11-27 [1] standard (@1.2-18) 
+   memoise       1.1.0   2017-04-21 [1] standard (@1.1.0)  
+   modelr        0.1.5   2019-08-08 [1] standard (@0.1.5)  
+   munsell       0.5.0   2018-06-12 [1] standard (@0.5.0)  
+   nlme          3.1-143 2019-12-10 [1] standard (@3.1-143)
+ P pillar        1.4.2   2019-06-29 [?] CRAN (R 3.6.0)     
+ P pkgconfig     2.0.3   2019-09-22 [?] CRAN (R 3.6.0)     
+   promises      1.1.0   2019-10-04 [1] standard (@1.1.0)  
+   purrr       * 0.3.3   2019-10-18 [1] standard (@0.3.3)  
+ P R6            2.4.1   2019-11-12 [?] CRAN (R 3.6.0)     
+ P Rcpp          1.0.3   2019-11-08 [?] CRAN (R 3.6.0)     
+   readr       * 1.3.1   2018-12-21 [1] standard (@1.3.1)  
+   readxl        1.3.1   2019-03-13 [1] standard (@1.3.1)  
+   renv          0.8.3   2019-11-11 [1] CRAN (R 3.6.1)     
+ P repr          1.0.2   2019-12-16 [?] CRAN (R 3.6.0)     
+   reprex        0.3.0   2019-05-16 [1] standard (@0.3.0)  
+   reticulate    1.13    2019-07-24 [1] standard (@1.13)   
+ P rlang         0.4.2   2019-11-23 [?] CRAN (R 3.6.0)     
+   rmarkdown     1.18    2019-11-27 [1] standard (@1.18)   
+ P rprojroot     1.3-2   2018-01-03 [?] CRAN (R 3.6.0)     
+   rstudioapi    0.10    2019-03-19 [1] standard (@0.10)   
+   rvest         0.3.5   2019-11-08 [1] standard (@0.3.5)  
+   scales        1.1.0   2019-11-18 [1] standard (@1.1.0)  
+   sessioninfo   1.1.1   2018-11-05 [1] standard (@1.1.1)  
+ P skimr       * 2.0.2   2019-11-26 [?] CRAN (R 3.6.0)     
+   storr         1.2.1   2018-10-18 [1] standard (@1.2.1)  
+ P stringi       1.4.3   2019-03-12 [?] CRAN (R 3.6.0)     
+ P stringr     * 1.4.0   2019-02-10 [?] CRAN (R 3.6.0)     
+ P tibble      * 2.1.3   2019-06-06 [?] CRAN (R 3.6.0)     
+   tidyr       * 1.0.0   2019-09-11 [1] standard (@1.0.0)  
+   tidyselect    0.2.5   2018-10-11 [1] standard (@0.2.5)  
+   tidyverse   * 1.3.0   2019-11-21 [1] standard (@1.3.0)  
+   txtq          0.2.0   2019-10-15 [1] standard (@0.2.0)  
+ P vctrs         0.2.0   2019-07-05 [?] CRAN (R 3.6.0)     
+   whisker       0.4     2019-08-28 [1] standard (@0.4)    
+ P withr         2.1.2   2018-03-15 [?] CRAN (R 3.6.0)     
+   workflowr     1.5.0   2019-11-01 [1] standard (@1.5.0)  
+   xfun          0.11    2019-11-12 [1] standard (@0.11)   
+ P xml2          1.2.2   2019-08-09 [?] CRAN (R 3.6.0)     
+   yaml          2.2.0   2018-07-25 [1] standard (@2.2.0)  
+ P zeallot       0.1.0   2018-01-28 [?] CRAN (R 3.6.0)     
+
+[1] /Users/Luke/Documents/Projects/interaction-tools/renv/library/R-3.6/x86_64-apple-darwin15.6.0
+[2] /private/var/folders/6z/gm76hk2d4357rydwgpszbh2r0000gq/T/Rtmpps1OBK/renv-system-library
+[3] /private/var/folders/6z/gm76hk2d4357rydwgpszbh2r0000gq/T/Rtmp0yVGMV/renv-system-library
+[4] /private/var/folders/6z/gm76hk2d4357rydwgpszbh2r0000gq/T/RtmptgzOM1/renv-system-library
+
+ P ── Loaded and on-disk path mismatch.</code></pre>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2VsbFBob25lREIgZXhhbXBsZSIKb3V0cHV0OiB3b3JrZmxvd3I6OndmbG93X2h0bWwKZWRpdG9yX29wdGlvbnM6CiAgY2h1bmtfb3V0cHV0X3R5cGU6IGNvbnNvbGUKLS0tCgpgYGB7ciBzZXR1cCwgY2FjaGUgPSBGQUxTRX0KIyBTZXR1cCBkb2N1bWVudApzb3VyY2UoaGVyZTo6aGVyZSgiY29kZSIsICJzZXR1cC5SIikpCgojIEZ1bmN0aW9uIGRlcGVuZGVuY2llcwppbnZpc2libGUoZHJha2U6OnJlYWRkKGRvd25sb2FkX2xpbmspKQpgYGAKCkludHJvZHVjdGlvbiB7LnVubnVtYmVyZWR9Cj09PT09PT09PT09PQoKSW4gdGhpcyBkb2N1bWVudCB3ZSBhcmUgZ29pbmcgdG8gcnVuIHRocm91Z2ggdGhlIGV4YW1wbGUgYW5hbHlzaXMgZm9yIHRoZQoqKkNlbGxQaG9uZURCKiogdG9vbCBhbmQgaGF2ZSBhIGxvb2sgYXQgdGhlIG91dHB1dCBpdCBwcm9kdWNlcy4gTW9yZSBpbmZvcm1hdGlvbgphYm91dCAqKkNlbGxQaG9uZURCKiogY2FuIGJlIGZvdW5kIGF0IGh0dHBzOi8vd3d3LmNlbGxwaG9uZWRiLm9yZy8uCgpJbnB1dAo9PT09PQoKKipDZWxsUGhvbmVEQioqIHRha2VzIHR3byBpbnB1dCBmaWxlcywgYSB0YWJsZSBvZiBtZXRhZGF0YSBmb3IgZWFjaCBjZWxsIGFuZCBhCmNvdW50cyBtYXRyaXguCgp0ZXN0X21ldGEudHh0Ci0tLS0tLS0tLS0tLS0KClRoaXMgZmlsZSBjb250YWlucyBjZWxsIHR5cGUgYXNzaWdubWVudHMgZm9yIGVhY2ggY2VsbCBpbiB0aGUgZGF0YXNldC4KCmBgYHtyIGlucHV0LW1ldGF9Cm1ldGEgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChQQVRIUyRjZWxscGhvbmVkYl9pbiwgInRlc3RfbWV0YS50eHQiKSwKICAgIGNvbF90eXBlcyA9IGNvbHMoCiAgICAgICAgQ2VsbCAgICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGNlbGxfdHlwZSA9IGNvbF9jaGFyYWN0ZXIoKQogICAgKQopCgpza2ltKG1ldGEpCmBgYAoKdGVzdF9jb3VudHMudHh0Ci0tLS0tLS0tLS0tLS0KClRoaXMgZmlsZSBjb250YWlucyB0aGUgY291bnQgZXhwcmVzc2lvbiBtYXRyaXguCgpgYGB7ciBpbnB1dC1jb3VudHN9CmNvdW50cyA8LSByZWFkX3RzdigKICAgIGZzOjpwYXRoKFBBVEhTJGNlbGxwaG9uZWRiX2luLCAidGVzdF9jb3VudHMudHh0IiksCiAgICBjb2xfdHlwZXMgPSBjb2xzKAogICAgICAgIC5kZWZhdWx0ID0gY29sX2RvdWJsZSgpLAogICAgICAgIEdlbmUgICAgID0gY29sX2NoYXJhY3RlcigpCiAgICApCikKCnNraW0oY291bnRzKQpgYGAKClRoZSBzbWFsbCB0ZXN0IGRhdGFzZXQgY29udGFpbnMgYHIgbnJvdyhjb3VudHMpYCBnZW5lcyBhbmQgYHIgbnJvdyhjb3VudHMpYApjZWxscy4KCkFuYWx5c2lzCj09PT09PT09CgoqKkNlbGxQaG9uZURCKiogaXMgZGVzaWduZWQgdG8gYmUgYSBjb21tYW5kIGxpbmUgdG9vbCBzbyB3ZSB3aWxsIHJ1biB0aGUKZm9sbG93aW5nIGNvbW1hbmRzIGluIGEgQkFTSCBzaGVsbC4gSGVyZSB3ZSBydW4gaXQgd2l0aCB0aGUgZnVsbCBzdGF0aXN0aWNhbCAKYW5hbHlzaXMuCgpgYGB7YmFzaCBjZWxscGhvbmVkYn0KZXZhbCAiJChjb25kYSBzaGVsbC5iYXNoIGhvb2spIgpjb25kYSBhY3RpdmF0ZSAkQ09OREFfRU5WCgpjZWxscGhvbmVkYiBtZXRob2Qgc3RhdGlzdGljYWxfYW5hbHlzaXMgXAogICAgLS1vdXRwdXQtcGF0aCBvdXRwdXQvMTEtY2VsbHBob25lZGIuUm1kIFwKICAgIC0tdGhyZWFkcyAxIFwKICAgIGRhdGEvY2VsbHBob25lZGIvdGVzdF9tZXRhLnR4dCBcCiAgICBkYXRhL2NlbGxwaG9uZWRiL3Rlc3RfY291bnRzLnR4dApgYGAKCk91dHB1dAo9PT09PT0KCioqQ2VsbFBob25lREIqKiBwcm9kdWNlcyBmb3VyIG91dHB1dCBmaWxlcy4gTGV0J3MgaGF2ZSBhIGxvb2sgYXQgZWFjaCBvZiB0aGVzZQphbmQgc2VlIHdoYXQgdGhleSBjb250YWluOgoKZGVjb252b2x1dGVkLnR4dAotLS0tLS0tLS0tLS0tLS0tCgpBY2NvcmRpbmcgdG8gdGhlICoqQ2VsbFBob25lREIqKiBkb2N1bWVudGF0aW9uIHRoaXMgZmlsZSBwcm92aWRlcyBhZGRpdGlvbmFsCmluZm9ybWF0aW9uIGFib3V0IHRoZSBpbnRlcmFjdGluZyBwYWlycy4gU3BlY2lmaWNhbGx5IGl0IGRlc2NpYmVzIHJlbGF0aW9uc2hpcHMKYmV0d2VlbiBnZW5lcywgY29tcGxleGVzIGFuZCBleHByZXNzaW9uIGluIGNlbGwgdHlwZXMuCgpgYGB7ciBvdXRwdXQtZGVjb252b2x1dGVkfQpkZWNvbnZvbHV0ZWQgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAiZGVjb252b2x1dGVkLnR4dCIpLAogICAgY29sX3R5cGVzID0gY29scygKICAgICAgICBnZW5lX25hbWUgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICB1bmlwcm90ICAgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpc19jb21wbGV4ICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcHJvdGVpbl9uYW1lICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgY29tcGxleF9uYW1lICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgaWRfY3BfaW50ZXJhY3Rpb24gPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgTXllbG9pZCAgICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgTktjZWxsc18wICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgTktjZWxsc18xICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgVGNlbGxzICAgICAgICAgICAgPSBjb2xfZG91YmxlKCkKICAgICkKKQoKc2tpbShkZWNvbnZvbHV0ZWQpCmBgYAoKbWVhbnMudHh0Ci0tLS0tLS0tLQoKVGhpcyBmaWxlIGNvbnRhaW5zIG1lYW4gdmFsdWVzIGZvciBlYWNoIGxpZ2FuZC1yZWNlcHRvciBpbnRlcmFjdGlvbi4KCmBgYHtyIG91dHB1dC1tZWFuc30KbWVhbnMgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAibWVhbnMudHh0IiksCiAgICBjb2xfdHlwZXMgPSBjb2xzKAogICAgICAgIC5kZWZhdWx0ICAgICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgaWRfY3BfaW50ZXJhY3Rpb24gICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpbnRlcmFjdGluZ19wYWlyICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIHBhcnRuZXJfYSAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgcGFydG5lcl9iICAgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBnZW5lX2EgICAgICAgICAgICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGdlbmVfYiAgICAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgc2VjcmV0ZWQgICAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYSAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYiAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgYW5ub3RhdGlvbl9zdHJhdGVneSA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpc19pbnRlZ3JpbiAgICAgICAgID0gY29sX2xvZ2ljYWwoKQogICAgKQopCgpza2ltKG1lYW5zKQpgYGAKCkl0IGluY2x1ZGVzIGluZm9ybWF0aW9uIGFib3V0IGVhY2ggbGlnYW5kLXJlY2VwdG9yIHBhaXIgYXMgd2VsbCBhcyBzY29yZXMgZm9yCmVhY2ggcGFpciBvZiBjZWxsIHR5cGVzLgoKcHZhbHVlcy50eHQKLS0tLS0tLS0tLS0KClRoaXMgZmlsZSBpcyBzaW1pbGFyIHRvIGBtZWFucy50eHRgIGJ1dCBjb250YWlucyBwLXZhbHVlcyBmcm9tIHRoZSBzdGF0aXN0aWNhbAp0ZXN0IGluc3RlYWQgb2Ygc2NvcmVzLgoKYGBge3Igb3V0cHV0LXB2YWx1ZXN9CnB2YWx1ZXMgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAicHZhbHVlcy50eHQiKSwKICAgIGNvbF90eXBlcyA9IGNvbHMoCiAgICAgICAgLmRlZmF1bHQgPSBjb2xfZG91YmxlKCksCiAgICAgICAgaWRfY3BfaW50ZXJhY3Rpb24gICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpbnRlcmFjdGluZ19wYWlyICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIHBhcnRuZXJfYSAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgcGFydG5lcl9iICAgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBnZW5lX2EgICAgICAgICAgICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGdlbmVfYiAgICAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgc2VjcmV0ZWQgICAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYSAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYiAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgYW5ub3RhdGlvbl9zdHJhdGVneSA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpc19pbnRlZ3JpbiAgICAgICAgID0gY29sX2xvZ2ljYWwoKQogICAgKQopCgpza2ltKHB2YWx1ZXMpCmBgYAoKc2lnbmlmaWNhbnRfbWVhbnMudHh0Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKVGhpcyBmaWxlIGNvbnRhaW5zIG1lYW4gdmFsdWVzIGZvciBzaWduaXRpZmljYW50IGxpZ2FuZC1yZWNlcHRvciBpbnRlcmFjdGlvbnMuCgpgYGB7ciBvdXRwdXQtc2lnLW1lYW5zfQpzaWdfbWVhbnMgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAic2lnbmlmaWNhbnRfbWVhbnMudHh0IiksCiAgICBjb2xfdHlwZXMgPSBjb2xzKAogICAgICAgIC5kZWZhdWx0ICAgICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgaWRfY3BfaW50ZXJhY3Rpb24gICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpbnRlcmFjdGluZ19wYWlyICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIHBhcnRuZXJfYSAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgcGFydG5lcl9iICAgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBnZW5lX2EgICAgICAgICAgICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGdlbmVfYiAgICAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgc2VjcmV0ZWQgICAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYSAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYiAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgYW5ub3RhdGlvbl9zdHJhdGVneSA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpc19pbnRlZ3JpbiAgICAgICAgID0gY29sX2xvZ2ljYWwoKQogICAgKQopCgpza2ltKHNpZ19tZWFucykKYGBgCgpQbG90dGluZwo9PT09PT09PQoKKipDZWxsUGhvbmVEQioqIGFsc28gaGFzIHNvbWUgcGxvdHRpbmcgZnVuY3Rpb25zLgoKRG90cGxvdAotLS0tLS0tCgpgYGB7YmFzaCBtYWtlLWRvdHBsb3R9CmV2YWwgIiQoY29uZGEgc2hlbGwuYmFzaCBob29rKSIKY29uZGEgYWN0aXZhdGUgJENPTkRBX0VOVgoKY2VsbHBob25lZGIgcGxvdCBkb3RfcGxvdCBcCiAgICAtLW1lYW5zLXBhdGggb3V0cHV0LzExLUNlbGxQaG9uZURCLlJtZC9tZWFucy50eHQgXAogICAgLS1wdmFsdWVzLXBhdGggb3V0cHV0LzExLUNlbGxQaG9uZURCLlJtZC9wdmFsdWVzLnR4dCBcCiAgICAtLW91dHB1dC1wYXRoIG91dHB1dC8xMS1DZWxsUGhvbmVEQi5SbWQvIFwKICAgIC0tb3V0cHV0LW5hbWUgZG90cGxvdC5wbmcKYGBgCgpUaGlzIGlzIGEgZG90cGxvdCBvZiB0aGUgbWVhbiBleHByZXNzaW9uIG9mIHRoZSBsaWdhbmQtcmVjZXB0b3IgcGFpciBpbiBlYWNoCnBhaXIgb2YgY2VsbCB0eXBlcy4KCmBgYHtyIGRvdHBsb3R9CmZpZ19kaXIgPC0gaGVyZSgiZG9jcyIsICJmaWd1cmUiLCBET0NOQU1FKQpmczo6ZGlyX2NyZWF0ZShmaWdfZGlyKQpmczo6ZmlsZV9jb3B5KAogICAgZnM6OnBhdGgoT1VUX0RJUiwgImRvdHBsb3QucG5nIiksCiAgICBmczo6cGF0aChmaWdfZGlyLCAiZG90cGxvdC5wbmciKSwKICAgIG92ZXJ3cml0ZSA9IFRSVUUKKQoKaW5jbHVkZV9ncmFwaGljcyhmczo6cGF0aCgiZmlndXJlIiwgRE9DTkFNRSwgImRvdHBsb3QucG5nIikpCmBgYAoKSGVhdG1hcAotLS0tLS0tCioqQ2VsbFBob25lREIqKiBhbHNvIGhhcyBhIGhlYXRtYXAgcGxvdHRpbmcgZnVuY3Rpb24uIFRoaXMgZnVuY3Rpb24gYWxzbwpwcm9kdWNlcyBzb21lIGFkZGl0aW9uYWwgb3V0cHV0IGZpbGVzLgoKYGBge2Jhc2ggbWFrZS1oZWF0bWFwfQpldmFsICIkKGNvbmRhIHNoZWxsLmJhc2ggaG9vaykiCmNvbmRhIGFjdGl2YXRlICRDT05EQV9FTlYKCmNlbGxwaG9uZWRiIHBsb3QgaGVhdG1hcF9wbG90IFwKICAgIC0tcHZhbHVlcy1wYXRoIG91dHB1dC8xMS1DZWxsUGhvbmVEQi5SbWQvcHZhbHVlcy50eHQgXAogICAgLS1vdXRwdXQtcGF0aCBvdXRwdXQvMTEtQ2VsbFBob25lREIuUm1kLyBcCiAgICAtLWNvdW50LW5hbWUgaGVhdG1hcF9jb3VudHMucG5nIFwKICAgIC0tbG9nLW5hbWUgaGVhdG1hcF9sb2djb3VudHMucG5nIFwKICAgIC0tY291bnQtbmV0d29yay1uYW1lIGNvdW50X25ldHdvcmsudHh0IFwKICAgIC0taW50ZXJhY3Rpb24tY291bnQtbmFtZSBpbnRlcmFjdGlvbnNfY291bnQudHh0IFwKICAgIGRhdGEvY2VsbHBob25lZGIvdGVzdF9tZXRhLnR4dApgYGAKCiMjIyBDb3VudHMKClRoaXMgaXMgYSBoZWF0bWFwIG9mIHRoZSBjb3VudCBvZiBpbnRlcmFjdGlvbnMgYmV0d2VlbiBjZWxsIHR5cGVzLgoKYGBge3IgaGVhdG1hcC1jb3VudHN9CmZpZ19kaXIgPC0gaGVyZSgiZG9jcyIsICJmaWd1cmUiLCBET0NOQU1FKQpmczo6ZGlyX2NyZWF0ZShmaWdfZGlyKQpmczo6ZmlsZV9jb3B5KAogICAgZnM6OnBhdGgoT1VUX0RJUiwgImhlYXRtYXBfY291bnRzLnBuZyIpLAogICAgZnM6OnBhdGgoZmlnX2RpciwgImhlYXRtYXBfY291bnRzLnBuZyIpLAogICAgb3ZlcndyaXRlID0gVFJVRQopCgppbmNsdWRlX2dyYXBoaWNzKGZzOjpwYXRoKCJmaWd1cmUiLCBET0NOQU1FLCAiaGVhdG1hcF9jb3VudHMucG5nIikpCmBgYAoKIyMjIExvZy1jb3VudHMKClRoaXMgaXMgYSBoZWF0bWFwIG9mIHRoZSBsb2ctY291bnQgb2YgaW50ZXJhY3Rpb25zIGJldHdlZW4gY2VsbCB0eXBlcy4KCmBgYHtyIGhlYXRtYXAtbG9nY291bnRzfQpmaWdfZGlyIDwtIGhlcmUoImRvY3MiLCAiZmlndXJlIiwgRE9DTkFNRSkKZnM6OmRpcl9jcmVhdGUoZmlnX2RpcikKZnM6OmZpbGVfY29weSgKICAgIGZzOjpwYXRoKE9VVF9ESVIsICJoZWF0bWFwX2xvZ2NvdW50cy5wbmciKSwKICAgIGZzOjpwYXRoKGZpZ19kaXIsICJoZWF0bWFwX2xvZ2NvdW50cy5wbmciKSwKICAgIG92ZXJ3cml0ZSA9IFRSVUUKKQoKaW5jbHVkZV9ncmFwaGljcyhmczo6cGF0aCgiZmlndXJlIiwgRE9DTkFNRSwgImhlYXRtYXBfbG9nY291bnRzLnBuZyIpKQpgYGAKCiMjIyBjb3VudF9uZXR3b3JrLnR4dAoKVGhpcyBmaWxlIGNvbnRhaW5zIGEgY291bnQgb2YgdGhlIGRpcmVjdGlvbmFsIGludGVyYWN0aW9ucyBiZXR3ZWVuIGRpZmZlcmVudApjZWxsIHR5cGVzIHVzZWQgdG8gY3JlYXRlIHRoZSBoZWF0bWFwcy4KCmBgYHtyIGhlYXRtYXAtbmV0d29ya30KbmV0d29yayA8LSByZWFkX3RzdigKICAgIGZzOjpwYXRoKE9VVF9ESVIsICJjb3VudF9uZXR3b3JrLnR4dCIpLAogICAgY29sX3R5cGVzID0gY29scygKICAgICAgICBTT1VSQ0UgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgVEFSR0VUID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGNvdW50ICA9IGNvbF9kb3VibGUoKQogICAgKQopCgpza2ltKG5ldHdvcmspCmBgYAoKIyMjIGludGVyYWN0aW9uc19jb3VudC50eHQKClRoaXMgZmlsZSBjb250YWlucyBhIGNvdW50IG9mIHRvdGFsIG51bWJlciBvZiBpbnRlcmFjdGlvbnMgZm9yIGVhY2ggY2VsbCB0eXBlLgoKYGBge3IgaGVhdG1hcC1pbnRlcmFjdGlvbnN9CmludGVyYWN0aW9ucyA8LSByZWFkX3RzdigKICAgIGZzOjpwYXRoKE9VVF9ESVIsICJpbnRlcmFjdGlvbnNfY291bnQudHh0IiksCiAgICBjb2xfdHlwZXMgPSBjb2xzKAogICAgICAgIFgxID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGFsbF9zdW0gPSBjb2xfZG91YmxlKCkKICAgICkKKQoKc2tpbShpbnRlcmFjdGlvbnMpCmBgYAoKU3VtbWFyeSB7LnVubnVtYmVyZWR9Cj09PT09PT0KClBhcmFtZXRlcnMgey51bm51bWJlcmVkfQotLS0tLS0tLS0tCgpUaGlzIHRhYmxlIGRlc2NyaWJlcyBwYXJhbWV0ZXJzIHVzZWQgYW5kIHNldCBpbiB0aGlzIGRvY3VtZW50LgoKYGBge3IgcGFyYW1ldGVyc30KcGFyYW1zIDwtIGxpc3QoCiAgICAKKQpwYXJhbXMgPC0gdG9KU09OKHBhcmFtcywgcHJldHR5ID0gVFJVRSkKa2FibGUoZnJvbUpTT04ocGFyYW1zKSkKYGBgCgpPdXRwdXQgZmlsZXMgey51bm51bWJlcmVkfQotLS0tLS0tLS0tLS0KClRoaXMgdGFibGUgZGVzY3JpYmVzIHRoZSBvdXRwdXQgZmlsZXMgcHJvZHVjZWQgYnkgdGhpcyBkb2N1bWVudC4gUmlnaHQgY2xpY2sKYW5kIF9TYXZlIExpbmsgQXMuLi5fIHRvIGRvd25sb2FkIHRoZSByZXN1bHRzLgoKYGBge3Igb3V0cHV0fQprYWJsZShkYXRhLmZyYW1lKAogICAgRmlsZSA9IGMoCiAgICAgICAgZG93bmxvYWRfbGluaygicGFyYW1ldGVycy5qc29uIiwgT1VUX0RJUiksCiAgICAgICAgZG93bmxvYWRfbGluaygiZGVjb252b2x1dGVkLnR4dCIsIE9VVF9ESVIpLAogICAgICAgIGRvd25sb2FkX2xpbmsoIm1lYW5zLnR4dCIsIE9VVF9ESVIpLAogICAgICAgIGRvd25sb2FkX2xpbmsoInB2YWx1ZXMudHh0IiwgT1VUX0RJUiksCiAgICAgICAgZG93bmxvYWRfbGluaygic2lnbmlmaWNhbnRfbWVhbnMudHh0IiwgT1VUX0RJUiksCiAgICAgICAgZG93bmxvYWRfbGluaygiZG90cGxvdC5wbmciLCBPVVRfRElSKSwKICAgICAgICBkb3dubG9hZF9saW5rKCJoZWF0bWFwX2NvdW50cy5wbmciLCBPVVRfRElSKSwKICAgICAgICBkb3dubG9hZF9saW5rKCJoZWF0bWFwX2xvZ2NvdW50cy5wbmciLCBPVVRfRElSKSwKICAgICAgICBkb3dubG9hZF9saW5rKCJjb3VudF9uZXR3b3JrLnR4dCIsIE9VVF9ESVIpLAogICAgICAgIGRvd25sb2FkX2xpbmsoImludGVyYWN0aW9uc19jb3VudC50eHQiLCBPVVRfRElSKQogICAgKSwKICAgIERlc2NyaXB0aW9uID0gYygKICAgICAgICAiUGFyYW1ldGVycyBzZXQgYW5kIHVzZWQgaW4gdGhpcyBhbmFseXNpcyIsCiAgICAgICAgIkRlY29udm9sdXRlZCBvdXRwdXQgZnJvbSBDZWxsUGhvbmVEQiIsCiAgICAgICAgIk1lYW5zIG91dHB1dCBmcm9tIENlbGxQaG9uZURCIiwKICAgICAgICAiUC12YWx1ZXMgb3V0cHV0IGZyb20gQ2VsbFBob25lREIiLAogICAgICAgICJTaWduaWZpY2FudCBtZWFucyBvdXRwdXQgZnJvbSBDZWxsUGhvbmVEQiIsCiAgICAgICAgIkRvdHBsb3QgcGxvdCBmcm9tIENlbGxQaG9uZURCIiwKICAgICAgICAiQ291bnRzIGhlYXRtYXAgcGxvdCBmcm9tIENlbGxQaG9uZURCIiwKICAgICAgICAiTG9nLWNvdW50cyBoZWF0bWFwIHBsb3QgZnJvbSBDZWxsUGhvbmVEQiIsCiAgICAgICAgIkNvdW50IG5ldHdvcmsgb3V0cHV0IGZyb20gQ2VsbFBob25lREIiLAogICAgICAgICJJbnRlcmFjdGlvbnMgY291bnQgb3V0cHV0IGZyb20gQ2VsbFBob25lREIiCiAgICApCikpCmBgYAoKU2Vzc2lvbiBpbmZvcm1hdGlvbiB7LnVubnVtYmVyZWR9Ci0tLS0tLS0tLS0tLS0tLS0tLS0K</div>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("11-CellPhoneDB.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
