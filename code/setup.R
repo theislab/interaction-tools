@@ -57,9 +57,16 @@ OUT_DIR <- here("output", DOCNAME)
 dir_create(OUT_DIR)
 
 #==============================================================================#
-# ---- EVIRONMENT VARIABLES ----
+# ---- ENVIRONMENT VARIABLES ----
 #==============================================================================#
 
+CONDA_BIN <- reticulate::conda_binary()
+if (is.null(CONDA_BIN)) {
+    stop("conda binary not found: reticulate::conda_binary() returned NULL",
+         call. = FALSE)
+}
+CONDA_PATH <- fs::path_dir(CONDA_BIN)
+Sys.setenv(PATH = paste(CONDA_PATH, Sys.getenv("PATH"), sep = ":"))
 CONDA_ENV <- fs::path(renv::project(), "renv/python/condaenvs/renv-python")
 Sys.setenv(CONDA_ENV = CONDA_ENV)
 
