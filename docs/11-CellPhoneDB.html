@@ -13,6 +13,7 @@
 
 <title>CellPhoneDB example</title>
 
+<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -31,6 +32,16 @@
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -381,13 +392,6 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<!-- Add a small amount of space between sections. -->
-<style type="text/css">
-div.section {
-  padding-top: 12px;
-}
-</style>
-
 <div class="fluid-row" id="header">
 
 <div class="btn-group pull-right">
@@ -427,7 +431,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-01-22
+<strong>Last updated:</strong> 2020-05-06
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -437,7 +441,7 @@ div.section {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -475,7 +479,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongSeedstrongcodesetseed20191213code" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20191213)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20191213)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
 </div>
 </div>
 </div>
@@ -518,13 +522,19 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreeeb2444175817c7c6680a0c2f91f78e46307c3033targetblankeb24441a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/eb2444175817c7c6680a0c2f91f78e46307c3033" target="_blank">eb24441</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree54358bcf9e5bc4fc99b75e1b76590ffa86627d71targetblank54358bca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/54358bcf9e5bc4fc99b75e1b76590ffa86627d71" target="_blank">54358bc</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreeeb2444175817c7c6680a0c2f91f78e46307c3033targetblankeb24441a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree54358bcf9e5bc4fc99b75e1b76590ffa86627d71targetblank54358bca" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/54358bcf9e5bc4fc99b75e1b76590ffa86627d71" target="_blank">54358bc</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
@@ -536,8 +546,15 @@ Ignored files:
     Ignored:    renv/python/
     Ignored:    renv/staging/
 
-Untracked files:
-    Untracked:  output/11-CellPhoneDB.Rmd/
+Unstaged changes:
+    Modified:   output/11-CellPhoneDB.Rmd/count_network.txt
+    Modified:   output/11-CellPhoneDB.Rmd/dotplot.png
+    Modified:   output/11-CellPhoneDB.Rmd/heatmap_counts.png
+    Modified:   output/11-CellPhoneDB.Rmd/heatmap_logcounts.png
+    Modified:   output/11-CellPhoneDB.Rmd/interactions_count.txt
+    Modified:   output/11-CellPhoneDB.Rmd/pvalues.txt
+    Modified:   output/11-CellPhoneDB.Rmd/significant_means.txt
+    Modified:   renv.lock
 
 </code></pre>
 <p>
@@ -552,7 +569,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/11-CellPhoneDB.Rmd</code>) and HTML (<code>docs/11-CellPhoneDB.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -576,6 +593,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/54358bcf9e5bc4fc99b75e1b76590ffa86627d71/analysis/11-CellPhoneDB.Rmd" target="_blank">54358bc</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-06
+</td>
+<td>
+Fix links to output figures
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/19026dfa6b395aa5d6bd6729571c0e5ea79c636e/docs/11-CellPhoneDB.html" target="_blank">19026df</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-01-22
+</td>
+<td>
+Rebuild
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -656,15 +707,15 @@ source(here::here(&quot;code&quot;, &quot;setup.R&quot;))
 
 # Function dependencies
 invisible(drake::readd(download_link))</code></pre>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
+<div id="introduction" class="section level1 unnumbered" number="">
+<h1 class="unnumbered" number="">Introduction</h1>
 <p>In this document we are going to run through the example analysis for the <strong>CellPhoneDB</strong> tool and have a look at the output it produces. More information about <strong>CellPhoneDB</strong> can be found at <a href="https://www.cellphonedb.org/" class="uri">https://www.cellphonedb.org/</a>.</p>
 </div>
-<div id="input" class="section level1">
-<h1><span class="header-section-number">1</span> Input</h1>
+<div id="input" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Input</h1>
 <p><strong>CellPhoneDB</strong> takes two input files, a table of metadata for each cell and a counts matrix.</p>
-<div id="test_meta.txt" class="section level2">
-<h2><span class="header-section-number">1.1</span> test_meta.txt</h2>
+<div id="test_meta.txt" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> test_meta.txt</h2>
 <p>This file contains cell type assignments for each cell in the dataset.</p>
 <pre class="r"><code>meta &lt;- read_tsv(
     fs::path(PATHS$cellphonedb_in, &quot;test_meta.txt&quot;),
@@ -750,8 +801,8 @@ skim(meta)</code></pre>
 </tbody>
 </table>
 </div>
-<div id="test_counts.txt" class="section level2">
-<h2><span class="header-section-number">1.2</span> test_counts.txt</h2>
+<div id="test_counts.txt" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> test_counts.txt</h2>
 <p>This file contains the count expression matrix.</p>
 <pre class="r"><code>counts &lt;- read_tsv(
     fs::path(PATHS$cellphonedb_in, &quot;test_counts.txt&quot;),
@@ -983,8 +1034,8 @@ skim(counts)</code></pre>
 <p>The small test dataset contains 17198 genes and 17198 cells.</p>
 </div>
 </div>
-<div id="analysis" class="section level1">
-<h1><span class="header-section-number">2</span> Analysis</h1>
+<div id="analysis" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Analysis</h1>
 <p><strong>CellPhoneDB</strong> is designed to be a command line tool so we will run the following commands in a BASH shell. Here we run it with the full statistical analysis.</p>
 <pre class="bash"><code>eval &quot;$(conda shell.bash hook)&quot;
 conda activate $CONDA_ENV
@@ -994,36 +1045,36 @@ cellphonedb method statistical_analysis \
     --threads 1 \
     data/cellphonedb/test_meta.txt \
     data/cellphonedb/test_counts.txt</code></pre>
-<pre><code>[ ][APP][22/01/20-16:00:29][WARNING] Latest local available version is `v2.0.0`, using it
-[ ][APP][22/01/20-16:00:29][WARNING] User selected downloaded database `v2.0.0` is available, using it
-[ ][CORE][22/01/20-16:00:29][INFO] Initializing SqlAlchemy CellPhoneDB Core
-[ ][CORE][22/01/20-16:00:29][INFO] Using custom database at /Users/Luke/.cpdb/releases/v2.0.0/cellphone.db
-[ ][APP][22/01/20-16:00:29][INFO] Launching Method cpdb_statistical_analysis_local_method_launcher
-[ ][APP][22/01/20-16:00:29][INFO] Launching Method _set_paths
-[ ][APP][22/01/20-16:00:29][WARNING] Output directory (output/11-cellphonedb.Rmd) exist and is not empty. Result can overwrite old results
-[ ][APP][22/01/20-16:00:29][INFO] Launching Method _load_meta_counts
-[ ][CORE][22/01/20-16:00:29][INFO] Launching Method cpdb_statistical_analysis_launcher
-[ ][CORE][22/01/20-16:00:29][INFO] Launching Method _counts_validations
-[ ][CORE][22/01/20-16:00:30][INFO] [Cluster Statistical Analysis Simple] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
-[ ][CORE][22/01/20-16:00:30][INFO] Running Simple Prefilters
-[ ][CORE][22/01/20-16:00:30][INFO] Running Real Simple Analysis
-[ ][CORE][22/01/20-16:00:30][INFO] Running Statistical Analysis
-/Users/Luke/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
+<pre><code>[ ][APP][06/05/20-16:07:27][WARNING] Latest local available version is `v2.0.0`, using it
+[ ][APP][06/05/20-16:07:27][WARNING] User selected downloaded database `v2.0.0` is available, using it
+[ ][CORE][06/05/20-16:07:27][INFO] Initializing SqlAlchemy CellPhoneDB Core
+[ ][CORE][06/05/20-16:07:27][INFO] Using custom database at /Users/luke.zappia/.cpdb/releases/v2.0.0/cellphone.db
+[ ][APP][06/05/20-16:07:27][INFO] Launching Method cpdb_statistical_analysis_local_method_launcher
+[ ][APP][06/05/20-16:07:27][INFO] Launching Method _set_paths
+[ ][APP][06/05/20-16:07:27][WARNING] Output directory (output/11-cellphonedb.Rmd) exist and is not empty. Result can overwrite old results
+[ ][APP][06/05/20-16:07:27][INFO] Launching Method _load_meta_counts
+[ ][CORE][06/05/20-16:07:27][INFO] Launching Method cpdb_statistical_analysis_launcher
+[ ][CORE][06/05/20-16:07:27][INFO] Launching Method _counts_validations
+[ ][CORE][06/05/20-16:07:27][INFO] [Cluster Statistical Analysis Simple] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
+[ ][CORE][06/05/20-16:07:27][INFO] Running Simple Prefilters
+[ ][CORE][06/05/20-16:07:27][INFO] Running Real Simple Analysis
+[ ][CORE][06/05/20-16:07:27][INFO] Running Statistical Analysis
+/Users/luke.zappia/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
   warnings.warn(message, FutureWarning)
-[ ][CORE][22/01/20-16:02:43][INFO] Building Pvalues result
-[ ][CORE][22/01/20-16:02:47][INFO] Building Simple results
-[ ][CORE][22/01/20-16:02:47][INFO] [Cluster Statistical Analysis Complex] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
-[ ][CORE][22/01/20-16:02:47][INFO] Running Complex Prefilters
-[ ][CORE][22/01/20-16:02:49][INFO] Running Real Complex Analysis
-[ ][CORE][22/01/20-16:02:49][INFO] Running Statistical Analysis
-[ ][CORE][22/01/20-16:05:30][INFO] Building Pvalues result
-[ ][CORE][22/01/20-16:05:32][INFO] Building Complex results</code></pre>
+[ ][CORE][06/05/20-16:08:48][INFO] Building Pvalues result
+[ ][CORE][06/05/20-16:08:51][INFO] Building Simple results
+[ ][CORE][06/05/20-16:08:51][INFO] [Cluster Statistical Analysis Complex] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
+[ ][CORE][06/05/20-16:08:51][INFO] Running Complex Prefilters
+[ ][CORE][06/05/20-16:08:52][INFO] Running Real Complex Analysis
+[ ][CORE][06/05/20-16:08:52][INFO] Running Statistical Analysis
+[ ][CORE][06/05/20-16:10:33][INFO] Building Pvalues result
+[ ][CORE][06/05/20-16:10:34][INFO] Building Complex results</code></pre>
 </div>
-<div id="output" class="section level1">
-<h1><span class="header-section-number">3</span> Output</h1>
+<div id="output" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Output</h1>
 <p><strong>CellPhoneDB</strong> produces four output files. Let’s have a look at each of these and see what they contain:</p>
-<div id="deconvoluted.txt" class="section level2">
-<h2><span class="header-section-number">3.1</span> deconvoluted.txt</h2>
+<div id="deconvoluted.txt" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> deconvoluted.txt</h2>
 <p>According to the <strong>CellPhoneDB</strong> documentation this file provides additional information about the interacting pairs. Specifically it descibes relationships between genes, complexes and expression in cell types.</p>
 <pre class="r"><code>deconvoluted &lt;- read_tsv(
     fs::path(OUT_DIR, &quot;deconvoluted.txt&quot;),
@@ -1213,7 +1264,7 @@ skim(deconvoluted)</code></pre>
 <td align="right">0.78</td>
 <td align="right">0.86</td>
 <td align="right">0</td>
-<td align="right">0.08</td>
+<td align="right">0.09</td>
 <td align="right">0.35</td>
 <td align="right">1.41</td>
 <td align="right">4.22</td>
@@ -1248,8 +1299,8 @@ skim(deconvoluted)</code></pre>
 </tbody>
 </table>
 </div>
-<div id="means.txt" class="section level2">
-<h2><span class="header-section-number">3.2</span> means.txt</h2>
+<div id="means.txt" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> means.txt</h2>
 <p>This file contains mean values for each ligand-receptor interaction.</p>
 <pre class="r"><code>means &lt;- read_tsv(
     fs::path(OUT_DIR, &quot;means.txt&quot;),
@@ -1674,8 +1725,8 @@ skim(means)</code></pre>
 </table>
 <p>It includes information about each ligand-receptor pair as well as scores for each pair of cell types.</p>
 </div>
-<div id="pvalues.txt" class="section level2">
-<h2><span class="header-section-number">3.3</span> pvalues.txt</h2>
+<div id="pvalues.txt" class="section level2" number="3.3">
+<h2 number="3.3"><span class="header-section-number">3.3</span> pvalues.txt</h2>
 <p>This file is similar to <code>means.txt</code> but contains p-values from the statistical test instead of scores.</p>
 <pre class="r"><code>pvalues &lt;- read_tsv(
     fs::path(OUT_DIR, &quot;pvalues.txt&quot;),
@@ -1908,7 +1959,7 @@ skim(pvalues)</code></pre>
 <td align="right">0.76</td>
 <td align="right">0.39</td>
 <td align="right">0.00</td>
-<td align="right">0.56</td>
+<td align="right">0.54</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -1960,7 +2011,7 @@ skim(pvalues)</code></pre>
 <td align="right">0.71</td>
 <td align="right">0.38</td>
 <td align="right">0.00</td>
-<td align="right">0.34</td>
+<td align="right">0.32</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -1971,7 +2022,7 @@ skim(pvalues)</code></pre>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">0.81</td>
-<td align="right">0.33</td>
+<td align="right">0.34</td>
 <td align="right">0.00</td>
 <td align="right">0.69</td>
 <td align="right">1</td>
@@ -2024,7 +2075,7 @@ skim(pvalues)</code></pre>
 <td align="right">1</td>
 <td align="right">0.89</td>
 <td align="right">0.27</td>
-<td align="right">0.03</td>
+<td align="right">0.02</td>
 <td align="right">1.00</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -2075,7 +2126,7 @@ skim(pvalues)</code></pre>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">0.91</td>
-<td align="right">0.25</td>
+<td align="right">0.26</td>
 <td align="right">0.00</td>
 <td align="right">1.00</td>
 <td align="right">1</td>
@@ -2099,8 +2150,8 @@ skim(pvalues)</code></pre>
 </tbody>
 </table>
 </div>
-<div id="significant_means.txt" class="section level2">
-<h2><span class="header-section-number">3.4</span> significant_means.txt</h2>
+<div id="significant_means.txt" class="section level2" number="3.4">
+<h2 number="3.4"><span class="header-section-number">3.4</span> significant_means.txt</h2>
 <p>This file contains mean values for signitificant ligand-receptor interactions.</p>
 <pre class="r"><code>sig_means &lt;- read_tsv(
     fs::path(OUT_DIR, &quot;significant_means.txt&quot;),
@@ -2317,11 +2368,11 @@ skim(sig_means)</code></pre>
 <td align="left">rank</td>
 <td align="right">0</td>
 <td align="right">1.00</td>
-<td align="right">0.64</td>
+<td align="right">0.65</td>
 <td align="right">0.55</td>
 <td align="right">0.06</td>
 <td align="right">0.06</td>
-<td align="right">0.69</td>
+<td align="right">1.19</td>
 <td align="right">1.19</td>
 <td align="right">1.19</td>
 <td align="left">▇▁▁▁▇</td>
@@ -2333,7 +2384,7 @@ skim(sig_means)</code></pre>
 <td align="right">1.65</td>
 <td align="right">0.49</td>
 <td align="right">1.13</td>
-<td align="right">1.38</td>
+<td align="right">1.39</td>
 <td align="right">1.55</td>
 <td align="right">1.94</td>
 <td align="right">2.70</td>
@@ -2341,29 +2392,29 @@ skim(sig_means)</code></pre>
 </tr>
 <tr class="odd">
 <td align="left">Myeloid|NKcells_0</td>
-<td align="right">163</td>
-<td align="right">0.14</td>
-<td align="right">1.40</td>
-<td align="right">0.67</td>
+<td align="right">167</td>
+<td align="right">0.12</td>
+<td align="right">1.34</td>
+<td align="right">0.66</td>
 <td align="right">0.61</td>
 <td align="right">0.81</td>
-<td align="right">1.13</td>
-<td align="right">2.01</td>
+<td align="right">1.12</td>
+<td align="right">1.91</td>
 <td align="right">2.70</td>
-<td align="left">▇▃▂▅▂</td>
+<td align="left">▇▃▁▃▂</td>
 </tr>
 <tr class="even">
 <td align="left">Myeloid|NKcells_1</td>
-<td align="right">178</td>
+<td align="right">179</td>
 <td align="right">0.06</td>
-<td align="right">1.05</td>
-<td align="right">0.25</td>
+<td align="right">1.06</td>
+<td align="right">0.26</td>
 <td align="right">0.74</td>
-<td align="right">0.93</td>
+<td align="right">0.90</td>
 <td align="right">1.03</td>
-<td align="right">1.08</td>
+<td align="right">1.12</td>
 <td align="right">1.60</td>
-<td align="left">▃▇▁▁▁</td>
+<td align="left">▅▇▂▂▂</td>
 </tr>
 <tr class="odd">
 <td align="left">Myeloid|Tcells</td>
@@ -2380,29 +2431,29 @@ skim(sig_means)</code></pre>
 </tr>
 <tr class="even">
 <td align="left">NKcells_0|Myeloid</td>
-<td align="right">181</td>
-<td align="right">0.05</td>
-<td align="right">1.14</td>
-<td align="right">0.46</td>
+<td align="right">179</td>
+<td align="right">0.06</td>
+<td align="right">1.18</td>
+<td align="right">0.43</td>
 <td align="right">0.61</td>
-<td align="right">0.90</td>
-<td align="right">0.98</td>
-<td align="right">1.27</td>
+<td align="right">0.92</td>
+<td align="right">1.11</td>
+<td align="right">1.43</td>
 <td align="right">2.00</td>
-<td align="left">▃▇▂▁▃</td>
+<td align="left">▃▇▂▂▃</td>
 </tr>
 <tr class="odd">
 <td align="left">NKcells_0|NKcells_0</td>
-<td align="right">178</td>
+<td align="right">179</td>
 <td align="right">0.06</td>
-<td align="right">0.52</td>
-<td align="right">0.38</td>
+<td align="right">0.51</td>
+<td align="right">0.40</td>
 <td align="right">0.12</td>
-<td align="right">0.23</td>
-<td align="right">0.42</td>
-<td align="right">0.71</td>
+<td align="right">0.22</td>
+<td align="right">0.25</td>
+<td align="right">0.73</td>
 <td align="right">1.19</td>
-<td align="left">▇▁▃▁▂</td>
+<td align="left">▇▁▂▁▂</td>
 </tr>
 <tr class="even">
 <td align="left">NKcells_0|NKcells_1</td>
@@ -2419,16 +2470,16 @@ skim(sig_means)</code></pre>
 </tr>
 <tr class="odd">
 <td align="left">NKcells_0|Tcells</td>
-<td align="right">182</td>
-<td align="right">0.04</td>
-<td align="right">1.12</td>
-<td align="right">0.56</td>
+<td align="right">181</td>
+<td align="right">0.05</td>
+<td align="right">1.17</td>
+<td align="right">0.54</td>
 <td align="right">0.59</td>
-<td align="right">0.81</td>
-<td align="right">0.96</td>
-<td align="right">1.27</td>
+<td align="right">0.88</td>
+<td align="right">1.04</td>
+<td align="right">1.43</td>
 <td align="right">2.34</td>
-<td align="left">▇▃▂▁▂</td>
+<td align="left">▇▃▃▁▂</td>
 </tr>
 <tr class="even">
 <td align="left">NKcells_1|Myeloid</td>
@@ -2452,35 +2503,35 @@ skim(sig_means)</code></pre>
 <td align="right">0.22</td>
 <td align="right">0.30</td>
 <td align="right">0.98</td>
-<td align="right">1.82</td>
+<td align="right">1.81</td>
 <td align="right">2.86</td>
 <td align="left">▇▅▂▁▅</td>
 </tr>
 <tr class="even">
 <td align="left">NKcells_1|NKcells_1</td>
-<td align="right">187</td>
+<td align="right">186</td>
 <td align="right">0.02</td>
-<td align="right">0.84</td>
-<td align="right">0.43</td>
+<td align="right">1.55</td>
+<td align="right">1.08</td>
 <td align="right">0.39</td>
-<td align="right">0.63</td>
-<td align="right">0.87</td>
-<td align="right">1.06</td>
-<td align="right">1.25</td>
-<td align="left">▇▁▇▁▇</td>
+<td align="right">0.75</td>
+<td align="right">1.67</td>
+<td align="right">2.48</td>
+<td align="right">2.48</td>
+<td align="left">▃▃▁▁▇</td>
 </tr>
 <tr class="odd">
 <td align="left">NKcells_1|Tcells</td>
-<td align="right">186</td>
-<td align="right">0.02</td>
-<td align="right">1.52</td>
-<td align="right">0.72</td>
+<td align="right">184</td>
+<td align="right">0.03</td>
+<td align="right">1.62</td>
+<td align="right">0.61</td>
 <td align="right">0.76</td>
-<td align="right">1.19</td>
-<td align="right">1.41</td>
-<td align="right">1.74</td>
+<td align="right">1.37</td>
+<td align="right">1.52</td>
+<td align="right">1.96</td>
 <td align="right">2.50</td>
-<td align="left">▇▇▇▁▇</td>
+<td align="left">▃▃▇▃▃</td>
 </tr>
 <tr class="even">
 <td align="left">Tcells|Myeloid</td>
@@ -2538,11 +2589,11 @@ skim(sig_means)</code></pre>
 </table>
 </div>
 </div>
-<div id="plotting" class="section level1">
-<h1><span class="header-section-number">4</span> Plotting</h1>
+<div id="plotting" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Plotting</h1>
 <p><strong>CellPhoneDB</strong> also has some plotting functions.</p>
-<div id="dotplot" class="section level2">
-<h2><span class="header-section-number">4.1</span> Dotplot</h2>
+<div id="dotplot" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> Dotplot</h2>
 <pre class="bash"><code>eval &quot;$(conda shell.bash hook)&quot;
 conda activate $CONDA_ENV
 
@@ -2551,8 +2602,8 @@ cellphonedb plot dot_plot \
     --pvalues-path output/11-CellPhoneDB.Rmd/pvalues.txt \
     --output-path output/11-CellPhoneDB.Rmd/ \
     --output-name dotplot.png</code></pre>
-<pre><code>* Project &#39;~/Documents/Projects/interaction-tools&#39; loaded. [renv 0.8.3]
-/Users/Luke/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
+<pre><code>* Project &#39;~/Documents/Projects/interaction-tools&#39; loaded. [renv 0.9.3]
+/Users/luke.zappia/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
   warnings.warn(message, FutureWarning)</code></pre>
 <p>This is a dotplot of the mean expression of the ligand-receptor pair in each pair of cell types.</p>
 <pre class="r"><code>fig_dir &lt;- here(&quot;docs&quot;, &quot;figure&quot;, DOCNAME)
@@ -2563,11 +2614,59 @@ fs::file_copy(
     overwrite = TRUE
 )
 
-include_graphics(fs::path(&quot;figure&quot;, DOCNAME, &quot;dotplot.png&quot;))</code></pre>
+include_graphics(fs::path(&quot;figure&quot;, DOCNAME, &quot;dotplot.png&quot;), error = FALSE)</code></pre>
 <p><img src="figure/11-CellPhoneDB.Rmd/dotplot.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dotplot">
+Past versions of dotplot.png
+</button>
+</p>
+<div id="fig-dotplot" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+54358bc
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-06
+</td>
+</tr>
+<tr>
+<td>
+19026df
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-01-22
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="heatmap" class="section level2">
-<h2><span class="header-section-number">4.2</span> Heatmap</h2>
+</div>
+</div>
+<div id="heatmap" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> Heatmap</h2>
 <p><strong>CellPhoneDB</strong> also has a heatmap plotting function. This function also produces some additional output files.</p>
 <pre class="bash"><code>eval &quot;$(conda shell.bash hook)&quot;
 conda activate $CONDA_ENV
@@ -2580,11 +2679,11 @@ cellphonedb plot heatmap_plot \
     --count-network-name count_network.txt \
     --interaction-count-name interactions_count.txt \
     data/cellphonedb/test_meta.txt</code></pre>
-<pre><code>* Project &#39;~/Documents/Projects/interaction-tools&#39; loaded. [renv 0.8.3]
-/Users/Luke/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
+<pre><code>* Project &#39;~/Documents/Projects/interaction-tools&#39; loaded. [renv 0.9.3]
+/Users/luke.zappia/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
   warnings.warn(message, FutureWarning)</code></pre>
-<div id="counts" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> Counts</h3>
+<div id="counts" class="section level3" number="4.2.1">
+<h3 number="4.2.1"><span class="header-section-number">4.2.1</span> Counts</h3>
 <p>This is a heatmap of the count of interactions between cell types.</p>
 <pre class="r"><code>fig_dir &lt;- here(&quot;docs&quot;, &quot;figure&quot;, DOCNAME)
 fs::dir_create(fig_dir)
@@ -2594,11 +2693,60 @@ fs::file_copy(
     overwrite = TRUE
 )
 
-include_graphics(fs::path(&quot;figure&quot;, DOCNAME, &quot;heatmap_counts.png&quot;))</code></pre>
+include_graphics(fs::path(&quot;figure&quot;, DOCNAME, &quot;heatmap_counts.png&quot;),
+                 error = FALSE)</code></pre>
 <p><img src="figure/11-CellPhoneDB.Rmd/heatmap_counts.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-heatmap_counts">
+Past versions of heatmap_counts.png
+</button>
+</p>
+<div id="fig-heatmap_counts" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+54358bc
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-06
+</td>
+</tr>
+<tr>
+<td>
+19026df
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-01-22
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="log-counts" class="section level3">
-<h3><span class="header-section-number">4.2.2</span> Log-counts</h3>
+</div>
+</div>
+<div id="log-counts" class="section level3" number="4.2.2">
+<h3 number="4.2.2"><span class="header-section-number">4.2.2</span> Log-counts</h3>
 <p>This is a heatmap of the log-count of interactions between cell types.</p>
 <pre class="r"><code>fig_dir &lt;- here(&quot;docs&quot;, &quot;figure&quot;, DOCNAME)
 fs::dir_create(fig_dir)
@@ -2608,11 +2756,60 @@ fs::file_copy(
     overwrite = TRUE
 )
 
-include_graphics(fs::path(&quot;figure&quot;, DOCNAME, &quot;heatmap_logcounts.png&quot;))</code></pre>
+include_graphics(fs::path(&quot;figure&quot;, DOCNAME, &quot;heatmap_logcounts.png&quot;),
+                 error = FALSE)</code></pre>
 <p><img src="figure/11-CellPhoneDB.Rmd/heatmap_logcounts.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-heatmap_logcounts">
+Past versions of heatmap_logcounts.png
+</button>
+</p>
+<div id="fig-heatmap_logcounts" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+54358bc
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-06
+</td>
+</tr>
+<tr>
+<td>
+19026df
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-01-22
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="count_network.txt" class="section level3">
-<h3><span class="header-section-number">4.2.3</span> count_network.txt</h3>
+</div>
+</div>
+<div id="count_network.txt" class="section level3" number="4.2.3">
+<h3 number="4.2.3"><span class="header-section-number">4.2.3</span> count_network.txt</h3>
 <p>This file contains a count of the directional interactions between different cell types used to create the heatmaps.</p>
 <pre class="r"><code>network &lt;- read_tsv(
     fs::path(OUT_DIR, &quot;count_network.txt&quot;),
@@ -2725,19 +2922,19 @@ skim(network)</code></pre>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">15.06</td>
-<td align="right">9.83</td>
+<td align="right">8.99</td>
 <td align="right">1</td>
-<td align="right">10.75</td>
-<td align="right">14</td>
+<td align="right">10.5</td>
+<td align="right">13</td>
 <td align="right">19</td>
-<td align="right">36</td>
-<td align="left">▅▇▃▁▂</td>
+<td align="right">34</td>
+<td align="left">▂▇▂▁▂</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="interactions_count.txt" class="section level3">
-<h3><span class="header-section-number">4.2.4</span> interactions_count.txt</h3>
+<div id="interactions_count.txt" class="section level3" number="4.2.4">
+<h3 number="4.2.4"><span class="header-section-number">4.2.4</span> interactions_count.txt</h3>
 <p>This file contains a count of total number of interactions for each cell type.</p>
 <pre class="r"><code>interactions &lt;- read_tsv(
     fs::path(OUT_DIR, &quot;interactions_count.txt&quot;),
@@ -2839,12 +3036,12 @@ skim(interactions)</code></pre>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">60.25</td>
-<td align="right">25.95</td>
-<td align="right">38</td>
-<td align="right">38.75</td>
-<td align="right">56.5</td>
-<td align="right">78</td>
-<td align="right">90</td>
+<td align="right">23.07</td>
+<td align="right">40</td>
+<td align="right">41.5</td>
+<td align="right">57</td>
+<td align="right">75.75</td>
+<td align="right">87</td>
 <td align="left">▇▁▁▃▃</td>
 </tr>
 </tbody>
@@ -2852,10 +3049,10 @@ skim(interactions)</code></pre>
 </div>
 </div>
 </div>
-<div id="summary" class="section level1 unnumbered">
-<h1>Summary</h1>
-<div id="parameters" class="section level2 unnumbered">
-<h2>Parameters</h2>
+<div id="summary" class="section level1 unnumbered" number="">
+<h1 class="unnumbered" number="">Summary</h1>
+<div id="parameters" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number="">Parameters</h2>
 <p>This table describes parameters used and set in this document.</p>
 <pre class="r"><code>params &lt;- list(
     
@@ -2871,8 +3068,8 @@ kable(fromJSON(params))</code></pre>
 </tbody>
 </table>
 </div>
-<div id="output-files" class="section level2 unnumbered">
-<h2>Output files</h2>
+<div id="output-files" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number="">Output files</h2>
 <p>This table describes the output files produced by this document. Right click and <em>Save Link As…</em> to download the results.</p>
 <pre class="r"><code>kable(data.frame(
     File = c(
@@ -2951,8 +3148,8 @@ kable(fromJSON(params))</code></pre>
 </tbody>
 </table>
 </div>
-<div id="session-information" class="section level2 unnumbered">
-<h2>Session information</h2>
+<div id="session-information" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number="">Session information</h2>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -2963,112 +3160,113 @@ kable(fromJSON(params))</code></pre>
 <pre class="r"><code>sessioninfo::session_info()</code></pre>
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value                       
- version  R version 3.6.1 (2019-07-05)
- os       macOS Mojave 10.14          
- system   x86_64, darwin15.6.0        
+ version  R version 4.0.0 (2020-04-24)
+ os       macOS Catalina 10.15.3      
+ system   x86_64, darwin17.0          
  ui       X11                         
  language (EN)                        
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Berlin               
- date     2020-01-22                  
+ date     2020-05-06                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
- ! package     * version date       lib source             
- P assertthat    0.2.1   2019-03-21 [?] CRAN (R 3.6.0)     
- P backports     1.1.5   2019-10-02 [?] CRAN (R 3.6.0)     
- P base64enc     0.1-3   2015-07-28 [?] CRAN (R 3.6.0)     
-   base64url     1.4     2018-05-14 [1] standard (@1.4)    
-   broom         0.5.2   2019-04-07 [1] standard (@0.5.2)  
-   cellranger    1.1.0   2016-07-27 [1] standard (@1.1.0)  
- P cli           2.0.0   2019-12-09 [?] CRAN (R 3.6.0)     
-   colorspace    1.4-1   2019-03-18 [1] standard (@1.4-1)  
-   conflicted  * 1.0.4   2019-06-21 [1] standard (@1.0.4)  
- P crayon        1.3.4   2017-09-16 [?] CRAN (R 3.6.0)     
-   DBI           1.0.0   2018-05-02 [1] standard (@1.0.0)  
-   dbplyr        1.4.2   2019-06-17 [1] standard (@1.4.2)  
- P digest        0.6.23  2019-11-23 [?] CRAN (R 3.6.0)     
-   dplyr       * 0.8.3   2019-07-04 [1] standard (@0.8.3)  
-   drake         7.8.0   2019-12-02 [1] standard (@7.8.0)  
-   evaluate      0.14    2019-05-28 [1] standard (@0.14)   
- P fansi         0.4.0   2018-10-05 [?] CRAN (R 3.6.0)     
- P filelock      1.0.2   2018-10-05 [?] CRAN (R 3.6.0)     
-   forcats     * 0.4.0   2019-02-17 [1] standard (@0.4.0)  
-   fs          * 1.3.1   2019-05-06 [1] standard (@1.3.1)  
-   generics      0.0.2   2018-11-29 [1] standard (@0.0.2)  
-   ggplot2     * 3.2.1   2019-08-10 [1] standard (@3.2.1)  
-   git2r         0.26.1  2019-06-29 [1] standard (@0.26.1) 
- P glue          1.3.1   2019-03-12 [?] CRAN (R 3.6.0)     
-   gtable        0.3.0   2019-03-25 [1] standard (@0.3.0)  
-   haven         2.2.0   2019-11-08 [1] standard (@2.2.0)  
-   here        * 0.1     2017-05-28 [1] standard (@0.1)    
-   highr         0.8     2019-03-20 [1] standard (@0.8)    
- P hms           0.5.2   2019-10-30 [?] CRAN (R 3.6.0)     
-   htmltools     0.4.0   2019-10-04 [1] standard (@0.4.0)  
-   httpuv        1.5.2   2019-09-11 [1] standard (@1.5.2)  
-   httr          1.4.1   2019-08-05 [1] standard (@1.4.1)  
-   igraph        1.2.4.2 2019-11-27 [1] standard (@1.2.4.2)
- P jsonlite    * 1.6     2018-12-07 [?] CRAN (R 3.6.0)     
-   knitr       * 1.26    2019-11-12 [1] standard (@1.26)   
-   later         1.0.0   2019-10-04 [1] standard (@1.0.0)  
-   lattice       0.20-38 2018-11-04 [1] standard (@0.20-38)
-   lazyeval      0.2.2   2019-03-15 [1] standard (@0.2.2)  
-   lifecycle     0.1.0   2019-08-01 [1] standard (@0.1.0)  
-   lubridate     1.7.4   2018-04-11 [1] standard (@1.7.4)  
- P magrittr      1.5     2014-11-22 [?] CRAN (R 3.6.0)     
-   Matrix        1.2-18  2019-11-27 [1] standard (@1.2-18) 
-   memoise       1.1.0   2017-04-21 [1] standard (@1.1.0)  
-   modelr        0.1.5   2019-08-08 [1] standard (@0.1.5)  
-   munsell       0.5.0   2018-06-12 [1] standard (@0.5.0)  
-   nlme          3.1-143 2019-12-10 [1] standard (@3.1-143)
- P pillar        1.4.2   2019-06-29 [?] CRAN (R 3.6.0)     
- P pkgconfig     2.0.3   2019-09-22 [?] CRAN (R 3.6.0)     
-   promises      1.1.0   2019-10-04 [1] standard (@1.1.0)  
-   purrr       * 0.3.3   2019-10-18 [1] standard (@0.3.3)  
- P R6            2.4.1   2019-11-12 [?] CRAN (R 3.6.0)     
- P Rcpp          1.0.3   2019-11-08 [?] CRAN (R 3.6.0)     
-   readr       * 1.3.1   2018-12-21 [1] standard (@1.3.1)  
-   readxl        1.3.1   2019-03-13 [1] standard (@1.3.1)  
-   renv          0.8.3   2019-11-11 [1] CRAN (R 3.6.1)     
- P repr          1.0.2   2019-12-16 [?] CRAN (R 3.6.0)     
-   reprex        0.3.0   2019-05-16 [1] standard (@0.3.0)  
-   reticulate    1.13    2019-07-24 [1] standard (@1.13)   
- P rlang         0.4.2   2019-11-23 [?] CRAN (R 3.6.0)     
-   rmarkdown     1.18    2019-11-27 [1] standard (@1.18)   
- P rprojroot     1.3-2   2018-01-03 [?] CRAN (R 3.6.0)     
-   rstudioapi    0.10    2019-03-19 [1] standard (@0.10)   
-   rvest         0.3.5   2019-11-08 [1] standard (@0.3.5)  
-   scales        1.1.0   2019-11-18 [1] standard (@1.1.0)  
-   sessioninfo   1.1.1   2018-11-05 [1] standard (@1.1.1)  
- P skimr       * 2.0.2   2019-11-26 [?] CRAN (R 3.6.0)     
-   storr         1.2.1   2018-10-18 [1] standard (@1.2.1)  
- P stringi       1.4.3   2019-03-12 [?] CRAN (R 3.6.0)     
- P stringr     * 1.4.0   2019-02-10 [?] CRAN (R 3.6.0)     
- P tibble      * 2.1.3   2019-06-06 [?] CRAN (R 3.6.0)     
-   tidyr       * 1.0.0   2019-09-11 [1] standard (@1.0.0)  
-   tidyselect    0.2.5   2018-10-11 [1] standard (@0.2.5)  
-   tidyverse   * 1.3.0   2019-11-21 [1] standard (@1.3.0)  
-   txtq          0.2.0   2019-10-15 [1] standard (@0.2.0)  
- P vctrs         0.2.0   2019-07-05 [?] CRAN (R 3.6.0)     
-   whisker       0.4     2019-08-28 [1] standard (@0.4)    
- P withr         2.1.2   2018-03-15 [?] CRAN (R 3.6.0)     
-   workflowr     1.5.0   2019-11-01 [1] standard (@1.5.0)  
-   xfun          0.11    2019-11-12 [1] standard (@0.11)   
- P xml2          1.2.2   2019-08-09 [?] CRAN (R 3.6.0)     
-   yaml          2.2.0   2018-07-25 [1] standard (@2.2.0)  
- P zeallot       0.1.0   2018-01-28 [?] CRAN (R 3.6.0)     
+ ! package     * version date       lib source            
+ P assertthat    0.2.1   2019-03-21 [?] CRAN (R 4.0.0)    
+ P backports     1.1.6   2020-04-05 [?] CRAN (R 4.0.0)    
+ P base64enc     0.1-3   2015-07-28 [?] CRAN (R 4.0.0)    
+ P base64url     1.4     2018-05-14 [?] standard (@1.4)   
+ P broom         0.5.6   2020-04-20 [?] CRAN (R 4.0.0)    
+ P cellranger    1.1.0   2016-07-27 [?] standard (@1.1.0) 
+ P cli           2.0.2   2020-02-28 [?] CRAN (R 4.0.0)    
+ P colorspace    1.4-1   2019-03-18 [?] standard (@1.4-1) 
+ P conflicted  * 1.0.4   2019-06-21 [?] standard (@1.0.4) 
+ P crayon        1.3.4   2017-09-16 [?] CRAN (R 4.0.0)    
+ P DBI           1.1.0   2019-12-15 [?] CRAN (R 4.0.0)    
+ P dbplyr        1.4.3   2020-04-19 [?] CRAN (R 4.0.0)    
+ P digest        0.6.25  2020-02-23 [?] CRAN (R 4.0.0)    
+ P dplyr       * 0.8.5   2020-03-07 [?] CRAN (R 4.0.0)    
+ P drake         7.12.0  2020-03-25 [?] CRAN (R 4.0.0)    
+ P ellipsis      0.3.0   2019-09-20 [?] CRAN (R 4.0.0)    
+ P evaluate      0.14    2019-05-28 [?] standard (@0.14)  
+ P fansi         0.4.1   2020-01-08 [?] CRAN (R 4.0.0)    
+ P filelock      1.0.2   2018-10-05 [?] CRAN (R 4.0.0)    
+ P forcats     * 0.5.0   2020-03-01 [?] CRAN (R 4.0.0)    
+ P fs          * 1.4.1   2020-04-04 [?] CRAN (R 4.0.0)    
+ P generics      0.0.2   2018-11-29 [?] standard (@0.0.2) 
+ P ggplot2     * 3.3.0   2020-03-05 [?] CRAN (R 4.0.0)    
+ P git2r         0.27.1  2020-05-03 [?] CRAN (R 4.0.0)    
+ P glue          1.4.0   2020-04-03 [?] CRAN (R 4.0.0)    
+ P gtable        0.3.0   2019-03-25 [?] standard (@0.3.0) 
+ P haven         2.2.0   2019-11-08 [?] standard (@2.2.0) 
+ P here        * 0.1     2017-05-28 [?] standard (@0.1)   
+ P highr         0.8     2019-03-20 [?] standard (@0.8)   
+ P hms           0.5.3   2020-01-08 [?] CRAN (R 4.0.0)    
+ P htmltools     0.4.0   2019-10-04 [?] standard (@0.4.0) 
+ P httpuv        1.5.2   2019-09-11 [?] standard (@1.5.2) 
+ P httr          1.4.1   2019-08-05 [?] standard (@1.4.1) 
+ P igraph        1.2.5   2020-03-19 [?] CRAN (R 4.0.0)    
+ P jsonlite    * 1.6.1   2020-02-02 [?] CRAN (R 4.0.0)    
+ P knitr       * 1.28    2020-02-06 [?] CRAN (R 4.0.0)    
+ P later         1.0.0   2019-10-04 [?] standard (@1.0.0) 
+ P lattice       0.20-41 2020-04-02 [?] CRAN (R 4.0.0)    
+ P lifecycle     0.2.0   2020-03-06 [?] CRAN (R 4.0.0)    
+ P lubridate     1.7.8   2020-04-06 [?] CRAN (R 4.0.0)    
+ P magrittr      1.5     2014-11-22 [?] CRAN (R 4.0.0)    
+ P Matrix        1.2-18  2019-11-27 [?] standard (@1.2-18)
+ P memoise       1.1.0   2017-04-21 [?] standard (@1.1.0) 
+ P modelr        0.1.7   2020-04-30 [?] CRAN (R 4.0.0)    
+ P munsell       0.5.0   2018-06-12 [?] standard (@0.5.0) 
+ P nlme          3.1-147 2020-04-13 [?] CRAN (R 4.0.0)    
+ P pillar        1.4.4   2020-05-05 [?] CRAN (R 4.0.0)    
+ P pkgconfig     2.0.3   2019-09-22 [?] CRAN (R 4.0.0)    
+ P prettyunits   1.1.1   2020-01-24 [?] CRAN (R 4.0.0)    
+ P progress      1.2.2   2019-05-16 [?] CRAN (R 4.0.0)    
+ P promises      1.1.0   2019-10-04 [?] standard (@1.1.0) 
+ P purrr       * 0.3.4   2020-04-17 [?] CRAN (R 4.0.0)    
+ P R6            2.4.1   2019-11-12 [?] CRAN (R 4.0.0)    
+ P Rcpp          1.0.4.6 2020-04-09 [?] CRAN (R 4.0.0)    
+ P readr       * 1.3.1   2018-12-21 [?] standard (@1.3.1) 
+ P readxl        1.3.1   2019-03-13 [?] standard (@1.3.1) 
+ P renv          0.9.3   2020-02-10 [?] CRAN (R 4.0.0)    
+ P repr          1.1.0   2020-01-28 [?] CRAN (R 4.0.0)    
+ P reprex        0.3.0   2019-05-16 [?] standard (@0.3.0) 
+ P reticulate    1.15    2020-04-02 [?] CRAN (R 4.0.0)    
+ P rlang         0.4.6   2020-05-02 [?] CRAN (R 4.0.0)    
+ P rmarkdown     2.1     2020-01-20 [?] CRAN (R 4.0.0)    
+ P rprojroot     1.3-2   2018-01-03 [?] CRAN (R 4.0.0)    
+ P rstudioapi    0.11    2020-02-07 [?] CRAN (R 4.0.0)    
+ P rvest         0.3.5   2019-11-08 [?] standard (@0.3.5) 
+ P scales        1.1.0   2019-11-18 [?] standard (@1.1.0) 
+ P sessioninfo   1.1.1   2018-11-05 [?] CRAN (R 4.0.0)    
+ P skimr       * 2.1.1   2020-04-16 [?] CRAN (R 4.0.0)    
+ P storr         1.2.1   2018-10-18 [?] standard (@1.2.1) 
+ P stringi       1.4.6   2020-02-17 [?] CRAN (R 4.0.0)    
+ P stringr     * 1.4.0   2019-02-10 [?] CRAN (R 4.0.0)    
+ P tibble      * 3.0.1   2020-04-20 [?] CRAN (R 4.0.0)    
+ P tidyr       * 1.0.2   2020-01-24 [?] CRAN (R 4.0.0)    
+ P tidyselect    1.0.0   2020-01-27 [?] CRAN (R 4.0.0)    
+ P tidyverse   * 1.3.0   2019-11-21 [?] standard (@1.3.0) 
+ P txtq          0.2.0   2019-10-15 [?] standard (@0.2.0) 
+ P vctrs         0.2.4   2020-03-10 [?] CRAN (R 4.0.0)    
+ P whisker       0.4     2019-08-28 [?] standard (@0.4)   
+ P withr         2.2.0   2020-04-20 [?] CRAN (R 4.0.0)    
+ P workflowr     1.6.2   2020-04-30 [?] CRAN (R 4.0.0)    
+ P xfun          0.13    2020-04-13 [?] CRAN (R 4.0.0)    
+ P xml2          1.3.2   2020-04-23 [?] CRAN (R 4.0.0)    
+ P yaml          2.2.1   2020-02-01 [?] CRAN (R 4.0.0)    
 
-[1] /Users/Luke/Documents/Projects/interaction-tools/renv/library/R-3.6/x86_64-apple-darwin15.6.0
-[2] /private/var/folders/6z/gm76hk2d4357rydwgpszbh2r0000gq/T/Rtmpps1OBK/renv-system-library
-[3] /private/var/folders/6z/gm76hk2d4357rydwgpszbh2r0000gq/T/Rtmp0yVGMV/renv-system-library
-[4] /private/var/folders/6z/gm76hk2d4357rydwgpszbh2r0000gq/T/RtmptgzOM1/renv-system-library
+[1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpQVAp06/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpzgBIG1/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp0bHLsE/renv-system-library
 
  P ── Loaded and on-disk path mismatch.</code></pre>
 </div>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2VsbFBob25lREIgZXhhbXBsZSIKb3V0cHV0OiB3b3JrZmxvd3I6OndmbG93X2h0bWwKZWRpdG9yX29wdGlvbnM6CiAgY2h1bmtfb3V0cHV0X3R5cGU6IGNvbnNvbGUKLS0tCgpgYGB7ciBzZXR1cCwgY2FjaGUgPSBGQUxTRX0KIyBTZXR1cCBkb2N1bWVudApzb3VyY2UoaGVyZTo6aGVyZSgiY29kZSIsICJzZXR1cC5SIikpCgojIEZ1bmN0aW9uIGRlcGVuZGVuY2llcwppbnZpc2libGUoZHJha2U6OnJlYWRkKGRvd25sb2FkX2xpbmspKQpgYGAKCkludHJvZHVjdGlvbiB7LnVubnVtYmVyZWR9Cj09PT09PT09PT09PQoKSW4gdGhpcyBkb2N1bWVudCB3ZSBhcmUgZ29pbmcgdG8gcnVuIHRocm91Z2ggdGhlIGV4YW1wbGUgYW5hbHlzaXMgZm9yIHRoZQoqKkNlbGxQaG9uZURCKiogdG9vbCBhbmQgaGF2ZSBhIGxvb2sgYXQgdGhlIG91dHB1dCBpdCBwcm9kdWNlcy4gTW9yZSBpbmZvcm1hdGlvbgphYm91dCAqKkNlbGxQaG9uZURCKiogY2FuIGJlIGZvdW5kIGF0IGh0dHBzOi8vd3d3LmNlbGxwaG9uZWRiLm9yZy8uCgpJbnB1dAo9PT09PQoKKipDZWxsUGhvbmVEQioqIHRha2VzIHR3byBpbnB1dCBmaWxlcywgYSB0YWJsZSBvZiBtZXRhZGF0YSBmb3IgZWFjaCBjZWxsIGFuZCBhCmNvdW50cyBtYXRyaXguCgp0ZXN0X21ldGEudHh0Ci0tLS0tLS0tLS0tLS0KClRoaXMgZmlsZSBjb250YWlucyBjZWxsIHR5cGUgYXNzaWdubWVudHMgZm9yIGVhY2ggY2VsbCBpbiB0aGUgZGF0YXNldC4KCmBgYHtyIGlucHV0LW1ldGF9Cm1ldGEgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChQQVRIUyRjZWxscGhvbmVkYl9pbiwgInRlc3RfbWV0YS50eHQiKSwKICAgIGNvbF90eXBlcyA9IGNvbHMoCiAgICAgICAgQ2VsbCAgICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGNlbGxfdHlwZSA9IGNvbF9jaGFyYWN0ZXIoKQogICAgKQopCgpza2ltKG1ldGEpCmBgYAoKdGVzdF9jb3VudHMudHh0Ci0tLS0tLS0tLS0tLS0KClRoaXMgZmlsZSBjb250YWlucyB0aGUgY291bnQgZXhwcmVzc2lvbiBtYXRyaXguCgpgYGB7ciBpbnB1dC1jb3VudHN9CmNvdW50cyA8LSByZWFkX3RzdigKICAgIGZzOjpwYXRoKFBBVEhTJGNlbGxwaG9uZWRiX2luLCAidGVzdF9jb3VudHMudHh0IiksCiAgICBjb2xfdHlwZXMgPSBjb2xzKAogICAgICAgIC5kZWZhdWx0ID0gY29sX2RvdWJsZSgpLAogICAgICAgIEdlbmUgICAgID0gY29sX2NoYXJhY3RlcigpCiAgICApCikKCnNraW0oY291bnRzKQpgYGAKClRoZSBzbWFsbCB0ZXN0IGRhdGFzZXQgY29udGFpbnMgYHIgbnJvdyhjb3VudHMpYCBnZW5lcyBhbmQgYHIgbnJvdyhjb3VudHMpYApjZWxscy4KCkFuYWx5c2lzCj09PT09PT09CgoqKkNlbGxQaG9uZURCKiogaXMgZGVzaWduZWQgdG8gYmUgYSBjb21tYW5kIGxpbmUgdG9vbCBzbyB3ZSB3aWxsIHJ1biB0aGUKZm9sbG93aW5nIGNvbW1hbmRzIGluIGEgQkFTSCBzaGVsbC4gSGVyZSB3ZSBydW4gaXQgd2l0aCB0aGUgZnVsbCBzdGF0aXN0aWNhbCAKYW5hbHlzaXMuCgpgYGB7YmFzaCBjZWxscGhvbmVkYn0KZXZhbCAiJChjb25kYSBzaGVsbC5iYXNoIGhvb2spIgpjb25kYSBhY3RpdmF0ZSAkQ09OREFfRU5WCgpjZWxscGhvbmVkYiBtZXRob2Qgc3RhdGlzdGljYWxfYW5hbHlzaXMgXAogICAgLS1vdXRwdXQtcGF0aCBvdXRwdXQvMTEtY2VsbHBob25lZGIuUm1kIFwKICAgIC0tdGhyZWFkcyAxIFwKICAgIGRhdGEvY2VsbHBob25lZGIvdGVzdF9tZXRhLnR4dCBcCiAgICBkYXRhL2NlbGxwaG9uZWRiL3Rlc3RfY291bnRzLnR4dApgYGAKCk91dHB1dAo9PT09PT0KCioqQ2VsbFBob25lREIqKiBwcm9kdWNlcyBmb3VyIG91dHB1dCBmaWxlcy4gTGV0J3MgaGF2ZSBhIGxvb2sgYXQgZWFjaCBvZiB0aGVzZQphbmQgc2VlIHdoYXQgdGhleSBjb250YWluOgoKZGVjb252b2x1dGVkLnR4dAotLS0tLS0tLS0tLS0tLS0tCgpBY2NvcmRpbmcgdG8gdGhlICoqQ2VsbFBob25lREIqKiBkb2N1bWVudGF0aW9uIHRoaXMgZmlsZSBwcm92aWRlcyBhZGRpdGlvbmFsCmluZm9ybWF0aW9uIGFib3V0IHRoZSBpbnRlcmFjdGluZyBwYWlycy4gU3BlY2lmaWNhbGx5IGl0IGRlc2NpYmVzIHJlbGF0aW9uc2hpcHMKYmV0d2VlbiBnZW5lcywgY29tcGxleGVzIGFuZCBleHByZXNzaW9uIGluIGNlbGwgdHlwZXMuCgpgYGB7ciBvdXRwdXQtZGVjb252b2x1dGVkfQpkZWNvbnZvbHV0ZWQgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAiZGVjb252b2x1dGVkLnR4dCIpLAogICAgY29sX3R5cGVzID0gY29scygKICAgICAgICBnZW5lX25hbWUgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICB1bmlwcm90ICAgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpc19jb21wbGV4ICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcHJvdGVpbl9uYW1lICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgY29tcGxleF9uYW1lICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgaWRfY3BfaW50ZXJhY3Rpb24gPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgTXllbG9pZCAgICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgTktjZWxsc18wICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgTktjZWxsc18xICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgVGNlbGxzICAgICAgICAgICAgPSBjb2xfZG91YmxlKCkKICAgICkKKQoKc2tpbShkZWNvbnZvbHV0ZWQpCmBgYAoKbWVhbnMudHh0Ci0tLS0tLS0tLQoKVGhpcyBmaWxlIGNvbnRhaW5zIG1lYW4gdmFsdWVzIGZvciBlYWNoIGxpZ2FuZC1yZWNlcHRvciBpbnRlcmFjdGlvbi4KCmBgYHtyIG91dHB1dC1tZWFuc30KbWVhbnMgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAibWVhbnMudHh0IiksCiAgICBjb2xfdHlwZXMgPSBjb2xzKAogICAgICAgIC5kZWZhdWx0ICAgICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgaWRfY3BfaW50ZXJhY3Rpb24gICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpbnRlcmFjdGluZ19wYWlyICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIHBhcnRuZXJfYSAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgcGFydG5lcl9iICAgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBnZW5lX2EgICAgICAgICAgICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGdlbmVfYiAgICAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgc2VjcmV0ZWQgICAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYSAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYiAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgYW5ub3RhdGlvbl9zdHJhdGVneSA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpc19pbnRlZ3JpbiAgICAgICAgID0gY29sX2xvZ2ljYWwoKQogICAgKQopCgpza2ltKG1lYW5zKQpgYGAKCkl0IGluY2x1ZGVzIGluZm9ybWF0aW9uIGFib3V0IGVhY2ggbGlnYW5kLXJlY2VwdG9yIHBhaXIgYXMgd2VsbCBhcyBzY29yZXMgZm9yCmVhY2ggcGFpciBvZiBjZWxsIHR5cGVzLgoKcHZhbHVlcy50eHQKLS0tLS0tLS0tLS0KClRoaXMgZmlsZSBpcyBzaW1pbGFyIHRvIGBtZWFucy50eHRgIGJ1dCBjb250YWlucyBwLXZhbHVlcyBmcm9tIHRoZSBzdGF0aXN0aWNhbAp0ZXN0IGluc3RlYWQgb2Ygc2NvcmVzLgoKYGBge3Igb3V0cHV0LXB2YWx1ZXN9CnB2YWx1ZXMgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAicHZhbHVlcy50eHQiKSwKICAgIGNvbF90eXBlcyA9IGNvbHMoCiAgICAgICAgLmRlZmF1bHQgPSBjb2xfZG91YmxlKCksCiAgICAgICAgaWRfY3BfaW50ZXJhY3Rpb24gICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpbnRlcmFjdGluZ19wYWlyICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIHBhcnRuZXJfYSAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgcGFydG5lcl9iICAgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBnZW5lX2EgICAgICAgICAgICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGdlbmVfYiAgICAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgc2VjcmV0ZWQgICAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYSAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYiAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgYW5ub3RhdGlvbl9zdHJhdGVneSA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpc19pbnRlZ3JpbiAgICAgICAgID0gY29sX2xvZ2ljYWwoKQogICAgKQopCgpza2ltKHB2YWx1ZXMpCmBgYAoKc2lnbmlmaWNhbnRfbWVhbnMudHh0Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKVGhpcyBmaWxlIGNvbnRhaW5zIG1lYW4gdmFsdWVzIGZvciBzaWduaXRpZmljYW50IGxpZ2FuZC1yZWNlcHRvciBpbnRlcmFjdGlvbnMuCgpgYGB7ciBvdXRwdXQtc2lnLW1lYW5zfQpzaWdfbWVhbnMgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAic2lnbmlmaWNhbnRfbWVhbnMudHh0IiksCiAgICBjb2xfdHlwZXMgPSBjb2xzKAogICAgICAgIC5kZWZhdWx0ICAgICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgaWRfY3BfaW50ZXJhY3Rpb24gICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpbnRlcmFjdGluZ19wYWlyICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIHBhcnRuZXJfYSAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgcGFydG5lcl9iICAgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBnZW5lX2EgICAgICAgICAgICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGdlbmVfYiAgICAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgc2VjcmV0ZWQgICAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYSAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYiAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgYW5ub3RhdGlvbl9zdHJhdGVneSA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpc19pbnRlZ3JpbiAgICAgICAgID0gY29sX2xvZ2ljYWwoKQogICAgKQopCgpza2ltKHNpZ19tZWFucykKYGBgCgpQbG90dGluZwo9PT09PT09PQoKKipDZWxsUGhvbmVEQioqIGFsc28gaGFzIHNvbWUgcGxvdHRpbmcgZnVuY3Rpb25zLgoKRG90cGxvdAotLS0tLS0tCgpgYGB7YmFzaCBtYWtlLWRvdHBsb3R9CmV2YWwgIiQoY29uZGEgc2hlbGwuYmFzaCBob29rKSIKY29uZGEgYWN0aXZhdGUgJENPTkRBX0VOVgoKY2VsbHBob25lZGIgcGxvdCBkb3RfcGxvdCBcCiAgICAtLW1lYW5zLXBhdGggb3V0cHV0LzExLUNlbGxQaG9uZURCLlJtZC9tZWFucy50eHQgXAogICAgLS1wdmFsdWVzLXBhdGggb3V0cHV0LzExLUNlbGxQaG9uZURCLlJtZC9wdmFsdWVzLnR4dCBcCiAgICAtLW91dHB1dC1wYXRoIG91dHB1dC8xMS1DZWxsUGhvbmVEQi5SbWQvIFwKICAgIC0tb3V0cHV0LW5hbWUgZG90cGxvdC5wbmcKYGBgCgpUaGlzIGlzIGEgZG90cGxvdCBvZiB0aGUgbWVhbiBleHByZXNzaW9uIG9mIHRoZSBsaWdhbmQtcmVjZXB0b3IgcGFpciBpbiBlYWNoCnBhaXIgb2YgY2VsbCB0eXBlcy4KCmBgYHtyIGRvdHBsb3R9CmZpZ19kaXIgPC0gaGVyZSgiZG9jcyIsICJmaWd1cmUiLCBET0NOQU1FKQpmczo6ZGlyX2NyZWF0ZShmaWdfZGlyKQpmczo6ZmlsZV9jb3B5KAogICAgZnM6OnBhdGgoT1VUX0RJUiwgImRvdHBsb3QucG5nIiksCiAgICBmczo6cGF0aChmaWdfZGlyLCAiZG90cGxvdC5wbmciKSwKICAgIG92ZXJ3cml0ZSA9IFRSVUUKKQoKaW5jbHVkZV9ncmFwaGljcyhmczo6cGF0aCgiZmlndXJlIiwgRE9DTkFNRSwgImRvdHBsb3QucG5nIikpCmBgYAoKSGVhdG1hcAotLS0tLS0tCioqQ2VsbFBob25lREIqKiBhbHNvIGhhcyBhIGhlYXRtYXAgcGxvdHRpbmcgZnVuY3Rpb24uIFRoaXMgZnVuY3Rpb24gYWxzbwpwcm9kdWNlcyBzb21lIGFkZGl0aW9uYWwgb3V0cHV0IGZpbGVzLgoKYGBge2Jhc2ggbWFrZS1oZWF0bWFwfQpldmFsICIkKGNvbmRhIHNoZWxsLmJhc2ggaG9vaykiCmNvbmRhIGFjdGl2YXRlICRDT05EQV9FTlYKCmNlbGxwaG9uZWRiIHBsb3QgaGVhdG1hcF9wbG90IFwKICAgIC0tcHZhbHVlcy1wYXRoIG91dHB1dC8xMS1DZWxsUGhvbmVEQi5SbWQvcHZhbHVlcy50eHQgXAogICAgLS1vdXRwdXQtcGF0aCBvdXRwdXQvMTEtQ2VsbFBob25lREIuUm1kLyBcCiAgICAtLWNvdW50LW5hbWUgaGVhdG1hcF9jb3VudHMucG5nIFwKICAgIC0tbG9nLW5hbWUgaGVhdG1hcF9sb2djb3VudHMucG5nIFwKICAgIC0tY291bnQtbmV0d29yay1uYW1lIGNvdW50X25ldHdvcmsudHh0IFwKICAgIC0taW50ZXJhY3Rpb24tY291bnQtbmFtZSBpbnRlcmFjdGlvbnNfY291bnQudHh0IFwKICAgIGRhdGEvY2VsbHBob25lZGIvdGVzdF9tZXRhLnR4dApgYGAKCiMjIyBDb3VudHMKClRoaXMgaXMgYSBoZWF0bWFwIG9mIHRoZSBjb3VudCBvZiBpbnRlcmFjdGlvbnMgYmV0d2VlbiBjZWxsIHR5cGVzLgoKYGBge3IgaGVhdG1hcC1jb3VudHN9CmZpZ19kaXIgPC0gaGVyZSgiZG9jcyIsICJmaWd1cmUiLCBET0NOQU1FKQpmczo6ZGlyX2NyZWF0ZShmaWdfZGlyKQpmczo6ZmlsZV9jb3B5KAogICAgZnM6OnBhdGgoT1VUX0RJUiwgImhlYXRtYXBfY291bnRzLnBuZyIpLAogICAgZnM6OnBhdGgoZmlnX2RpciwgImhlYXRtYXBfY291bnRzLnBuZyIpLAogICAgb3ZlcndyaXRlID0gVFJVRQopCgppbmNsdWRlX2dyYXBoaWNzKGZzOjpwYXRoKCJmaWd1cmUiLCBET0NOQU1FLCAiaGVhdG1hcF9jb3VudHMucG5nIikpCmBgYAoKIyMjIExvZy1jb3VudHMKClRoaXMgaXMgYSBoZWF0bWFwIG9mIHRoZSBsb2ctY291bnQgb2YgaW50ZXJhY3Rpb25zIGJldHdlZW4gY2VsbCB0eXBlcy4KCmBgYHtyIGhlYXRtYXAtbG9nY291bnRzfQpmaWdfZGlyIDwtIGhlcmUoImRvY3MiLCAiZmlndXJlIiwgRE9DTkFNRSkKZnM6OmRpcl9jcmVhdGUoZmlnX2RpcikKZnM6OmZpbGVfY29weSgKICAgIGZzOjpwYXRoKE9VVF9ESVIsICJoZWF0bWFwX2xvZ2NvdW50cy5wbmciKSwKICAgIGZzOjpwYXRoKGZpZ19kaXIsICJoZWF0bWFwX2xvZ2NvdW50cy5wbmciKSwKICAgIG92ZXJ3cml0ZSA9IFRSVUUKKQoKaW5jbHVkZV9ncmFwaGljcyhmczo6cGF0aCgiZmlndXJlIiwgRE9DTkFNRSwgImhlYXRtYXBfbG9nY291bnRzLnBuZyIpKQpgYGAKCiMjIyBjb3VudF9uZXR3b3JrLnR4dAoKVGhpcyBmaWxlIGNvbnRhaW5zIGEgY291bnQgb2YgdGhlIGRpcmVjdGlvbmFsIGludGVyYWN0aW9ucyBiZXR3ZWVuIGRpZmZlcmVudApjZWxsIHR5cGVzIHVzZWQgdG8gY3JlYXRlIHRoZSBoZWF0bWFwcy4KCmBgYHtyIGhlYXRtYXAtbmV0d29ya30KbmV0d29yayA8LSByZWFkX3RzdigKICAgIGZzOjpwYXRoKE9VVF9ESVIsICJjb3VudF9uZXR3b3JrLnR4dCIpLAogICAgY29sX3R5cGVzID0gY29scygKICAgICAgICBTT1VSQ0UgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgVEFSR0VUID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGNvdW50ICA9IGNvbF9kb3VibGUoKQogICAgKQopCgpza2ltKG5ldHdvcmspCmBgYAoKIyMjIGludGVyYWN0aW9uc19jb3VudC50eHQKClRoaXMgZmlsZSBjb250YWlucyBhIGNvdW50IG9mIHRvdGFsIG51bWJlciBvZiBpbnRlcmFjdGlvbnMgZm9yIGVhY2ggY2VsbCB0eXBlLgoKYGBge3IgaGVhdG1hcC1pbnRlcmFjdGlvbnN9CmludGVyYWN0aW9ucyA8LSByZWFkX3RzdigKICAgIGZzOjpwYXRoKE9VVF9ESVIsICJpbnRlcmFjdGlvbnNfY291bnQudHh0IiksCiAgICBjb2xfdHlwZXMgPSBjb2xzKAogICAgICAgIFgxID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGFsbF9zdW0gPSBjb2xfZG91YmxlKCkKICAgICkKKQoKc2tpbShpbnRlcmFjdGlvbnMpCmBgYAoKU3VtbWFyeSB7LnVubnVtYmVyZWR9Cj09PT09PT0KClBhcmFtZXRlcnMgey51bm51bWJlcmVkfQotLS0tLS0tLS0tCgpUaGlzIHRhYmxlIGRlc2NyaWJlcyBwYXJhbWV0ZXJzIHVzZWQgYW5kIHNldCBpbiB0aGlzIGRvY3VtZW50LgoKYGBge3IgcGFyYW1ldGVyc30KcGFyYW1zIDwtIGxpc3QoCiAgICAKKQpwYXJhbXMgPC0gdG9KU09OKHBhcmFtcywgcHJldHR5ID0gVFJVRSkKa2FibGUoZnJvbUpTT04ocGFyYW1zKSkKYGBgCgpPdXRwdXQgZmlsZXMgey51bm51bWJlcmVkfQotLS0tLS0tLS0tLS0KClRoaXMgdGFibGUgZGVzY3JpYmVzIHRoZSBvdXRwdXQgZmlsZXMgcHJvZHVjZWQgYnkgdGhpcyBkb2N1bWVudC4gUmlnaHQgY2xpY2sKYW5kIF9TYXZlIExpbmsgQXMuLi5fIHRvIGRvd25sb2FkIHRoZSByZXN1bHRzLgoKYGBge3Igb3V0cHV0fQprYWJsZShkYXRhLmZyYW1lKAogICAgRmlsZSA9IGMoCiAgICAgICAgZG93bmxvYWRfbGluaygicGFyYW1ldGVycy5qc29uIiwgT1VUX0RJUiksCiAgICAgICAgZG93bmxvYWRfbGluaygiZGVjb252b2x1dGVkLnR4dCIsIE9VVF9ESVIpLAogICAgICAgIGRvd25sb2FkX2xpbmsoIm1lYW5zLnR4dCIsIE9VVF9ESVIpLAogICAgICAgIGRvd25sb2FkX2xpbmsoInB2YWx1ZXMudHh0IiwgT1VUX0RJUiksCiAgICAgICAgZG93bmxvYWRfbGluaygic2lnbmlmaWNhbnRfbWVhbnMudHh0IiwgT1VUX0RJUiksCiAgICAgICAgZG93bmxvYWRfbGluaygiZG90cGxvdC5wbmciLCBPVVRfRElSKSwKICAgICAgICBkb3dubG9hZF9saW5rKCJoZWF0bWFwX2NvdW50cy5wbmciLCBPVVRfRElSKSwKICAgICAgICBkb3dubG9hZF9saW5rKCJoZWF0bWFwX2xvZ2NvdW50cy5wbmciLCBPVVRfRElSKSwKICAgICAgICBkb3dubG9hZF9saW5rKCJjb3VudF9uZXR3b3JrLnR4dCIsIE9VVF9ESVIpLAogICAgICAgIGRvd25sb2FkX2xpbmsoImludGVyYWN0aW9uc19jb3VudC50eHQiLCBPVVRfRElSKQogICAgKSwKICAgIERlc2NyaXB0aW9uID0gYygKICAgICAgICAiUGFyYW1ldGVycyBzZXQgYW5kIHVzZWQgaW4gdGhpcyBhbmFseXNpcyIsCiAgICAgICAgIkRlY29udm9sdXRlZCBvdXRwdXQgZnJvbSBDZWxsUGhvbmVEQiIsCiAgICAgICAgIk1lYW5zIG91dHB1dCBmcm9tIENlbGxQaG9uZURCIiwKICAgICAgICAiUC12YWx1ZXMgb3V0cHV0IGZyb20gQ2VsbFBob25lREIiLAogICAgICAgICJTaWduaWZpY2FudCBtZWFucyBvdXRwdXQgZnJvbSBDZWxsUGhvbmVEQiIsCiAgICAgICAgIkRvdHBsb3QgcGxvdCBmcm9tIENlbGxQaG9uZURCIiwKICAgICAgICAiQ291bnRzIGhlYXRtYXAgcGxvdCBmcm9tIENlbGxQaG9uZURCIiwKICAgICAgICAiTG9nLWNvdW50cyBoZWF0bWFwIHBsb3QgZnJvbSBDZWxsUGhvbmVEQiIsCiAgICAgICAgIkNvdW50IG5ldHdvcmsgb3V0cHV0IGZyb20gQ2VsbFBob25lREIiLAogICAgICAgICJJbnRlcmFjdGlvbnMgY291bnQgb3V0cHV0IGZyb20gQ2VsbFBob25lREIiCiAgICApCikpCmBgYAoKU2Vzc2lvbiBpbmZvcm1hdGlvbiB7LnVubnVtYmVyZWR9Ci0tLS0tLS0tLS0tLS0tLS0tLS0K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2VsbFBob25lREIgZXhhbXBsZSIKb3V0cHV0OiB3b3JrZmxvd3I6OndmbG93X2h0bWwKZWRpdG9yX29wdGlvbnM6CiAgY2h1bmtfb3V0cHV0X3R5cGU6IGNvbnNvbGUKLS0tCgpgYGB7ciBzZXR1cCwgY2FjaGUgPSBGQUxTRX0KIyBTZXR1cCBkb2N1bWVudApzb3VyY2UoaGVyZTo6aGVyZSgiY29kZSIsICJzZXR1cC5SIikpCgojIEZ1bmN0aW9uIGRlcGVuZGVuY2llcwppbnZpc2libGUoZHJha2U6OnJlYWRkKGRvd25sb2FkX2xpbmspKQpgYGAKCkludHJvZHVjdGlvbiB7LnVubnVtYmVyZWR9Cj09PT09PT09PT09PQoKSW4gdGhpcyBkb2N1bWVudCB3ZSBhcmUgZ29pbmcgdG8gcnVuIHRocm91Z2ggdGhlIGV4YW1wbGUgYW5hbHlzaXMgZm9yIHRoZQoqKkNlbGxQaG9uZURCKiogdG9vbCBhbmQgaGF2ZSBhIGxvb2sgYXQgdGhlIG91dHB1dCBpdCBwcm9kdWNlcy4gTW9yZSBpbmZvcm1hdGlvbgphYm91dCAqKkNlbGxQaG9uZURCKiogY2FuIGJlIGZvdW5kIGF0IGh0dHBzOi8vd3d3LmNlbGxwaG9uZWRiLm9yZy8uCgpJbnB1dAo9PT09PQoKKipDZWxsUGhvbmVEQioqIHRha2VzIHR3byBpbnB1dCBmaWxlcywgYSB0YWJsZSBvZiBtZXRhZGF0YSBmb3IgZWFjaCBjZWxsIGFuZCBhCmNvdW50cyBtYXRyaXguCgp0ZXN0X21ldGEudHh0Ci0tLS0tLS0tLS0tLS0KClRoaXMgZmlsZSBjb250YWlucyBjZWxsIHR5cGUgYXNzaWdubWVudHMgZm9yIGVhY2ggY2VsbCBpbiB0aGUgZGF0YXNldC4KCmBgYHtyIGlucHV0LW1ldGF9Cm1ldGEgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChQQVRIUyRjZWxscGhvbmVkYl9pbiwgInRlc3RfbWV0YS50eHQiKSwKICAgIGNvbF90eXBlcyA9IGNvbHMoCiAgICAgICAgQ2VsbCAgICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGNlbGxfdHlwZSA9IGNvbF9jaGFyYWN0ZXIoKQogICAgKQopCgpza2ltKG1ldGEpCmBgYAoKdGVzdF9jb3VudHMudHh0Ci0tLS0tLS0tLS0tLS0KClRoaXMgZmlsZSBjb250YWlucyB0aGUgY291bnQgZXhwcmVzc2lvbiBtYXRyaXguCgpgYGB7ciBpbnB1dC1jb3VudHN9CmNvdW50cyA8LSByZWFkX3RzdigKICAgIGZzOjpwYXRoKFBBVEhTJGNlbGxwaG9uZWRiX2luLCAidGVzdF9jb3VudHMudHh0IiksCiAgICBjb2xfdHlwZXMgPSBjb2xzKAogICAgICAgIC5kZWZhdWx0ID0gY29sX2RvdWJsZSgpLAogICAgICAgIEdlbmUgICAgID0gY29sX2NoYXJhY3RlcigpCiAgICApCikKCnNraW0oY291bnRzKQpgYGAKClRoZSBzbWFsbCB0ZXN0IGRhdGFzZXQgY29udGFpbnMgYHIgbnJvdyhjb3VudHMpYCBnZW5lcyBhbmQgYHIgbnJvdyhjb3VudHMpYApjZWxscy4KCkFuYWx5c2lzCj09PT09PT09CgoqKkNlbGxQaG9uZURCKiogaXMgZGVzaWduZWQgdG8gYmUgYSBjb21tYW5kIGxpbmUgdG9vbCBzbyB3ZSB3aWxsIHJ1biB0aGUKZm9sbG93aW5nIGNvbW1hbmRzIGluIGEgQkFTSCBzaGVsbC4gSGVyZSB3ZSBydW4gaXQgd2l0aCB0aGUgZnVsbCBzdGF0aXN0aWNhbCAKYW5hbHlzaXMuCgpgYGB7YmFzaCBjZWxscGhvbmVkYn0KZXZhbCAiJChjb25kYSBzaGVsbC5iYXNoIGhvb2spIgpjb25kYSBhY3RpdmF0ZSAkQ09OREFfRU5WCgpjZWxscGhvbmVkYiBtZXRob2Qgc3RhdGlzdGljYWxfYW5hbHlzaXMgXAogICAgLS1vdXRwdXQtcGF0aCBvdXRwdXQvMTEtY2VsbHBob25lZGIuUm1kIFwKICAgIC0tdGhyZWFkcyAxIFwKICAgIGRhdGEvY2VsbHBob25lZGIvdGVzdF9tZXRhLnR4dCBcCiAgICBkYXRhL2NlbGxwaG9uZWRiL3Rlc3RfY291bnRzLnR4dApgYGAKCk91dHB1dAo9PT09PT0KCioqQ2VsbFBob25lREIqKiBwcm9kdWNlcyBmb3VyIG91dHB1dCBmaWxlcy4gTGV0J3MgaGF2ZSBhIGxvb2sgYXQgZWFjaCBvZiB0aGVzZQphbmQgc2VlIHdoYXQgdGhleSBjb250YWluOgoKZGVjb252b2x1dGVkLnR4dAotLS0tLS0tLS0tLS0tLS0tCgpBY2NvcmRpbmcgdG8gdGhlICoqQ2VsbFBob25lREIqKiBkb2N1bWVudGF0aW9uIHRoaXMgZmlsZSBwcm92aWRlcyBhZGRpdGlvbmFsCmluZm9ybWF0aW9uIGFib3V0IHRoZSBpbnRlcmFjdGluZyBwYWlycy4gU3BlY2lmaWNhbGx5IGl0IGRlc2NpYmVzIHJlbGF0aW9uc2hpcHMKYmV0d2VlbiBnZW5lcywgY29tcGxleGVzIGFuZCBleHByZXNzaW9uIGluIGNlbGwgdHlwZXMuCgpgYGB7ciBvdXRwdXQtZGVjb252b2x1dGVkfQpkZWNvbnZvbHV0ZWQgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAiZGVjb252b2x1dGVkLnR4dCIpLAogICAgY29sX3R5cGVzID0gY29scygKICAgICAgICBnZW5lX25hbWUgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICB1bmlwcm90ICAgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpc19jb21wbGV4ICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcHJvdGVpbl9uYW1lICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgY29tcGxleF9uYW1lICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgaWRfY3BfaW50ZXJhY3Rpb24gPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgTXllbG9pZCAgICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgTktjZWxsc18wICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgTktjZWxsc18xICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgVGNlbGxzICAgICAgICAgICAgPSBjb2xfZG91YmxlKCkKICAgICkKKQoKc2tpbShkZWNvbnZvbHV0ZWQpCmBgYAoKbWVhbnMudHh0Ci0tLS0tLS0tLQoKVGhpcyBmaWxlIGNvbnRhaW5zIG1lYW4gdmFsdWVzIGZvciBlYWNoIGxpZ2FuZC1yZWNlcHRvciBpbnRlcmFjdGlvbi4KCmBgYHtyIG91dHB1dC1tZWFuc30KbWVhbnMgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAibWVhbnMudHh0IiksCiAgICBjb2xfdHlwZXMgPSBjb2xzKAogICAgICAgIC5kZWZhdWx0ICAgICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgaWRfY3BfaW50ZXJhY3Rpb24gICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpbnRlcmFjdGluZ19wYWlyICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIHBhcnRuZXJfYSAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgcGFydG5lcl9iICAgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBnZW5lX2EgICAgICAgICAgICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGdlbmVfYiAgICAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgc2VjcmV0ZWQgICAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYSAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYiAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgYW5ub3RhdGlvbl9zdHJhdGVneSA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpc19pbnRlZ3JpbiAgICAgICAgID0gY29sX2xvZ2ljYWwoKQogICAgKQopCgpza2ltKG1lYW5zKQpgYGAKCkl0IGluY2x1ZGVzIGluZm9ybWF0aW9uIGFib3V0IGVhY2ggbGlnYW5kLXJlY2VwdG9yIHBhaXIgYXMgd2VsbCBhcyBzY29yZXMgZm9yCmVhY2ggcGFpciBvZiBjZWxsIHR5cGVzLgoKcHZhbHVlcy50eHQKLS0tLS0tLS0tLS0KClRoaXMgZmlsZSBpcyBzaW1pbGFyIHRvIGBtZWFucy50eHRgIGJ1dCBjb250YWlucyBwLXZhbHVlcyBmcm9tIHRoZSBzdGF0aXN0aWNhbAp0ZXN0IGluc3RlYWQgb2Ygc2NvcmVzLgoKYGBge3Igb3V0cHV0LXB2YWx1ZXN9CnB2YWx1ZXMgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAicHZhbHVlcy50eHQiKSwKICAgIGNvbF90eXBlcyA9IGNvbHMoCiAgICAgICAgLmRlZmF1bHQgPSBjb2xfZG91YmxlKCksCiAgICAgICAgaWRfY3BfaW50ZXJhY3Rpb24gICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpbnRlcmFjdGluZ19wYWlyICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIHBhcnRuZXJfYSAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgcGFydG5lcl9iICAgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBnZW5lX2EgICAgICAgICAgICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGdlbmVfYiAgICAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgc2VjcmV0ZWQgICAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYSAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYiAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgYW5ub3RhdGlvbl9zdHJhdGVneSA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpc19pbnRlZ3JpbiAgICAgICAgID0gY29sX2xvZ2ljYWwoKQogICAgKQopCgpza2ltKHB2YWx1ZXMpCmBgYAoKc2lnbmlmaWNhbnRfbWVhbnMudHh0Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKVGhpcyBmaWxlIGNvbnRhaW5zIG1lYW4gdmFsdWVzIGZvciBzaWduaXRpZmljYW50IGxpZ2FuZC1yZWNlcHRvciBpbnRlcmFjdGlvbnMuCgpgYGB7ciBvdXRwdXQtc2lnLW1lYW5zfQpzaWdfbWVhbnMgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAic2lnbmlmaWNhbnRfbWVhbnMudHh0IiksCiAgICBjb2xfdHlwZXMgPSBjb2xzKAogICAgICAgIC5kZWZhdWx0ICAgICAgICAgICAgPSBjb2xfZG91YmxlKCksCiAgICAgICAgaWRfY3BfaW50ZXJhY3Rpb24gICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpbnRlcmFjdGluZ19wYWlyICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIHBhcnRuZXJfYSAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgcGFydG5lcl9iICAgICAgICAgICA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBnZW5lX2EgICAgICAgICAgICAgID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIGdlbmVfYiAgICAgICAgICAgICAgPSBjb2xfY2hhcmFjdGVyKCksCiAgICAgICAgc2VjcmV0ZWQgICAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYSAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgcmVjZXB0b3JfYiAgICAgICAgICA9IGNvbF9sb2dpY2FsKCksCiAgICAgICAgYW5ub3RhdGlvbl9zdHJhdGVneSA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBpc19pbnRlZ3JpbiAgICAgICAgID0gY29sX2xvZ2ljYWwoKQogICAgKQopCgpza2ltKHNpZ19tZWFucykKYGBgCgpQbG90dGluZwo9PT09PT09PQoKKipDZWxsUGhvbmVEQioqIGFsc28gaGFzIHNvbWUgcGxvdHRpbmcgZnVuY3Rpb25zLgoKRG90cGxvdAotLS0tLS0tCgpgYGB7YmFzaCBtYWtlLWRvdHBsb3R9CmV2YWwgIiQoY29uZGEgc2hlbGwuYmFzaCBob29rKSIKY29uZGEgYWN0aXZhdGUgJENPTkRBX0VOVgoKY2VsbHBob25lZGIgcGxvdCBkb3RfcGxvdCBcCiAgICAtLW1lYW5zLXBhdGggb3V0cHV0LzExLUNlbGxQaG9uZURCLlJtZC9tZWFucy50eHQgXAogICAgLS1wdmFsdWVzLXBhdGggb3V0cHV0LzExLUNlbGxQaG9uZURCLlJtZC9wdmFsdWVzLnR4dCBcCiAgICAtLW91dHB1dC1wYXRoIG91dHB1dC8xMS1DZWxsUGhvbmVEQi5SbWQvIFwKICAgIC0tb3V0cHV0LW5hbWUgZG90cGxvdC5wbmcKYGBgCgpUaGlzIGlzIGEgZG90cGxvdCBvZiB0aGUgbWVhbiBleHByZXNzaW9uIG9mIHRoZSBsaWdhbmQtcmVjZXB0b3IgcGFpciBpbiBlYWNoCnBhaXIgb2YgY2VsbCB0eXBlcy4KCmBgYHtyIGRvdHBsb3R9CmZpZ19kaXIgPC0gaGVyZSgiZG9jcyIsICJmaWd1cmUiLCBET0NOQU1FKQpmczo6ZGlyX2NyZWF0ZShmaWdfZGlyKQpmczo6ZmlsZV9jb3B5KAogICAgZnM6OnBhdGgoT1VUX0RJUiwgImRvdHBsb3QucG5nIiksCiAgICBmczo6cGF0aChmaWdfZGlyLCAiZG90cGxvdC5wbmciKSwKICAgIG92ZXJ3cml0ZSA9IFRSVUUKKQoKaW5jbHVkZV9ncmFwaGljcyhmczo6cGF0aCgiZmlndXJlIiwgRE9DTkFNRSwgImRvdHBsb3QucG5nIiksIGVycm9yID0gRkFMU0UpCmBgYAoKSGVhdG1hcAotLS0tLS0tCioqQ2VsbFBob25lREIqKiBhbHNvIGhhcyBhIGhlYXRtYXAgcGxvdHRpbmcgZnVuY3Rpb24uIFRoaXMgZnVuY3Rpb24gYWxzbwpwcm9kdWNlcyBzb21lIGFkZGl0aW9uYWwgb3V0cHV0IGZpbGVzLgoKYGBge2Jhc2ggbWFrZS1oZWF0bWFwfQpldmFsICIkKGNvbmRhIHNoZWxsLmJhc2ggaG9vaykiCmNvbmRhIGFjdGl2YXRlICRDT05EQV9FTlYKCmNlbGxwaG9uZWRiIHBsb3QgaGVhdG1hcF9wbG90IFwKICAgIC0tcHZhbHVlcy1wYXRoIG91dHB1dC8xMS1DZWxsUGhvbmVEQi5SbWQvcHZhbHVlcy50eHQgXAogICAgLS1vdXRwdXQtcGF0aCBvdXRwdXQvMTEtQ2VsbFBob25lREIuUm1kLyBcCiAgICAtLWNvdW50LW5hbWUgaGVhdG1hcF9jb3VudHMucG5nIFwKICAgIC0tbG9nLW5hbWUgaGVhdG1hcF9sb2djb3VudHMucG5nIFwKICAgIC0tY291bnQtbmV0d29yay1uYW1lIGNvdW50X25ldHdvcmsudHh0IFwKICAgIC0taW50ZXJhY3Rpb24tY291bnQtbmFtZSBpbnRlcmFjdGlvbnNfY291bnQudHh0IFwKICAgIGRhdGEvY2VsbHBob25lZGIvdGVzdF9tZXRhLnR4dApgYGAKCiMjIyBDb3VudHMKClRoaXMgaXMgYSBoZWF0bWFwIG9mIHRoZSBjb3VudCBvZiBpbnRlcmFjdGlvbnMgYmV0d2VlbiBjZWxsIHR5cGVzLgoKYGBge3IgaGVhdG1hcC1jb3VudHN9CmZpZ19kaXIgPC0gaGVyZSgiZG9jcyIsICJmaWd1cmUiLCBET0NOQU1FKQpmczo6ZGlyX2NyZWF0ZShmaWdfZGlyKQpmczo6ZmlsZV9jb3B5KAogICAgZnM6OnBhdGgoT1VUX0RJUiwgImhlYXRtYXBfY291bnRzLnBuZyIpLAogICAgZnM6OnBhdGgoZmlnX2RpciwgImhlYXRtYXBfY291bnRzLnBuZyIpLAogICAgb3ZlcndyaXRlID0gVFJVRQopCgppbmNsdWRlX2dyYXBoaWNzKGZzOjpwYXRoKCJmaWd1cmUiLCBET0NOQU1FLCAiaGVhdG1hcF9jb3VudHMucG5nIiksCiAgICAgICAgICAgICAgICAgZXJyb3IgPSBGQUxTRSkKYGBgCgojIyMgTG9nLWNvdW50cwoKVGhpcyBpcyBhIGhlYXRtYXAgb2YgdGhlIGxvZy1jb3VudCBvZiBpbnRlcmFjdGlvbnMgYmV0d2VlbiBjZWxsIHR5cGVzLgoKYGBge3IgaGVhdG1hcC1sb2djb3VudHN9CmZpZ19kaXIgPC0gaGVyZSgiZG9jcyIsICJmaWd1cmUiLCBET0NOQU1FKQpmczo6ZGlyX2NyZWF0ZShmaWdfZGlyKQpmczo6ZmlsZV9jb3B5KAogICAgZnM6OnBhdGgoT1VUX0RJUiwgImhlYXRtYXBfbG9nY291bnRzLnBuZyIpLAogICAgZnM6OnBhdGgoZmlnX2RpciwgImhlYXRtYXBfbG9nY291bnRzLnBuZyIpLAogICAgb3ZlcndyaXRlID0gVFJVRQopCgppbmNsdWRlX2dyYXBoaWNzKGZzOjpwYXRoKCJmaWd1cmUiLCBET0NOQU1FLCAiaGVhdG1hcF9sb2djb3VudHMucG5nIiksCiAgICAgICAgICAgICAgICAgZXJyb3IgPSBGQUxTRSkKYGBgCgojIyMgY291bnRfbmV0d29yay50eHQKClRoaXMgZmlsZSBjb250YWlucyBhIGNvdW50IG9mIHRoZSBkaXJlY3Rpb25hbCBpbnRlcmFjdGlvbnMgYmV0d2VlbiBkaWZmZXJlbnQKY2VsbCB0eXBlcyB1c2VkIHRvIGNyZWF0ZSB0aGUgaGVhdG1hcHMuCgpgYGB7ciBoZWF0bWFwLW5ldHdvcmt9Cm5ldHdvcmsgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAiY291bnRfbmV0d29yay50eHQiKSwKICAgIGNvbF90eXBlcyA9IGNvbHMoCiAgICAgICAgU09VUkNFID0gY29sX2NoYXJhY3RlcigpLAogICAgICAgIFRBUkdFVCA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBjb3VudCAgPSBjb2xfZG91YmxlKCkKICAgICkKKQoKc2tpbShuZXR3b3JrKQpgYGAKCiMjIyBpbnRlcmFjdGlvbnNfY291bnQudHh0CgpUaGlzIGZpbGUgY29udGFpbnMgYSBjb3VudCBvZiB0b3RhbCBudW1iZXIgb2YgaW50ZXJhY3Rpb25zIGZvciBlYWNoIGNlbGwgdHlwZS4KCmBgYHtyIGhlYXRtYXAtaW50ZXJhY3Rpb25zfQppbnRlcmFjdGlvbnMgPC0gcmVhZF90c3YoCiAgICBmczo6cGF0aChPVVRfRElSLCAiaW50ZXJhY3Rpb25zX2NvdW50LnR4dCIpLAogICAgY29sX3R5cGVzID0gY29scygKICAgICAgICBYMSA9IGNvbF9jaGFyYWN0ZXIoKSwKICAgICAgICBhbGxfc3VtID0gY29sX2RvdWJsZSgpCiAgICApCikKCnNraW0oaW50ZXJhY3Rpb25zKQpgYGAKClN1bW1hcnkgey51bm51bWJlcmVkfQo9PT09PT09CgpQYXJhbWV0ZXJzIHsudW5udW1iZXJlZH0KLS0tLS0tLS0tLQoKVGhpcyB0YWJsZSBkZXNjcmliZXMgcGFyYW1ldGVycyB1c2VkIGFuZCBzZXQgaW4gdGhpcyBkb2N1bWVudC4KCmBgYHtyIHBhcmFtZXRlcnN9CnBhcmFtcyA8LSBsaXN0KAogICAgCikKcGFyYW1zIDwtIHRvSlNPTihwYXJhbXMsIHByZXR0eSA9IFRSVUUpCmthYmxlKGZyb21KU09OKHBhcmFtcykpCmBgYAoKT3V0cHV0IGZpbGVzIHsudW5udW1iZXJlZH0KLS0tLS0tLS0tLS0tCgpUaGlzIHRhYmxlIGRlc2NyaWJlcyB0aGUgb3V0cHV0IGZpbGVzIHByb2R1Y2VkIGJ5IHRoaXMgZG9jdW1lbnQuIFJpZ2h0IGNsaWNrCmFuZCBfU2F2ZSBMaW5rIEFzLi4uXyB0byBkb3dubG9hZCB0aGUgcmVzdWx0cy4KCmBgYHtyIG91dHB1dH0Ka2FibGUoZGF0YS5mcmFtZSgKICAgIEZpbGUgPSBjKAogICAgICAgIGRvd25sb2FkX2xpbmsoInBhcmFtZXRlcnMuanNvbiIsIE9VVF9ESVIpLAogICAgICAgIGRvd25sb2FkX2xpbmsoImRlY29udm9sdXRlZC50eHQiLCBPVVRfRElSKSwKICAgICAgICBkb3dubG9hZF9saW5rKCJtZWFucy50eHQiLCBPVVRfRElSKSwKICAgICAgICBkb3dubG9hZF9saW5rKCJwdmFsdWVzLnR4dCIsIE9VVF9ESVIpLAogICAgICAgIGRvd25sb2FkX2xpbmsoInNpZ25pZmljYW50X21lYW5zLnR4dCIsIE9VVF9ESVIpLAogICAgICAgIGRvd25sb2FkX2xpbmsoImRvdHBsb3QucG5nIiwgT1VUX0RJUiksCiAgICAgICAgZG93bmxvYWRfbGluaygiaGVhdG1hcF9jb3VudHMucG5nIiwgT1VUX0RJUiksCiAgICAgICAgZG93bmxvYWRfbGluaygiaGVhdG1hcF9sb2djb3VudHMucG5nIiwgT1VUX0RJUiksCiAgICAgICAgZG93bmxvYWRfbGluaygiY291bnRfbmV0d29yay50eHQiLCBPVVRfRElSKSwKICAgICAgICBkb3dubG9hZF9saW5rKCJpbnRlcmFjdGlvbnNfY291bnQudHh0IiwgT1VUX0RJUikKICAgICksCiAgICBEZXNjcmlwdGlvbiA9IGMoCiAgICAgICAgIlBhcmFtZXRlcnMgc2V0IGFuZCB1c2VkIGluIHRoaXMgYW5hbHlzaXMiLAogICAgICAgICJEZWNvbnZvbHV0ZWQgb3V0cHV0IGZyb20gQ2VsbFBob25lREIiLAogICAgICAgICJNZWFucyBvdXRwdXQgZnJvbSBDZWxsUGhvbmVEQiIsCiAgICAgICAgIlAtdmFsdWVzIG91dHB1dCBmcm9tIENlbGxQaG9uZURCIiwKICAgICAgICAiU2lnbmlmaWNhbnQgbWVhbnMgb3V0cHV0IGZyb20gQ2VsbFBob25lREIiLAogICAgICAgICJEb3RwbG90IHBsb3QgZnJvbSBDZWxsUGhvbmVEQiIsCiAgICAgICAgIkNvdW50cyBoZWF0bWFwIHBsb3QgZnJvbSBDZWxsUGhvbmVEQiIsCiAgICAgICAgIkxvZy1jb3VudHMgaGVhdG1hcCBwbG90IGZyb20gQ2VsbFBob25lREIiLAogICAgICAgICJDb3VudCBuZXR3b3JrIG91dHB1dCBmcm9tIENlbGxQaG9uZURCIiwKICAgICAgICAiSW50ZXJhY3Rpb25zIGNvdW50IG91dHB1dCBmcm9tIENlbGxQaG9uZURCIgogICAgKQopKQpgYGAKClNlc3Npb24gaW5mb3JtYXRpb24gey51bm51bWJlcmVkfQotLS0tLS0tLS0tLS0tLS0tLS0tCg==</div>
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
 TeX fonts only; see
@@ -3081,6 +3279,8 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
+
+
 
 
 </div>
