@@ -230,7 +230,7 @@ fs::file_copy(
     overwrite = TRUE
 )
 
-include_graphics(fs::path("figure", DOCNAME, "dotplot.png"))
+include_graphics(fs::path("figure", DOCNAME, "dotplot.png"), error = FALSE)
 ```
 
 Heatmap
@@ -265,7 +265,8 @@ fs::file_copy(
     overwrite = TRUE
 )
 
-include_graphics(fs::path("figure", DOCNAME, "heatmap_counts.png"))
+include_graphics(fs::path("figure", DOCNAME, "heatmap_counts.png"),
+                 error = FALSE)
 ```
 
 ### Log-counts
@@ -281,7 +282,8 @@ fs::file_copy(
     overwrite = TRUE
 )
 
-include_graphics(fs::path("figure", DOCNAME, "heatmap_logcounts.png"))
+include_graphics(fs::path("figure", DOCNAME, "heatmap_logcounts.png"),
+                 error = FALSE)
 ```
 
 ### count_network.txt
