@@ -1,5 +1,7 @@
 name: null
 channels:
+  - conda-forge
+  - bioconda
   - defaults
 dependencies:
   - ca-certificates=2019.11.27=0
@@ -67,4 +69,4 @@ dependencies:
     - wcwidth==0.1.7
     - werkzeug==0.16.0
     - zipp==0.6.0
-prefix: /Users/Luke/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python
+prefix: /Users/luke.zappia/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python
