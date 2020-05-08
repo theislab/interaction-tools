@@ -8,4 +8,10 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+# Table of contents {.unnumbered}
+
+```{r toc, include = FALSE}
+toc <- workflowr::wflow_toc()
+```
+
+`r paste(toc, collapse = "\n")`
