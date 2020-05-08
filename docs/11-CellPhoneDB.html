@@ -431,7 +431,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-06
+<strong>Last updated:</strong> 2020-05-08
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -522,16 +522,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree54358bcf9e5bc4fc99b75e1b76590ffa86627d71targetblank54358bca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/54358bcf9e5bc4fc99b75e1b76590ffa86627d71" target="_blank">54358bc</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree7bd35b289898d50296c4e49470b8aa8b6e0e5396targetblank7bd35b2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/7bd35b289898d50296c4e49470b8aa8b6e0e5396" target="_blank">7bd35b2</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree54358bcf9e5bc4fc99b75e1b76590ffa86627d71targetblank54358bca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree7bd35b289898d50296c4e49470b8aa8b6e0e5396targetblank7bd35b2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/54358bcf9e5bc4fc99b75e1b76590ffa86627d71" target="_blank">54358bc</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/7bd35b289898d50296c4e49470b8aa8b6e0e5396" target="_blank">7bd35b2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -547,14 +547,7 @@ Ignored files:
     Ignored:    renv/staging/
 
 Unstaged changes:
-    Modified:   output/11-CellPhoneDB.Rmd/count_network.txt
-    Modified:   output/11-CellPhoneDB.Rmd/dotplot.png
-    Modified:   output/11-CellPhoneDB.Rmd/heatmap_counts.png
-    Modified:   output/11-CellPhoneDB.Rmd/heatmap_logcounts.png
-    Modified:   output/11-CellPhoneDB.Rmd/interactions_count.txt
-    Modified:   output/11-CellPhoneDB.Rmd/pvalues.txt
-    Modified:   output/11-CellPhoneDB.Rmd/significant_means.txt
-    Modified:   renv.lock
+    Modified:   environment.yml
 
 </code></pre>
 <p>
@@ -593,6 +586,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/7bd35b289898d50296c4e49470b8aa8b6e0e5396/docs/11-CellPhoneDB.html" target="_blank">7bd35b2</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-06
+</td>
+<td>
+Rebuild cellphonedb
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1045,30 +1055,30 @@ cellphonedb method statistical_analysis \
     --threads 1 \
     data/cellphonedb/test_meta.txt \
     data/cellphonedb/test_counts.txt</code></pre>
-<pre><code>[ ][APP][06/05/20-16:07:27][WARNING] Latest local available version is `v2.0.0`, using it
-[ ][APP][06/05/20-16:07:27][WARNING] User selected downloaded database `v2.0.0` is available, using it
-[ ][CORE][06/05/20-16:07:27][INFO] Initializing SqlAlchemy CellPhoneDB Core
-[ ][CORE][06/05/20-16:07:27][INFO] Using custom database at /Users/luke.zappia/.cpdb/releases/v2.0.0/cellphone.db
-[ ][APP][06/05/20-16:07:27][INFO] Launching Method cpdb_statistical_analysis_local_method_launcher
-[ ][APP][06/05/20-16:07:27][INFO] Launching Method _set_paths
-[ ][APP][06/05/20-16:07:27][WARNING] Output directory (output/11-cellphonedb.Rmd) exist and is not empty. Result can overwrite old results
-[ ][APP][06/05/20-16:07:27][INFO] Launching Method _load_meta_counts
-[ ][CORE][06/05/20-16:07:27][INFO] Launching Method cpdb_statistical_analysis_launcher
-[ ][CORE][06/05/20-16:07:27][INFO] Launching Method _counts_validations
-[ ][CORE][06/05/20-16:07:27][INFO] [Cluster Statistical Analysis Simple] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
-[ ][CORE][06/05/20-16:07:27][INFO] Running Simple Prefilters
-[ ][CORE][06/05/20-16:07:27][INFO] Running Real Simple Analysis
-[ ][CORE][06/05/20-16:07:27][INFO] Running Statistical Analysis
+<pre><code>[ ][APP][08/05/20-10:54:13][WARNING] Latest local available version is `v2.0.0`, using it
+[ ][APP][08/05/20-10:54:13][WARNING] User selected downloaded database `v2.0.0` is available, using it
+[ ][CORE][08/05/20-10:54:13][INFO] Initializing SqlAlchemy CellPhoneDB Core
+[ ][CORE][08/05/20-10:54:13][INFO] Using custom database at /Users/luke.zappia/.cpdb/releases/v2.0.0/cellphone.db
+[ ][APP][08/05/20-10:54:13][INFO] Launching Method cpdb_statistical_analysis_local_method_launcher
+[ ][APP][08/05/20-10:54:13][INFO] Launching Method _set_paths
+[ ][APP][08/05/20-10:54:13][WARNING] Output directory (output/11-cellphonedb.Rmd) exist and is not empty. Result can overwrite old results
+[ ][APP][08/05/20-10:54:13][INFO] Launching Method _load_meta_counts
+[ ][CORE][08/05/20-10:54:13][INFO] Launching Method cpdb_statistical_analysis_launcher
+[ ][CORE][08/05/20-10:54:13][INFO] Launching Method _counts_validations
+[ ][CORE][08/05/20-10:54:13][INFO] [Cluster Statistical Analysis Simple] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
+[ ][CORE][08/05/20-10:54:13][INFO] Running Simple Prefilters
+[ ][CORE][08/05/20-10:54:13][INFO] Running Real Simple Analysis
+[ ][CORE][08/05/20-10:54:14][INFO] Running Statistical Analysis
 /Users/luke.zappia/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
   warnings.warn(message, FutureWarning)
-[ ][CORE][06/05/20-16:08:48][INFO] Building Pvalues result
-[ ][CORE][06/05/20-16:08:51][INFO] Building Simple results
-[ ][CORE][06/05/20-16:08:51][INFO] [Cluster Statistical Analysis Complex] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
-[ ][CORE][06/05/20-16:08:51][INFO] Running Complex Prefilters
-[ ][CORE][06/05/20-16:08:52][INFO] Running Real Complex Analysis
-[ ][CORE][06/05/20-16:08:52][INFO] Running Statistical Analysis
-[ ][CORE][06/05/20-16:10:33][INFO] Building Pvalues result
-[ ][CORE][06/05/20-16:10:34][INFO] Building Complex results</code></pre>
+[ ][CORE][08/05/20-10:55:37][INFO] Building Pvalues result
+[ ][CORE][08/05/20-10:55:39][INFO] Building Simple results
+[ ][CORE][08/05/20-10:55:39][INFO] [Cluster Statistical Analysis Complex] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
+[ ][CORE][08/05/20-10:55:39][INFO] Running Complex Prefilters
+[ ][CORE][08/05/20-10:55:40][INFO] Running Real Complex Analysis
+[ ][CORE][08/05/20-10:55:41][INFO] Running Statistical Analysis
+[ ][CORE][08/05/20-10:57:24][INFO] Building Pvalues result
+[ ][CORE][08/05/20-10:57:25][INFO] Building Complex results</code></pre>
 </div>
 <div id="output" class="section level1" number="3">
 <h1 number="3"><span class="header-section-number">3</span> Output</h1>
@@ -1956,10 +1966,10 @@ skim(pvalues)</code></pre>
 <td align="left">Myeloid|NKcells_0</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">0.76</td>
+<td align="right">0.77</td>
 <td align="right">0.39</td>
 <td align="right">0.00</td>
-<td align="right">0.54</td>
+<td align="right">0.56</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -2011,7 +2021,7 @@ skim(pvalues)</code></pre>
 <td align="right">0.71</td>
 <td align="right">0.38</td>
 <td align="right">0.00</td>
-<td align="right">0.32</td>
+<td align="right">0.35</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -2022,9 +2032,9 @@ skim(pvalues)</code></pre>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">0.81</td>
-<td align="right">0.34</td>
+<td align="right">0.33</td>
 <td align="right">0.00</td>
-<td align="right">0.69</td>
+<td align="right">0.67</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -2048,7 +2058,7 @@ skim(pvalues)</code></pre>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">0.94</td>
-<td align="right">0.21</td>
+<td align="right">0.22</td>
 <td align="right">0.03</td>
 <td align="right">1.00</td>
 <td align="right">1</td>
@@ -2392,25 +2402,25 @@ skim(sig_means)</code></pre>
 </tr>
 <tr class="odd">
 <td align="left">Myeloid|NKcells_0</td>
-<td align="right">167</td>
-<td align="right">0.12</td>
-<td align="right">1.34</td>
+<td align="right">164</td>
+<td align="right">0.14</td>
+<td align="right">1.43</td>
 <td align="right">0.66</td>
 <td align="right">0.61</td>
-<td align="right">0.81</td>
-<td align="right">1.12</td>
-<td align="right">1.91</td>
+<td align="right">0.87</td>
+<td align="right">1.25</td>
+<td align="right">2.05</td>
 <td align="right">2.70</td>
-<td align="left">▇▃▁▃▂</td>
+<td align="left">▇▃▂▆▂</td>
 </tr>
 <tr class="even">
 <td align="left">Myeloid|NKcells_1</td>
 <td align="right">179</td>
 <td align="right">0.06</td>
-<td align="right">1.06</td>
-<td align="right">0.26</td>
+<td align="right">1.07</td>
+<td align="right">0.25</td>
 <td align="right">0.74</td>
-<td align="right">0.90</td>
+<td align="right">0.96</td>
 <td align="right">1.03</td>
 <td align="right">1.12</td>
 <td align="right">1.60</td>
@@ -2418,16 +2428,16 @@ skim(sig_means)</code></pre>
 </tr>
 <tr class="odd">
 <td align="left">Myeloid|Tcells</td>
-<td align="right">180</td>
-<td align="right">0.05</td>
-<td align="right">1.95</td>
-<td align="right">0.75</td>
+<td align="right">179</td>
+<td align="right">0.06</td>
+<td align="right">2.00</td>
+<td align="right">0.74</td>
 <td align="right">1.11</td>
 <td align="right">1.37</td>
-<td align="right">1.77</td>
-<td align="right">2.71</td>
+<td align="right">2.18</td>
+<td align="right">2.69</td>
 <td align="right">2.94</td>
-<td align="left">▇▁▂▂▅</td>
+<td align="left">▇▁▂▃▅</td>
 </tr>
 <tr class="even">
 <td align="left">NKcells_0|Myeloid</td>
@@ -2511,14 +2521,14 @@ skim(sig_means)</code></pre>
 <td align="left">NKcells_1|NKcells_1</td>
 <td align="right">186</td>
 <td align="right">0.02</td>
-<td align="right">1.55</td>
-<td align="right">1.08</td>
+<td align="right">1.65</td>
+<td align="right">1.02</td>
 <td align="right">0.39</td>
-<td align="right">0.75</td>
-<td align="right">1.67</td>
+<td align="right">1.03</td>
+<td align="right">1.86</td>
 <td align="right">2.48</td>
 <td align="right">2.48</td>
-<td align="left">▃▃▁▁▇</td>
+<td align="left">▃▁▃▁▇</td>
 </tr>
 <tr class="odd">
 <td align="left">NKcells_1|Tcells</td>
@@ -2535,16 +2545,16 @@ skim(sig_means)</code></pre>
 </tr>
 <tr class="even">
 <td align="left">Tcells|Myeloid</td>
-<td align="right">181</td>
+<td align="right">180</td>
 <td align="right">0.05</td>
-<td align="right">1.72</td>
-<td align="right">0.52</td>
+<td align="right">1.66</td>
+<td align="right">0.53</td>
 <td align="right">1.11</td>
-<td align="right">1.37</td>
-<td align="right">1.67</td>
-<td align="right">2.04</td>
+<td align="right">1.18</td>
+<td align="right">1.60</td>
+<td align="right">1.94</td>
 <td align="right">2.56</td>
-<td align="left">▇▇▁▂▅</td>
+<td align="left">▇▆▁▂▃</td>
 </tr>
 <tr class="odd">
 <td align="left">Tcells|NKcells_0</td>
@@ -2640,6 +2650,17 @@ Date
 <tbody>
 <tr>
 <td>
+7bd35b2
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-06
+</td>
+</tr>
+<tr>
+<td>
 54358bc
 </td>
 <td>
@@ -2720,6 +2741,17 @@ Date
 <tbody>
 <tr>
 <td>
+7bd35b2
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-06
+</td>
+</tr>
+<tr>
+<td>
 54358bc
 </td>
 <td>
@@ -2781,6 +2813,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+7bd35b2
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-06
+</td>
+</tr>
 <tr>
 <td>
 54358bc
@@ -2921,13 +2964,13 @@ skim(network)</code></pre>
 <td align="left">count</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">15.06</td>
-<td align="right">8.99</td>
+<td align="right">15.69</td>
+<td align="right">9.97</td>
 <td align="right">1</td>
 <td align="right">10.5</td>
 <td align="right">13</td>
-<td align="right">19</td>
-<td align="right">34</td>
+<td align="right">21</td>
+<td align="right">37</td>
 <td align="left">▂▇▂▁▂</td>
 </tr>
 </tbody>
@@ -3035,13 +3078,13 @@ skim(interactions)</code></pre>
 <td align="left">all_sum</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">60.25</td>
-<td align="right">23.07</td>
+<td align="right">62.75</td>
+<td align="right">25</td>
 <td align="right">40</td>
-<td align="right">41.5</td>
-<td align="right">57</td>
-<td align="right">75.75</td>
-<td align="right">87</td>
+<td align="right">43</td>
+<td align="right">59.5</td>
+<td align="right">79.25</td>
+<td align="right">92</td>
 <td align="left">▇▁▁▃▃</td>
 </tr>
 </tbody>
@@ -3168,7 +3211,7 @@ kable(fromJSON(params))</code></pre>
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Berlin               
- date     2020-05-06                  
+ date     2020-05-08                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  ! package     * version date       lib source            
@@ -3257,9 +3300,8 @@ kable(fromJSON(params))</code></pre>
  P yaml          2.2.1   2020-02-01 [?] CRAN (R 4.0.0)    
 
 [1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
-[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpQVAp06/renv-system-library
-[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpzgBIG1/renv-system-library
-[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp0bHLsE/renv-system-library
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpnH5XYo/renv-system-library
+[3] /Library/Frameworks/R.framework/Versions/4.0/Resources/library
 
  P ── Loaded and on-disk path mismatch.</code></pre>
 </div>

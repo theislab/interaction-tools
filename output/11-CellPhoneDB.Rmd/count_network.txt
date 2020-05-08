@@ -6,12 +6,12 @@ NKcells_1	Myeloid	13
 NKcells_0	NKcells_1	14
 NKcells_0	NKcells_0	11
 NKcells_0	Tcells	13
-NKcells_0	Myeloid	34
+NKcells_0	Myeloid	37
 Tcells	NKcells_1	9
 Tcells	NKcells_0	13
 Tcells	Tcells	1
-Tcells	Myeloid	19
+Tcells	Myeloid	21
 Myeloid	NKcells_1	13
-Myeloid	NKcells_0	34
-Myeloid	Tcells	19
+Myeloid	NKcells_0	37
+Myeloid	Tcells	21
 Myeloid	Myeloid	21

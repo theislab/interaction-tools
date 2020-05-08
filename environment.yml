@@ -26,10 +26,11 @@ dependencies:
     - attrs==19.3.0
     - boto3==1.7.84
     - botocore==1.10.84
-    - cellphonedb==2.1.1
+    - cellphonedb==2.1.2
     - cffi==1.13.2
     - chardet==3.0.4
     - click==6.7
+    - cython==0.29.17
     - docutils==0.15.2
     - fbpca==1.0
     - flask==1.0.4
