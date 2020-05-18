@@ -12,6 +12,8 @@ suppressPackageStartupMessages({
     library("knitr")
     library("jsonlite")
     library("skimr")
+    library("pander")
+    library("glue")
     # Tidyverse
     library("tidyverse")
 })
@@ -19,6 +21,10 @@ suppressPackageStartupMessages({
 #==============================================================================#
 # ---- CONFLICTS ----
 #==============================================================================#
+
+suppressMessages({
+    conflict_prefer("filter", "dplyr")
+})
 
 #==============================================================================#
 # ---- KNITR ----
@@ -87,5 +93,6 @@ theme_set(theme_minimal())
 #==============================================================================#
 
 PATHS <- list(
-    cellphonedb_in = here("data", "cellphonedb")
+    cellphonedb_in = here("data", "cellphonedb"),
+    NicheNet_in    = here("data", "NicheNet")
 )

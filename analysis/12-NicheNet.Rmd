@@ -24,6 +24,327 @@ about **NicheNet** can be found at https://github.com/saeyslab/nichenetr.
 library("nichenetr")
 ```
 
+Input
+=====
+
+**NicheNet** takes four inputs, a matrix of ligand targets, a ligand-receptor
+network, an scRNA-seq dataset and a gene set of interest.
+
+Ligand-target matrix
+--------------------
+
+This matrix contains the prior potential that a particular ligand might regulate
+the expression of a specific target gene. Here is a snippet of the matrix:
+
+```{r input-ligand-target}
+# From https://zenodo.org/record/3260758/files/ligand_target_matrix.rds
+ligand_targets <- read_rds(
+    fs::path(PATHS$NicheNet_in, "ligand_target_matrix.Rds")
+)
+
+pander(ligand_targets[1:5, 1:5])
+```
+
+The full matrix has **`r nrow(ligand_targets)`** rows (targets) and
+**`r ncol(ligand_targets)`** columns (ligands).
+
+Ligand-receptor network
+-----------------------
+
+This is a database of ligand-receptor pairs with information about their source.
+
+```{r input-network}
+# From https://zenodo.org/record/3260758/files/lr_network.rds
+lr_network <- read_rds(fs::path(PATHS$NicheNet_in, "lr_network.Rds"))
+
+skim(lr_network)
+```
+
+Expression data
+---------------
+
+The example dataset is from cancer-associated fibroblasts (CAFs) in the head and
+neck squamous cell carcinoma (HNSCC) tumour microenvironment.
+
+```{r input-expression}
+# From https://zenodo.org/record/3260758/files/hnscc_expression.rds
+hnscc <- read_rds(fs::path(PATHS$NicheNet_in, "hnscc_expression.Rds"))
+```
+
+This dataset is provided as a list with the following items:
+`r paste("**", names(hnscc), "**", sep = "", collapse = ", ")`.
+
+### Expression matrix
+
+The first item is the expression matrix.
+
+```{r input-expression-matrix}
+exprs_mat <- hnscc$expression
+
+pander(exprs_mat[1:5, 1:5])
+```
+
+The expression matrix has **`r nrow(exprs_mat)`** rows (cells) and
+**`r ncol(exprs_mat)`** columns (genes).
+
+### Sample information
+
+There is also some metadata about the cells.
+
+```{r input-expression-samples}
+sample_info <- hnscc$sample_info
+
+skim(sample_info)
+```
+
+### Expressed genes
+
+The final item is a vector of the names of expressed genes.
+
+```{r input-expression-genes}
+skim(hnscc$expressed_genes)
+```
+
+Gene set
+--------
+
+Because we are looking at how CAFs influence cancer growth we will use a
+signature for p-EMT.
+
+```{r input-geneset}
+# From https://zenodo.org/record/3260758/files/pemt_signature.txt
+geneset <- read_tsv(
+    fs::path(PATHS$NicheNet_in, "pemt_signature.txt"),
+    col_types = cols(
+        gene = col_character()
+    ),
+    col_names = "gene"
+) %>%
+    pull(gene) %>%
+    .[. %in% rownames(ligand_targets)]
+
+skim(geneset)
+```
+
+Define expressed genes
+======================
+
+The first step in the analysis is to define which genes are expressed in the
+sender and receiver cell populations. In this example the CAFs are defined to be
+the senders and tumour cells (from high quality tumours) are defined to be
+receivers.
+
+We also need to set a threshold for deciding a gene is "expressed". Here we use
+the following formula:
+
+$$Ea_i = log_2((\frac{1}{k}\sum_{i = 1}^{k} TPM_i) + 1) >= 4$$
+
+> **NOTE:** For UMI data (10x Chromium) the authors don't use this formula and
+> instead suggest a threshold of non-zero expression in at least 10% of cells.
+
+```{r expressed genes}
+# Low-quality tumours to remove
+tumours_remove <- c("HN10", "HN", "HN12", "HN13", "HN24", "HN7", "HN8", "HN23")
+
+CAF_ids <- sample_info %>%
+    filter(
+        `Lymph node` == 0 &
+            !(tumor %in% tumours_remove) &
+            `non-cancer cell type` == "CAF"
+    ) %>%
+    pull(cell)
+
+malignant_ids <- sample_info %>%
+    filter(
+        `Lymph node` == 0 &
+            !(tumor %in% tumours_remove) &
+            `classified  as cancer cell` == 1
+    ) %>%
+    pull(cell)
+
+expressed_sender <- exprs_mat[CAF_ids, ] %>%
+    apply(2, function(x) {10 * (2 ** x - 1)}) %>%
+    apply(2, function(x) {log2(mean(x) + 1)}) %>%
+    .[. >= 4] %>%
+    names()
+expressed_receiver <- exprs_mat[malignant_ids, ] %>%
+    apply(2, function(x) {10 * (2 ** x - 1)}) %>% 
+    apply(2, function(x) {log2(mean(x) + 1)}) %>%
+    .[. >= 4] %>%
+    names()
+```
+
+After this quality control we have selected **`r length(CAF_ids)`** CAFs
+(senders) and **`r length(malignant_ids)`** tumour cells (receivers). There are
+**`r length(expressed_sender)`** genes expressed in the sender cells and
+**`r length(expressed_receiver)`** genes expressed in the receiver cells.
+
+Background genes
+================
+
+We already have the gene set of interest that we want to look at but we also
+need to define a background set of genes. For this we use all genes expressed in
+the malignant (receiver) cells which are also in the ligand-target matrix.
+
+```{r background}
+background_genes <- expressed_receiver %>%
+    .[. %in% rownames(ligand_targets)]
+```
+
+This gives us a set of **`r length(background_genes)`** background genes.
+
+Potential ligands
+=================
+
+We determine a set of potential ligands by selection those that are expressed
+by CAFs (sender) and bind a receptor expressed in malignant cells (receiver).
+
+```{r ligands}
+ligands <- lr_network %>%
+    pull(from) %>%
+    unique()
+
+expressed_ligands <- intersect(ligands, expressed_sender)
+
+receptors <- lr_network %>%
+    pull(to) %>%
+    unique()
+
+expressed_receptors <- intersect(receptors, expressed_receiver)
+
+lr_network_expressed <- lr_network %>%
+    filter(
+        from %in% expressed_ligands &
+            to %in% expressed_receptors
+    )
+
+potential_ligands <- lr_network_expressed %>%
+    pull(from) %>%
+    unique()
+```
+
+The filtered database contains **`r nrow(lr_network_expressed)`** expressed
+ligand-receptor pairs with **`r length(potential_ligands)`** potential ligands.
+
+Ligand activity analysis
+========================
+
+Now we have all the input data sorted we can run **NicheNet**. The first
+analysis assesses ligand activity by calculating how well each CAF-ligand can
+predict that a gene belongs to the p-EMT gene set compared to the background
+genes.
+
+```{r activity}
+ligand_activities <- predict_ligand_activities(
+    geneset                    = geneset, 
+    background_expressed_genes = background_genes,
+    ligand_target_matrix       = ligand_targets,
+    potential_ligands          = potential_ligands
+)
+
+skim(ligand_activities)
+```
+
+There are various scores given as results here but the authors suggest using
+the Pearson correlation to select ligands. We select 20 ligands with highest
+correlation.
+
+```{r best-activity}
+best_ligands <- ligand_activities %>%
+    top_n(20, pearson) %>%
+    arrange(-pearson) %>%
+    pull(test_ligand)
+```
+
+These ligands are:
+`r glue_collapse(glue("**{best_ligands}**"), sep = ", ", last = " and ")`
+
+The choice of to use 20 ligands is somewhat arbitary and is likely to be
+different for different settings. For a real analysis the authors suggest
+choosing a threshold by looking at the distribution of correlations.
+
+```{r activity-plot}
+pearson_thresh <- ligand_activities %>%
+    top_n(20, pearson) %>%
+    pull(pearson) %>%
+    min()
+
+ggplot(ligand_activities, aes(x = pearson)) + 
+    geom_histogram(color = "black", fill = "darkorange")  +
+    geom_vline(
+        xintercept = pearson_thresh,
+        color      = "red",
+        linetype   = "dashed",
+        size       = 1
+    ) + 
+    labs(
+        x = "ligand activity (PCC)",
+        y = "# ligands"
+    ) +
+    theme_classic()
+```
+
+Infer target genes
+==================
+
+Once we have a set of active ligands we can look at the regulatory potential
+between ligands and downstream targets. We only look at interactions between the
+top 20 ligands and genes that belong to the gene set and are in the top 250
+most strongly predicted targets of one of the selected ligands. The targets are
+selected based on predictions in the general prior model so are not specific to
+this dataset. Genes that are not a top target of one of the selected ligands
+will not be shown.
+
+```{r active-links}
+active_links <- best_ligands %>%
+    lapply(
+        get_weighted_ligand_target_links,
+        geneset              = geneset,
+        ligand_target_matrix = ligand_targets,
+        n                    = 250
+    ) %>%
+    bind_rows()
+
+skim(active_links)
+```
+
+For visualisation potential scores are set to zero if they were below the 0.25
+quantile for top targets of that ligand in the ligand-target matrix.
+
+```{r target-heatmap}
+links_mat = prepare_ligand_target_visualization(
+    ligand_target_df     = active_links,
+    ligand_target_matrix = ligand_targets,
+    cutoff               = 0.25
+)
+
+order_ligands <- intersect(best_ligands, colnames(links_mat)) %>% rev()
+order_targets <- active_links$target %>% unique()
+
+vis_ligand_target <- links_mat[order_targets, order_ligands] %>% t()
+
+vis_ligand_target %>%
+    make_heatmap_ggplot(
+        "Prioritized CAF-ligands",
+        "p-EMT genes in malignant cells",
+        color           = "purple",
+        legend_position = "top",
+        x_axis_position = "top",
+        legend_title    = "Regulatory potential"
+    ) +
+    scale_fill_gradient2(
+        low = "whitesmoke",
+        high = "purple",
+        breaks = c(0,0.005,0.01)
+    ) +
+    theme(axis.text.x = element_text(face = "italic"))
+```
+
+The cutoffs for visualisation are arbitary and the authors suggest testing
+several cutoffs. Considering more targets would identify more interactions but
+with less confidence. Lowering the quantil cutoff would result in a denser
+heatmap.
+
 Summary {.unnumbered}
 =======
 
