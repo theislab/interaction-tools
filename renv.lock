@@ -1270,6 +1270,13 @@
       "Repository": "CRAN",
       "Hash": "285ca01e793958ac6f2c264c84dbb16b"
     },
+    "pander": {
+      "Package": "pander",
+      "Version": "0.6.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "121198ce37b5a6b5227edc5a38223da4"
+    },
     "parallelMap": {
       "Package": "parallelMap",
       "Version": "1.5.0",

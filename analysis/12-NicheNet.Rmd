@@ -22,13 +22,19 @@ about **NicheNet** can be found at https://github.com/saeyslab/nichenetr.
 
 ```{r libraries}
 library("nichenetr")
+library("RColorBrewer")
+library("cowplot")
+library("ggpubr")
+
+conflict_prefer("get_legend", "cowplot")
 ```
 
 Input
 =====
 
-**NicheNet** takes four inputs, a matrix of ligand targets, a ligand-receptor
-network, an scRNA-seq dataset and a gene set of interest.
+**NicheNet** takes several inputs for different parts of the analysis. These
+include a matrix of ligand targets, a ligand-receptor network, network weights,
+an scRNA-seq dataset and a gene set of interest.
 
 Ligand-target matrix
 --------------------
@@ -60,6 +66,31 @@ lr_network <- read_rds(fs::path(PATHS$NicheNet_in, "lr_network.Rds"))
 skim(lr_network)
 ```
 
+Network weights
+---------------
+
+```{r input-weights}
+# From https://zenodo.org/record/3260758/files/weighted_networks.rds
+weighted_networks <- read_rds(
+    fs::path(PATHS$NicheNet_in, "weighted_networks.Rds")
+)
+```
+
+This is a list with **`r length(weighted_networks)`** items:
+`r glue_collapse(glue("**{names(weighted_networks)}**"), sep = ", ", last = " and ")`.
+
+### Ligand-receptor
+
+```{r input-weights-lr}
+skim(weighted_networks$lr_sig)
+```
+
+### Gene-receptor
+
+```{r input-weights-gr}
+skim(weighted_networks$gr)
+```
+
 Expression data
 ---------------
 
@@ -71,8 +102,8 @@ neck squamous cell carcinoma (HNSCC) tumour microenvironment.
 hnscc <- read_rds(fs::path(PATHS$NicheNet_in, "hnscc_expression.Rds"))
 ```
 
-This dataset is provided as a list with the following items:
-`r paste("**", names(hnscc), "**", sep = "", collapse = ", ")`.
+This dataset is provided as a list with **`r length(hnscc)` items:
+`r glue_collapse(glue("**{names(hnscc)}**"), sep = ", ", last = " and ")`.
 
 ### Expression matrix
 
@@ -312,7 +343,7 @@ For visualisation potential scores are set to zero if they were below the 0.25
 quantile for top targets of that ligand in the ligand-target matrix.
 
 ```{r target-heatmap}
-links_mat = prepare_ligand_target_visualization(
+links_mat <- prepare_ligand_target_visualization(
     ligand_target_df     = active_links,
     ligand_target_matrix = ligand_targets,
     cutoff               = 0.25
@@ -323,7 +354,7 @@ order_targets <- active_links$target %>% unique()
 
 vis_ligand_target <- links_mat[order_targets, order_ligands] %>% t()
 
-vis_ligand_target %>%
+ligand_target_heatmap <- vis_ligand_target %>%
     make_heatmap_ggplot(
         "Prioritized CAF-ligands",
         "p-EMT genes in malignant cells",
@@ -333,17 +364,234 @@ vis_ligand_target %>%
         legend_title    = "Regulatory potential"
     ) +
     scale_fill_gradient2(
-        low = "whitesmoke",
-        high = "purple",
+        low    = "whitesmoke",
+        high   = "purple",
         breaks = c(0,0.005,0.01)
     ) +
     theme(axis.text.x = element_text(face = "italic"))
+
+ligand_target_heatmap
 ```
 
 The cutoffs for visualisation are arbitary and the authors suggest testing
 several cutoffs. Considering more targets would identify more interactions but
 with less confidence. Lowering the quantil cutoff would result in a denser
 heatmap.
+
+Ligand-receptor network
+=======================
+
+A further analysis is to look at the interactions between ligands and receptors
+rather than downstream targets.
+
+```{r lr-network}
+lr_network_top <- lr_network %>%
+    filter(
+        from %in% best_ligands &
+            to %in% expressed_receptors
+    ) %>%
+    distinct(from, to)
+
+best_receptors <- lr_network_top %>%
+    pull(to) %>%
+    unique()
+
+lr_network_top <- weighted_networks$lr_sig %>%
+    filter(
+        from %in% best_ligands &
+            to %in% best_receptors
+    ) %>%
+    spread("from", "weight", fill = 0)
+
+lr_network_top_mat <- lr_network_top %>%
+    select(-to) %>%
+    as.matrix() %>%
+    magrittr::set_rownames(lr_network_top$to)
+
+dist_receptors   <- dist(lr_network_top_mat, method = "binary")
+hclust_receptors <- hclust(dist_receptors, method = "ward.D2")
+order_receptors  <- hclust_receptors$labels[hclust_receptors$order]
+
+dist_ligands            <- dist(lr_network_top_mat %>% t(), method = "binary")
+hclust_ligands          <- hclust(dist_ligands, method = "ward.D2")
+order_ligands_receptors <- hclust_ligands$labels[hclust_ligands$order]
+
+ligand_receptor_heatmap <-
+    lr_network_top_mat[order_receptors, order_ligands_receptors] %>%
+    t() %>%
+    make_heatmap_ggplot(
+        "Prioritized CAF-ligands",
+        "Receptors expressed by malignant cells",
+        color           = "mediumvioletred",
+        x_axis_position = "top",
+        legend_title    = "Prior interaction potential"
+    ) +
+    theme()
+
+ligand_receptor_heatmap
+```
+
+Combined heatmap (with expression)
+==================================
+
+**NicheNet** only considers expressed ligands but does not use their expression
+when ranking them, the ranking is only based on potential for regulation given
+prior knowledge. Here we make a combined heatmap that shows expression alongside
+regulatory potential.
+
+```{r combined-heatmap, fig.width = 13, fig.height = 7}
+ligand_pearson_matrix <- ligand_activities %>%
+    select(pearson) %>%
+    as.matrix() %>%
+    magrittr::set_rownames(ligand_activities$test_ligand)
+
+ligand_pearson_heatmap <- ligand_pearson_matrix[order_ligands, ] %>%
+    as.matrix(ncol = 1) %>%
+    magrittr::set_colnames("Pearson") %>%
+    make_heatmap_ggplot(
+        "Prioritized CAF-ligands",
+        "Ligand activity",
+        color           = "darkorange",
+        legend_position = "top",
+        x_axis_position = "top",
+        legend_title    = paste(
+            "Pearson correlation coefficient,",
+            "(target gene prediction ability)",
+            collapse = "\n"
+        )
+    )
+
+expression_CAF <- exprs_mat[CAF_ids, order_ligands] %>%
+    data.frame() %>%
+    rownames_to_column("cell") %>%
+    tbl_df() %>%
+    inner_join(
+        sample_info %>%
+            select(cell,tumor),
+        by =  "cell"
+    ) %>%
+    group_by(tumor) %>%
+    select(-cell) %>%
+    summarise_all(mean) %>%
+    gather("ligand", "exprs", -tumor) %>%
+    spread(tumor, exprs)
+    
+expression_CAF_mat <- expression_CAF %>%
+    select(-ligand) %>%
+    as.matrix() %>%
+    magrittr::set_rownames(expression_CAF$ligand)
+
+order_tumors = c("HN6", "HN20", "HN26", "HN28", "HN22", "HN25", 
+                 "HN5", "HN18", "HN17", "HN16")
+
+color <- colorRampPalette(rev(brewer.pal(n = 7, name = "RdYlBu")))(100)
+
+ligand_exprs_heatmap <- expression_CAF_mat[order_ligands, order_tumors] %>% 
+    make_heatmap_ggplot(
+        "Prioritized CAF-ligands",
+        "Tumor",
+        color           = color[100],
+        legend_position = "top",
+        x_axis_position = "top",
+        legend_title    = "Expression\n(averaged over\nsingle cells)"
+    ) +
+    theme(axis.text.y = element_text(face = "italic"))
+
+expression_targets <- exprs_mat[malignant_ids, geneset] %>%
+    data.frame() %>%
+    rownames_to_column("cell") %>%
+    tbl_df() %>%
+    inner_join(
+        sample_info %>%
+            select(cell, tumor),
+        by =  "cell"
+    ) %>%
+    group_by(tumor) %>%
+    select(-cell) %>%
+    summarise_all(mean) %>%
+    gather("target", "exprs", -tumor) %>%
+    spread(tumor, exprs)
+
+expression_targets_mat <- expression_targets %>%
+    select(-target) %>%
+    as.matrix() %>%
+    magrittr::set_rownames(expression_targets$target)
+
+targets_exprs_heatmap <- expression_targets_mat %>%
+    t() %>%
+    scale_quantile() %>%
+    .[order_tumors, order_targets] %>%
+    make_threecolor_heatmap_ggplot(
+        "Tumor",
+        "Target",
+        low_color       = color[1],
+        mid_color       = color[50],
+        mid             = 0.5,
+        high_color      = color[100],
+        legend_position = "top",
+        x_axis_position = "top" ,
+        legend_title    = "Scaled expression\n(averaged over\nsingle cells)"
+    ) +
+    theme(axis.text.x = element_text(face = "italic"))
+
+combined_heatmap <- plot_grid(
+    ligand_pearson_heatmap +
+        theme(
+            legend.position = "none",
+            axis.ticks      = element_blank(),
+            axis.title.x    = element_text()
+        ),
+    ligand_exprs_heatmap +
+        ylab("") +
+        theme(
+            legend.position = "none",
+            axis.ticks      = element_blank(),
+            axis.title.x    = element_text()
+        ),
+    ligand_target_heatmap +
+        ylab("") +
+        theme(
+            legend.position = "none",
+            axis.ticks      = element_blank()
+        ), 
+    NULL,
+    NULL,
+    targets_exprs_heatmap +
+        xlab("") +
+        theme(
+            legend.position = "none",
+            axis.ticks      = element_blank()
+        ), 
+    align       = "hv",
+    nrow        = 2,
+    rel_widths  = c(
+        1 + 4.5,
+        ncol(expression_CAF_mat),
+        ncol(vis_ligand_target)
+    ) - 2,
+    rel_heights = c(
+        length(order_ligands),
+        nrow(t(expression_targets_mat)) + 3
+    )
+) 
+
+legends <- plot_grid(
+    as_ggplot(get_legend(ligand_pearson_heatmap)),
+    as_ggplot(get_legend(ligand_exprs_heatmap)),
+    as_ggplot(get_legend(ligand_target_heatmap)),
+    as_ggplot(get_legend(targets_exprs_heatmap)),
+    nrow  = 2,
+    align = "h"
+)
+
+plot_grid(
+    combined_heatmap, 
+    legends, 
+    rel_heights = c(10, 2),
+    nrow        = 2,
+    align       = "hv"
+)
+```
 
 Summary {.unnumbered}
 =======
@@ -368,12 +616,19 @@ This table describes the output files produced by this document. Right click
 and _Save Link As..._ to download the results.
 
 ```{r output}
+write_tsv(ligand_activities, fs::path(OUT_DIR, "ligand_activities.tsv"))
+write_tsv(active_links, fs::path(OUT_DIR, "active_links.tsv"))
+
 kable(data.frame(
     File = c(
-        download_link("parameters.json", OUT_DIR)
+        download_link("parameters.json", OUT_DIR),
+        download_link("ligand_activities.tsv", OUT_DIR),
+        download_link("active_links.tsv", OUT_DIR)
     ),
     Description = c(
-        "Parameters set and used in this analysis"
+        "Parameters set and used in this analysis",
+        "Ligand activites calculated by NicheNet",
+        "Active links between ligands and targets inferred by NicheNet"
     )
 ))
 ```
