@@ -79,6 +79,13 @@
       "Repository": "CRAN",
       "Hash": "0537b6f1f38ea1fd514089192724bb6e"
     },
+    "GlobalOptions": {
+      "Package": "GlobalOptions",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "819f3084d1ec686a6d56b6385ad3280b"
+    },
     "Hmisc": {
       "Package": "Hmisc",
       "Version": "4.4-0",
@@ -390,6 +397,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "a667800d5f0350371bedeb8b8b950289"
+    },
+    "circlize": {
+      "Package": "circlize",
+      "Version": "0.4.9",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c802fa539a646c94720a3f4ceea09e10"
     },
     "class": {
       "Package": "class",
@@ -1659,6 +1673,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "308013098befe37484df72c39cf90d6e"
+    },
+    "shape": {
+      "Package": "shape",
+      "Version": "1.4.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ef692f72a633981cad0d4950a5775702"
     },
     "sitmo": {
       "Package": "sitmo",

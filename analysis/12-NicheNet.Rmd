@@ -25,6 +25,7 @@ library("nichenetr")
 library("RColorBrewer")
 library("cowplot")
 library("ggpubr")
+library("circlize")
 
 conflict_prefer("get_legend", "cowplot")
 ```
@@ -631,25 +632,27 @@ ligands_sel <- "TGFB3"
 targets_sel <- c("TGFBI", "LAMC2", "TNC")
 
 signalling_path <- get_ligand_signaling_path(
-  ligand_tf_matrix  = ligand_targets,
-  ligands_all       = ligands_sel,
-  targets_all       = targets_sel,
-  weighted_networks = weighted_networks
+    ligand_tf_matrix  = ligand_targets,
+    ligands_all       = ligands_sel,
+    targets_all       = targets_sel,
+    weighted_networks = weighted_networks
 )
 
 # Normalise edge weights for visualisation
 signalling_path_minmax     <- signalling_path
 signalling_path_minmax$sig <- signalling_path_minmax$sig %>%
-  mutate(weight = ((weight - min(weight)) / (max(weight) - min(weight))) + 0.75)
+    mutate(weight = ((weight - min(weight)) /
+                         (max(weight) - min(weight))) + 0.75)
 signalling_path_minmax$gr  <- signalling_path_minmax$gr %>%
-  mutate(weight = ((weight - min(weight)) / (max(weight) - min(weight))) + 0.75)
+    mutate(weight = ((weight - min(weight)) /
+                         (max(weight) - min(weight))) + 0.75)
 
 graph_minmax <- diagrammer_format_signaling_graph(
-  signaling_graph_list = signalling_path_minmax,
-  ligands_all          = ligands_sel,
-  targets_all          = targets_sel,
-  sig_color            = "indianred",
-  gr_color             = "steelblue"
+    signaling_graph_list = signalling_path_minmax,
+    ligands_all          = ligands_sel,
+    targets_all          = targets_sel,
+    sig_color            = "indianred",
+    gr_color             = "steelblue"
 )
 
 DiagrammeR::render_graph(graph_minmax, layout = "tree")
@@ -660,13 +663,331 @@ Here are examples of the first few sources.
 
 ```{r pathway-sources}
 path_sources <- infer_supporting_datasources(
-  signaling_graph_list = signalling_path,
-  lr_network           = lr_network,
-  sig_network          = sig_network,
-  gr_network           = gr_network
+    signaling_graph_list = signalling_path,
+    lr_network           = lr_network,
+    sig_network          = sig_network,
+    gr_network           = gr_network
 )
 
 kable(head(path_sources, n = 10))
+```
+
+Gene set prediction
+===================
+
+**NicheNet** can also use the top-ranked ligands to predict whether a gene
+belongs to a gene set. This is done by training a random forest classification
+model that returns a probability for each gene.
+
+```{r geneset-prediction}
+k_folds  <- 3
+n_rounds <- 2
+
+pemt_predictions <- seq(n_rounds) %>%
+    lapply(
+        assess_rf_class_probabilities,
+        folds                      = k_folds,
+        geneset                    = geneset,
+        background_expressed_genes = background_genes,
+        ligands_oi                 = best_ligands,
+        ligand_target_matrix       = ligand_targets
+    )
+```
+
+This returns a list with **`r length(pemt_predictions)`** items. Here is a
+summary of the first item:
+
+`r skim(pemt_predictions[[1]])`
+
+We can then evaluate how well the calculated probabilites match up with the gene
+set assignments.
+
+```{r geneset-prediction-eval}
+prediction_performance <- pemt_predictions %>%
+    lapply(classification_evaluation_continuous_pred_wrapper) %>%
+    bind_rows() %>%
+    mutate(round = seq(1:nrow(.)))
+
+prediction_performance %>%
+    summarise(
+        AUROC   = mean(auroc),
+        AUPR    = mean(aupr),
+        Pearson = mean(pearson)
+    ) %>%
+    kable()
+
+prediction_performance_discrete <- pemt_predictions %>%
+    lapply(calculate_fraction_top_predicted, quantile_cutoff = 0.95) %>%
+    bind_rows() %>%
+    ungroup() %>%
+    mutate(round = rep(1:length(pemt_predictions), each = 2))
+
+pemt_frac <- prediction_performance_discrete %>%
+    filter(true_target) %>%
+    .$fraction_positive_predicted %>%
+    mean()
+
+nonpemt_frac <- prediction_performance_discrete %>%
+    filter(!true_target) %>%
+    .$fraction_positive_predicted %>%
+    mean()
+
+prediction_performance_fisher <- pemt_predictions %>%
+    lapply(calculate_fraction_top_predicted_fisher, quantile_cutoff = 0.95) %>%
+    unlist() %>%
+    mean()
+```
+
+We see that **`r round(pemt_frac * 100)`%** of p-EMT genes are classified as
+being part of the geneset and **`r round(nonpemt_frac * 100)`%** of non-p-EMT
+genes. A Fisher's exact test gives us a p-value of
+**`r prediction_performance_fisher`**.
+
+The following p-EMT genes were correctly predicted in every cross-validation
+round:
+
+```{r geneset-prediction-table}
+seq(length(pemt_predictions)) %>%
+    lapply(get_top_predicted_genes, pemt_predictions) %>%
+    reduce(full_join, by = c("gene", "true_target")) %>%
+    filter(true_target) %>%
+    kable()
+```
+
+Single-cell ligand activities
+=============================
+
+So far we have considered ligand activities for cell types but it is also
+possible to calculate ligand activities for individual cells.
+
+To reduce run time we only perform this analysis on a selection of 10 cells from
+a single tumour.
+
+```{r sc-activities}
+exprs_scaled <- exprs_mat %>%
+    .[malignant_ids, background_genes] %>%
+    scale_quantile()
+
+malignant_hn5_ids <- sample_info %>%
+    filter(tumor == "HN5") %>%
+    filter(`Lymph node` == 0) %>%
+    filter(`classified  as cancer cell` == 1) %>%
+    .$cell %>%
+    head(10)
+
+sc_ligand_activities <- predict_single_cell_ligand_activities(
+    cell_ids             = malignant_hn5_ids,
+    expression_scaled    = exprs_scaled,
+    ligand_target_matrix = ligand_targets,
+    potential_ligands    = potential_ligands
+)
+```
+
+Now that we have activities at the single-cell level they can be linked to other
+properties of cells. Here we score cells on their expression of the core p-EMT
+gene _TGFBI_. This is taken as a proxy for p-EMT activity and correlated with
+the calculated ligand activities. The correlation can be used to rank p-EMT
+inducing ligands.
+
+```{r score-cells}
+cell_scores <- tibble(
+    cell  = malignant_hn5_ids,
+    score = exprs_scaled[malignant_hn5_ids, "TGFBI"]
+)
+
+sc_ligand_activities_norm <- normalize_single_cell_ligand_activities(
+    sc_ligand_activities
+)
+
+correlations <- single_ligand_activity_score_regression(
+    sc_ligand_activities_norm,
+    cell_scores
+)
+
+skim(correlations)
+
+correlations %>%
+    arrange(-pearson_regression) %>%
+    select(ligand, pearson_regression) %>%
+    head() %>%
+    kable()
+
+inner_join(cell_scores, sc_ligand_activities_norm) %>%
+    ggplot(aes(score, TNC)) +
+    geom_point() +
+    geom_smooth(method = "lm")
+```
+
+Circos plots
+============
+
+An alternative way to visualise interactions is using a Circos plot.
+
+```{r circos, eval = FALSE, include = FALSE}
+endothelial_ids <- sample_info %>%
+    filter(
+        `Lymph node` == 0 &
+            !(tumor %in% tumours_remove) &
+            `non-cancer cell type` == "Endothelial"
+    ) %>%
+    pull(cell)
+
+ligand_exprs <- tibble(
+    ligand      = best_ligands, 
+    CAF         = exprs_mat[CAF_ids, best_ligands] %>%
+        apply(2, function(x) {10 * (2 ** x - 1)}) %>%
+        apply(2, function(x) {log2(mean(x) + 1)}),
+    endothelial = exprs_mat[endothelial_ids, best_ligands] %>%
+        apply(2, function(x) {10 * (2 ** x - 1)}) %>%
+        apply(2, function(x) {log2(mean(x) + 1)})
+)
+
+CAF_ligands <- ligand_exprs %>%
+    filter(CAF > endothelial + 2) %>%
+    pull(ligand)
+endothelial_ligands <- ligand_exprs %>%
+    filter(endothelial > CAF + 2) %>%
+    pull(ligand)
+general_ligands <- setdiff(best_ligands, c(CAF_ligands, endothelial_ligands))
+
+ligand_types <- tibble(
+    ligand_type = c(
+        rep("CAF-specific", times = CAF_ligands %>% length()),
+        rep("General", times = general_ligands %>% length()),
+        rep("Endothelial-specific", times = endothelial_ligands %>% length())
+    ),
+    ligand = c(CAF_ligands, general_ligands, endothelial_ligands)
+)
+
+cutoff_ligands <- active_links$weight %>% quantile(0.66)
+
+active_links_circos <- active_links %>%
+    filter(weight > cutoff_ligands)
+
+ligands_remove <- setdiff(
+    active_links$ligand %>% unique(),
+    active_links_circos$ligand %>% unique()
+)
+targets_remove <- setdiff(
+    active_links$target %>% unique(),
+    active_links_circos$target %>% unique()
+)
+  
+circos_links <- active_links %>%
+    inner_join(ligand_types) %>%
+    mutate(target_type = "p_emt") %>%
+    filter(
+        !target %in% targets_remove &
+            !ligand %in% ligands_remove
+    )
+
+grid_col_ligand <- c(
+    "General"              = "lawngreen",
+    "CAF-specific"         = "royalblue",
+    "Endothelial-specific" = "gold"
+)
+grid_col_target <- c("p_emt" = "tomato")
+
+grid_col_tbl_ligand <- tibble(
+    ligand_type       = grid_col_ligand %>% names(),
+    color_ligand_type = grid_col_ligand
+)
+grid_col_tbl_target <- tibble(
+    target_type       = grid_col_target %>% names(),
+    color_target_type = grid_col_target
+)
+
+circos_links <- circos_links %>%
+    mutate(ligand = paste(ligand," ")) %>%
+    inner_join(grid_col_tbl_ligand) %>%
+    inner_join(grid_col_tbl_target)
+links_circle <- circos_links %>% select(ligand, target, weight)
+
+ligand_color <- circos_links %>% distinct(ligand, color_ligand_type)
+grid_ligand_color <- ligand_color$color_ligand_type %>%
+    set_names(ligand_color$ligand)
+target_color <- circos_links %>% distinct(target, color_target_type)
+grid_target_color <- target_color$color_target_type %>%
+    set_names(target_color$target)
+
+grid_col <- c(grid_ligand_color, grid_target_color)
+
+transparency <- circos_links %>%
+    mutate(weight = (weight - min(weight)) / (max(weight) - min(weight))) %>%
+    mutate(transparency = 1 - weight) %>%
+    .$transparency
+
+target_order <- circos_links$target %>% unique()
+ligand_order <- c(
+    CAF_ligands,
+    general_ligands,
+    endothelial_ligands) %>%
+    c(paste(.," ")) %>%
+    intersect(circos_links$ligand)
+order <- c(ligand_order, target_order)
+
+width_same_cell_same_ligand_type <- 0.5
+width_different_cell <- 6
+width_ligand_target <- 15
+width_same_cell_same_target_type <- 0.5
+
+gaps <- c(
+    # width_ligand_target,
+    rep(
+        width_same_cell_same_ligand_type,
+        times = circos_links %>%
+            filter(ligand_type == "CAF-specific") %>%
+            distinct(ligand) %>%
+            nrow() - 1
+    ),
+    width_different_cell,
+    rep(
+        width_same_cell_same_ligand_type,
+        times = circos_links %>%
+            filter(ligand_type == "General") %>%
+            distinct(ligand) %>%
+            nrow() - 1
+    ),
+    width_different_cell,
+    rep(
+        width_same_cell_same_ligand_type,
+        times = max(circos_links %>%
+            filter(ligand_type == "Endothelial-specific") %>%
+            distinct(ligand) %>%
+            nrow() - 1, 1)
+    ), 
+    width_ligand_target,
+    rep(
+        width_same_cell_same_target_type,
+        times = circos_links %>%
+            filter(target_type == "p_emt") %>%
+            distinct(target) %>%
+            nrow() -1
+    ),
+    width_ligand_target
+)
+
+circos.par(gap.degree = gaps)
+chordDiagram(
+    links_circle,
+    directional       = 1,
+    order             = order,
+    # link.sort         = TRUE,
+    # link.decreasing   = FALSE,
+    # grid.col          = grid_col,
+    # transparency      = 0,
+    # diffHeight        = 0.005,
+    # direction.type    = c("diffHeight", "arrows"),
+    # link.arr.type     = "big.arrow",
+    # link.visible      = links_circle$weight >= cutoff_ligands,
+    # annotationTrack   = "grid", 
+    # preAllocateTracks = list(track.height = 0.075)
+)
+# we go back to the first track and customize sector labels
+circos.track(track.index = 1, panel.fun = function(x, y) {
+    circos.text(CELL_META$xcenter, CELL_META$ylim[1], CELL_META$sector.index,
+        facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.55), cex = 1)
+}, bg.border = NA) #
 ```
 
 Summary {.unnumbered}
