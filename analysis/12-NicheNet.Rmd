@@ -59,11 +59,36 @@ Ligand-receptor network
 
 This is a database of ligand-receptor pairs with information about their source.
 
-```{r input-network}
+```{r input-lr-network}
 # From https://zenodo.org/record/3260758/files/lr_network.rds
 lr_network <- read_rds(fs::path(PATHS$NicheNet_in, "lr_network.Rds"))
 
 skim(lr_network)
+```
+
+Gene-receptor network
+---------------------
+
+This is a database of gene-receptor pairs with information about their source.
+
+```{r input-gr-network}
+# From https://zenodo.org/record/3260758/files/gr_network.rds
+gr_network <- read_rds(fs::path(PATHS$NicheNet_in, "gr_network.Rds"))
+
+skim(gr_network)
+```
+
+Signalling network
+------------------
+
+This is a database of signalling interactions with information about their
+source.
+
+```{r input-sig-network}
+# From https://zenodo.org/record/3260758/files/signaling_network.rds
+sig_network <- read_rds(fs::path(PATHS$NicheNet_in, "signaling_network.Rds"))
+
+skim(sig_network)
 ```
 
 Network weights
@@ -591,6 +616,57 @@ plot_grid(
     nrow        = 2,
     align       = "hv"
 )
+```
+
+Signalling paths
+================
+
+**NicheNet** can also be used to infer the signalling paths between a ligands
+and targets of interest. This is done by looking at which transcription factors
+regulating the target are most closely downstream of the ligand. The pathway is
+confirmed by looking at the signalling database.
+
+```{r pathway}
+ligands_sel <- "TGFB3"
+targets_sel <- c("TGFBI", "LAMC2", "TNC")
+
+signalling_path <- get_ligand_signaling_path(
+  ligand_tf_matrix  = ligand_targets,
+  ligands_all       = ligands_sel,
+  targets_all       = targets_sel,
+  weighted_networks = weighted_networks
+)
+
+# Normalise edge weights for visualisation
+signalling_path_minmax     <- signalling_path
+signalling_path_minmax$sig <- signalling_path_minmax$sig %>%
+  mutate(weight = ((weight - min(weight)) / (max(weight) - min(weight))) + 0.75)
+signalling_path_minmax$gr  <- signalling_path_minmax$gr %>%
+  mutate(weight = ((weight - min(weight)) / (max(weight) - min(weight))) + 0.75)
+
+graph_minmax <- diagrammer_format_signaling_graph(
+  signaling_graph_list = signalling_path_minmax,
+  ligands_all          = ligands_sel,
+  targets_all          = targets_sel,
+  sig_color            = "indianred",
+  gr_color             = "steelblue"
+)
+
+DiagrammeR::render_graph(graph_minmax, layout = "tree")
+```
+
+We can also look at which data sources support the interactions in this network.
+Here are examples of the first few sources.
+
+```{r pathway-sources}
+path_sources <- infer_supporting_datasources(
+  signaling_graph_list = signalling_path,
+  lr_network           = lr_network,
+  sig_network          = sig_network,
+  gr_network           = gr_network
+)
+
+kable(head(path_sources, n = 10))
 ```
 
 Summary {.unnumbered}
