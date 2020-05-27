@@ -1,0 +1,3615 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>NicheNet example</title>
+
+<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/viz-1.8.2/viz.js"></script>
+<link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="site_libs/grViz-binding-1.0.5/grViz.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Interaction tools</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/lazappi/interaction-tools">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">NicheNet example</h1>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-05-27
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>interaction-tools/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20191213code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20191213)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20191213code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20191213)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree749bd0242f7da81223b7210a0f2402ce5cc58596targetblank749bd02a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/749bd0242f7da81223b7210a0f2402ce5cc58596" target="_blank">749bd02</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree749bd0242f7da81223b7210a0f2402ce5cc58596targetblank749bd02a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/749bd0242f7da81223b7210a0f2402ce5cc58596" target="_blank">749bd02</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    .drake/
+    Ignored:    data/NicheNet/
+    Ignored:    data/cellphonedb/
+    Ignored:    renv/library/
+    Ignored:    renv/python/
+    Ignored:    renv/staging/
+
+Untracked files:
+    Untracked:  output/12-NicheNet.Rmd/
+
+Unstaged changes:
+    Modified:   _drake.R
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/12-NicheNet.Rmd</code>) and HTML (<code>docs/12-NicheNet.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/749bd0242f7da81223b7210a0f2402ce5cc58596/analysis/12-NicheNet.Rmd" target="_blank">749bd02</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-26
+</td>
+<td>
+Added remaining NicheNet examples
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/7fbd88f7374363d024e65916c978418e7c9081c9/analysis/12-NicheNet.Rmd" target="_blank">7fbd88f</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-26
+</td>
+<td>
+Add signalling pathway to NicheNet
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/701ded48d25a9cd7c5613a5ae035cebeeb26a917/analysis/12-NicheNet.Rmd" target="_blank">701ded4</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-19
+</td>
+<td>
+Add rest of main NicheNet tutorial
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/0cf961b04674956fbbabfb4ded5a910d72a84d1d/analysis/12-NicheNet.Rmd" target="_blank">0cf961b</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-18
+</td>
+<td>
+Add most of first NicheNet tutorial
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/58b31437e5d9b4c273d0b17d77d645002dec51fe/analysis/12-NicheNet.Rmd" target="_blank">58b3143</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-08
+</td>
+<td>
+Set up NicheNet example file
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code># Setup document
+source(here::here(&quot;code&quot;, &quot;setup.R&quot;))
+
+# Function dependencies
+invisible(drake::readd(download_link))</code></pre>
+<div id="introduction" class="section level1 unnumbered" number="">
+<h1 class="unnumbered" number="">Introduction</h1>
+<p>In this document we are going to run through the example analysis for the <strong>NicheNet</strong> tool and have a look at the output it produces. More information about <strong>NicheNet</strong> can be found at <a href="https://github.com/saeyslab/nichenetr" class="uri">https://github.com/saeyslab/nichenetr</a>.</p>
+<pre class="r"><code>library(&quot;nichenetr&quot;)
+library(&quot;RColorBrewer&quot;)
+library(&quot;cowplot&quot;)
+library(&quot;ggpubr&quot;)
+library(&quot;circlize&quot;)
+
+conflict_prefer(&quot;get_legend&quot;, &quot;cowplot&quot;)</code></pre>
+</div>
+<div id="input" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Input</h1>
+<p><strong>NicheNet</strong> takes several inputs for different parts of the analysis. These include a matrix of ligand targets, a ligand-receptor network, network weights, an scRNA-seq dataset and a gene set of interest.</p>
+<div id="ligand-target-matrix" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Ligand-target matrix</h2>
+<p>This matrix contains the prior potential that a particular ligand might regulate the expression of a specific target gene. Here is a snippet of the matrix:</p>
+<pre class="r"><code># From https://zenodo.org/record/3260758/files/ligand_target_matrix.rds
+ligand_targets &lt;- read_rds(
+    fs::path(PATHS$NicheNet_in, &quot;ligand_target_matrix.Rds&quot;)
+)
+
+pander(ligand_targets[1:5, 1:5])</code></pre>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">CXCL1</th>
+<th align="center">CXCL2</th>
+<th align="center">CXCL3</th>
+<th align="center">CXCL5</th>
+<th align="center">PPBP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>A1BG</strong></td>
+<td align="center">0.0003534</td>
+<td align="center">0.0004041</td>
+<td align="center">0.000373</td>
+<td align="center">0.0003081</td>
+<td align="center">0.0002628</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>A1BG-AS1</strong></td>
+<td align="center">0.0001651</td>
+<td align="center">0.0001509</td>
+<td align="center">0.0001584</td>
+<td align="center">0.0001317</td>
+<td align="center">0.0001232</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>A1CF</strong></td>
+<td align="center">0.0005787</td>
+<td align="center">0.0004596</td>
+<td align="center">0.0003896</td>
+<td align="center">0.0003293</td>
+<td align="center">0.0003212</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>A2M</strong></td>
+<td align="center">0.0006027</td>
+<td align="center">0.0005997</td>
+<td align="center">0.0005164</td>
+<td align="center">0.0004517</td>
+<td align="center">0.0004591</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>A2M-AS1</strong></td>
+<td align="center">8.899e-05</td>
+<td align="center">8.243e-05</td>
+<td align="center">7.484e-05</td>
+<td align="center">4.913e-05</td>
+<td align="center">5.12e-05</td>
+</tr>
+</tbody>
+</table>
+<p>The full matrix has <strong>25345</strong> rows (targets) and <strong>688</strong> columns (ligands).</p>
+</div>
+<div id="ligand-receptor-network" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Ligand-receptor network</h2>
+<p>This is a database of ligand-receptor pairs with information about their source.</p>
+<pre class="r"><code># From https://zenodo.org/record/3260758/files/lr_network.rds
+lr_network &lt;- read_rds(fs::path(PATHS$NicheNet_in, &quot;lr_network.Rds&quot;))
+
+skim(lr_network)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">lr_network</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">12651</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">from</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">688</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">to</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">857</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">source</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">18</td>
+<td align="right">0</td>
+<td align="right">14</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">database</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">18</td>
+<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gene-receptor-network" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> Gene-receptor network</h2>
+<p>This is a database of gene-receptor pairs with information about their source.</p>
+<pre class="r"><code># From https://zenodo.org/record/3260758/files/gr_network.rds
+gr_network &lt;- read_rds(fs::path(PATHS$NicheNet_in, &quot;gr_network.Rds&quot;))
+
+skim(gr_network)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">gr_network</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">3592299</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">from</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">4486</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">to</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">22</td>
+<td align="right">0</td>
+<td align="right">25103</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">source</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">40</td>
+<td align="right">0</td>
+<td align="right">20</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">database</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="right">25</td>
+<td align="right">0</td>
+<td align="right">8</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="signalling-network" class="section level2" number="1.4">
+<h2 number="1.4"><span class="header-section-number">1.4</span> Signalling network</h2>
+<p>This is a database of signalling interactions with information about their source.</p>
+<pre class="r"><code># From https://zenodo.org/record/3260758/files/signaling_network.rds
+sig_network &lt;- read_rds(fs::path(PATHS$NicheNet_in, &quot;signaling_network.Rds&quot;))
+
+skim(sig_network)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">sig_network</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">3621987</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">from</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">18550</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">to</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">18068</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">source</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">12</td>
+<td align="right">42</td>
+<td align="right">0</td>
+<td align="right">23</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">database</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">24</td>
+<td align="right">0</td>
+<td align="right">7</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="network-weights" class="section level2" number="1.5">
+<h2 number="1.5"><span class="header-section-number">1.5</span> Network weights</h2>
+<pre class="r"><code># From https://zenodo.org/record/3260758/files/weighted_networks.rds
+weighted_networks &lt;- read_rds(
+    fs::path(PATHS$NicheNet_in, &quot;weighted_networks.Rds&quot;)
+)</code></pre>
+<p>This is a list with <strong>2</strong> items: <strong>lr_sig</strong> and <strong>gr</strong>.</p>
+<div id="ligand-receptor" class="section level3" number="1.5.1">
+<h3 number="1.5.1"><span class="header-section-number">1.5.1</span> Ligand-receptor</h3>
+<pre class="r"><code>skim(weighted_networks$lr_sig)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">weighted_networks$lr_sig</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">2476577</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">from</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">18553</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">to</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">18077</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">weight</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.12</td>
+<td align="right">0.1</td>
+<td align="right">0</td>
+<td align="right">0.06</td>
+<td align="right">0.09</td>
+<td align="right">0.13</td>
+<td align="right">3.89</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gene-receptor" class="section level3" number="1.5.2">
+<h3 number="1.5.2"><span class="header-section-number">1.5.2</span> Gene-receptor</h3>
+<pre class="r"><code>skim(weighted_networks$gr)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">weighted_networks$gr</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">2912482</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">from</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">4486</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">to</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">22</td>
+<td align="right">0</td>
+<td align="right">25103</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">weight</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.03</td>
+<td align="right">0.03</td>
+<td align="right">0</td>
+<td align="right">0.01</td>
+<td align="right">0.02</td>
+<td align="right">0.05</td>
+<td align="right">1.28</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="expression-data" class="section level2" number="1.6">
+<h2 number="1.6"><span class="header-section-number">1.6</span> Expression data</h2>
+<p>The example dataset is from cancer-associated fibroblasts (CAFs) in the head and neck squamous cell carcinoma (HNSCC) tumour microenvironment.</p>
+<pre class="r"><code># From https://zenodo.org/record/3260758/files/hnscc_expression.rds
+hnscc &lt;- read_rds(fs::path(PATHS$NicheNet_in, &quot;hnscc_expression.Rds&quot;))</code></pre>
+<p>This dataset is provided as a list with <strong>3 items: </strong>expression<strong>, </strong>sample_info** and <strong>expressed_genes</strong>.</p>
+<div id="expression-matrix" class="section level3" number="1.6.1">
+<h3 number="1.6.1"><span class="header-section-number">1.6.1</span> Expression matrix</h3>
+<p>The first item is the expression matrix.</p>
+<pre class="r"><code>exprs_mat &lt;- hnscc$expression
+
+pander(exprs_mat[1:5, 1:5])</code></pre>
+<table>
+<colgroup>
+<col width="37%" />
+<col width="14%" />
+<col width="10%" />
+<col width="11%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">C9orf152</th>
+<th align="center">RPS11</th>
+<th align="center">ELMO2</th>
+<th align="center">CREB3L1</th>
+<th align="center">PNMA1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>HN28_P15_D06_S330_comb</strong></td>
+<td align="center">0</td>
+<td align="center">6.004</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">5.147</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>HN28_P6_G05_S173_comb</strong></td>
+<td align="center">0</td>
+<td align="center">7.301</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">5.333</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>HN26_P14_D11_S239_comb</strong></td>
+<td align="center">0.4276</td>
+<td align="center">7.288</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">2.834</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>HN26_P14_H05_S281_comb</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">5.247</td>
+<td align="center">0</td>
+<td align="center">5.751</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>HN26_P25_H09_S189_comb</strong></td>
+<td align="center">0</td>
+<td align="center">7.474</td>
+<td align="center">0.5049</td>
+<td align="center">0</td>
+<td align="center">0.1966</td>
+</tr>
+</tbody>
+</table>
+<p>The expression matrix has <strong>5902</strong> rows (cells) and <strong>23686</strong> columns (genes).</p>
+</div>
+<div id="sample-information" class="section level3" number="1.6.2">
+<h3 number="1.6.2"><span class="header-section-number">1.6.2</span> Sample information</h3>
+<p>There is also some metadata about the cells.</p>
+<pre class="r"><code>sample_info &lt;- hnscc$sample_info
+
+skim(sample_info)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">sample_info</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">5902</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">7</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">7</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">processed by Maxima enzyme</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Lymph node</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">classified as cancer cell</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">classified as non-cancer cells</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">non-cancer cell type</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">13</td>
+<td align="right">0</td>
+<td align="right">12</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">cell</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">16</td>
+<td align="right">33</td>
+<td align="right">0</td>
+<td align="right">5902</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">tumor</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">18</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="expressed-genes" class="section level3" number="1.6.3">
+<h3 number="1.6.3"><span class="header-section-number">1.6.3</span> Expressed genes</h3>
+<p>The final item is a vector of the names of expressed genes.</p>
+<pre class="r"><code>skim(hnscc$expressed_genes)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">hnscc$expressed_genes</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">7374</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">data</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">13</td>
+<td align="right">0</td>
+<td align="right">7374</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="gene-set" class="section level2" number="1.7">
+<h2 number="1.7"><span class="header-section-number">1.7</span> Gene set</h2>
+<p>Because we are looking at how CAFs influence cancer growth we will use a signature for p-EMT.</p>
+<pre class="r"><code># From https://zenodo.org/record/3260758/files/pemt_signature.txt
+geneset &lt;- read_tsv(
+    fs::path(PATHS$NicheNet_in, &quot;pemt_signature.txt&quot;),
+    col_types = cols(
+        gene = col_character()
+    ),
+    col_names = &quot;gene&quot;
+) %&gt;%
+    pull(gene) %&gt;%
+    .[. %in% rownames(ligand_targets)]
+
+skim(geneset)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">geneset</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">96</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">data</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">96</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="define-expressed-genes" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Define expressed genes</h1>
+<p>The first step in the analysis is to define which genes are expressed in the sender and receiver cell populations. In this example the CAFs are defined to be the senders and tumour cells (from high quality tumours) are defined to be receivers.</p>
+<p>We also need to set a threshold for deciding a gene is “expressed”. Here we use the following formula:</p>
+<p><span class="math display">\[Ea_i = log_2((\frac{1}{k}\sum_{i = 1}^{k} TPM_i) + 1) &gt;= 4\]</span></p>
+<blockquote>
+<p><strong>NOTE:</strong> For UMI data (10x Chromium) the authors don’t use this formula and instead suggest a threshold of non-zero expression in at least 10% of cells.</p>
+</blockquote>
+<pre class="r"><code># Low-quality tumours to remove
+tumours_remove &lt;- c(&quot;HN10&quot;, &quot;HN&quot;, &quot;HN12&quot;, &quot;HN13&quot;, &quot;HN24&quot;, &quot;HN7&quot;, &quot;HN8&quot;, &quot;HN23&quot;)
+
+CAF_ids &lt;- sample_info %&gt;%
+    filter(
+        `Lymph node` == 0 &amp;
+            !(tumor %in% tumours_remove) &amp;
+            `non-cancer cell type` == &quot;CAF&quot;
+    ) %&gt;%
+    pull(cell)
+
+malignant_ids &lt;- sample_info %&gt;%
+    filter(
+        `Lymph node` == 0 &amp;
+            !(tumor %in% tumours_remove) &amp;
+            `classified  as cancer cell` == 1
+    ) %&gt;%
+    pull(cell)
+
+expressed_sender &lt;- exprs_mat[CAF_ids, ] %&gt;%
+    apply(2, function(x) {10 * (2 ** x - 1)}) %&gt;%
+    apply(2, function(x) {log2(mean(x) + 1)}) %&gt;%
+    .[. &gt;= 4] %&gt;%
+    names()
+expressed_receiver &lt;- exprs_mat[malignant_ids, ] %&gt;%
+    apply(2, function(x) {10 * (2 ** x - 1)}) %&gt;% 
+    apply(2, function(x) {log2(mean(x) + 1)}) %&gt;%
+    .[. &gt;= 4] %&gt;%
+    names()</code></pre>
+<p>After this quality control we have selected <strong>404</strong> CAFs (senders) and <strong>1388</strong> tumour cells (receivers). There are <strong>6706</strong> genes expressed in the sender cells and <strong>6351</strong> genes expressed in the receiver cells.</p>
+</div>
+<div id="background-genes" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Background genes</h1>
+<p>We already have the gene set of interest that we want to look at but we also need to define a background set of genes. For this we use all genes expressed in the malignant (receiver) cells which are also in the ligand-target matrix.</p>
+<pre class="r"><code>background_genes &lt;- expressed_receiver %&gt;%
+    .[. %in% rownames(ligand_targets)]</code></pre>
+<p>This gives us a set of <strong>6072</strong> background genes.</p>
+</div>
+<div id="potential-ligands" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Potential ligands</h1>
+<p>We determine a set of potential ligands by selection those that are expressed by CAFs (sender) and bind a receptor expressed in malignant cells (receiver).</p>
+<pre class="r"><code>ligands &lt;- lr_network %&gt;%
+    pull(from) %&gt;%
+    unique()
+
+expressed_ligands &lt;- intersect(ligands, expressed_sender)
+
+receptors &lt;- lr_network %&gt;%
+    pull(to) %&gt;%
+    unique()
+
+expressed_receptors &lt;- intersect(receptors, expressed_receiver)
+
+lr_network_expressed &lt;- lr_network %&gt;%
+    filter(
+        from %in% expressed_ligands &amp;
+            to %in% expressed_receptors
+    )
+
+potential_ligands &lt;- lr_network_expressed %&gt;%
+    pull(from) %&gt;%
+    unique()</code></pre>
+<p>The filtered database contains <strong>565</strong> expressed ligand-receptor pairs with <strong>131</strong> potential ligands.</p>
+</div>
+<div id="ligand-activity-analysis" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Ligand activity analysis</h1>
+<p>Now we have all the input data sorted we can run <strong>NicheNet</strong>. The first analysis assesses ligand activity by calculating how well each CAF-ligand can predict that a gene belongs to the p-EMT gene set compared to the background genes.</p>
+<pre class="r"><code>ligand_activities &lt;- predict_ligand_activities(
+    geneset                    = geneset, 
+    background_expressed_genes = background_genes,
+    ligand_target_matrix       = ligand_targets,
+    potential_ligands          = potential_ligands
+)
+
+skim(ligand_activities)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">ligand_activities</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">131</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">test_ligand</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">8</td>
+<td align="right">0</td>
+<td align="right">131</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">auroc</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.66</td>
+<td align="right">0.03</td>
+<td align="right">0.53</td>
+<td align="right">0.64</td>
+<td align="right">0.66</td>
+<td align="right">0.67</td>
+<td align="right">0.72</td>
+<td align="left">▁▁▂▇▁</td>
+</tr>
+<tr class="even">
+<td align="left">aupr</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.03</td>
+<td align="right">0.01</td>
+<td align="right">0.02</td>
+<td align="right">0.03</td>
+<td align="right">0.03</td>
+<td align="right">0.04</td>
+<td align="right">0.07</td>
+<td align="left">▃▇▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">pearson</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.07</td>
+<td align="right">0.02</td>
+<td align="right">0.01</td>
+<td align="right">0.06</td>
+<td align="right">0.07</td>
+<td align="right">0.08</td>
+<td align="right">0.13</td>
+<td align="left">▁▂▇▅▂</td>
+</tr>
+</tbody>
+</table>
+<p>There are various scores given as results here but the authors suggest using the Pearson correlation to select ligands. We select 20 ligands with highest correlation.</p>
+<pre class="r"><code>best_ligands &lt;- ligand_activities %&gt;%
+    top_n(20, pearson) %&gt;%
+    arrange(-pearson) %&gt;%
+    pull(test_ligand)</code></pre>
+<p>These ligands are: <strong>PTHLH</strong>, <strong>CXCL12</strong>, <strong>AGT</strong>, <strong>TGFB3</strong>, <strong>IL6</strong>, <strong>INHBA</strong>, <strong>ADAM17</strong>, <strong>TNC</strong>, <strong>CTGF</strong>, <strong>FN1</strong>, <strong>BMP5</strong>, <strong>IL24</strong>, <strong>CXCL11</strong>, <strong>MMP9</strong>, <strong>COL4A1</strong>, <strong>PSEN1</strong>, <strong>CXCL9</strong>, <strong>VCAM1</strong>, <strong>CXCL2</strong> and <strong>SEMA5A</strong></p>
+<p>The choice of to use 20 ligands is somewhat arbitary and is likely to be different for different settings. For a real analysis the authors suggest choosing a threshold by looking at the distribution of correlations.</p>
+<pre class="r"><code>pearson_thresh &lt;- ligand_activities %&gt;%
+    top_n(20, pearson) %&gt;%
+    pull(pearson) %&gt;%
+    min()
+
+ggplot(ligand_activities, aes(x = pearson)) + 
+    geom_histogram(color = &quot;black&quot;, fill = &quot;darkorange&quot;)  +
+    geom_vline(
+        xintercept = pearson_thresh,
+        color      = &quot;red&quot;,
+        linetype   = &quot;dashed&quot;,
+        size       = 1
+    ) + 
+    labs(
+        x = &quot;ligand activity (PCC)&quot;,
+        y = &quot;# ligands&quot;
+    ) +
+    theme_classic()</code></pre>
+<p><img src="figure/12-NicheNet.Rmd/activity-plot-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="infer-target-genes" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> Infer target genes</h1>
+<p>Once we have a set of active ligands we can look at the regulatory potential between ligands and downstream targets. We only look at interactions between the top 20 ligands and genes that belong to the gene set and are in the top 250 most strongly predicted targets of one of the selected ligands. The targets are selected based on predictions in the general prior model so are not specific to this dataset. Genes that are not a top target of one of the selected ligands will not be shown.</p>
+<pre class="r"><code>active_links &lt;- best_ligands %&gt;%
+    lapply(
+        get_weighted_ligand_target_links,
+        geneset              = geneset,
+        ligand_target_matrix = ligand_targets,
+        n                    = 250
+    ) %&gt;%
+    bind_rows()
+
+skim(active_links)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">active_links</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">143</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ligand</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">20</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">target</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">31</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">weight</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.01</td>
+<td align="left">▇▃▁▂▁</td>
+</tr>
+</tbody>
+</table>
+<p>For visualisation potential scores are set to zero if they were below the 0.25 quantile for top targets of that ligand in the ligand-target matrix.</p>
+<pre class="r"><code>links_mat &lt;- prepare_ligand_target_visualization(
+    ligand_target_df     = active_links,
+    ligand_target_matrix = ligand_targets,
+    cutoff               = 0.25
+)
+
+order_ligands &lt;- intersect(best_ligands, colnames(links_mat)) %&gt;% rev()
+order_targets &lt;- active_links$target %&gt;% unique()
+
+vis_ligand_target &lt;- links_mat[order_targets, order_ligands] %&gt;% t()
+
+ligand_target_heatmap &lt;- vis_ligand_target %&gt;%
+    make_heatmap_ggplot(
+        &quot;Prioritized CAF-ligands&quot;,
+        &quot;p-EMT genes in malignant cells&quot;,
+        color           = &quot;purple&quot;,
+        legend_position = &quot;top&quot;,
+        x_axis_position = &quot;top&quot;,
+        legend_title    = &quot;Regulatory potential&quot;
+    ) +
+    scale_fill_gradient2(
+        low    = &quot;whitesmoke&quot;,
+        high   = &quot;purple&quot;,
+        breaks = c(0,0.005,0.01)
+    ) +
+    theme(axis.text.x = element_text(face = &quot;italic&quot;))
+
+ligand_target_heatmap</code></pre>
+<p><img src="figure/12-NicheNet.Rmd/target-heatmap-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>The cutoffs for visualisation are arbitary and the authors suggest testing several cutoffs. Considering more targets would identify more interactions but with less confidence. Lowering the quantil cutoff would result in a denser heatmap.</p>
+</div>
+<div id="ligand-receptor-network-1" class="section level1" number="7">
+<h1 number="7"><span class="header-section-number">7</span> Ligand-receptor network</h1>
+<p>A further analysis is to look at the interactions between ligands and receptors rather than downstream targets.</p>
+<pre class="r"><code>lr_network_top &lt;- lr_network %&gt;%
+    filter(
+        from %in% best_ligands &amp;
+            to %in% expressed_receptors
+    ) %&gt;%
+    distinct(from, to)
+
+best_receptors &lt;- lr_network_top %&gt;%
+    pull(to) %&gt;%
+    unique()
+
+lr_network_top &lt;- weighted_networks$lr_sig %&gt;%
+    filter(
+        from %in% best_ligands &amp;
+            to %in% best_receptors
+    ) %&gt;%
+    spread(&quot;from&quot;, &quot;weight&quot;, fill = 0)
+
+lr_network_top_mat &lt;- lr_network_top %&gt;%
+    select(-to) %&gt;%
+    as.matrix() %&gt;%
+    magrittr::set_rownames(lr_network_top$to)
+
+dist_receptors   &lt;- dist(lr_network_top_mat, method = &quot;binary&quot;)
+hclust_receptors &lt;- hclust(dist_receptors, method = &quot;ward.D2&quot;)
+order_receptors  &lt;- hclust_receptors$labels[hclust_receptors$order]
+
+dist_ligands            &lt;- dist(lr_network_top_mat %&gt;% t(), method = &quot;binary&quot;)
+hclust_ligands          &lt;- hclust(dist_ligands, method = &quot;ward.D2&quot;)
+order_ligands_receptors &lt;- hclust_ligands$labels[hclust_ligands$order]
+
+ligand_receptor_heatmap &lt;-
+    lr_network_top_mat[order_receptors, order_ligands_receptors] %&gt;%
+    t() %&gt;%
+    make_heatmap_ggplot(
+        &quot;Prioritized CAF-ligands&quot;,
+        &quot;Receptors expressed by malignant cells&quot;,
+        color           = &quot;mediumvioletred&quot;,
+        x_axis_position = &quot;top&quot;,
+        legend_title    = &quot;Prior interaction potential&quot;
+    ) +
+    theme()
+
+ligand_receptor_heatmap</code></pre>
+<p><img src="figure/12-NicheNet.Rmd/lr-network-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="combined-heatmap-with-expression" class="section level1" number="8">
+<h1 number="8"><span class="header-section-number">8</span> Combined heatmap (with expression)</h1>
+<p><strong>NicheNet</strong> only considers expressed ligands but does not use their expression when ranking them, the ranking is only based on potential for regulation given prior knowledge. Here we make a combined heatmap that shows expression alongside regulatory potential.</p>
+<pre class="r"><code>ligand_pearson_matrix &lt;- ligand_activities %&gt;%
+    select(pearson) %&gt;%
+    as.matrix() %&gt;%
+    magrittr::set_rownames(ligand_activities$test_ligand)
+
+ligand_pearson_heatmap &lt;- ligand_pearson_matrix[order_ligands, ] %&gt;%
+    as.matrix(ncol = 1) %&gt;%
+    magrittr::set_colnames(&quot;Pearson&quot;) %&gt;%
+    make_heatmap_ggplot(
+        &quot;Prioritized CAF-ligands&quot;,
+        &quot;Ligand activity&quot;,
+        color           = &quot;darkorange&quot;,
+        legend_position = &quot;top&quot;,
+        x_axis_position = &quot;top&quot;,
+        legend_title    = paste(
+            &quot;Pearson correlation coefficient,&quot;,
+            &quot;(target gene prediction ability)&quot;,
+            collapse = &quot;\n&quot;
+        )
+    )
+
+expression_CAF &lt;- exprs_mat[CAF_ids, order_ligands] %&gt;%
+    data.frame() %&gt;%
+    rownames_to_column(&quot;cell&quot;) %&gt;%
+    tbl_df() %&gt;%
+    inner_join(
+        sample_info %&gt;%
+            select(cell,tumor),
+        by =  &quot;cell&quot;
+    ) %&gt;%
+    group_by(tumor) %&gt;%
+    select(-cell) %&gt;%
+    summarise_all(mean) %&gt;%
+    gather(&quot;ligand&quot;, &quot;exprs&quot;, -tumor) %&gt;%
+    spread(tumor, exprs)
+    
+expression_CAF_mat &lt;- expression_CAF %&gt;%
+    select(-ligand) %&gt;%
+    as.matrix() %&gt;%
+    magrittr::set_rownames(expression_CAF$ligand)
+
+order_tumors = c(&quot;HN6&quot;, &quot;HN20&quot;, &quot;HN26&quot;, &quot;HN28&quot;, &quot;HN22&quot;, &quot;HN25&quot;, 
+                 &quot;HN5&quot;, &quot;HN18&quot;, &quot;HN17&quot;, &quot;HN16&quot;)
+
+color &lt;- colorRampPalette(rev(brewer.pal(n = 7, name = &quot;RdYlBu&quot;)))(100)
+
+ligand_exprs_heatmap &lt;- expression_CAF_mat[order_ligands, order_tumors] %&gt;% 
+    make_heatmap_ggplot(
+        &quot;Prioritized CAF-ligands&quot;,
+        &quot;Tumor&quot;,
+        color           = color[100],
+        legend_position = &quot;top&quot;,
+        x_axis_position = &quot;top&quot;,
+        legend_title    = &quot;Expression\n(averaged over\nsingle cells)&quot;
+    ) +
+    theme(axis.text.y = element_text(face = &quot;italic&quot;))
+
+expression_targets &lt;- exprs_mat[malignant_ids, geneset] %&gt;%
+    data.frame() %&gt;%
+    rownames_to_column(&quot;cell&quot;) %&gt;%
+    tbl_df() %&gt;%
+    inner_join(
+        sample_info %&gt;%
+            select(cell, tumor),
+        by =  &quot;cell&quot;
+    ) %&gt;%
+    group_by(tumor) %&gt;%
+    select(-cell) %&gt;%
+    summarise_all(mean) %&gt;%
+    gather(&quot;target&quot;, &quot;exprs&quot;, -tumor) %&gt;%
+    spread(tumor, exprs)
+
+expression_targets_mat &lt;- expression_targets %&gt;%
+    select(-target) %&gt;%
+    as.matrix() %&gt;%
+    magrittr::set_rownames(expression_targets$target)
+
+targets_exprs_heatmap &lt;- expression_targets_mat %&gt;%
+    t() %&gt;%
+    scale_quantile() %&gt;%
+    .[order_tumors, order_targets] %&gt;%
+    make_threecolor_heatmap_ggplot(
+        &quot;Tumor&quot;,
+        &quot;Target&quot;,
+        low_color       = color[1],
+        mid_color       = color[50],
+        mid             = 0.5,
+        high_color      = color[100],
+        legend_position = &quot;top&quot;,
+        x_axis_position = &quot;top&quot; ,
+        legend_title    = &quot;Scaled expression\n(averaged over\nsingle cells)&quot;
+    ) +
+    theme(axis.text.x = element_text(face = &quot;italic&quot;))
+
+combined_heatmap &lt;- plot_grid(
+    ligand_pearson_heatmap +
+        theme(
+            legend.position = &quot;none&quot;,
+            axis.ticks      = element_blank(),
+            axis.title.x    = element_text()
+        ),
+    ligand_exprs_heatmap +
+        ylab(&quot;&quot;) +
+        theme(
+            legend.position = &quot;none&quot;,
+            axis.ticks      = element_blank(),
+            axis.title.x    = element_text()
+        ),
+    ligand_target_heatmap +
+        ylab(&quot;&quot;) +
+        theme(
+            legend.position = &quot;none&quot;,
+            axis.ticks      = element_blank()
+        ), 
+    NULL,
+    NULL,
+    targets_exprs_heatmap +
+        xlab(&quot;&quot;) +
+        theme(
+            legend.position = &quot;none&quot;,
+            axis.ticks      = element_blank()
+        ), 
+    align       = &quot;hv&quot;,
+    nrow        = 2,
+    rel_widths  = c(
+        1 + 4.5,
+        ncol(expression_CAF_mat),
+        ncol(vis_ligand_target)
+    ) - 2,
+    rel_heights = c(
+        length(order_ligands),
+        nrow(t(expression_targets_mat)) + 3
+    )
+) 
+
+legends &lt;- plot_grid(
+    as_ggplot(get_legend(ligand_pearson_heatmap)),
+    as_ggplot(get_legend(ligand_exprs_heatmap)),
+    as_ggplot(get_legend(ligand_target_heatmap)),
+    as_ggplot(get_legend(targets_exprs_heatmap)),
+    nrow  = 2,
+    align = &quot;h&quot;
+)
+
+plot_grid(
+    combined_heatmap, 
+    legends, 
+    rel_heights = c(10, 2),
+    nrow        = 2,
+    align       = &quot;hv&quot;
+)</code></pre>
+<p><img src="figure/12-NicheNet.Rmd/combined-heatmap-1.png" width="1248" style="display: block; margin: auto;" /></p>
+</div>
+<div id="signalling-paths" class="section level1" number="9">
+<h1 number="9"><span class="header-section-number">9</span> Signalling paths</h1>
+<p><strong>NicheNet</strong> can also be used to infer the signalling paths between a ligands and targets of interest. This is done by looking at which transcription factors regulating the target are most closely downstream of the ligand. The pathway is confirmed by looking at the signalling database.</p>
+<pre class="r"><code>ligands_sel &lt;- &quot;TGFB3&quot;
+targets_sel &lt;- c(&quot;TGFBI&quot;, &quot;LAMC2&quot;, &quot;TNC&quot;)
+
+signalling_path &lt;- get_ligand_signaling_path(
+    ligand_tf_matrix  = ligand_targets,
+    ligands_all       = ligands_sel,
+    targets_all       = targets_sel,
+    weighted_networks = weighted_networks
+)
+
+# Normalise edge weights for visualisation
+signalling_path_minmax     &lt;- signalling_path
+signalling_path_minmax$sig &lt;- signalling_path_minmax$sig %&gt;%
+    mutate(weight = ((weight - min(weight)) /
+                         (max(weight) - min(weight))) + 0.75)
+signalling_path_minmax$gr  &lt;- signalling_path_minmax$gr %&gt;%
+    mutate(weight = ((weight - min(weight)) /
+                         (max(weight) - min(weight))) + 0.75)
+
+graph_minmax &lt;- diagrammer_format_signaling_graph(
+    signaling_graph_list = signalling_path_minmax,
+    ligands_all          = ligands_sel,
+    targets_all          = targets_sel,
+    sig_color            = &quot;indianred&quot;,
+    gr_color             = &quot;steelblue&quot;
+)
+
+DiagrammeR::render_graph(graph_minmax, layout = &quot;tree&quot;)</code></pre>
+<div id="htmlwidget-4a11aa07d6792e289e6c" style="width:960px;height:768px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4a11aa07d6792e289e6c">{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"CDK1\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"9,8!\"] \n  \"2\" [label = \"ESR1\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"27,6!\"] \n  \"3\" [label = \"FOS\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"31.5,5!\"] \n  \"4\" [label = \"JUN\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"30,4!\"] \n  \"5\" [label = \"SMAD2\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"27,7!\"] \n  \"6\" [label = \"SMAD3\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"23.5,3!\"] \n  \"7\" [label = \"SOX9\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"26.5,2!\"] \n  \"8\" [label = \"TGFB3\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#CD5C5C\", pos = \"8,8!\"] \n  \"9\" [label = \"TGFBR1\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"3,2!\"] \n  \"10\" [label = \"TGFBR2\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"5.5,1!\"] \n  \"11\" [label = \"TP53\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"44,2!\"] \n  \"12\" [label = \"TGFBI\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#4682B4\", pos = \"53,1!\"] \n  \"13\" [label = \"TNC\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#4682B4\", pos = \"22.5,1!\"] \n  \"14\" [label = \"LAMC2\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#4682B4\", pos = \"33.5,1!\"] \n\"1\"->\"2\" [penwidth = \"0.814943618815127\", color = \"indianred\"] \n\"1\"->\"3\" [penwidth = \"0.869739690278899\", color = \"indianred\"] \n\"1\"->\"4\" [penwidth = \"0.913173915295903\", color = \"indianred\"] \n\"1\"->\"6\" [penwidth = \"0.75\", color = \"indianred\"] \n\"1\"->\"10\" [penwidth = \"1.25692543491003\", color = \"indianred\"] \n\"1\"->\"11\" [penwidth = \"1.25006116769321\", color = \"indianred\"] \n\"2\"->\"3\" [penwidth = \"1.25240012751204\", color = \"indianred\"] \n\"2\"->\"4\" [penwidth = \"1.1568807530515\", color = \"indianred\"] \n\"2\"->\"5\" [penwidth = \"1.14285956394859\", color = \"indianred\"] \n\"2\"->\"6\" [penwidth = \"1.42907536977704\", color = \"indianred\"] \n\"2\"->\"7\" [penwidth = \"0.893581003849813\", color = \"indianred\"] \n\"2\"->\"10\" [penwidth = \"0.898239570882218\", color = \"indianred\"] \n\"2\"->\"11\" [penwidth = \"1.14209528166143\", color = \"indianred\"] \n\"3\"->\"2\" [penwidth = \"1.1447883106913\", color = \"indianred\"] \n\"3\"->\"4\" [penwidth = \"1.11906351468039\", color = \"indianred\"] \n\"3\"->\"5\" [penwidth = \"1.09427700028501\", color = \"indianred\"] \n\"3\"->\"6\" [penwidth = \"1.17096216916331\", color = \"indianred\"] \n\"3\"->\"11\" [penwidth = \"0.897159861380588\", color = \"indianred\"] \n\"4\"->\"3\" [penwidth = \"1.21275033730909\", color = \"indianred\"] \n\"4\"->\"6\" [penwidth = \"1.1946589631163\", color = \"indianred\"] \n\"4\"->\"10\" [penwidth = \"0.84498584935393\", color = \"indianred\"] \n\"4\"->\"11\" [penwidth = \"0.921628475069415\", color = \"indianred\"] \n\"5\"->\"2\" [penwidth = \"1.08360875753039\", color = \"indianred\"] \n\"5\"->\"3\" [penwidth = \"1.13231102539343\", color = \"indianred\"] \n\"5\"->\"4\" [penwidth = \"1.009873255081\", color = \"indianred\"] \n\"5\"->\"6\" [penwidth = \"1.4167215749261\", color = \"indianred\"] \n\"5\"->\"7\" [penwidth = \"1.30886659245309\", color = \"indianred\"] \n\"5\"->\"9\" [penwidth = \"1.1130372327655\", color = \"indianred\"] \n\"5\"->\"10\" [penwidth = \"1.38632098703726\", color = \"indianred\"] \n\"5\"->\"11\" [penwidth = \"1.0282454120515\", color = \"indianred\"] \n\"6\"->\"2\" [penwidth = \"1.2328829085436\", color = \"indianred\"] \n\"6\"->\"3\" [penwidth = \"1.1881418490859\", color = \"indianred\"] \n\"6\"->\"4\" [penwidth = \"1.05485794472667\", color = \"indianred\"] \n\"6\"->\"5\" [penwidth = \"1.29186450962171\", color = \"indianred\"] \n\"6\"->\"7\" [penwidth = \"1.06499342557543\", color = \"indianred\"] \n\"6\"->\"9\" [penwidth = \"1.27067588530684\", color = \"indianred\"] \n\"6\"->\"10\" [penwidth = \"1.15290849817578\", color = \"indianred\"] \n\"6\"->\"11\" [penwidth = \"0.940749394116088\", color = \"indianred\"] \n\"7\"->\"2\" [penwidth = \"0.790009054516044\", color = \"indianred\"] \n\"7\"->\"5\" [penwidth = \"0.982486378003499\", color = \"indianred\"] \n\"7\"->\"6\" [penwidth = \"0.884124356552715\", color = \"indianred\"] \n\"8\"->\"5\" [penwidth = \"0.956868906462128\", color = \"indianred\"] \n\"8\"->\"6\" [penwidth = \"0.971275311052981\", color = \"indianred\"] \n\"8\"->\"9\" [penwidth = \"1.40508169100421\", color = \"indianred\"] \n\"8\"->\"10\" [penwidth = \"1.45450953845243\", color = \"indianred\"] \n\"9\"->\"5\" [penwidth = \"1.39685725465003\", color = \"indianred\"] \n\"9\"->\"6\" [penwidth = \"1.40153938425828\", color = \"indianred\"] \n\"9\"->\"10\" [penwidth = \"1.43035054741386\", color = \"indianred\"] \n\"10\"->\"1\" [penwidth = \"1.27571366531811\", color = \"indianred\"] \n\"10\"->\"2\" [penwidth = \"0.818978164877864\", color = \"indianred\"] \n\"10\"->\"4\" [penwidth = \"0.780164509757753\", color = \"indianred\"] \n\"10\"->\"5\" [penwidth = \"1.31449253512821\", color = \"indianred\"] \n\"10\"->\"6\" [penwidth = \"1.2871832236806\", color = \"indianred\"] \n\"10\"->\"9\" [penwidth = \"1.75\", color = \"indianred\"] \n\"11\"->\"1\" [penwidth = \"1.15193373038827\", color = \"indianred\"] \n\"11\"->\"2\" [penwidth = \"1.08356153481461\", color = \"indianred\"] \n\"11\"->\"3\" [penwidth = \"0.958872244302078\", color = \"indianred\"] \n\"11\"->\"4\" [penwidth = \"0.946227834428359\", color = \"indianred\"] \n\"11\"->\"6\" [penwidth = \"0.985319729480381\", color = \"indianred\"] \n\"2\"->\"12\" [penwidth = \"1.56804184171716\", color = \"steelblue\"] \n\"2\"->\"13\" [penwidth = \"0.927124786649569\", color = \"steelblue\"] \n\"3\"->\"14\" [penwidth = \"1.05114789543356\", color = \"steelblue\"] \n\"3\"->\"12\" [penwidth = \"1.0313816417039\", color = \"steelblue\"] \n\"3\"->\"13\" [penwidth = \"0.983581251692347\", color = \"steelblue\"] \n\"4\"->\"14\" [penwidth = \"1.02366417561658\", color = \"steelblue\"] \n\"4\"->\"12\" [penwidth = \"0.75\", color = \"steelblue\"] \n\"4\"->\"13\" [penwidth = \"1.52769824761689\", color = \"steelblue\"] \n\"5\"->\"14\" [penwidth = \"0.989948432817242\", color = \"steelblue\"] \n\"5\"->\"12\" [penwidth = \"0.946545877853133\", color = \"steelblue\"] \n\"5\"->\"13\" [penwidth = \"1.19175050903839\", color = \"steelblue\"] \n\"6\"->\"14\" [penwidth = \"1.40983490139672\", color = \"steelblue\"] \n\"6\"->\"12\" [penwidth = \"0.946545877853133\", color = \"steelblue\"] \n\"6\"->\"13\" [penwidth = \"1.75\", color = \"steelblue\"] \n\"7\"->\"14\" [penwidth = \"0.914830937636554\", color = \"steelblue\"] \n\"7\"->\"12\" [penwidth = \"0.946545877853133\", color = \"steelblue\"] \n\"7\"->\"13\" [penwidth = \"0.931624788263285\", color = \"steelblue\"] \n\"11\"->\"14\" [penwidth = \"1.51066872036671\", color = \"steelblue\"] \n\"11\"->\"12\" [penwidth = \"1.25185959241407\", color = \"steelblue\"] \n\"11\"->\"13\" [penwidth = \"1.05227131582542\", color = \"steelblue\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p>We can also look at which data sources support the interactions in this network. Here are examples of the first few sources.</p>
+<pre class="r"><code>path_sources &lt;- infer_supporting_datasources(
+    signaling_graph_list = signalling_path,
+    lr_network           = lr_network,
+    sig_network          = sig_network,
+    gr_network           = gr_network
+)
+
+kable(head(path_sources, n = 10))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">from</th>
+<th align="left">to</th>
+<th align="left">source</th>
+<th align="left">database</th>
+<th align="left">layer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ESR1</td>
+<td align="left">TGFBI</td>
+<td align="left">harmonizome_CHEA</td>
+<td align="left">harmonizome_gr</td>
+<td align="left">regulatory</td>
+</tr>
+<tr class="even">
+<td align="left">ESR1</td>
+<td align="left">TGFBI</td>
+<td align="left">HTRIDB</td>
+<td align="left">HTRIDB</td>
+<td align="left">regulatory</td>
+</tr>
+<tr class="odd">
+<td align="left">ESR1</td>
+<td align="left">TGFBI</td>
+<td align="left">harmonizome_GEO_TF</td>
+<td align="left">harmonizome_gr</td>
+<td align="left">regulatory</td>
+</tr>
+<tr class="even">
+<td align="left">ESR1</td>
+<td align="left">TGFBI</td>
+<td align="left">harmonizome_GEO_GENE</td>
+<td align="left">harmonizome_gr</td>
+<td align="left">regulatory</td>
+</tr>
+<tr class="odd">
+<td align="left">ESR1</td>
+<td align="left">TGFBI</td>
+<td align="left">lr_pathwaycommons_controls_expression_of</td>
+<td align="left">pathwaycommons_expression</td>
+<td align="left">regulatory</td>
+</tr>
+<tr class="even">
+<td align="left">ESR1</td>
+<td align="left">TNC</td>
+<td align="left">harmonizome_ENCODE</td>
+<td align="left">harmonizome_gr</td>
+<td align="left">regulatory</td>
+</tr>
+<tr class="odd">
+<td align="left">ESR1</td>
+<td align="left">TNC</td>
+<td align="left">HTRIDB</td>
+<td align="left">HTRIDB</td>
+<td align="left">regulatory</td>
+</tr>
+<tr class="even">
+<td align="left">ESR1</td>
+<td align="left">TNC</td>
+<td align="left">harmonizome_GEO_TF</td>
+<td align="left">harmonizome_gr</td>
+<td align="left">regulatory</td>
+</tr>
+<tr class="odd">
+<td align="left">FOS</td>
+<td align="left">LAMC2</td>
+<td align="left">harmonizome_ENCODE</td>
+<td align="left">harmonizome_gr</td>
+<td align="left">regulatory</td>
+</tr>
+<tr class="even">
+<td align="left">FOS</td>
+<td align="left">LAMC2</td>
+<td align="left">Remap_5</td>
+<td align="left">Remap</td>
+<td align="left">regulatory</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gene-set-prediction" class="section level1" number="10">
+<h1 number="10"><span class="header-section-number">10</span> Gene set prediction</h1>
+<p><strong>NicheNet</strong> can also use the top-ranked ligands to predict whether a gene belongs to a gene set. This is done by training a random forest classification model that returns a probability for each gene.</p>
+<pre class="r"><code>k_folds  &lt;- 3
+n_rounds &lt;- 2
+
+pemt_predictions &lt;- seq(n_rounds) %&gt;%
+    lapply(
+        assess_rf_class_probabilities,
+        folds                      = k_folds,
+        geneset                    = geneset,
+        background_expressed_genes = background_genes,
+        ligands_oi                 = best_ligands,
+        ligand_target_matrix       = ligand_targets
+    )</code></pre>
+<p>This returns a list with <strong>2</strong> items. Here is a summary of the first item:</p>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">pemt_predictions[[1]]</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">6072</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">logical</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">gene</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">13</td>
+<td align="right">0</td>
+<td align="right">6072</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: logical</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">response</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.02</td>
+<td align="left">FAL: 5976, TRU: 96</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">prediction</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.02</td>
+<td align="right">0.04</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.01</td>
+<td align="right">0.02</td>
+<td align="right">0.63</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<p>We can then evaluate how well the calculated probabilites match up with the gene set assignments.</p>
+<pre class="r"><code>prediction_performance &lt;- pemt_predictions %&gt;%
+    lapply(classification_evaluation_continuous_pred_wrapper) %&gt;%
+    bind_rows() %&gt;%
+    mutate(round = seq(1:nrow(.)))
+
+prediction_performance %&gt;%
+    summarise(
+        AUROC   = mean(auroc),
+        AUPR    = mean(aupr),
+        Pearson = mean(pearson)
+    ) %&gt;%
+    kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">AUROC</th>
+<th align="right">AUPR</th>
+<th align="right">Pearson</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.7318148</td>
+<td align="right">0.0845526</td>
+<td align="right">0.1751712</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>prediction_performance_discrete &lt;- pemt_predictions %&gt;%
+    lapply(calculate_fraction_top_predicted, quantile_cutoff = 0.95) %&gt;%
+    bind_rows() %&gt;%
+    ungroup() %&gt;%
+    mutate(round = rep(1:length(pemt_predictions), each = 2))
+
+pemt_frac &lt;- prediction_performance_discrete %&gt;%
+    filter(true_target) %&gt;%
+    .$fraction_positive_predicted %&gt;%
+    mean()
+
+nonpemt_frac &lt;- prediction_performance_discrete %&gt;%
+    filter(!true_target) %&gt;%
+    .$fraction_positive_predicted %&gt;%
+    mean()
+
+prediction_performance_fisher &lt;- pemt_predictions %&gt;%
+    lapply(calculate_fraction_top_predicted_fisher, quantile_cutoff = 0.95) %&gt;%
+    unlist() %&gt;%
+    mean()</code></pre>
+<p>We see that <strong>26%</strong> of p-EMT genes are classified as being part of the geneset and <strong>5%</strong> of non-p-EMT genes. A Fisher’s exact test gives us a p-value of <strong>8.3865289^{-11}</strong>.</p>
+<p>The following p-EMT genes were correctly predicted in every cross-validation round:</p>
+<pre class="r"><code>seq(length(pemt_predictions)) %&gt;%
+    lapply(get_top_predicted_genes, pemt_predictions) %&gt;%
+    reduce(full_join, by = c(&quot;gene&quot;, &quot;true_target&quot;)) %&gt;%
+    filter(true_target) %&gt;%
+    kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">gene</th>
+<th align="left">true_target</th>
+<th align="left">predicted_top_target_round1</th>
+<th align="left">predicted_top_target_round2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">MMP1</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">COL1A1</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">F3</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">MT2A</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">PLAU</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">MMP2</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">IGFBP3</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">MMP10</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">TNC</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">TPM1</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SERPINE1</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">TIMP3</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">PTHLH</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">STON2</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">GJA1</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">DKK3</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">CDH13</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">THBS1</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">COL17A1</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">ANXA8L1</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">COL4A2</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">NAGK</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">TNFRSF12A</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">LAMA3</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">TPM4</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">LAMC2</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">INHBA</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">FSTL3</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">P4HA2</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">ITGB1</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">ITGB6</td>
+<td align="left">TRUE</td>
+<td align="left">NA</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="single-cell-ligand-activities" class="section level1" number="11">
+<h1 number="11"><span class="header-section-number">11</span> Single-cell ligand activities</h1>
+<p>So far we have considered ligand activities for cell types but it is also possible to calculate ligand activities for individual cells.</p>
+<p>To reduce run time we only perform this analysis on a selection of 10 cells from a single tumour.</p>
+<pre class="r"><code>exprs_scaled &lt;- exprs_mat %&gt;%
+    .[malignant_ids, background_genes] %&gt;%
+    scale_quantile()
+
+malignant_hn5_ids &lt;- sample_info %&gt;%
+    filter(tumor == &quot;HN5&quot;) %&gt;%
+    filter(`Lymph node` == 0) %&gt;%
+    filter(`classified  as cancer cell` == 1) %&gt;%
+    .$cell %&gt;%
+    head(10)
+
+sc_ligand_activities &lt;- predict_single_cell_ligand_activities(
+    cell_ids             = malignant_hn5_ids,
+    expression_scaled    = exprs_scaled,
+    ligand_target_matrix = ligand_targets,
+    potential_ligands    = potential_ligands
+)</code></pre>
+<p>Now that we have activities at the single-cell level they can be linked to other properties of cells. Here we score cells on their expression of the core p-EMT gene <em>TGFBI</em>. This is taken as a proxy for p-EMT activity and correlated with the calculated ligand activities. The correlation can be used to rank p-EMT inducing ligands.</p>
+<pre class="r"><code>cell_scores &lt;- tibble(
+    cell  = malignant_hn5_ids,
+    score = exprs_scaled[malignant_hn5_ids, &quot;TGFBI&quot;]
+)
+
+sc_ligand_activities_norm &lt;- normalize_single_cell_ligand_activities(
+    sc_ligand_activities
+)
+
+correlations &lt;- single_ligand_activity_score_regression(
+    sc_ligand_activities_norm,
+    cell_scores
+)
+
+skim(correlations)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">correlations</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">131</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">13</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">12</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ligand</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">8</td>
+<td align="right">0</td>
+<td align="right">131</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">r_squared</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.08</td>
+<td align="right">0.10</td>
+<td align="right">0.00</td>
+<td align="right">0.01</td>
+<td align="right">0.04</td>
+<td align="right">0.12</td>
+<td align="right">0.45</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">adj_r_squared</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">-0.04</td>
+<td align="right">0.11</td>
+<td align="right">-0.12</td>
+<td align="right">-0.12</td>
+<td align="right">-0.08</td>
+<td align="right">0.01</td>
+<td align="right">0.38</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">f_statistic</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.80</td>
+<td align="right">1.19</td>
+<td align="right">0.00</td>
+<td align="right">0.07</td>
+<td align="right">0.33</td>
+<td align="right">1.05</td>
+<td align="right">6.52</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">lm_coefficient_abs_t</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.70</td>
+<td align="right">0.56</td>
+<td align="right">0.00</td>
+<td align="right">0.26</td>
+<td align="right">0.58</td>
+<td align="right">1.02</td>
+<td align="right">2.55</td>
+<td align="left">▇▆▃▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">inverse_rmse</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6.39</td>
+<td align="right">0.40</td>
+<td align="right">6.10</td>
+<td align="right">6.13</td>
+<td align="right">6.23</td>
+<td align="right">6.49</td>
+<td align="right">8.22</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">reverse_aic</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4.90</td>
+<td align="right">1.18</td>
+<td align="right">4.02</td>
+<td align="right">4.10</td>
+<td align="right">4.42</td>
+<td align="right">5.25</td>
+<td align="right">9.98</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">reverse_bic</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.99</td>
+<td align="right">1.18</td>
+<td align="right">3.11</td>
+<td align="right">3.20</td>
+<td align="right">3.52</td>
+<td align="right">4.34</td>
+<td align="right">9.07</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">inverse_mae</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">8.33</td>
+<td align="right">0.71</td>
+<td align="right">7.64</td>
+<td align="right">7.86</td>
+<td align="right">8.10</td>
+<td align="right">8.41</td>
+<td align="right">10.96</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">pearson_log_pval</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.33</td>
+<td align="right">0.31</td>
+<td align="right">0.00</td>
+<td align="right">0.10</td>
+<td align="right">0.24</td>
+<td align="right">0.47</td>
+<td align="right">1.47</td>
+<td align="left">▇▃▂▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">spearman_log_pval</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.36</td>
+<td align="right">0.35</td>
+<td align="right">0.00</td>
+<td align="right">0.09</td>
+<td align="right">0.29</td>
+<td align="right">0.50</td>
+<td align="right">1.67</td>
+<td align="left">▇▃▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">pearson_regression</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.02</td>
+<td align="right">0.28</td>
+<td align="right">-0.67</td>
+<td align="right">-0.18</td>
+<td align="right">0.04</td>
+<td align="right">0.23</td>
+<td align="right">0.53</td>
+<td align="left">▂▅▇▇▅</td>
+</tr>
+<tr class="even">
+<td align="left">spearman_regression</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.00</td>
+<td align="right">0.30</td>
+<td align="right">-0.73</td>
+<td align="right">-0.22</td>
+<td align="right">0.02</td>
+<td align="right">0.24</td>
+<td align="right">0.60</td>
+<td align="left">▂▅▇▇▅</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>correlations %&gt;%
+    arrange(-pearson_regression) %&gt;%
+    select(ligand, pearson_regression) %&gt;%
+    head() %&gt;%
+    kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">ligand</th>
+<th align="right">pearson_regression</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">TNC</td>
+<td align="right">0.5252682</td>
+</tr>
+<tr class="even">
+<td align="left">TFPI</td>
+<td align="right">0.4974591</td>
+</tr>
+<tr class="odd">
+<td align="left">SEMA5A</td>
+<td align="right">0.4908069</td>
+</tr>
+<tr class="even">
+<td align="left">ANXA1</td>
+<td align="right">0.4883174</td>
+</tr>
+<tr class="odd">
+<td align="left">TNFSF13B</td>
+<td align="right">0.4730668</td>
+</tr>
+<tr class="even">
+<td align="left">IBSP</td>
+<td align="right">0.4615628</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>inner_join(cell_scores, sc_ligand_activities_norm) %&gt;%
+    ggplot(aes(score, TNC)) +
+    geom_point() +
+    geom_smooth(method = &quot;lm&quot;)</code></pre>
+<p><img src="figure/12-NicheNet.Rmd/score-cells-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="circos-plots" class="section level1" number="12">
+<h1 number="12"><span class="header-section-number">12</span> Circos plots</h1>
+<p>An alternative way to visualise interactions is using a Circos plot.</p>
+</div>
+<div id="summary" class="section level1 unnumbered" number="">
+<h1 class="unnumbered" number="">Summary</h1>
+<div id="parameters" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number="">Parameters</h2>
+<p>This table describes parameters used and set in this document.</p>
+<pre class="r"><code>params &lt;- list(
+    
+)
+params &lt;- toJSON(params, pretty = TRUE)
+kable(fromJSON(params))</code></pre>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="output-files" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number="">Output files</h2>
+<p>This table describes the output files produced by this document. Right click and <em>Save Link As…</em> to download the results.</p>
+<pre class="r"><code>write_tsv(ligand_activities, fs::path(OUT_DIR, &quot;ligand_activities.tsv&quot;))
+write_tsv(active_links, fs::path(OUT_DIR, &quot;active_links.tsv&quot;))
+
+kable(data.frame(
+    File = c(
+        download_link(&quot;parameters.json&quot;, OUT_DIR),
+        download_link(&quot;ligand_activities.tsv&quot;, OUT_DIR),
+        download_link(&quot;active_links.tsv&quot;, OUT_DIR)
+    ),
+    Description = c(
+        &quot;Parameters set and used in this analysis&quot;,
+        &quot;Ligand activites calculated by NicheNet&quot;,
+        &quot;Active links between ligands and targets inferred by NicheNet&quot;
+    )
+))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="NA/raw/master/output/12-NicheNet.Rmd/parameters.json">parameters.json</a></td>
+<td align="left">Parameters set and used in this analysis</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="NA/raw/master/output/12-NicheNet.Rmd/ligand_activities.tsv">ligand_activities.tsv</a></td>
+<td align="left">Ligand activites calculated by NicheNet</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="NA/raw/master/output/12-NicheNet.Rmd/active_links.tsv">active_links.tsv</a></td>
+<td align="left">Active links between ligands and targets inferred by NicheNet</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="session-information" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number="">Session information</h2>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessioninfo::session_info()</code></pre>
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value                       
+ version  R version 4.0.0 (2020-04-24)
+ os       macOS Catalina 10.15.4      
+ system   x86_64, darwin17.0          
+ ui       X11                         
+ language (EN)                        
+ collate  en_US.UTF-8                 
+ ctype    en_US.UTF-8                 
+ tz       Europe/Berlin               
+ date     2020-05-27                  
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ ! package       * version    date       lib
+   abind           1.4-5      2016-07-21 [1]
+   acepack         1.4.1      2016-10-29 [1]
+ P assertthat      0.2.1      2019-03-21 [?]
+ P backports       1.1.6      2020-04-05 [?]
+ P base64enc       0.1-3      2015-07-28 [?]
+ P base64url       1.4        2018-05-14 [?]
+ P BiocManager     1.30.10    2019-11-16 [?]
+   bitops          1.0-6      2013-08-17 [1]
+ P broom           0.5.6      2020-04-20 [?]
+   car             3.0-7      2020-03-11 [1]
+   carData         3.0-3      2019-11-16 [1]
+   caret           6.0-86     2020-03-20 [1]
+   caTools         1.18.0     2020-01-17 [1]
+ P cellranger      1.1.0      2016-07-27 [?]
+   checkmate       2.0.0      2020-02-06 [1]
+ P circlize      * 0.4.9      2020-04-30 [?]
+ P class           7.3-17     2020-04-26 [?]
+ P cli             2.0.2      2020-02-28 [?]
+ P cluster         2.1.0      2019-06-19 [?]
+ P codetools       0.2-16     2018-12-24 [?]
+ P colorspace      1.4-1      2019-03-18 [?]
+ P conflicted    * 1.0.4      2019-06-21 [?]
+ P cowplot       * 1.0.0      2019-07-11 [?]
+ P crayon          1.3.4      2017-09-16 [?]
+ P curl            4.3        2019-12-02 [?]
+   data.table      1.12.8     2019-12-09 [1]
+ P DBI             1.1.0      2019-12-15 [?]
+ P dbplyr          1.4.3      2020-04-19 [?]
+   DiagrammeR      1.0.5      2020-01-16 [1]
+ P digest          0.6.25     2020-02-23 [?]
+ P dplyr         * 0.8.5      2020-03-07 [?]
+ P drake           7.12.0     2020-03-25 [?]
+   e1071         * 1.7-3      2019-11-26 [1]
+ P ellipsis        0.3.0      2019-09-20 [?]
+ P evaluate        0.14       2019-05-28 [?]
+ P fansi           0.4.1      2020-01-08 [?]
+ P farver          2.0.3      2020-01-16 [?]
+   fdrtool         1.2.15     2015-07-08 [1]
+ P filelock        1.0.2      2018-10-05 [?]
+ P forcats       * 0.5.0      2020-03-01 [?]
+   foreach         1.5.0      2020-03-30 [1]
+ P foreign         0.8-79     2020-04-26 [?]
+   Formula         1.2-3      2018-05-03 [1]
+ P fs            * 1.4.1      2020-04-04 [?]
+ P generics        0.0.2      2018-11-29 [?]
+ P ggplot2       * 3.3.0      2020-03-05 [?]
+ P ggpubr        * 0.3.0      2020-05-04 [?]
+   ggsignif        0.6.0      2019-08-08 [1]
+ P git2r           0.27.1     2020-05-03 [?]
+ P GlobalOptions   0.1.1      2019-09-30 [?]
+ P glue          * 1.4.0      2020-04-03 [?]
+   gower           0.2.1      2019-05-14 [1]
+   gridExtra       2.3        2017-09-09 [1]
+ P gtable          0.3.0      2019-03-25 [?]
+ P haven           2.2.0      2019-11-08 [?]
+ P here          * 0.1        2017-05-28 [?]
+ P highr           0.8        2019-03-20 [?]
+   Hmisc           4.4-0      2020-03-23 [1]
+ P hms             0.5.3      2020-01-08 [?]
+   htmlTable       1.13.3     2019-12-04 [1]
+ P htmltools       0.4.0      2019-10-04 [?]
+   htmlwidgets     1.5.1      2019-10-08 [1]
+ P httpuv          1.5.2      2019-09-11 [?]
+ P httr            1.4.1      2019-08-05 [?]
+ P igraph          1.2.5      2020-03-19 [?]
+   ipred           0.9-9      2019-04-28 [1]
+   iterators       1.0.12     2019-07-26 [1]
+   jpeg            0.1-8.1    2019-10-24 [1]
+ P jsonlite      * 1.6.1      2020-02-02 [?]
+ P knitr         * 1.28       2020-02-06 [?]
+ P labeling        0.3        2014-08-23 [?]
+ P later           1.0.0      2019-10-04 [?]
+ P lattice         0.20-41    2020-04-02 [?]
+   latticeExtra    0.6-29     2019-12-19 [1]
+   lava            1.6.7      2020-03-05 [1]
+ P lifecycle       0.2.0      2020-03-06 [?]
+   limma           3.44.1     2020-04-28 [1]
+ P lubridate       1.7.8      2020-04-06 [?]
+ P magrittr        1.5        2014-11-22 [?]
+ P MASS            7.3-51.6   2020-04-26 [?]
+ P Matrix          1.2-18     2019-11-27 [?]
+ P memoise         1.1.0      2017-04-21 [?]
+ P mgcv            1.8-31     2019-11-09 [?]
+   ModelMetrics    1.2.2.2    2020-03-17 [1]
+ P modelr          0.1.7      2020-04-30 [?]
+ P munsell         0.5.0      2018-06-12 [?]
+   nichenetr     * 0.1.0      2020-05-08 [1]
+ P nlme            3.1-147    2020-04-13 [?]
+ P nnet            7.3-14     2020-04-26 [?]
+   openxlsx        4.1.5      2020-05-06 [1]
+ P pander        * 0.6.3      2018-11-06 [?]
+ P pillar          1.4.4      2020-05-05 [?]
+ P pkgconfig       2.0.3      2019-09-22 [?]
+ P plyr            1.8.6      2020-03-03 [?]
+   png             0.1-7      2013-12-03 [1]
+ P prettyunits     1.1.1      2020-01-24 [?]
+   pROC            1.16.2     2020-03-19 [1]
+   prodlim         2019.11.13 2019-11-17 [1]
+ P progress        1.2.2      2019-05-16 [?]
+ P promises        1.1.0      2019-10-04 [?]
+ P purrr         * 0.3.4      2020-04-17 [?]
+ P R6              2.4.1      2019-11-12 [?]
+   randomForest    4.6-14     2018-03-25 [1]
+ P RColorBrewer  * 1.1-2      2014-12-07 [?]
+ P Rcpp            1.0.4.6    2020-04-09 [?]
+ P readr         * 1.3.1      2018-12-21 [?]
+ P readxl          1.3.1      2019-03-13 [?]
+   recipes         0.1.12     2020-05-01 [1]
+   renv            0.10.0     2020-05-06 [1]
+ P repr            1.1.0      2020-01-28 [?]
+ P reprex          0.3.0      2019-05-16 [?]
+ P reshape2        1.4.4      2020-04-09 [?]
+ P reticulate      1.15       2020-04-02 [?]
+   rio             0.5.16     2018-11-26 [1]
+ P rlang           0.4.6      2020-05-02 [?]
+ P rmarkdown       2.1        2020-01-20 [?]
+   ROCR            1.0-11     2020-05-02 [1]
+ P rpart           4.1-15     2019-04-12 [?]
+ P rprojroot       1.3-2      2018-01-03 [?]
+   rstatix         0.5.0      2020-04-28 [1]
+ P rstudioapi      0.11       2020-02-07 [?]
+ P rvest           0.3.5      2019-11-08 [?]
+ P scales          1.1.0      2019-11-18 [?]
+ P sessioninfo     1.1.1      2018-11-05 [?]
+ P shape           1.4.4      2018-02-07 [?]
+ P skimr         * 2.1.1      2020-04-16 [?]
+ P storr           1.2.1      2018-10-18 [?]
+ P stringi         1.4.6      2020-02-17 [?]
+ P stringr       * 1.4.0      2019-02-10 [?]
+ P survival        3.1-12     2020-04-10 [?]
+ P tibble        * 3.0.1      2020-04-20 [?]
+   tidyr         * 1.0.3      2020-05-07 [1]
+ P tidyselect      1.0.0      2020-01-27 [?]
+ P tidyverse     * 1.3.0      2019-11-21 [?]
+   timeDate        3043.102   2018-02-21 [1]
+ P txtq            0.2.0      2019-10-15 [?]
+ P vctrs           0.2.4      2020-03-10 [?]
+   visNetwork      2.0.9      2019-12-06 [1]
+ P whisker         0.4        2019-08-28 [?]
+ P withr           2.2.0      2020-04-20 [?]
+ P workflowr       1.6.2      2020-04-30 [?]
+ P xfun            0.13       2020-04-13 [?]
+ P xml2            1.3.2      2020-04-23 [?]
+ P yaml            2.2.1      2020-02-01 [?]
+   zip             2.0.4      2019-09-01 [1]
+ source                             
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@1.4)                    
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@1.1.0)                  
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@1.4-1)                  
+ standard (@1.0.4)                  
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@0.14)                   
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@0.0.2)                  
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@0.3.0)                  
+ standard (@2.2.0)                  
+ standard (@0.1)                    
+ standard (@0.8)                    
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@0.4.0)                  
+ CRAN (R 4.0.0)                     
+ standard (@1.5.2)                  
+ standard (@1.4.1)                  
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@0.3)                    
+ standard (@1.0.0)                  
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ Bioconductor                       
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@1.2-18)                 
+ standard (@1.1.0)                  
+ standard (@1.8-31)                 
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@0.5.0)                  
+ Github (saeyslab/nichenetr@e535b72)
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@1.1.0)                  
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@1.1-2)                  
+ CRAN (R 4.0.0)                     
+ standard (@1.3.1)                  
+ standard (@1.3.1)                  
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@0.3.0)                  
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@0.3.5)                  
+ standard (@1.1.0)                  
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@1.2.1)                  
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@1.3.0)                  
+ CRAN (R 4.0.0)                     
+ standard (@0.2.0)                  
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ standard (@0.4)                    
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+ CRAN (R 4.0.0)                     
+
+[1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpeX3EJ1/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpKeqWC8/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp3rxPLT/renv-system-library
+
+ P ── Loaded and on-disk path mismatch.</code></pre>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTmljaGVOZXQgZXhhbXBsZSIKb3V0cHV0OiB3b3JrZmxvd3I6OndmbG93X2h0bWwKZWRpdG9yX29wdGlvbnM6CiAgY2h1bmtfb3V0cHV0X3R5cGU6IGNvbnNvbGUKLS0tCgpgYGB7ciBzZXR1cCwgY2FjaGUgPSBGQUxTRX0KIyBTZXR1cCBkb2N1bWVudApzb3VyY2UoaGVyZTo6aGVyZSgiY29kZSIsICJzZXR1cC5SIikpCgojIEZ1bmN0aW9uIGRlcGVuZGVuY2llcwppbnZpc2libGUoZHJha2U6OnJlYWRkKGRvd25sb2FkX2xpbmspKQpgYGAKCkludHJvZHVjdGlvbiB7LnVubnVtYmVyZWR9Cj09PT09PT09PT09PQoKSW4gdGhpcyBkb2N1bWVudCB3ZSBhcmUgZ29pbmcgdG8gcnVuIHRocm91Z2ggdGhlIGV4YW1wbGUgYW5hbHlzaXMgZm9yIHRoZQoqKk5pY2hlTmV0KiogdG9vbCBhbmQgaGF2ZSBhIGxvb2sgYXQgdGhlIG91dHB1dCBpdCBwcm9kdWNlcy4gTW9yZSBpbmZvcm1hdGlvbgphYm91dCAqKk5pY2hlTmV0KiogY2FuIGJlIGZvdW5kIGF0IGh0dHBzOi8vZ2l0aHViLmNvbS9zYWV5c2xhYi9uaWNoZW5ldHIuCgpgYGB7ciBsaWJyYXJpZXN9CmxpYnJhcnkoIm5pY2hlbmV0ciIpCmxpYnJhcnkoIlJDb2xvckJyZXdlciIpCmxpYnJhcnkoImNvd3Bsb3QiKQpsaWJyYXJ5KCJnZ3B1YnIiKQpsaWJyYXJ5KCJjaXJjbGl6ZSIpCgpjb25mbGljdF9wcmVmZXIoImdldF9sZWdlbmQiLCAiY293cGxvdCIpCmBgYAoKSW5wdXQKPT09PT0KCioqTmljaGVOZXQqKiB0YWtlcyBzZXZlcmFsIGlucHV0cyBmb3IgZGlmZmVyZW50IHBhcnRzIG9mIHRoZSBhbmFseXNpcy4gVGhlc2UKaW5jbHVkZSBhIG1hdHJpeCBvZiBsaWdhbmQgdGFyZ2V0cywgYSBsaWdhbmQtcmVjZXB0b3IgbmV0d29yaywgbmV0d29yayB3ZWlnaHRzLAphbiBzY1JOQS1zZXEgZGF0YXNldCBhbmQgYSBnZW5lIHNldCBvZiBpbnRlcmVzdC4KCkxpZ2FuZC10YXJnZXQgbWF0cml4Ci0tLS0tLS0tLS0tLS0tLS0tLS0tCgpUaGlzIG1hdHJpeCBjb250YWlucyB0aGUgcHJpb3IgcG90ZW50aWFsIHRoYXQgYSBwYXJ0aWN1bGFyIGxpZ2FuZCBtaWdodCByZWd1bGF0ZQp0aGUgZXhwcmVzc2lvbiBvZiBhIHNwZWNpZmljIHRhcmdldCBnZW5lLiBIZXJlIGlzIGEgc25pcHBldCBvZiB0aGUgbWF0cml4OgoKYGBge3IgaW5wdXQtbGlnYW5kLXRhcmdldH0KIyBGcm9tIGh0dHBzOi8vemVub2RvLm9yZy9yZWNvcmQvMzI2MDc1OC9maWxlcy9saWdhbmRfdGFyZ2V0X21hdHJpeC5yZHMKbGlnYW5kX3RhcmdldHMgPC0gcmVhZF9yZHMoCiAgICBmczo6cGF0aChQQVRIUyROaWNoZU5ldF9pbiwgImxpZ2FuZF90YXJnZXRfbWF0cml4LlJkcyIpCikKCnBhbmRlcihsaWdhbmRfdGFyZ2V0c1sxOjUsIDE6NV0pCmBgYAoKVGhlIGZ1bGwgbWF0cml4IGhhcyAqKmByIG5yb3cobGlnYW5kX3RhcmdldHMpYCoqIHJvd3MgKHRhcmdldHMpIGFuZAoqKmByIG5jb2wobGlnYW5kX3RhcmdldHMpYCoqIGNvbHVtbnMgKGxpZ2FuZHMpLgoKTGlnYW5kLXJlY2VwdG9yIG5ldHdvcmsKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KClRoaXMgaXMgYSBkYXRhYmFzZSBvZiBsaWdhbmQtcmVjZXB0b3IgcGFpcnMgd2l0aCBpbmZvcm1hdGlvbiBhYm91dCB0aGVpciBzb3VyY2UuCgpgYGB7ciBpbnB1dC1sci1uZXR3b3JrfQojIEZyb20gaHR0cHM6Ly96ZW5vZG8ub3JnL3JlY29yZC8zMjYwNzU4L2ZpbGVzL2xyX25ldHdvcmsucmRzCmxyX25ldHdvcmsgPC0gcmVhZF9yZHMoZnM6OnBhdGgoUEFUSFMkTmljaGVOZXRfaW4sICJscl9uZXR3b3JrLlJkcyIpKQoKc2tpbShscl9uZXR3b3JrKQpgYGAKCkdlbmUtcmVjZXB0b3IgbmV0d29yawotLS0tLS0tLS0tLS0tLS0tLS0tLS0KClRoaXMgaXMgYSBkYXRhYmFzZSBvZiBnZW5lLXJlY2VwdG9yIHBhaXJzIHdpdGggaW5mb3JtYXRpb24gYWJvdXQgdGhlaXIgc291cmNlLgoKYGBge3IgaW5wdXQtZ3ItbmV0d29ya30KIyBGcm9tIGh0dHBzOi8vemVub2RvLm9yZy9yZWNvcmQvMzI2MDc1OC9maWxlcy9ncl9uZXR3b3JrLnJkcwpncl9uZXR3b3JrIDwtIHJlYWRfcmRzKGZzOjpwYXRoKFBBVEhTJE5pY2hlTmV0X2luLCAiZ3JfbmV0d29yay5SZHMiKSkKCnNraW0oZ3JfbmV0d29yaykKYGBgCgpTaWduYWxsaW5nIG5ldHdvcmsKLS0tLS0tLS0tLS0tLS0tLS0tCgpUaGlzIGlzIGEgZGF0YWJhc2Ugb2Ygc2lnbmFsbGluZyBpbnRlcmFjdGlvbnMgd2l0aCBpbmZvcm1hdGlvbiBhYm91dCB0aGVpcgpzb3VyY2UuCgpgYGB7ciBpbnB1dC1zaWctbmV0d29ya30KIyBGcm9tIGh0dHBzOi8vemVub2RvLm9yZy9yZWNvcmQvMzI2MDc1OC9maWxlcy9zaWduYWxpbmdfbmV0d29yay5yZHMKc2lnX25ldHdvcmsgPC0gcmVhZF9yZHMoZnM6OnBhdGgoUEFUSFMkTmljaGVOZXRfaW4sICJzaWduYWxpbmdfbmV0d29yay5SZHMiKSkKCnNraW0oc2lnX25ldHdvcmspCmBgYAoKTmV0d29yayB3ZWlnaHRzCi0tLS0tLS0tLS0tLS0tLQoKYGBge3IgaW5wdXQtd2VpZ2h0c30KIyBGcm9tIGh0dHBzOi8vemVub2RvLm9yZy9yZWNvcmQvMzI2MDc1OC9maWxlcy93ZWlnaHRlZF9uZXR3b3Jrcy5yZHMKd2VpZ2h0ZWRfbmV0d29ya3MgPC0gcmVhZF9yZHMoCiAgICBmczo6cGF0aChQQVRIUyROaWNoZU5ldF9pbiwgIndlaWdodGVkX25ldHdvcmtzLlJkcyIpCikKYGBgCgpUaGlzIGlzIGEgbGlzdCB3aXRoICoqYHIgbGVuZ3RoKHdlaWdodGVkX25ldHdvcmtzKWAqKiBpdGVtczoKYHIgZ2x1ZV9jb2xsYXBzZShnbHVlKCIqKntuYW1lcyh3ZWlnaHRlZF9uZXR3b3Jrcyl9KioiKSwgc2VwID0gIiwgIiwgbGFzdCA9ICIgYW5kICIpYC4KCiMjIyBMaWdhbmQtcmVjZXB0b3IKCmBgYHtyIGlucHV0LXdlaWdodHMtbHJ9CnNraW0od2VpZ2h0ZWRfbmV0d29ya3MkbHJfc2lnKQpgYGAKCiMjIyBHZW5lLXJlY2VwdG9yCgpgYGB7ciBpbnB1dC13ZWlnaHRzLWdyfQpza2ltKHdlaWdodGVkX25ldHdvcmtzJGdyKQpgYGAKCkV4cHJlc3Npb24gZGF0YQotLS0tLS0tLS0tLS0tLS0KClRoZSBleGFtcGxlIGRhdGFzZXQgaXMgZnJvbSBjYW5jZXItYXNzb2NpYXRlZCBmaWJyb2JsYXN0cyAoQ0FGcykgaW4gdGhlIGhlYWQgYW5kCm5lY2sgc3F1YW1vdXMgY2VsbCBjYXJjaW5vbWEgKEhOU0NDKSB0dW1vdXIgbWljcm9lbnZpcm9ubWVudC4KCmBgYHtyIGlucHV0LWV4cHJlc3Npb259CiMgRnJvbSBodHRwczovL3plbm9kby5vcmcvcmVjb3JkLzMyNjA3NTgvZmlsZXMvaG5zY2NfZXhwcmVzc2lvbi5yZHMKaG5zY2MgPC0gcmVhZF9yZHMoZnM6OnBhdGgoUEFUSFMkTmljaGVOZXRfaW4sICJobnNjY19leHByZXNzaW9uLlJkcyIpKQpgYGAKClRoaXMgZGF0YXNldCBpcyBwcm92aWRlZCBhcyBhIGxpc3Qgd2l0aCAqKmByIGxlbmd0aChobnNjYylgIGl0ZW1zOgpgciBnbHVlX2NvbGxhcHNlKGdsdWUoIioqe25hbWVzKGhuc2NjKX0qKiIpLCBzZXAgPSAiLCAiLCBsYXN0ID0gIiBhbmQgIilgLgoKIyMjIEV4cHJlc3Npb24gbWF0cml4CgpUaGUgZmlyc3QgaXRlbSBpcyB0aGUgZXhwcmVzc2lvbiBtYXRyaXguCgpgYGB7ciBpbnB1dC1leHByZXNzaW9uLW1hdHJpeH0KZXhwcnNfbWF0IDwtIGhuc2NjJGV4cHJlc3Npb24KCnBhbmRlcihleHByc19tYXRbMTo1LCAxOjVdKQpgYGAKClRoZSBleHByZXNzaW9uIG1hdHJpeCBoYXMgKipgciBucm93KGV4cHJzX21hdClgKiogcm93cyAoY2VsbHMpIGFuZAoqKmByIG5jb2woZXhwcnNfbWF0KWAqKiBjb2x1bW5zIChnZW5lcykuCgojIyMgU2FtcGxlIGluZm9ybWF0aW9uCgpUaGVyZSBpcyBhbHNvIHNvbWUgbWV0YWRhdGEgYWJvdXQgdGhlIGNlbGxzLgoKYGBge3IgaW5wdXQtZXhwcmVzc2lvbi1zYW1wbGVzfQpzYW1wbGVfaW5mbyA8LSBobnNjYyRzYW1wbGVfaW5mbwoKc2tpbShzYW1wbGVfaW5mbykKYGBgCgojIyMgRXhwcmVzc2VkIGdlbmVzCgpUaGUgZmluYWwgaXRlbSBpcyBhIHZlY3RvciBvZiB0aGUgbmFtZXMgb2YgZXhwcmVzc2VkIGdlbmVzLgoKYGBge3IgaW5wdXQtZXhwcmVzc2lvbi1nZW5lc30Kc2tpbShobnNjYyRleHByZXNzZWRfZ2VuZXMpCmBgYAoKR2VuZSBzZXQKLS0tLS0tLS0KCkJlY2F1c2Ugd2UgYXJlIGxvb2tpbmcgYXQgaG93IENBRnMgaW5mbHVlbmNlIGNhbmNlciBncm93dGggd2Ugd2lsbCB1c2UgYQpzaWduYXR1cmUgZm9yIHAtRU1ULgoKYGBge3IgaW5wdXQtZ2VuZXNldH0KIyBGcm9tIGh0dHBzOi8vemVub2RvLm9yZy9yZWNvcmQvMzI2MDc1OC9maWxlcy9wZW10X3NpZ25hdHVyZS50eHQKZ2VuZXNldCA8LSByZWFkX3RzdigKICAgIGZzOjpwYXRoKFBBVEhTJE5pY2hlTmV0X2luLCAicGVtdF9zaWduYXR1cmUudHh0IiksCiAgICBjb2xfdHlwZXMgPSBjb2xzKAogICAgICAgIGdlbmUgPSBjb2xfY2hhcmFjdGVyKCkKICAgICksCiAgICBjb2xfbmFtZXMgPSAiZ2VuZSIKKSAlPiUKICAgIHB1bGwoZ2VuZSkgJT4lCiAgICAuWy4gJWluJSByb3duYW1lcyhsaWdhbmRfdGFyZ2V0cyldCgpza2ltKGdlbmVzZXQpCmBgYAoKRGVmaW5lIGV4cHJlc3NlZCBnZW5lcwo9PT09PT09PT09PT09PT09PT09PT09CgpUaGUgZmlyc3Qgc3RlcCBpbiB0aGUgYW5hbHlzaXMgaXMgdG8gZGVmaW5lIHdoaWNoIGdlbmVzIGFyZSBleHByZXNzZWQgaW4gdGhlCnNlbmRlciBhbmQgcmVjZWl2ZXIgY2VsbCBwb3B1bGF0aW9ucy4gSW4gdGhpcyBleGFtcGxlIHRoZSBDQUZzIGFyZSBkZWZpbmVkIHRvIGJlCnRoZSBzZW5kZXJzIGFuZCB0dW1vdXIgY2VsbHMgKGZyb20gaGlnaCBxdWFsaXR5IHR1bW91cnMpIGFyZSBkZWZpbmVkIHRvIGJlCnJlY2VpdmVycy4KCldlIGFsc28gbmVlZCB0byBzZXQgYSB0aHJlc2hvbGQgZm9yIGRlY2lkaW5nIGEgZ2VuZSBpcyAiZXhwcmVzc2VkIi4gSGVyZSB3ZSB1c2UKdGhlIGZvbGxvd2luZyBmb3JtdWxhOgoKJCRFYV9pID0gbG9nXzIoKFxmcmFjezF9e2t9XHN1bV97aSA9IDF9XntrfSBUUE1faSkgKyAxKSA+PSA0JCQKCj4gKipOT1RFOioqIEZvciBVTUkgZGF0YSAoMTB4IENocm9taXVtKSB0aGUgYXV0aG9ycyBkb24ndCB1c2UgdGhpcyBmb3JtdWxhIGFuZAo+IGluc3RlYWQgc3VnZ2VzdCBhIHRocmVzaG9sZCBvZiBub24temVybyBleHByZXNzaW9uIGluIGF0IGxlYXN0IDEwJSBvZiBjZWxscy4KCmBgYHtyIGV4cHJlc3NlZCBnZW5lc30KIyBMb3ctcXVhbGl0eSB0dW1vdXJzIHRvIHJlbW92ZQp0dW1vdXJzX3JlbW92ZSA8LSBjKCJITjEwIiwgIkhOIiwgIkhOMTIiLCAiSE4xMyIsICJITjI0IiwgIkhONyIsICJITjgiLCAiSE4yMyIpCgpDQUZfaWRzIDwtIHNhbXBsZV9pbmZvICU+JQogICAgZmlsdGVyKAogICAgICAgIGBMeW1waCBub2RlYCA9PSAwICYKICAgICAgICAgICAgISh0dW1vciAlaW4lIHR1bW91cnNfcmVtb3ZlKSAmCiAgICAgICAgICAgIGBub24tY2FuY2VyIGNlbGwgdHlwZWAgPT0gIkNBRiIKICAgICkgJT4lCiAgICBwdWxsKGNlbGwpCgptYWxpZ25hbnRfaWRzIDwtIHNhbXBsZV9pbmZvICU+JQogICAgZmlsdGVyKAogICAgICAgIGBMeW1waCBub2RlYCA9PSAwICYKICAgICAgICAgICAgISh0dW1vciAlaW4lIHR1bW91cnNfcmVtb3ZlKSAmCiAgICAgICAgICAgIGBjbGFzc2lmaWVkICBhcyBjYW5jZXIgY2VsbGAgPT0gMQogICAgKSAlPiUKICAgIHB1bGwoY2VsbCkKCmV4cHJlc3NlZF9zZW5kZXIgPC0gZXhwcnNfbWF0W0NBRl9pZHMsIF0gJT4lCiAgICBhcHBseSgyLCBmdW5jdGlvbih4KSB7MTAgKiAoMiAqKiB4IC0gMSl9KSAlPiUKICAgIGFwcGx5KDIsIGZ1bmN0aW9uKHgpIHtsb2cyKG1lYW4oeCkgKyAxKX0pICU+JQogICAgLlsuID49IDRdICU+JQogICAgbmFtZXMoKQpleHByZXNzZWRfcmVjZWl2ZXIgPC0gZXhwcnNfbWF0W21hbGlnbmFudF9pZHMsIF0gJT4lCiAgICBhcHBseSgyLCBmdW5jdGlvbih4KSB7MTAgKiAoMiAqKiB4IC0gMSl9KSAlPiUgCiAgICBhcHBseSgyLCBmdW5jdGlvbih4KSB7bG9nMihtZWFuKHgpICsgMSl9KSAlPiUKICAgIC5bLiA+PSA0XSAlPiUKICAgIG5hbWVzKCkKYGBgCgpBZnRlciB0aGlzIHF1YWxpdHkgY29udHJvbCB3ZSBoYXZlIHNlbGVjdGVkICoqYHIgbGVuZ3RoKENBRl9pZHMpYCoqIENBRnMKKHNlbmRlcnMpIGFuZCAqKmByIGxlbmd0aChtYWxpZ25hbnRfaWRzKWAqKiB0dW1vdXIgY2VsbHMgKHJlY2VpdmVycykuIFRoZXJlIGFyZQoqKmByIGxlbmd0aChleHByZXNzZWRfc2VuZGVyKWAqKiBnZW5lcyBleHByZXNzZWQgaW4gdGhlIHNlbmRlciBjZWxscyBhbmQKKipgciBsZW5ndGgoZXhwcmVzc2VkX3JlY2VpdmVyKWAqKiBnZW5lcyBleHByZXNzZWQgaW4gdGhlIHJlY2VpdmVyIGNlbGxzLgoKQmFja2dyb3VuZCBnZW5lcwo9PT09PT09PT09PT09PT09CgpXZSBhbHJlYWR5IGhhdmUgdGhlIGdlbmUgc2V0IG9mIGludGVyZXN0IHRoYXQgd2Ugd2FudCB0byBsb29rIGF0IGJ1dCB3ZSBhbHNvCm5lZWQgdG8gZGVmaW5lIGEgYmFja2dyb3VuZCBzZXQgb2YgZ2VuZXMuIEZvciB0aGlzIHdlIHVzZSBhbGwgZ2VuZXMgZXhwcmVzc2VkIGluCnRoZSBtYWxpZ25hbnQgKHJlY2VpdmVyKSBjZWxscyB3aGljaCBhcmUgYWxzbyBpbiB0aGUgbGlnYW5kLXRhcmdldCBtYXRyaXguCgpgYGB7ciBiYWNrZ3JvdW5kfQpiYWNrZ3JvdW5kX2dlbmVzIDwtIGV4cHJlc3NlZF9yZWNlaXZlciAlPiUKICAgIC5bLiAlaW4lIHJvd25hbWVzKGxpZ2FuZF90YXJnZXRzKV0KYGBgCgpUaGlzIGdpdmVzIHVzIGEgc2V0IG9mICoqYHIgbGVuZ3RoKGJhY2tncm91bmRfZ2VuZXMpYCoqIGJhY2tncm91bmQgZ2VuZXMuCgpQb3RlbnRpYWwgbGlnYW5kcwo9PT09PT09PT09PT09PT09PQoKV2UgZGV0ZXJtaW5lIGEgc2V0IG9mIHBvdGVudGlhbCBsaWdhbmRzIGJ5IHNlbGVjdGlvbiB0aG9zZSB0aGF0IGFyZSBleHByZXNzZWQKYnkgQ0FGcyAoc2VuZGVyKSBhbmQgYmluZCBhIHJlY2VwdG9yIGV4cHJlc3NlZCBpbiBtYWxpZ25hbnQgY2VsbHMgKHJlY2VpdmVyKS4KCmBgYHtyIGxpZ2FuZHN9CmxpZ2FuZHMgPC0gbHJfbmV0d29yayAlPiUKICAgIHB1bGwoZnJvbSkgJT4lCiAgICB1bmlxdWUoKQoKZXhwcmVzc2VkX2xpZ2FuZHMgPC0gaW50ZXJzZWN0KGxpZ2FuZHMsIGV4cHJlc3NlZF9zZW5kZXIpCgpyZWNlcHRvcnMgPC0gbHJfbmV0d29yayAlPiUKICAgIHB1bGwodG8pICU+JQogICAgdW5pcXVlKCkKCmV4cHJlc3NlZF9yZWNlcHRvcnMgPC0gaW50ZXJzZWN0KHJlY2VwdG9ycywgZXhwcmVzc2VkX3JlY2VpdmVyKQoKbHJfbmV0d29ya19leHByZXNzZWQgPC0gbHJfbmV0d29yayAlPiUKICAgIGZpbHRlcigKICAgICAgICBmcm9tICVpbiUgZXhwcmVzc2VkX2xpZ2FuZHMgJgogICAgICAgICAgICB0byAlaW4lIGV4cHJlc3NlZF9yZWNlcHRvcnMKICAgICkKCnBvdGVudGlhbF9saWdhbmRzIDwtIGxyX25ldHdvcmtfZXhwcmVzc2VkICU+JQogICAgcHVsbChmcm9tKSAlPiUKICAgIHVuaXF1ZSgpCmBgYAoKVGhlIGZpbHRlcmVkIGRhdGFiYXNlIGNvbnRhaW5zICoqYHIgbnJvdyhscl9uZXR3b3JrX2V4cHJlc3NlZClgKiogZXhwcmVzc2VkCmxpZ2FuZC1yZWNlcHRvciBwYWlycyB3aXRoICoqYHIgbGVuZ3RoKHBvdGVudGlhbF9saWdhbmRzKWAqKiBwb3RlbnRpYWwgbGlnYW5kcy4KCkxpZ2FuZCBhY3Rpdml0eSBhbmFseXNpcwo9PT09PT09PT09PT09PT09PT09PT09PT0KCk5vdyB3ZSBoYXZlIGFsbCB0aGUgaW5wdXQgZGF0YSBzb3J0ZWQgd2UgY2FuIHJ1biAqKk5pY2hlTmV0KiouIFRoZSBmaXJzdAphbmFseXNpcyBhc3Nlc3NlcyBsaWdhbmQgYWN0aXZpdHkgYnkgY2FsY3VsYXRpbmcgaG93IHdlbGwgZWFjaCBDQUYtbGlnYW5kIGNhbgpwcmVkaWN0IHRoYXQgYSBnZW5lIGJlbG9uZ3MgdG8gdGhlIHAtRU1UIGdlbmUgc2V0IGNvbXBhcmVkIHRvIHRoZSBiYWNrZ3JvdW5kCmdlbmVzLgoKYGBge3IgYWN0aXZpdHl9CmxpZ2FuZF9hY3Rpdml0aWVzIDwtIHByZWRpY3RfbGlnYW5kX2FjdGl2aXRpZXMoCiAgICBnZW5lc2V0ICAgICAgICAgICAgICAgICAgICA9IGdlbmVzZXQsIAogICAgYmFja2dyb3VuZF9leHByZXNzZWRfZ2VuZXMgPSBiYWNrZ3JvdW5kX2dlbmVzLAogICAgbGlnYW5kX3RhcmdldF9tYXRyaXggICAgICAgPSBsaWdhbmRfdGFyZ2V0cywKICAgIHBvdGVudGlhbF9saWdhbmRzICAgICAgICAgID0gcG90ZW50aWFsX2xpZ2FuZHMKKQoKc2tpbShsaWdhbmRfYWN0aXZpdGllcykKYGBgCgpUaGVyZSBhcmUgdmFyaW91cyBzY29yZXMgZ2l2ZW4gYXMgcmVzdWx0cyBoZXJlIGJ1dCB0aGUgYXV0aG9ycyBzdWdnZXN0IHVzaW5nCnRoZSBQZWFyc29uIGNvcnJlbGF0aW9uIHRvIHNlbGVjdCBsaWdhbmRzLiBXZSBzZWxlY3QgMjAgbGlnYW5kcyB3aXRoIGhpZ2hlc3QKY29ycmVsYXRpb24uCgpgYGB7ciBiZXN0LWFjdGl2aXR5fQpiZXN0X2xpZ2FuZHMgPC0gbGlnYW5kX2FjdGl2aXRpZXMgJT4lCiAgICB0b3BfbigyMCwgcGVhcnNvbikgJT4lCiAgICBhcnJhbmdlKC1wZWFyc29uKSAlPiUKICAgIHB1bGwodGVzdF9saWdhbmQpCmBgYAoKVGhlc2UgbGlnYW5kcyBhcmU6CmByIGdsdWVfY29sbGFwc2UoZ2x1ZSgiKip7YmVzdF9saWdhbmRzfSoqIiksIHNlcCA9ICIsICIsIGxhc3QgPSAiIGFuZCAiKWAKClRoZSBjaG9pY2Ugb2YgdG8gdXNlIDIwIGxpZ2FuZHMgaXMgc29tZXdoYXQgYXJiaXRhcnkgYW5kIGlzIGxpa2VseSB0byBiZQpkaWZmZXJlbnQgZm9yIGRpZmZlcmVudCBzZXR0aW5ncy4gRm9yIGEgcmVhbCBhbmFseXNpcyB0aGUgYXV0aG9ycyBzdWdnZXN0CmNob29zaW5nIGEgdGhyZXNob2xkIGJ5IGxvb2tpbmcgYXQgdGhlIGRpc3RyaWJ1dGlvbiBvZiBjb3JyZWxhdGlvbnMuCgpgYGB7ciBhY3Rpdml0eS1wbG90fQpwZWFyc29uX3RocmVzaCA8LSBsaWdhbmRfYWN0aXZpdGllcyAlPiUKICAgIHRvcF9uKDIwLCBwZWFyc29uKSAlPiUKICAgIHB1bGwocGVhcnNvbikgJT4lCiAgICBtaW4oKQoKZ2dwbG90KGxpZ2FuZF9hY3Rpdml0aWVzLCBhZXMoeCA9IHBlYXJzb24pKSArIAogICAgZ2VvbV9oaXN0b2dyYW0oY29sb3IgPSAiYmxhY2siLCBmaWxsID0gImRhcmtvcmFuZ2UiKSAgKwogICAgZ2VvbV92bGluZSgKICAgICAgICB4aW50ZXJjZXB0ID0gcGVhcnNvbl90aHJlc2gsCiAgICAgICAgY29sb3IgICAgICA9ICJyZWQiLAogICAgICAgIGxpbmV0eXBlICAgPSAiZGFzaGVkIiwKICAgICAgICBzaXplICAgICAgID0gMQogICAgKSArIAogICAgbGFicygKICAgICAgICB4ID0gImxpZ2FuZCBhY3Rpdml0eSAoUENDKSIsCiAgICAgICAgeSA9ICIjIGxpZ2FuZHMiCiAgICApICsKICAgIHRoZW1lX2NsYXNzaWMoKQpgYGAKCkluZmVyIHRhcmdldCBnZW5lcwo9PT09PT09PT09PT09PT09PT0KCk9uY2Ugd2UgaGF2ZSBhIHNldCBvZiBhY3RpdmUgbGlnYW5kcyB3ZSBjYW4gbG9vayBhdCB0aGUgcmVndWxhdG9yeSBwb3RlbnRpYWwKYmV0d2VlbiBsaWdhbmRzIGFuZCBkb3duc3RyZWFtIHRhcmdldHMuIFdlIG9ubHkgbG9vayBhdCBpbnRlcmFjdGlvbnMgYmV0d2VlbiB0aGUKdG9wIDIwIGxpZ2FuZHMgYW5kIGdlbmVzIHRoYXQgYmVsb25nIHRvIHRoZSBnZW5lIHNldCBhbmQgYXJlIGluIHRoZSB0b3AgMjUwCm1vc3Qgc3Ryb25nbHkgcHJlZGljdGVkIHRhcmdldHMgb2Ygb25lIG9mIHRoZSBzZWxlY3RlZCBsaWdhbmRzLiBUaGUgdGFyZ2V0cyBhcmUKc2VsZWN0ZWQgYmFzZWQgb24gcHJlZGljdGlvbnMgaW4gdGhlIGdlbmVyYWwgcHJpb3IgbW9kZWwgc28gYXJlIG5vdCBzcGVjaWZpYyB0bwp0aGlzIGRhdGFzZXQuIEdlbmVzIHRoYXQgYXJlIG5vdCBhIHRvcCB0YXJnZXQgb2Ygb25lIG9mIHRoZSBzZWxlY3RlZCBsaWdhbmRzCndpbGwgbm90IGJlIHNob3duLgoKYGBge3IgYWN0aXZlLWxpbmtzfQphY3RpdmVfbGlua3MgPC0gYmVzdF9saWdhbmRzICU+JQogICAgbGFwcGx5KAogICAgICAgIGdldF93ZWlnaHRlZF9saWdhbmRfdGFyZ2V0X2xpbmtzLAogICAgICAgIGdlbmVzZXQgICAgICAgICAgICAgID0gZ2VuZXNldCwKICAgICAgICBsaWdhbmRfdGFyZ2V0X21hdHJpeCA9IGxpZ2FuZF90YXJnZXRzLAogICAgICAgIG4gICAgICAgICAgICAgICAgICAgID0gMjUwCiAgICApICU+JQogICAgYmluZF9yb3dzKCkKCnNraW0oYWN0aXZlX2xpbmtzKQpgYGAKCkZvciB2aXN1YWxpc2F0aW9uIHBvdGVudGlhbCBzY29yZXMgYXJlIHNldCB0byB6ZXJvIGlmIHRoZXkgd2VyZSBiZWxvdyB0aGUgMC4yNQpxdWFudGlsZSBmb3IgdG9wIHRhcmdldHMgb2YgdGhhdCBsaWdhbmQgaW4gdGhlIGxpZ2FuZC10YXJnZXQgbWF0cml4LgoKYGBge3IgdGFyZ2V0LWhlYXRtYXB9CmxpbmtzX21hdCA8LSBwcmVwYXJlX2xpZ2FuZF90YXJnZXRfdmlzdWFsaXphdGlvbigKICAgIGxpZ2FuZF90YXJnZXRfZGYgICAgID0gYWN0aXZlX2xpbmtzLAogICAgbGlnYW5kX3RhcmdldF9tYXRyaXggPSBsaWdhbmRfdGFyZ2V0cywKICAgIGN1dG9mZiAgICAgICAgICAgICAgID0gMC4yNQopCgpvcmRlcl9saWdhbmRzIDwtIGludGVyc2VjdChiZXN0X2xpZ2FuZHMsIGNvbG5hbWVzKGxpbmtzX21hdCkpICU+JSByZXYoKQpvcmRlcl90YXJnZXRzIDwtIGFjdGl2ZV9saW5rcyR0YXJnZXQgJT4lIHVuaXF1ZSgpCgp2aXNfbGlnYW5kX3RhcmdldCA8LSBsaW5rc19tYXRbb3JkZXJfdGFyZ2V0cywgb3JkZXJfbGlnYW5kc10gJT4lIHQoKQoKbGlnYW5kX3RhcmdldF9oZWF0bWFwIDwtIHZpc19saWdhbmRfdGFyZ2V0ICU+JQogICAgbWFrZV9oZWF0bWFwX2dncGxvdCgKICAgICAgICAiUHJpb3JpdGl6ZWQgQ0FGLWxpZ2FuZHMiLAogICAgICAgICJwLUVNVCBnZW5lcyBpbiBtYWxpZ25hbnQgY2VsbHMiLAogICAgICAgIGNvbG9yICAgICAgICAgICA9ICJwdXJwbGUiLAogICAgICAgIGxlZ2VuZF9wb3NpdGlvbiA9ICJ0b3AiLAogICAgICAgIHhfYXhpc19wb3NpdGlvbiA9ICJ0b3AiLAogICAgICAgIGxlZ2VuZF90aXRsZSAgICA9ICJSZWd1bGF0b3J5IHBvdGVudGlhbCIKICAgICkgKwogICAgc2NhbGVfZmlsbF9ncmFkaWVudDIoCiAgICAgICAgbG93ICAgID0gIndoaXRlc21va2UiLAogICAgICAgIGhpZ2ggICA9ICJwdXJwbGUiLAogICAgICAgIGJyZWFrcyA9IGMoMCwwLjAwNSwwLjAxKQogICAgKSArCiAgICB0aGVtZShheGlzLnRleHQueCA9IGVsZW1lbnRfdGV4dChmYWNlID0gIml0YWxpYyIpKQoKbGlnYW5kX3RhcmdldF9oZWF0bWFwCmBgYAoKVGhlIGN1dG9mZnMgZm9yIHZpc3VhbGlzYXRpb24gYXJlIGFyYml0YXJ5IGFuZCB0aGUgYXV0aG9ycyBzdWdnZXN0IHRlc3RpbmcKc2V2ZXJhbCBjdXRvZmZzLiBDb25zaWRlcmluZyBtb3JlIHRhcmdldHMgd291bGQgaWRlbnRpZnkgbW9yZSBpbnRlcmFjdGlvbnMgYnV0CndpdGggbGVzcyBjb25maWRlbmNlLiBMb3dlcmluZyB0aGUgcXVhbnRpbCBjdXRvZmYgd291bGQgcmVzdWx0IGluIGEgZGVuc2VyCmhlYXRtYXAuCgpMaWdhbmQtcmVjZXB0b3IgbmV0d29yawo9PT09PT09PT09PT09PT09PT09PT09PQoKQSBmdXJ0aGVyIGFuYWx5c2lzIGlzIHRvIGxvb2sgYXQgdGhlIGludGVyYWN0aW9ucyBiZXR3ZWVuIGxpZ2FuZHMgYW5kIHJlY2VwdG9ycwpyYXRoZXIgdGhhbiBkb3duc3RyZWFtIHRhcmdldHMuCgpgYGB7ciBsci1uZXR3b3JrfQpscl9uZXR3b3JrX3RvcCA8LSBscl9uZXR3b3JrICU+JQogICAgZmlsdGVyKAogICAgICAgIGZyb20gJWluJSBiZXN0X2xpZ2FuZHMgJgogICAgICAgICAgICB0byAlaW4lIGV4cHJlc3NlZF9yZWNlcHRvcnMKICAgICkgJT4lCiAgICBkaXN0aW5jdChmcm9tLCB0bykKCmJlc3RfcmVjZXB0b3JzIDwtIGxyX25ldHdvcmtfdG9wICU+JQogICAgcHVsbCh0bykgJT4lCiAgICB1bmlxdWUoKQoKbHJfbmV0d29ya190b3AgPC0gd2VpZ2h0ZWRfbmV0d29ya3MkbHJfc2lnICU+JQogICAgZmlsdGVyKAogICAgICAgIGZyb20gJWluJSBiZXN0X2xpZ2FuZHMgJgogICAgICAgICAgICB0byAlaW4lIGJlc3RfcmVjZXB0b3JzCiAgICApICU+JQogICAgc3ByZWFkKCJmcm9tIiwgIndlaWdodCIsIGZpbGwgPSAwKQoKbHJfbmV0d29ya190b3BfbWF0IDwtIGxyX25ldHdvcmtfdG9wICU+JQogICAgc2VsZWN0KC10bykgJT4lCiAgICBhcy5tYXRyaXgoKSAlPiUKICAgIG1hZ3JpdHRyOjpzZXRfcm93bmFtZXMobHJfbmV0d29ya190b3AkdG8pCgpkaXN0X3JlY2VwdG9ycyAgIDwtIGRpc3QobHJfbmV0d29ya190b3BfbWF0LCBtZXRob2QgPSAiYmluYXJ5IikKaGNsdXN0X3JlY2VwdG9ycyA8LSBoY2x1c3QoZGlzdF9yZWNlcHRvcnMsIG1ldGhvZCA9ICJ3YXJkLkQyIikKb3JkZXJfcmVjZXB0b3JzICA8LSBoY2x1c3RfcmVjZXB0b3JzJGxhYmVsc1toY2x1c3RfcmVjZXB0b3JzJG9yZGVyXQoKZGlzdF9saWdhbmRzICAgICAgICAgICAgPC0gZGlzdChscl9uZXR3b3JrX3RvcF9tYXQgJT4lIHQoKSwgbWV0aG9kID0gImJpbmFyeSIpCmhjbHVzdF9saWdhbmRzICAgICAgICAgIDwtIGhjbHVzdChkaXN0X2xpZ2FuZHMsIG1ldGhvZCA9ICJ3YXJkLkQyIikKb3JkZXJfbGlnYW5kc19yZWNlcHRvcnMgPC0gaGNsdXN0X2xpZ2FuZHMkbGFiZWxzW2hjbHVzdF9saWdhbmRzJG9yZGVyXQoKbGlnYW5kX3JlY2VwdG9yX2hlYXRtYXAgPC0KICAgIGxyX25ldHdvcmtfdG9wX21hdFtvcmRlcl9yZWNlcHRvcnMsIG9yZGVyX2xpZ2FuZHNfcmVjZXB0b3JzXSAlPiUKICAgIHQoKSAlPiUKICAgIG1ha2VfaGVhdG1hcF9nZ3Bsb3QoCiAgICAgICAgIlByaW9yaXRpemVkIENBRi1saWdhbmRzIiwKICAgICAgICAiUmVjZXB0b3JzIGV4cHJlc3NlZCBieSBtYWxpZ25hbnQgY2VsbHMiLAogICAgICAgIGNvbG9yICAgICAgICAgICA9ICJtZWRpdW12aW9sZXRyZWQiLAogICAgICAgIHhfYXhpc19wb3NpdGlvbiA9ICJ0b3AiLAogICAgICAgIGxlZ2VuZF90aXRsZSAgICA9ICJQcmlvciBpbnRlcmFjdGlvbiBwb3RlbnRpYWwiCiAgICApICsKICAgIHRoZW1lKCkKCmxpZ2FuZF9yZWNlcHRvcl9oZWF0bWFwCmBgYAoKQ29tYmluZWQgaGVhdG1hcCAod2l0aCBleHByZXNzaW9uKQo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgoqKk5pY2hlTmV0Kiogb25seSBjb25zaWRlcnMgZXhwcmVzc2VkIGxpZ2FuZHMgYnV0IGRvZXMgbm90IHVzZSB0aGVpciBleHByZXNzaW9uCndoZW4gcmFua2luZyB0aGVtLCB0aGUgcmFua2luZyBpcyBvbmx5IGJhc2VkIG9uIHBvdGVudGlhbCBmb3IgcmVndWxhdGlvbiBnaXZlbgpwcmlvciBrbm93bGVkZ2UuIEhlcmUgd2UgbWFrZSBhIGNvbWJpbmVkIGhlYXRtYXAgdGhhdCBzaG93cyBleHByZXNzaW9uIGFsb25nc2lkZQpyZWd1bGF0b3J5IHBvdGVudGlhbC4KCmBgYHtyIGNvbWJpbmVkLWhlYXRtYXAsIGZpZy53aWR0aCA9IDEzLCBmaWcuaGVpZ2h0ID0gN30KbGlnYW5kX3BlYXJzb25fbWF0cml4IDwtIGxpZ2FuZF9hY3Rpdml0aWVzICU+JQogICAgc2VsZWN0KHBlYXJzb24pICU+JQogICAgYXMubWF0cml4KCkgJT4lCiAgICBtYWdyaXR0cjo6c2V0X3Jvd25hbWVzKGxpZ2FuZF9hY3Rpdml0aWVzJHRlc3RfbGlnYW5kKQoKbGlnYW5kX3BlYXJzb25faGVhdG1hcCA8LSBsaWdhbmRfcGVhcnNvbl9tYXRyaXhbb3JkZXJfbGlnYW5kcywgXSAlPiUKICAgIGFzLm1hdHJpeChuY29sID0gMSkgJT4lCiAgICBtYWdyaXR0cjo6c2V0X2NvbG5hbWVzKCJQZWFyc29uIikgJT4lCiAgICBtYWtlX2hlYXRtYXBfZ2dwbG90KAogICAgICAgICJQcmlvcml0aXplZCBDQUYtbGlnYW5kcyIsCiAgICAgICAgIkxpZ2FuZCBhY3Rpdml0eSIsCiAgICAgICAgY29sb3IgICAgICAgICAgID0gImRhcmtvcmFuZ2UiLAogICAgICAgIGxlZ2VuZF9wb3NpdGlvbiA9ICJ0b3AiLAogICAgICAgIHhfYXhpc19wb3NpdGlvbiA9ICJ0b3AiLAogICAgICAgIGxlZ2VuZF90aXRsZSAgICA9IHBhc3RlKAogICAgICAgICAgICAiUGVhcnNvbiBjb3JyZWxhdGlvbiBjb2VmZmljaWVudCwiLAogICAgICAgICAgICAiKHRhcmdldCBnZW5lIHByZWRpY3Rpb24gYWJpbGl0eSkiLAogICAgICAgICAgICBjb2xsYXBzZSA9ICJcbiIKICAgICAgICApCiAgICApCgpleHByZXNzaW9uX0NBRiA8LSBleHByc19tYXRbQ0FGX2lkcywgb3JkZXJfbGlnYW5kc10gJT4lCiAgICBkYXRhLmZyYW1lKCkgJT4lCiAgICByb3duYW1lc190b19jb2x1bW4oImNlbGwiKSAlPiUKICAgIHRibF9kZigpICU+JQogICAgaW5uZXJfam9pbigKICAgICAgICBzYW1wbGVfaW5mbyAlPiUKICAgICAgICAgICAgc2VsZWN0KGNlbGwsdHVtb3IpLAogICAgICAgIGJ5ID0gICJjZWxsIgogICAgKSAlPiUKICAgIGdyb3VwX2J5KHR1bW9yKSAlPiUKICAgIHNlbGVjdCgtY2VsbCkgJT4lCiAgICBzdW1tYXJpc2VfYWxsKG1lYW4pICU+JQogICAgZ2F0aGVyKCJsaWdhbmQiLCAiZXhwcnMiLCAtdHVtb3IpICU+JQogICAgc3ByZWFkKHR1bW9yLCBleHBycykKICAgIApleHByZXNzaW9uX0NBRl9tYXQgPC0gZXhwcmVzc2lvbl9DQUYgJT4lCiAgICBzZWxlY3QoLWxpZ2FuZCkgJT4lCiAgICBhcy5tYXRyaXgoKSAlPiUKICAgIG1hZ3JpdHRyOjpzZXRfcm93bmFtZXMoZXhwcmVzc2lvbl9DQUYkbGlnYW5kKQoKb3JkZXJfdHVtb3JzID0gYygiSE42IiwgIkhOMjAiLCAiSE4yNiIsICJITjI4IiwgIkhOMjIiLCAiSE4yNSIsIAogICAgICAgICAgICAgICAgICJITjUiLCAiSE4xOCIsICJITjE3IiwgIkhOMTYiKQoKY29sb3IgPC0gY29sb3JSYW1wUGFsZXR0ZShyZXYoYnJld2VyLnBhbChuID0gNywgbmFtZSA9ICJSZFlsQnUiKSkpKDEwMCkKCmxpZ2FuZF9leHByc19oZWF0bWFwIDwtIGV4cHJlc3Npb25fQ0FGX21hdFtvcmRlcl9saWdhbmRzLCBvcmRlcl90dW1vcnNdICU+JSAKICAgIG1ha2VfaGVhdG1hcF9nZ3Bsb3QoCiAgICAgICAgIlByaW9yaXRpemVkIENBRi1saWdhbmRzIiwKICAgICAgICAiVHVtb3IiLAogICAgICAgIGNvbG9yICAgICAgICAgICA9IGNvbG9yWzEwMF0sCiAgICAgICAgbGVnZW5kX3Bvc2l0aW9uID0gInRvcCIsCiAgICAgICAgeF9heGlzX3Bvc2l0aW9uID0gInRvcCIsCiAgICAgICAgbGVnZW5kX3RpdGxlICAgID0gIkV4cHJlc3Npb25cbihhdmVyYWdlZCBvdmVyXG5zaW5nbGUgY2VsbHMpIgogICAgKSArCiAgICB0aGVtZShheGlzLnRleHQueSA9IGVsZW1lbnRfdGV4dChmYWNlID0gIml0YWxpYyIpKQoKZXhwcmVzc2lvbl90YXJnZXRzIDwtIGV4cHJzX21hdFttYWxpZ25hbnRfaWRzLCBnZW5lc2V0XSAlPiUKICAgIGRhdGEuZnJhbWUoKSAlPiUKICAgIHJvd25hbWVzX3RvX2NvbHVtbigiY2VsbCIpICU+JQogICAgdGJsX2RmKCkgJT4lCiAgICBpbm5lcl9qb2luKAogICAgICAgIHNhbXBsZV9pbmZvICU+JQogICAgICAgICAgICBzZWxlY3QoY2VsbCwgdHVtb3IpLAogICAgICAgIGJ5ID0gICJjZWxsIgogICAgKSAlPiUKICAgIGdyb3VwX2J5KHR1bW9yKSAlPiUKICAgIHNlbGVjdCgtY2VsbCkgJT4lCiAgICBzdW1tYXJpc2VfYWxsKG1lYW4pICU+JQogICAgZ2F0aGVyKCJ0YXJnZXQiLCAiZXhwcnMiLCAtdHVtb3IpICU+JQogICAgc3ByZWFkKHR1bW9yLCBleHBycykKCmV4cHJlc3Npb25fdGFyZ2V0c19tYXQgPC0gZXhwcmVzc2lvbl90YXJnZXRzICU+JQogICAgc2VsZWN0KC10YXJnZXQpICU+JQogICAgYXMubWF0cml4KCkgJT4lCiAgICBtYWdyaXR0cjo6c2V0X3Jvd25hbWVzKGV4cHJlc3Npb25fdGFyZ2V0cyR0YXJnZXQpCgp0YXJnZXRzX2V4cHJzX2hlYXRtYXAgPC0gZXhwcmVzc2lvbl90YXJnZXRzX21hdCAlPiUKICAgIHQoKSAlPiUKICAgIHNjYWxlX3F1YW50aWxlKCkgJT4lCiAgICAuW29yZGVyX3R1bW9ycywgb3JkZXJfdGFyZ2V0c10gJT4lCiAgICBtYWtlX3RocmVlY29sb3JfaGVhdG1hcF9nZ3Bsb3QoCiAgICAgICAgIlR1bW9yIiwKICAgICAgICAiVGFyZ2V0IiwKICAgICAgICBsb3dfY29sb3IgICAgICAgPSBjb2xvclsxXSwKICAgICAgICBtaWRfY29sb3IgICAgICAgPSBjb2xvcls1MF0sCiAgICAgICAgbWlkICAgICAgICAgICAgID0gMC41LAogICAgICAgIGhpZ2hfY29sb3IgICAgICA9IGNvbG9yWzEwMF0sCiAgICAgICAgbGVnZW5kX3Bvc2l0aW9uID0gInRvcCIsCiAgICAgICAgeF9heGlzX3Bvc2l0aW9uID0gInRvcCIgLAogICAgICAgIGxlZ2VuZF90aXRsZSAgICA9ICJTY2FsZWQgZXhwcmVzc2lvblxuKGF2ZXJhZ2VkIG92ZXJcbnNpbmdsZSBjZWxscykiCiAgICApICsKICAgIHRoZW1lKGF4aXMudGV4dC54ID0gZWxlbWVudF90ZXh0KGZhY2UgPSAiaXRhbGljIikpCgpjb21iaW5lZF9oZWF0bWFwIDwtIHBsb3RfZ3JpZCgKICAgIGxpZ2FuZF9wZWFyc29uX2hlYXRtYXAgKwogICAgICAgIHRoZW1lKAogICAgICAgICAgICBsZWdlbmQucG9zaXRpb24gPSAibm9uZSIsCiAgICAgICAgICAgIGF4aXMudGlja3MgICAgICA9IGVsZW1lbnRfYmxhbmsoKSwKICAgICAgICAgICAgYXhpcy50aXRsZS54ICAgID0gZWxlbWVudF90ZXh0KCkKICAgICAgICApLAogICAgbGlnYW5kX2V4cHJzX2hlYXRtYXAgKwogICAgICAgIHlsYWIoIiIpICsKICAgICAgICB0aGVtZSgKICAgICAgICAgICAgbGVnZW5kLnBvc2l0aW9uID0gIm5vbmUiLAogICAgICAgICAgICBheGlzLnRpY2tzICAgICAgPSBlbGVtZW50X2JsYW5rKCksCiAgICAgICAgICAgIGF4aXMudGl0bGUueCAgICA9IGVsZW1lbnRfdGV4dCgpCiAgICAgICAgKSwKICAgIGxpZ2FuZF90YXJnZXRfaGVhdG1hcCArCiAgICAgICAgeWxhYigiIikgKwogICAgICAgIHRoZW1lKAogICAgICAgICAgICBsZWdlbmQucG9zaXRpb24gPSAibm9uZSIsCiAgICAgICAgICAgIGF4aXMudGlja3MgICAgICA9IGVsZW1lbnRfYmxhbmsoKQogICAgICAgICksIAogICAgTlVMTCwKICAgIE5VTEwsCiAgICB0YXJnZXRzX2V4cHJzX2hlYXRtYXAgKwogICAgICAgIHhsYWIoIiIpICsKICAgICAgICB0aGVtZSgKICAgICAgICAgICAgbGVnZW5kLnBvc2l0aW9uID0gIm5vbmUiLAogICAgICAgICAgICBheGlzLnRpY2tzICAgICAgPSBlbGVtZW50X2JsYW5rKCkKICAgICAgICApLCAKICAgIGFsaWduICAgICAgID0gImh2IiwKICAgIG5yb3cgICAgICAgID0gMiwKICAgIHJlbF93aWR0aHMgID0gYygKICAgICAgICAxICsgNC41LAogICAgICAgIG5jb2woZXhwcmVzc2lvbl9DQUZfbWF0KSwKICAgICAgICBuY29sKHZpc19saWdhbmRfdGFyZ2V0KQogICAgKSAtIDIsCiAgICByZWxfaGVpZ2h0cyA9IGMoCiAgICAgICAgbGVuZ3RoKG9yZGVyX2xpZ2FuZHMpLAogICAgICAgIG5yb3codChleHByZXNzaW9uX3RhcmdldHNfbWF0KSkgKyAzCiAgICApCikgCgpsZWdlbmRzIDwtIHBsb3RfZ3JpZCgKICAgIGFzX2dncGxvdChnZXRfbGVnZW5kKGxpZ2FuZF9wZWFyc29uX2hlYXRtYXApKSwKICAgIGFzX2dncGxvdChnZXRfbGVnZW5kKGxpZ2FuZF9leHByc19oZWF0bWFwKSksCiAgICBhc19nZ3Bsb3QoZ2V0X2xlZ2VuZChsaWdhbmRfdGFyZ2V0X2hlYXRtYXApKSwKICAgIGFzX2dncGxvdChnZXRfbGVnZW5kKHRhcmdldHNfZXhwcnNfaGVhdG1hcCkpLAogICAgbnJvdyAgPSAyLAogICAgYWxpZ24gPSAiaCIKKQoKcGxvdF9ncmlkKAogICAgY29tYmluZWRfaGVhdG1hcCwgCiAgICBsZWdlbmRzLCAKICAgIHJlbF9oZWlnaHRzID0gYygxMCwgMiksCiAgICBucm93ICAgICAgICA9IDIsCiAgICBhbGlnbiAgICAgICA9ICJodiIKKQpgYGAKClNpZ25hbGxpbmcgcGF0aHMKPT09PT09PT09PT09PT09PQoKKipOaWNoZU5ldCoqIGNhbiBhbHNvIGJlIHVzZWQgdG8gaW5mZXIgdGhlIHNpZ25hbGxpbmcgcGF0aHMgYmV0d2VlbiBhIGxpZ2FuZHMKYW5kIHRhcmdldHMgb2YgaW50ZXJlc3QuIFRoaXMgaXMgZG9uZSBieSBsb29raW5nIGF0IHdoaWNoIHRyYW5zY3JpcHRpb24gZmFjdG9ycwpyZWd1bGF0aW5nIHRoZSB0YXJnZXQgYXJlIG1vc3QgY2xvc2VseSBkb3duc3RyZWFtIG9mIHRoZSBsaWdhbmQuIFRoZSBwYXRod2F5IGlzCmNvbmZpcm1lZCBieSBsb29raW5nIGF0IHRoZSBzaWduYWxsaW5nIGRhdGFiYXNlLgoKYGBge3IgcGF0aHdheX0KbGlnYW5kc19zZWwgPC0gIlRHRkIzIgp0YXJnZXRzX3NlbCA8LSBjKCJUR0ZCSSIsICJMQU1DMiIsICJUTkMiKQoKc2lnbmFsbGluZ19wYXRoIDwtIGdldF9saWdhbmRfc2lnbmFsaW5nX3BhdGgoCiAgICBsaWdhbmRfdGZfbWF0cml4ICA9IGxpZ2FuZF90YXJnZXRzLAogICAgbGlnYW5kc19hbGwgICAgICAgPSBsaWdhbmRzX3NlbCwKICAgIHRhcmdldHNfYWxsICAgICAgID0gdGFyZ2V0c19zZWwsCiAgICB3ZWlnaHRlZF9uZXR3b3JrcyA9IHdlaWdodGVkX25ldHdvcmtzCikKCiMgTm9ybWFsaXNlIGVkZ2Ugd2VpZ2h0cyBmb3IgdmlzdWFsaXNhdGlvbgpzaWduYWxsaW5nX3BhdGhfbWlubWF4ICAgICA8LSBzaWduYWxsaW5nX3BhdGgKc2lnbmFsbGluZ19wYXRoX21pbm1heCRzaWcgPC0gc2lnbmFsbGluZ19wYXRoX21pbm1heCRzaWcgJT4lCiAgICBtdXRhdGUod2VpZ2h0ID0gKCh3ZWlnaHQgLSBtaW4od2VpZ2h0KSkgLwogICAgICAgICAgICAgICAgICAgICAgICAgKG1heCh3ZWlnaHQpIC0gbWluKHdlaWdodCkpKSArIDAuNzUpCnNpZ25hbGxpbmdfcGF0aF9taW5tYXgkZ3IgIDwtIHNpZ25hbGxpbmdfcGF0aF9taW5tYXgkZ3IgJT4lCiAgICBtdXRhdGUod2VpZ2h0ID0gKCh3ZWlnaHQgLSBtaW4od2VpZ2h0KSkgLwogICAgICAgICAgICAgICAgICAgICAgICAgKG1heCh3ZWlnaHQpIC0gbWluKHdlaWdodCkpKSArIDAuNzUpCgpncmFwaF9taW5tYXggPC0gZGlhZ3JhbW1lcl9mb3JtYXRfc2lnbmFsaW5nX2dyYXBoKAogICAgc2lnbmFsaW5nX2dyYXBoX2xpc3QgPSBzaWduYWxsaW5nX3BhdGhfbWlubWF4LAogICAgbGlnYW5kc19hbGwgICAgICAgICAgPSBsaWdhbmRzX3NlbCwKICAgIHRhcmdldHNfYWxsICAgICAgICAgID0gdGFyZ2V0c19zZWwsCiAgICBzaWdfY29sb3IgICAgICAgICAgICA9ICJpbmRpYW5yZWQiLAogICAgZ3JfY29sb3IgICAgICAgICAgICAgPSAic3RlZWxibHVlIgopCgpEaWFncmFtbWVSOjpyZW5kZXJfZ3JhcGgoZ3JhcGhfbWlubWF4LCBsYXlvdXQgPSAidHJlZSIpCmBgYAoKV2UgY2FuIGFsc28gbG9vayBhdCB3aGljaCBkYXRhIHNvdXJjZXMgc3VwcG9ydCB0aGUgaW50ZXJhY3Rpb25zIGluIHRoaXMgbmV0d29yay4KSGVyZSBhcmUgZXhhbXBsZXMgb2YgdGhlIGZpcnN0IGZldyBzb3VyY2VzLgoKYGBge3IgcGF0aHdheS1zb3VyY2VzfQpwYXRoX3NvdXJjZXMgPC0gaW5mZXJfc3VwcG9ydGluZ19kYXRhc291cmNlcygKICAgIHNpZ25hbGluZ19ncmFwaF9saXN0ID0gc2lnbmFsbGluZ19wYXRoLAogICAgbHJfbmV0d29yayAgICAgICAgICAgPSBscl9uZXR3b3JrLAogICAgc2lnX25ldHdvcmsgICAgICAgICAgPSBzaWdfbmV0d29yaywKICAgIGdyX25ldHdvcmsgICAgICAgICAgID0gZ3JfbmV0d29yawopCgprYWJsZShoZWFkKHBhdGhfc291cmNlcywgbiA9IDEwKSkKYGBgCgpHZW5lIHNldCBwcmVkaWN0aW9uCj09PT09PT09PT09PT09PT09PT0KCioqTmljaGVOZXQqKiBjYW4gYWxzbyB1c2UgdGhlIHRvcC1yYW5rZWQgbGlnYW5kcyB0byBwcmVkaWN0IHdoZXRoZXIgYSBnZW5lCmJlbG9uZ3MgdG8gYSBnZW5lIHNldC4gVGhpcyBpcyBkb25lIGJ5IHRyYWluaW5nIGEgcmFuZG9tIGZvcmVzdCBjbGFzc2lmaWNhdGlvbgptb2RlbCB0aGF0IHJldHVybnMgYSBwcm9iYWJpbGl0eSBmb3IgZWFjaCBnZW5lLgoKYGBge3IgZ2VuZXNldC1wcmVkaWN0aW9ufQprX2ZvbGRzICA8LSAzCm5fcm91bmRzIDwtIDIKCnBlbXRfcHJlZGljdGlvbnMgPC0gc2VxKG5fcm91bmRzKSAlPiUKICAgIGxhcHBseSgKICAgICAgICBhc3Nlc3NfcmZfY2xhc3NfcHJvYmFiaWxpdGllcywKICAgICAgICBmb2xkcyAgICAgICAgICAgICAgICAgICAgICA9IGtfZm9sZHMsCiAgICAgICAgZ2VuZXNldCAgICAgICAgICAgICAgICAgICAgPSBnZW5lc2V0LAogICAgICAgIGJhY2tncm91bmRfZXhwcmVzc2VkX2dlbmVzID0gYmFja2dyb3VuZF9nZW5lcywKICAgICAgICBsaWdhbmRzX29pICAgICAgICAgICAgICAgICA9IGJlc3RfbGlnYW5kcywKICAgICAgICBsaWdhbmRfdGFyZ2V0X21hdHJpeCAgICAgICA9IGxpZ2FuZF90YXJnZXRzCiAgICApCmBgYAoKVGhpcyByZXR1cm5zIGEgbGlzdCB3aXRoICoqYHIgbGVuZ3RoKHBlbXRfcHJlZGljdGlvbnMpYCoqIGl0ZW1zLiBIZXJlIGlzIGEKc3VtbWFyeSBvZiB0aGUgZmlyc3QgaXRlbToKCmByIHNraW0ocGVtdF9wcmVkaWN0aW9uc1tbMV1dKWAKCldlIGNhbiB0aGVuIGV2YWx1YXRlIGhvdyB3ZWxsIHRoZSBjYWxjdWxhdGVkIHByb2JhYmlsaXRlcyBtYXRjaCB1cCB3aXRoIHRoZSBnZW5lCnNldCBhc3NpZ25tZW50cy4KCmBgYHtyIGdlbmVzZXQtcHJlZGljdGlvbi1ldmFsfQpwcmVkaWN0aW9uX3BlcmZvcm1hbmNlIDwtIHBlbXRfcHJlZGljdGlvbnMgJT4lCiAgICBsYXBwbHkoY2xhc3NpZmljYXRpb25fZXZhbHVhdGlvbl9jb250aW51b3VzX3ByZWRfd3JhcHBlcikgJT4lCiAgICBiaW5kX3Jvd3MoKSAlPiUKICAgIG11dGF0ZShyb3VuZCA9IHNlcSgxOm5yb3coLikpKQoKcHJlZGljdGlvbl9wZXJmb3JtYW5jZSAlPiUKICAgIHN1bW1hcmlzZSgKICAgICAgICBBVVJPQyAgID0gbWVhbihhdXJvYyksCiAgICAgICAgQVVQUiAgICA9IG1lYW4oYXVwciksCiAgICAgICAgUGVhcnNvbiA9IG1lYW4ocGVhcnNvbikKICAgICkgJT4lCiAgICBrYWJsZSgpCgpwcmVkaWN0aW9uX3BlcmZvcm1hbmNlX2Rpc2NyZXRlIDwtIHBlbXRfcHJlZGljdGlvbnMgJT4lCiAgICBsYXBwbHkoY2FsY3VsYXRlX2ZyYWN0aW9uX3RvcF9wcmVkaWN0ZWQsIHF1YW50aWxlX2N1dG9mZiA9IDAuOTUpICU+JQogICAgYmluZF9yb3dzKCkgJT4lCiAgICB1bmdyb3VwKCkgJT4lCiAgICBtdXRhdGUocm91bmQgPSByZXAoMTpsZW5ndGgocGVtdF9wcmVkaWN0aW9ucyksIGVhY2ggPSAyKSkKCnBlbXRfZnJhYyA8LSBwcmVkaWN0aW9uX3BlcmZvcm1hbmNlX2Rpc2NyZXRlICU+JQogICAgZmlsdGVyKHRydWVfdGFyZ2V0KSAlPiUKICAgIC4kZnJhY3Rpb25fcG9zaXRpdmVfcHJlZGljdGVkICU+JQogICAgbWVhbigpCgpub25wZW10X2ZyYWMgPC0gcHJlZGljdGlvbl9wZXJmb3JtYW5jZV9kaXNjcmV0ZSAlPiUKICAgIGZpbHRlcighdHJ1ZV90YXJnZXQpICU+JQogICAgLiRmcmFjdGlvbl9wb3NpdGl2ZV9wcmVkaWN0ZWQgJT4lCiAgICBtZWFuKCkKCnByZWRpY3Rpb25fcGVyZm9ybWFuY2VfZmlzaGVyIDwtIHBlbXRfcHJlZGljdGlvbnMgJT4lCiAgICBsYXBwbHkoY2FsY3VsYXRlX2ZyYWN0aW9uX3RvcF9wcmVkaWN0ZWRfZmlzaGVyLCBxdWFudGlsZV9jdXRvZmYgPSAwLjk1KSAlPiUKICAgIHVubGlzdCgpICU+JQogICAgbWVhbigpCmBgYAoKV2Ugc2VlIHRoYXQgKipgciByb3VuZChwZW10X2ZyYWMgKiAxMDApYCUqKiBvZiBwLUVNVCBnZW5lcyBhcmUgY2xhc3NpZmllZCBhcwpiZWluZyBwYXJ0IG9mIHRoZSBnZW5lc2V0IGFuZCAqKmByIHJvdW5kKG5vbnBlbXRfZnJhYyAqIDEwMClgJSoqIG9mIG5vbi1wLUVNVApnZW5lcy4gQSBGaXNoZXIncyBleGFjdCB0ZXN0IGdpdmVzIHVzIGEgcC12YWx1ZSBvZgoqKmByIHByZWRpY3Rpb25fcGVyZm9ybWFuY2VfZmlzaGVyYCoqLgoKVGhlIGZvbGxvd2luZyBwLUVNVCBnZW5lcyB3ZXJlIGNvcnJlY3RseSBwcmVkaWN0ZWQgaW4gZXZlcnkgY3Jvc3MtdmFsaWRhdGlvbgpyb3VuZDoKCmBgYHtyIGdlbmVzZXQtcHJlZGljdGlvbi10YWJsZX0Kc2VxKGxlbmd0aChwZW10X3ByZWRpY3Rpb25zKSkgJT4lCiAgICBsYXBwbHkoZ2V0X3RvcF9wcmVkaWN0ZWRfZ2VuZXMsIHBlbXRfcHJlZGljdGlvbnMpICU+JQogICAgcmVkdWNlKGZ1bGxfam9pbiwgYnkgPSBjKCJnZW5lIiwgInRydWVfdGFyZ2V0IikpICU+JQogICAgZmlsdGVyKHRydWVfdGFyZ2V0KSAlPiUKICAgIGthYmxlKCkKYGBgCgpTaW5nbGUtY2VsbCBsaWdhbmQgYWN0aXZpdGllcwo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoKU28gZmFyIHdlIGhhdmUgY29uc2lkZXJlZCBsaWdhbmQgYWN0aXZpdGllcyBmb3IgY2VsbCB0eXBlcyBidXQgaXQgaXMgYWxzbwpwb3NzaWJsZSB0byBjYWxjdWxhdGUgbGlnYW5kIGFjdGl2aXRpZXMgZm9yIGluZGl2aWR1YWwgY2VsbHMuCgpUbyByZWR1Y2UgcnVuIHRpbWUgd2Ugb25seSBwZXJmb3JtIHRoaXMgYW5hbHlzaXMgb24gYSBzZWxlY3Rpb24gb2YgMTAgY2VsbHMgZnJvbQphIHNpbmdsZSB0dW1vdXIuCgpgYGB7ciBzYy1hY3Rpdml0aWVzfQpleHByc19zY2FsZWQgPC0gZXhwcnNfbWF0ICU+JQogICAgLlttYWxpZ25hbnRfaWRzLCBiYWNrZ3JvdW5kX2dlbmVzXSAlPiUKICAgIHNjYWxlX3F1YW50aWxlKCkKCm1hbGlnbmFudF9objVfaWRzIDwtIHNhbXBsZV9pbmZvICU+JQogICAgZmlsdGVyKHR1bW9yID09ICJITjUiKSAlPiUKICAgIGZpbHRlcihgTHltcGggbm9kZWAgPT0gMCkgJT4lCiAgICBmaWx0ZXIoYGNsYXNzaWZpZWQgIGFzIGNhbmNlciBjZWxsYCA9PSAxKSAlPiUKICAgIC4kY2VsbCAlPiUKICAgIGhlYWQoMTApCgpzY19saWdhbmRfYWN0aXZpdGllcyA8LSBwcmVkaWN0X3NpbmdsZV9jZWxsX2xpZ2FuZF9hY3Rpdml0aWVzKAogICAgY2VsbF9pZHMgICAgICAgICAgICAgPSBtYWxpZ25hbnRfaG41X2lkcywKICAgIGV4cHJlc3Npb25fc2NhbGVkICAgID0gZXhwcnNfc2NhbGVkLAogICAgbGlnYW5kX3RhcmdldF9tYXRyaXggPSBsaWdhbmRfdGFyZ2V0cywKICAgIHBvdGVudGlhbF9saWdhbmRzICAgID0gcG90ZW50aWFsX2xpZ2FuZHMKKQpgYGAKCk5vdyB0aGF0IHdlIGhhdmUgYWN0aXZpdGllcyBhdCB0aGUgc2luZ2xlLWNlbGwgbGV2ZWwgdGhleSBjYW4gYmUgbGlua2VkIHRvIG90aGVyCnByb3BlcnRpZXMgb2YgY2VsbHMuIEhlcmUgd2Ugc2NvcmUgY2VsbHMgb24gdGhlaXIgZXhwcmVzc2lvbiBvZiB0aGUgY29yZSBwLUVNVApnZW5lIF9UR0ZCSV8uIFRoaXMgaXMgdGFrZW4gYXMgYSBwcm94eSBmb3IgcC1FTVQgYWN0aXZpdHkgYW5kIGNvcnJlbGF0ZWQgd2l0aAp0aGUgY2FsY3VsYXRlZCBsaWdhbmQgYWN0aXZpdGllcy4gVGhlIGNvcnJlbGF0aW9uIGNhbiBiZSB1c2VkIHRvIHJhbmsgcC1FTVQKaW5kdWNpbmcgbGlnYW5kcy4KCmBgYHtyIHNjb3JlLWNlbGxzfQpjZWxsX3Njb3JlcyA8LSB0aWJibGUoCiAgICBjZWxsICA9IG1hbGlnbmFudF9objVfaWRzLAogICAgc2NvcmUgPSBleHByc19zY2FsZWRbbWFsaWduYW50X2huNV9pZHMsICJUR0ZCSSJdCikKCnNjX2xpZ2FuZF9hY3Rpdml0aWVzX25vcm0gPC0gbm9ybWFsaXplX3NpbmdsZV9jZWxsX2xpZ2FuZF9hY3Rpdml0aWVzKAogICAgc2NfbGlnYW5kX2FjdGl2aXRpZXMKKQoKY29ycmVsYXRpb25zIDwtIHNpbmdsZV9saWdhbmRfYWN0aXZpdHlfc2NvcmVfcmVncmVzc2lvbigKICAgIHNjX2xpZ2FuZF9hY3Rpdml0aWVzX25vcm0sCiAgICBjZWxsX3Njb3JlcwopCgpza2ltKGNvcnJlbGF0aW9ucykKCmNvcnJlbGF0aW9ucyAlPiUKICAgIGFycmFuZ2UoLXBlYXJzb25fcmVncmVzc2lvbikgJT4lCiAgICBzZWxlY3QobGlnYW5kLCBwZWFyc29uX3JlZ3Jlc3Npb24pICU+JQogICAgaGVhZCgpICU+JQogICAga2FibGUoKQoKaW5uZXJfam9pbihjZWxsX3Njb3Jlcywgc2NfbGlnYW5kX2FjdGl2aXRpZXNfbm9ybSkgJT4lCiAgICBnZ3Bsb3QoYWVzKHNjb3JlLCBUTkMpKSArCiAgICBnZW9tX3BvaW50KCkgKwogICAgZ2VvbV9zbW9vdGgobWV0aG9kID0gImxtIikKYGBgCgpDaXJjb3MgcGxvdHMKPT09PT09PT09PT09CgpBbiBhbHRlcm5hdGl2ZSB3YXkgdG8gdmlzdWFsaXNlIGludGVyYWN0aW9ucyBpcyB1c2luZyBhIENpcmNvcyBwbG90LgoKYGBge3IgY2lyY29zLCBldmFsID0gRkFMU0UsIGluY2x1ZGUgPSBGQUxTRX0KZW5kb3RoZWxpYWxfaWRzIDwtIHNhbXBsZV9pbmZvICU+JQogICAgZmlsdGVyKAogICAgICAgIGBMeW1waCBub2RlYCA9PSAwICYKICAgICAgICAgICAgISh0dW1vciAlaW4lIHR1bW91cnNfcmVtb3ZlKSAmCiAgICAgICAgICAgIGBub24tY2FuY2VyIGNlbGwgdHlwZWAgPT0gIkVuZG90aGVsaWFsIgogICAgKSAlPiUKICAgIHB1bGwoY2VsbCkKCmxpZ2FuZF9leHBycyA8LSB0aWJibGUoCiAgICBsaWdhbmQgICAgICA9IGJlc3RfbGlnYW5kcywgCiAgICBDQUYgICAgICAgICA9IGV4cHJzX21hdFtDQUZfaWRzLCBiZXN0X2xpZ2FuZHNdICU+JQogICAgICAgIGFwcGx5KDIsIGZ1bmN0aW9uKHgpIHsxMCAqICgyICoqIHggLSAxKX0pICU+JQogICAgICAgIGFwcGx5KDIsIGZ1bmN0aW9uKHgpIHtsb2cyKG1lYW4oeCkgKyAxKX0pLAogICAgZW5kb3RoZWxpYWwgPSBleHByc19tYXRbZW5kb3RoZWxpYWxfaWRzLCBiZXN0X2xpZ2FuZHNdICU+JQogICAgICAgIGFwcGx5KDIsIGZ1bmN0aW9uKHgpIHsxMCAqICgyICoqIHggLSAxKX0pICU+JQogICAgICAgIGFwcGx5KDIsIGZ1bmN0aW9uKHgpIHtsb2cyKG1lYW4oeCkgKyAxKX0pCikKCkNBRl9saWdhbmRzIDwtIGxpZ2FuZF9leHBycyAlPiUKICAgIGZpbHRlcihDQUYgPiBlbmRvdGhlbGlhbCArIDIpICU+JQogICAgcHVsbChsaWdhbmQpCmVuZG90aGVsaWFsX2xpZ2FuZHMgPC0gbGlnYW5kX2V4cHJzICU+JQogICAgZmlsdGVyKGVuZG90aGVsaWFsID4gQ0FGICsgMikgJT4lCiAgICBwdWxsKGxpZ2FuZCkKZ2VuZXJhbF9saWdhbmRzIDwtIHNldGRpZmYoYmVzdF9saWdhbmRzLCBjKENBRl9saWdhbmRzLCBlbmRvdGhlbGlhbF9saWdhbmRzKSkKCmxpZ2FuZF90eXBlcyA8LSB0aWJibGUoCiAgICBsaWdhbmRfdHlwZSA9IGMoCiAgICAgICAgcmVwKCJDQUYtc3BlY2lmaWMiLCB0aW1lcyA9IENBRl9saWdhbmRzICU+JSBsZW5ndGgoKSksCiAgICAgICAgcmVwKCJHZW5lcmFsIiwgdGltZXMgPSBnZW5lcmFsX2xpZ2FuZHMgJT4lIGxlbmd0aCgpKSwKICAgICAgICByZXAoIkVuZG90aGVsaWFsLXNwZWNpZmljIiwgdGltZXMgPSBlbmRvdGhlbGlhbF9saWdhbmRzICU+JSBsZW5ndGgoKSkKICAgICksCiAgICBsaWdhbmQgPSBjKENBRl9saWdhbmRzLCBnZW5lcmFsX2xpZ2FuZHMsIGVuZG90aGVsaWFsX2xpZ2FuZHMpCikKCmN1dG9mZl9saWdhbmRzIDwtIGFjdGl2ZV9saW5rcyR3ZWlnaHQgJT4lIHF1YW50aWxlKDAuNjYpCgphY3RpdmVfbGlua3NfY2lyY29zIDwtIGFjdGl2ZV9saW5rcyAlPiUKICAgIGZpbHRlcih3ZWlnaHQgPiBjdXRvZmZfbGlnYW5kcykKCmxpZ2FuZHNfcmVtb3ZlIDwtIHNldGRpZmYoCiAgICBhY3RpdmVfbGlua3MkbGlnYW5kICU+JSB1bmlxdWUoKSwKICAgIGFjdGl2ZV9saW5rc19jaXJjb3MkbGlnYW5kICU+JSB1bmlxdWUoKQopCnRhcmdldHNfcmVtb3ZlIDwtIHNldGRpZmYoCiAgICBhY3RpdmVfbGlua3MkdGFyZ2V0ICU+JSB1bmlxdWUoKSwKICAgIGFjdGl2ZV9saW5rc19jaXJjb3MkdGFyZ2V0ICU+JSB1bmlxdWUoKQopCiAgCmNpcmNvc19saW5rcyA8LSBhY3RpdmVfbGlua3MgJT4lCiAgICBpbm5lcl9qb2luKGxpZ2FuZF90eXBlcykgJT4lCiAgICBtdXRhdGUodGFyZ2V0X3R5cGUgPSAicF9lbXQiKSAlPiUKICAgIGZpbHRlcigKICAgICAgICAhdGFyZ2V0ICVpbiUgdGFyZ2V0c19yZW1vdmUgJgogICAgICAgICAgICAhbGlnYW5kICVpbiUgbGlnYW5kc19yZW1vdmUKICAgICkKCmdyaWRfY29sX2xpZ2FuZCA8LSBjKAogICAgIkdlbmVyYWwiICAgICAgICAgICAgICA9ICJsYXduZ3JlZW4iLAogICAgIkNBRi1zcGVjaWZpYyIgICAgICAgICA9ICJyb3lhbGJsdWUiLAogICAgIkVuZG90aGVsaWFsLXNwZWNpZmljIiA9ICJnb2xkIgopCmdyaWRfY29sX3RhcmdldCA8LSBjKCJwX2VtdCIgPSAidG9tYXRvIikKCmdyaWRfY29sX3RibF9saWdhbmQgPC0gdGliYmxlKAogICAgbGlnYW5kX3R5cGUgICAgICAgPSBncmlkX2NvbF9saWdhbmQgJT4lIG5hbWVzKCksCiAgICBjb2xvcl9saWdhbmRfdHlwZSA9IGdyaWRfY29sX2xpZ2FuZAopCmdyaWRfY29sX3RibF90YXJnZXQgPC0gdGliYmxlKAogICAgdGFyZ2V0X3R5cGUgICAgICAgPSBncmlkX2NvbF90YXJnZXQgJT4lIG5hbWVzKCksCiAgICBjb2xvcl90YXJnZXRfdHlwZSA9IGdyaWRfY29sX3RhcmdldAopCgpjaXJjb3NfbGlua3MgPC0gY2lyY29zX2xpbmtzICU+JQogICAgbXV0YXRlKGxpZ2FuZCA9IHBhc3RlKGxpZ2FuZCwiICIpKSAlPiUKICAgIGlubmVyX2pvaW4oZ3JpZF9jb2xfdGJsX2xpZ2FuZCkgJT4lCiAgICBpbm5lcl9qb2luKGdyaWRfY29sX3RibF90YXJnZXQpCmxpbmtzX2NpcmNsZSA8LSBjaXJjb3NfbGlua3MgJT4lIHNlbGVjdChsaWdhbmQsIHRhcmdldCwgd2VpZ2h0KQoKbGlnYW5kX2NvbG9yIDwtIGNpcmNvc19saW5rcyAlPiUgZGlzdGluY3QobGlnYW5kLCBjb2xvcl9saWdhbmRfdHlwZSkKZ3JpZF9saWdhbmRfY29sb3IgPC0gbGlnYW5kX2NvbG9yJGNvbG9yX2xpZ2FuZF90eXBlICU+JQogICAgc2V0X25hbWVzKGxpZ2FuZF9jb2xvciRsaWdhbmQpCnRhcmdldF9jb2xvciA8LSBjaXJjb3NfbGlua3MgJT4lIGRpc3RpbmN0KHRhcmdldCwgY29sb3JfdGFyZ2V0X3R5cGUpCmdyaWRfdGFyZ2V0X2NvbG9yIDwtIHRhcmdldF9jb2xvciRjb2xvcl90YXJnZXRfdHlwZSAlPiUKICAgIHNldF9uYW1lcyh0YXJnZXRfY29sb3IkdGFyZ2V0KQoKZ3JpZF9jb2wgPC0gYyhncmlkX2xpZ2FuZF9jb2xvciwgZ3JpZF90YXJnZXRfY29sb3IpCgp0cmFuc3BhcmVuY3kgPC0gY2lyY29zX2xpbmtzICU+JQogICAgbXV0YXRlKHdlaWdodCA9ICh3ZWlnaHQgLSBtaW4od2VpZ2h0KSkgLyAobWF4KHdlaWdodCkgLSBtaW4od2VpZ2h0KSkpICU+JQogICAgbXV0YXRlKHRyYW5zcGFyZW5jeSA9IDEgLSB3ZWlnaHQpICU+JQogICAgLiR0cmFuc3BhcmVuY3kKCnRhcmdldF9vcmRlciA8LSBjaXJjb3NfbGlua3MkdGFyZ2V0ICU+JSB1bmlxdWUoKQpsaWdhbmRfb3JkZXIgPC0gYygKICAgIENBRl9saWdhbmRzLAogICAgZ2VuZXJhbF9saWdhbmRzLAogICAgZW5kb3RoZWxpYWxfbGlnYW5kcykgJT4lCiAgICBjKHBhc3RlKC4sIiAiKSkgJT4lCiAgICBpbnRlcnNlY3QoY2lyY29zX2xpbmtzJGxpZ2FuZCkKb3JkZXIgPC0gYyhsaWdhbmRfb3JkZXIsIHRhcmdldF9vcmRlcikKCndpZHRoX3NhbWVfY2VsbF9zYW1lX2xpZ2FuZF90eXBlIDwtIDAuNQp3aWR0aF9kaWZmZXJlbnRfY2VsbCA8LSA2CndpZHRoX2xpZ2FuZF90YXJnZXQgPC0gMTUKd2lkdGhfc2FtZV9jZWxsX3NhbWVfdGFyZ2V0X3R5cGUgPC0gMC41CgpnYXBzIDwtIGMoCiAgICAjIHdpZHRoX2xpZ2FuZF90YXJnZXQsCiAgICByZXAoCiAgICAgICAgd2lkdGhfc2FtZV9jZWxsX3NhbWVfbGlnYW5kX3R5cGUsCiAgICAgICAgdGltZXMgPSBjaXJjb3NfbGlua3MgJT4lCiAgICAgICAgICAgIGZpbHRlcihsaWdhbmRfdHlwZSA9PSAiQ0FGLXNwZWNpZmljIikgJT4lCiAgICAgICAgICAgIGRpc3RpbmN0KGxpZ2FuZCkgJT4lCiAgICAgICAgICAgIG5yb3coKSAtIDEKICAgICksCiAgICB3aWR0aF9kaWZmZXJlbnRfY2VsbCwKICAgIHJlcCgKICAgICAgICB3aWR0aF9zYW1lX2NlbGxfc2FtZV9saWdhbmRfdHlwZSwKICAgICAgICB0aW1lcyA9IGNpcmNvc19saW5rcyAlPiUKICAgICAgICAgICAgZmlsdGVyKGxpZ2FuZF90eXBlID09ICJHZW5lcmFsIikgJT4lCiAgICAgICAgICAgIGRpc3RpbmN0KGxpZ2FuZCkgJT4lCiAgICAgICAgICAgIG5yb3coKSAtIDEKICAgICksCiAgICB3aWR0aF9kaWZmZXJlbnRfY2VsbCwKICAgIHJlcCgKICAgICAgICB3aWR0aF9zYW1lX2NlbGxfc2FtZV9saWdhbmRfdHlwZSwKICAgICAgICB0aW1lcyA9IG1heChjaXJjb3NfbGlua3MgJT4lCiAgICAgICAgICAgIGZpbHRlcihsaWdhbmRfdHlwZSA9PSAiRW5kb3RoZWxpYWwtc3BlY2lmaWMiKSAlPiUKICAgICAgICAgICAgZGlzdGluY3QobGlnYW5kKSAlPiUKICAgICAgICAgICAgbnJvdygpIC0gMSwgMSkKICAgICksIAogICAgd2lkdGhfbGlnYW5kX3RhcmdldCwKICAgIHJlcCgKICAgICAgICB3aWR0aF9zYW1lX2NlbGxfc2FtZV90YXJnZXRfdHlwZSwKICAgICAgICB0aW1lcyA9IGNpcmNvc19saW5rcyAlPiUKICAgICAgICAgICAgZmlsdGVyKHRhcmdldF90eXBlID09ICJwX2VtdCIpICU+JQogICAgICAgICAgICBkaXN0aW5jdCh0YXJnZXQpICU+JQogICAgICAgICAgICBucm93KCkgLTEKICAgICksCiAgICB3aWR0aF9saWdhbmRfdGFyZ2V0CikKCmNpcmNvcy5wYXIoZ2FwLmRlZ3JlZSA9IGdhcHMpCmNob3JkRGlhZ3JhbSgKICAgIGxpbmtzX2NpcmNsZSwKICAgIGRpcmVjdGlvbmFsICAgICAgID0gMSwKICAgIG9yZGVyICAgICAgICAgICAgID0gb3JkZXIsCiAgICAjIGxpbmsuc29ydCAgICAgICAgID0gVFJVRSwKICAgICMgbGluay5kZWNyZWFzaW5nICAgPSBGQUxTRSwKICAgICMgZ3JpZC5jb2wgICAgICAgICAgPSBncmlkX2NvbCwKICAgICMgdHJhbnNwYXJlbmN5ICAgICAgPSAwLAogICAgIyBkaWZmSGVpZ2h0ICAgICAgICA9IDAuMDA1LAogICAgIyBkaXJlY3Rpb24udHlwZSAgICA9IGMoImRpZmZIZWlnaHQiLCAiYXJyb3dzIiksCiAgICAjIGxpbmsuYXJyLnR5cGUgICAgID0gImJpZy5hcnJvdyIsCiAgICAjIGxpbmsudmlzaWJsZSAgICAgID0gbGlua3NfY2lyY2xlJHdlaWdodCA+PSBjdXRvZmZfbGlnYW5kcywKICAgICMgYW5ub3RhdGlvblRyYWNrICAgPSAiZ3JpZCIsIAogICAgIyBwcmVBbGxvY2F0ZVRyYWNrcyA9IGxpc3QodHJhY2suaGVpZ2h0ID0gMC4wNzUpCikKIyB3ZSBnbyBiYWNrIHRvIHRoZSBmaXJzdCB0cmFjayBhbmQgY3VzdG9taXplIHNlY3RvciBsYWJlbHMKY2lyY29zLnRyYWNrKHRyYWNrLmluZGV4ID0gMSwgcGFuZWwuZnVuID0gZnVuY3Rpb24oeCwgeSkgewogICAgY2lyY29zLnRleHQoQ0VMTF9NRVRBJHhjZW50ZXIsIENFTExfTUVUQSR5bGltWzFdLCBDRUxMX01FVEEkc2VjdG9yLmluZGV4LAogICAgICAgIGZhY2luZyA9ICJjbG9ja3dpc2UiLCBuaWNlRmFjaW5nID0gVFJVRSwgYWRqID0gYygwLCAwLjU1KSwgY2V4ID0gMSkKfSwgYmcuYm9yZGVyID0gTkEpICMKYGBgCgpTdW1tYXJ5IHsudW5udW1iZXJlZH0KPT09PT09PQoKUGFyYW1ldGVycyB7LnVubnVtYmVyZWR9Ci0tLS0tLS0tLS0KClRoaXMgdGFibGUgZGVzY3JpYmVzIHBhcmFtZXRlcnMgdXNlZCBhbmQgc2V0IGluIHRoaXMgZG9jdW1lbnQuCgpgYGB7ciBwYXJhbWV0ZXJzfQpwYXJhbXMgPC0gbGlzdCgKICAgIAopCnBhcmFtcyA8LSB0b0pTT04ocGFyYW1zLCBwcmV0dHkgPSBUUlVFKQprYWJsZShmcm9tSlNPTihwYXJhbXMpKQpgYGAKCk91dHB1dCBmaWxlcyB7LnVubnVtYmVyZWR9Ci0tLS0tLS0tLS0tLQoKVGhpcyB0YWJsZSBkZXNjcmliZXMgdGhlIG91dHB1dCBmaWxlcyBwcm9kdWNlZCBieSB0aGlzIGRvY3VtZW50LiBSaWdodCBjbGljawphbmQgX1NhdmUgTGluayBBcy4uLl8gdG8gZG93bmxvYWQgdGhlIHJlc3VsdHMuCgpgYGB7ciBvdXRwdXR9CndyaXRlX3RzdihsaWdhbmRfYWN0aXZpdGllcywgZnM6OnBhdGgoT1VUX0RJUiwgImxpZ2FuZF9hY3Rpdml0aWVzLnRzdiIpKQp3cml0ZV90c3YoYWN0aXZlX2xpbmtzLCBmczo6cGF0aChPVVRfRElSLCAiYWN0aXZlX2xpbmtzLnRzdiIpKQoKa2FibGUoZGF0YS5mcmFtZSgKICAgIEZpbGUgPSBjKAogICAgICAgIGRvd25sb2FkX2xpbmsoInBhcmFtZXRlcnMuanNvbiIsIE9VVF9ESVIpLAogICAgICAgIGRvd25sb2FkX2xpbmsoImxpZ2FuZF9hY3Rpdml0aWVzLnRzdiIsIE9VVF9ESVIpLAogICAgICAgIGRvd25sb2FkX2xpbmsoImFjdGl2ZV9saW5rcy50c3YiLCBPVVRfRElSKQogICAgKSwKICAgIERlc2NyaXB0aW9uID0gYygKICAgICAgICAiUGFyYW1ldGVycyBzZXQgYW5kIHVzZWQgaW4gdGhpcyBhbmFseXNpcyIsCiAgICAgICAgIkxpZ2FuZCBhY3Rpdml0ZXMgY2FsY3VsYXRlZCBieSBOaWNoZU5ldCIsCiAgICAgICAgIkFjdGl2ZSBsaW5rcyBiZXR3ZWVuIGxpZ2FuZHMgYW5kIHRhcmdldHMgaW5mZXJyZWQgYnkgTmljaGVOZXQiCiAgICApCikpCmBgYAoKU2Vzc2lvbiBpbmZvcm1hdGlvbiB7LnVubnVtYmVyZWR9Ci0tLS0tLS0tLS0tLS0tLS0tLS0K</div>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("12-NicheNet.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -355,7 +355,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-08
+<strong>Last updated:</strong> 2020-05-27
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -446,16 +446,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree6f3638bd7516f8cb26527a063ce1253310cb30f7targetblank6f3638ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/6f3638bd7516f8cb26527a063ce1253310cb30f7" target="_blank">6f3638b</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree0df44ddafc12e836fb20dba18ae049be8f5ffd70targetblank0df44dda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/0df44ddafc12e836fb20dba18ae049be8f5ffd70" target="_blank">0df44dd</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree6f3638bd7516f8cb26527a063ce1253310cb30f7targetblank6f3638ba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree0df44ddafc12e836fb20dba18ae049be8f5ffd70targetblank0df44dda" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/6f3638bd7516f8cb26527a063ce1253310cb30f7" target="_blank">6f3638b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/0df44ddafc12e836fb20dba18ae049be8f5ffd70" target="_blank">0df44dd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -465,6 +465,7 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    .drake/
+    Ignored:    data/NicheNet/
     Ignored:    data/cellphonedb/
     Ignored:    renv/library/
     Ignored:    renv/python/
@@ -509,10 +510,44 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/0df44ddafc12e836fb20dba18ae049be8f5ffd70/docs/index.html" target="_blank">0df44dd</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-27
+</td>
+<td>
+Add NicheNet to drake
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="http://github.com/lazappi/iteraction-tools/blob/6f3638bd7516f8cb26527a063ce1253310cb30f7/analysis/index.Rmd" target="_blank">6f3638b</a>
+<a href="http://github.com/lazappi/iteraction-tools/blob/cc8947c90fcfc4b8f762f45aee2e27580f7275d9/analysis/index.Rmd" target="_blank">cc8947c</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-08
+</td>
+<td>
+Add ToC to index
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/cc8947c90fcfc4b8f762f45aee2e27580f7275d9/docs/index.html" target="_blank">cc8947c</a>
 </td>
 <td>
 Luke Zappia
@@ -586,6 +621,7 @@ Start workflowr project.
 <h1 class="unnumbered" number="">Table of contents</h1>
 <ol style="list-style-type: decimal">
 <li><a href="11-CellPhoneDB.html">CellPhoneDB example</a></li>
+<li><a href="12-NicheNet.html">NicheNet example</a></li>
 </ol>
 <br>
 <p>
@@ -598,20 +634,21 @@ Start workflowr project.
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value                       
  version  R version 4.0.0 (2020-04-24)
- os       macOS Catalina 10.15.3      
+ os       macOS Catalina 10.15.4      
  system   x86_64, darwin17.0          
  ui       X11                         
  language (EN)                        
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Berlin               
- date     2020-05-08                  
+ date     2020-05-27                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  ! package     * version date       lib source            
  P assertthat    0.2.1   2019-03-21 [?] CRAN (R 4.0.0)    
  P backports     1.1.6   2020-04-05 [?] CRAN (R 4.0.0)    
  P base64enc     0.1-3   2015-07-28 [?] CRAN (R 4.0.0)    
+ P BiocManager   1.30.10 2019-11-16 [?] CRAN (R 4.0.0)    
  P cli           2.0.2   2020-02-28 [?] CRAN (R 4.0.0)    
  P clipr         0.7.0   2019-07-23 [?] standard (@0.7.0) 
  P crayon        1.3.4   2017-09-16 [?] CRAN (R 4.0.0)    
@@ -632,7 +669,7 @@ Start workflowr project.
  P promises      1.1.0   2019-10-04 [?] standard (@1.1.0) 
  P R6            2.4.1   2019-11-12 [?] CRAN (R 4.0.0)    
  P Rcpp          1.0.4.6 2020-04-09 [?] CRAN (R 4.0.0)    
- P renv          0.9.3   2020-02-10 [?] CRAN (R 4.0.0)    
+   renv          0.10.0  2020-05-06 [1] CRAN (R 4.0.0)    
  P reticulate    1.15    2020-04-02 [?] CRAN (R 4.0.0)    
  P rlang         0.4.6   2020-05-02 [?] CRAN (R 4.0.0)    
  P rmarkdown     2.1     2020-01-20 [?] CRAN (R 4.0.0)    
@@ -648,9 +685,9 @@ Start workflowr project.
  P yaml          2.2.1   2020-02-01 [?] CRAN (R 4.0.0)    
 
 [1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
-[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpnH5XYo/renv-system-library
-[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpeyRqWI/renv-system-library
-[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpxYa6vB/renv-system-library
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpeX3EJ1/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpsDId36/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp0wMrlq/renv-system-library
 
  P ── Loaded and on-disk path mismatch.</code></pre>
 </div>
