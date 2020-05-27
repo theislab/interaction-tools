@@ -40,7 +40,13 @@ knitr::knit_hooks$set(timeit = function(before) {
         NOW <<- Sys.time()
     } else {
         print(paste("Stop:", Sys.time()))
-        print(Sys.time() - NOW)
+        runtime <- Sys.time() - NOW
+        print(runtime)
+        paste(
+            '<p class="timeit">',
+            "Chunk time:", round(runtime, 2), attr(runtime, "units"),
+            "</p>"
+        )
     }
 })
 
