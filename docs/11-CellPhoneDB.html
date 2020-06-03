@@ -91,6 +91,7 @@ h6 {
 }
 </style>
 
+<link rel="stylesheet" href="custom.css" type="text/css" />
 
 
 
@@ -431,7 +432,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-08
+<strong>Last updated:</strong> 2020-05-27
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -522,16 +523,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree7bd35b289898d50296c4e49470b8aa8b6e0e5396targetblank7bd35b2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/7bd35b289898d50296c4e49470b8aa8b6e0e5396" target="_blank">7bd35b2</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreefd22f252375d785d45a23eaeb4d21c178e6f7c4atargetblankfd22f25a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/fd22f252375d785d45a23eaeb4d21c178e6f7c4a" target="_blank">fd22f25</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree7bd35b289898d50296c4e49470b8aa8b6e0e5396targetblank7bd35b2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreefd22f252375d785d45a23eaeb4d21c178e6f7c4atargetblankfd22f25a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/7bd35b289898d50296c4e49470b8aa8b6e0e5396" target="_blank">7bd35b2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/fd22f252375d785d45a23eaeb4d21c178e6f7c4a" target="_blank">fd22f25</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -541,13 +542,21 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    .drake/
+    Ignored:    data/NicheNet/
     Ignored:    data/cellphonedb/
+    Ignored:    output/index.Rmd/
     Ignored:    renv/library/
     Ignored:    renv/python/
     Ignored:    renv/staging/
 
 Unstaged changes:
-    Modified:   environment.yml
+    Modified:   output/11-CellPhoneDB.Rmd/count_network.txt
+    Modified:   output/11-CellPhoneDB.Rmd/dotplot.png
+    Modified:   output/11-CellPhoneDB.Rmd/heatmap_counts.png
+    Modified:   output/11-CellPhoneDB.Rmd/heatmap_logcounts.png
+    Modified:   output/11-CellPhoneDB.Rmd/interactions_count.txt
+    Modified:   output/11-CellPhoneDB.Rmd/pvalues.txt
+    Modified:   output/11-CellPhoneDB.Rmd/significant_means.txt
 
 </code></pre>
 <p>
@@ -586,6 +595,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/9e20a9acdfb733bee8cd99d004cc68939942794e/docs/11-CellPhoneDB.html" target="_blank">9e20a9a</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-08
+</td>
+<td>
+Update cellphonedb to v2.1.2
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -810,6 +836,9 @@ skim(meta)</code></pre>
 </tr>
 </tbody>
 </table>
+<p class="timeit">
+Chunk time: 0.13 secs
+</p>
 </div>
 <div id="test_counts.txt" class="section level2" number="1.2">
 <h2 number="1.2"><span class="header-section-number">1.2</span> test_counts.txt</h2>
@@ -1041,6 +1070,9 @@ skim(counts)</code></pre>
 </tr>
 </tbody>
 </table>
+<p class="timeit">
+Chunk time: 0.19 secs
+</p>
 <p>The small test dataset contains 17198 genes and 17198 cells.</p>
 </div>
 </div>
@@ -1055,30 +1087,33 @@ cellphonedb method statistical_analysis \
     --threads 1 \
     data/cellphonedb/test_meta.txt \
     data/cellphonedb/test_counts.txt</code></pre>
-<pre><code>[ ][APP][08/05/20-10:54:13][WARNING] Latest local available version is `v2.0.0`, using it
-[ ][APP][08/05/20-10:54:13][WARNING] User selected downloaded database `v2.0.0` is available, using it
-[ ][CORE][08/05/20-10:54:13][INFO] Initializing SqlAlchemy CellPhoneDB Core
-[ ][CORE][08/05/20-10:54:13][INFO] Using custom database at /Users/luke.zappia/.cpdb/releases/v2.0.0/cellphone.db
-[ ][APP][08/05/20-10:54:13][INFO] Launching Method cpdb_statistical_analysis_local_method_launcher
-[ ][APP][08/05/20-10:54:13][INFO] Launching Method _set_paths
-[ ][APP][08/05/20-10:54:13][WARNING] Output directory (output/11-cellphonedb.Rmd) exist and is not empty. Result can overwrite old results
-[ ][APP][08/05/20-10:54:13][INFO] Launching Method _load_meta_counts
-[ ][CORE][08/05/20-10:54:13][INFO] Launching Method cpdb_statistical_analysis_launcher
-[ ][CORE][08/05/20-10:54:13][INFO] Launching Method _counts_validations
-[ ][CORE][08/05/20-10:54:13][INFO] [Cluster Statistical Analysis Simple] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
-[ ][CORE][08/05/20-10:54:13][INFO] Running Simple Prefilters
-[ ][CORE][08/05/20-10:54:13][INFO] Running Real Simple Analysis
-[ ][CORE][08/05/20-10:54:14][INFO] Running Statistical Analysis
+<pre><code>[ ][APP][27/05/20-12:15:50][WARNING] Latest local available version is `v2.0.0`, using it
+[ ][APP][27/05/20-12:15:50][WARNING] User selected downloaded database `v2.0.0` is available, using it
+[ ][CORE][27/05/20-12:15:50][INFO] Initializing SqlAlchemy CellPhoneDB Core
+[ ][CORE][27/05/20-12:15:50][INFO] Using custom database at /Users/luke.zappia/.cpdb/releases/v2.0.0/cellphone.db
+[ ][APP][27/05/20-12:15:50][INFO] Launching Method cpdb_statistical_analysis_local_method_launcher
+[ ][APP][27/05/20-12:15:50][INFO] Launching Method _set_paths
+[ ][APP][27/05/20-12:15:50][WARNING] Output directory (output/11-cellphonedb.Rmd) exist and is not empty. Result can overwrite old results
+[ ][APP][27/05/20-12:15:50][INFO] Launching Method _load_meta_counts
+[ ][CORE][27/05/20-12:15:50][INFO] Launching Method cpdb_statistical_analysis_launcher
+[ ][CORE][27/05/20-12:15:50][INFO] Launching Method _counts_validations
+[ ][CORE][27/05/20-12:15:50][INFO] [Cluster Statistical Analysis Simple] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
+[ ][CORE][27/05/20-12:15:50][INFO] Running Simple Prefilters
+[ ][CORE][27/05/20-12:15:51][INFO] Running Real Simple Analysis
+[ ][CORE][27/05/20-12:15:51][INFO] Running Statistical Analysis
 /Users/luke.zappia/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
   warnings.warn(message, FutureWarning)
-[ ][CORE][08/05/20-10:55:37][INFO] Building Pvalues result
-[ ][CORE][08/05/20-10:55:39][INFO] Building Simple results
-[ ][CORE][08/05/20-10:55:39][INFO] [Cluster Statistical Analysis Complex] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
-[ ][CORE][08/05/20-10:55:39][INFO] Running Complex Prefilters
-[ ][CORE][08/05/20-10:55:40][INFO] Running Real Complex Analysis
-[ ][CORE][08/05/20-10:55:41][INFO] Running Statistical Analysis
-[ ][CORE][08/05/20-10:57:24][INFO] Building Pvalues result
-[ ][CORE][08/05/20-10:57:25][INFO] Building Complex results</code></pre>
+[ ][CORE][27/05/20-12:17:16][INFO] Building Pvalues result
+[ ][CORE][27/05/20-12:17:18][INFO] Building Simple results
+[ ][CORE][27/05/20-12:17:18][INFO] [Cluster Statistical Analysis Complex] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
+[ ][CORE][27/05/20-12:17:18][INFO] Running Complex Prefilters
+[ ][CORE][27/05/20-12:17:20][INFO] Running Real Complex Analysis
+[ ][CORE][27/05/20-12:17:20][INFO] Running Statistical Analysis
+[ ][CORE][27/05/20-12:19:06][INFO] Building Pvalues result
+[ ][CORE][27/05/20-12:19:07][INFO] Building Complex results</code></pre>
+<p class="timeit">
+Chunk time: 3.32 mins
+</p>
 </div>
 <div id="output" class="section level1" number="3">
 <h1 number="3"><span class="header-section-number">3</span> Output</h1>
@@ -1308,6 +1343,9 @@ skim(deconvoluted)</code></pre>
 </tr>
 </tbody>
 </table>
+<p class="timeit">
+Chunk time: 0.11 secs
+</p>
 </div>
 <div id="means.txt" class="section level2" number="3.2">
 <h2 number="3.2"><span class="header-section-number">3.2</span> means.txt</h2>
@@ -1733,6 +1771,9 @@ skim(means)</code></pre>
 </tr>
 </tbody>
 </table>
+<p class="timeit">
+Chunk time: 0.2 secs
+</p>
 <p>It includes information about each ligand-receptor pair as well as scores for each pair of cell types.</p>
 </div>
 <div id="pvalues.txt" class="section level2" number="3.3">
@@ -1969,7 +2010,7 @@ skim(pvalues)</code></pre>
 <td align="right">0.77</td>
 <td align="right">0.39</td>
 <td align="right">0.00</td>
-<td align="right">0.56</td>
+<td align="right">0.55</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -2005,7 +2046,7 @@ skim(pvalues)</code></pre>
 <td align="left">NKcells_0|Myeloid</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">0.85</td>
+<td align="right">0.86</td>
 <td align="right">0.33</td>
 <td align="right">0.00</td>
 <td align="right">1.00</td>
@@ -2021,7 +2062,7 @@ skim(pvalues)</code></pre>
 <td align="right">0.71</td>
 <td align="right">0.38</td>
 <td align="right">0.00</td>
-<td align="right">0.35</td>
+<td align="right">0.33</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -2032,9 +2073,9 @@ skim(pvalues)</code></pre>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">0.81</td>
-<td align="right">0.33</td>
+<td align="right">0.34</td>
 <td align="right">0.00</td>
-<td align="right">0.67</td>
+<td align="right">0.69</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -2159,6 +2200,9 @@ skim(pvalues)</code></pre>
 </tr>
 </tbody>
 </table>
+<p class="timeit">
+Chunk time: 0.18 secs
+</p>
 </div>
 <div id="significant_means.txt" class="section level2" number="3.4">
 <h2 number="3.4"><span class="header-section-number">3.4</span> significant_means.txt</h2>
@@ -2378,13 +2422,13 @@ skim(sig_means)</code></pre>
 <td align="left">rank</td>
 <td align="right">0</td>
 <td align="right">1.00</td>
-<td align="right">0.65</td>
-<td align="right">0.55</td>
+<td align="right">0.69</td>
+<td align="right">0.58</td>
 <td align="right">0.06</td>
 <td align="right">0.06</td>
-<td align="right">1.19</td>
-<td align="right">1.19</td>
-<td align="right">1.19</td>
+<td align="right">1.25</td>
+<td align="right">1.25</td>
+<td align="right">1.25</td>
 <td align="left">▇▁▁▁▇</td>
 </tr>
 <tr class="even">
@@ -2415,55 +2459,55 @@ skim(sig_means)</code></pre>
 </tr>
 <tr class="even">
 <td align="left">Myeloid|NKcells_1</td>
-<td align="right">179</td>
+<td align="right">178</td>
 <td align="right">0.06</td>
-<td align="right">1.07</td>
+<td align="right">1.04</td>
 <td align="right">0.25</td>
 <td align="right">0.74</td>
-<td align="right">0.96</td>
+<td align="right">0.85</td>
 <td align="right">1.03</td>
-<td align="right">1.12</td>
+<td align="right">1.08</td>
 <td align="right">1.60</td>
-<td align="left">▅▇▂▂▂</td>
+<td align="left">▆▇▂▂▂</td>
 </tr>
 <tr class="odd">
 <td align="left">Myeloid|Tcells</td>
 <td align="right">179</td>
 <td align="right">0.06</td>
-<td align="right">2.00</td>
-<td align="right">0.74</td>
+<td align="right">1.97</td>
+<td align="right">0.72</td>
 <td align="right">1.11</td>
 <td align="right">1.37</td>
 <td align="right">2.18</td>
-<td align="right">2.69</td>
+<td align="right">2.60</td>
 <td align="right">2.94</td>
 <td align="left">▇▁▂▃▅</td>
 </tr>
 <tr class="even">
 <td align="left">NKcells_0|Myeloid</td>
-<td align="right">179</td>
-<td align="right">0.06</td>
-<td align="right">1.18</td>
+<td align="right">180</td>
+<td align="right">0.05</td>
+<td align="right">1.14</td>
 <td align="right">0.43</td>
 <td align="right">0.61</td>
-<td align="right">0.92</td>
-<td align="right">1.11</td>
-<td align="right">1.43</td>
+<td align="right">0.91</td>
+<td align="right">1.04</td>
+<td align="right">1.24</td>
 <td align="right">2.00</td>
-<td align="left">▃▇▂▂▃</td>
+<td align="left">▃▇▂▁▃</td>
 </tr>
 <tr class="odd">
 <td align="left">NKcells_0|NKcells_0</td>
-<td align="right">179</td>
+<td align="right">178</td>
 <td align="right">0.06</td>
-<td align="right">0.51</td>
-<td align="right">0.40</td>
+<td align="right">0.52</td>
+<td align="right">0.38</td>
 <td align="right">0.12</td>
-<td align="right">0.22</td>
-<td align="right">0.25</td>
-<td align="right">0.73</td>
+<td align="right">0.23</td>
+<td align="right">0.42</td>
+<td align="right">0.71</td>
 <td align="right">1.19</td>
-<td align="left">▇▁▂▁▂</td>
+<td align="left">▇▁▃▁▂</td>
 </tr>
 <tr class="even">
 <td align="left">NKcells_0|NKcells_1</td>
@@ -2493,68 +2537,68 @@ skim(sig_means)</code></pre>
 </tr>
 <tr class="even">
 <td align="left">NKcells_1|Myeloid</td>
-<td align="right">188</td>
+<td align="right">189</td>
 <td align="right">0.01</td>
-<td align="right">1.28</td>
-<td align="right">0.46</td>
 <td align="right">0.95</td>
-<td align="right">1.11</td>
-<td align="right">1.28</td>
-<td align="right">1.44</td>
-<td align="right">1.60</td>
-<td align="left">▇▁▁▁▇</td>
+<td align="right">NA</td>
+<td align="right">0.95</td>
+<td align="right">0.95</td>
+<td align="right">0.95</td>
+<td align="right">0.95</td>
+<td align="right">0.95</td>
+<td align="left">▁▁▇▁▁</td>
 </tr>
 <tr class="odd">
 <td align="left">NKcells_1|NKcells_0</td>
-<td align="right">182</td>
-<td align="right">0.04</td>
-<td align="right">1.20</td>
-<td align="right">1.00</td>
+<td align="right">184</td>
+<td align="right">0.03</td>
+<td align="right">1.08</td>
+<td align="right">0.82</td>
 <td align="right">0.22</td>
-<td align="right">0.30</td>
+<td align="right">0.46</td>
 <td align="right">0.98</td>
-<td align="right">1.81</td>
-<td align="right">2.86</td>
-<td align="left">▇▅▂▁▅</td>
+<td align="right">1.47</td>
+<td align="right">2.39</td>
+<td align="left">▇▇▁▃▃</td>
 </tr>
 <tr class="even">
 <td align="left">NKcells_1|NKcells_1</td>
 <td align="right">186</td>
 <td align="right">0.02</td>
-<td align="right">1.65</td>
-<td align="right">1.02</td>
+<td align="right">1.55</td>
+<td align="right">1.08</td>
 <td align="right">0.39</td>
-<td align="right">1.03</td>
-<td align="right">1.86</td>
+<td align="right">0.75</td>
+<td align="right">1.67</td>
 <td align="right">2.48</td>
 <td align="right">2.48</td>
-<td align="left">▃▁▃▁▇</td>
+<td align="left">▃▃▁▁▇</td>
 </tr>
 <tr class="odd">
 <td align="left">NKcells_1|Tcells</td>
-<td align="right">184</td>
+<td align="right">185</td>
 <td align="right">0.03</td>
-<td align="right">1.62</td>
-<td align="right">0.61</td>
-<td align="right">0.76</td>
-<td align="right">1.37</td>
 <td align="right">1.52</td>
-<td align="right">1.96</td>
+<td align="right">0.63</td>
+<td align="right">0.76</td>
+<td align="right">1.33</td>
+<td align="right">1.49</td>
+<td align="right">1.55</td>
 <td align="right">2.50</td>
-<td align="left">▃▃▇▃▃</td>
+<td align="left">▃▃▇▁▃</td>
 </tr>
 <tr class="even">
 <td align="left">Tcells|Myeloid</td>
-<td align="right">180</td>
+<td align="right">181</td>
 <td align="right">0.05</td>
-<td align="right">1.66</td>
-<td align="right">0.53</td>
+<td align="right">1.72</td>
+<td align="right">0.52</td>
 <td align="right">1.11</td>
-<td align="right">1.18</td>
-<td align="right">1.60</td>
-<td align="right">1.94</td>
+<td align="right">1.37</td>
+<td align="right">1.67</td>
+<td align="right">2.04</td>
 <td align="right">2.56</td>
-<td align="left">▇▆▁▂▃</td>
+<td align="left">▇▇▁▂▅</td>
 </tr>
 <tr class="odd">
 <td align="left">Tcells|NKcells_0</td>
@@ -2571,16 +2615,16 @@ skim(sig_means)</code></pre>
 </tr>
 <tr class="even">
 <td align="left">Tcells|NKcells_1</td>
-<td align="right">187</td>
+<td align="right">186</td>
 <td align="right">0.02</td>
-<td align="right">2.04</td>
-<td align="right">0.53</td>
-<td align="right">1.46</td>
+<td align="right">1.72</td>
+<td align="right">0.77</td>
+<td align="right">0.76</td>
+<td align="right">1.29</td>
 <td align="right">1.81</td>
-<td align="right">2.17</td>
-<td align="right">2.33</td>
+<td align="right">2.25</td>
 <td align="right">2.50</td>
-<td align="left">▇▁▁▇▇</td>
+<td align="left">▃▁▃▁▇</td>
 </tr>
 <tr class="odd">
 <td align="left">Tcells|Tcells</td>
@@ -2597,6 +2641,9 @@ skim(sig_means)</code></pre>
 </tr>
 </tbody>
 </table>
+<p class="timeit">
+Chunk time: 0.17 secs
+</p>
 </div>
 </div>
 <div id="plotting" class="section level1" number="4">
@@ -2612,9 +2659,13 @@ cellphonedb plot dot_plot \
     --pvalues-path output/11-CellPhoneDB.Rmd/pvalues.txt \
     --output-path output/11-CellPhoneDB.Rmd/ \
     --output-name dotplot.png</code></pre>
-<pre><code>* Project &#39;~/Documents/Projects/interaction-tools&#39; loaded. [renv 0.9.3]
+<pre><code>* Project &#39;~/Documents/Projects/interaction-tools&#39; loaded. [renv 0.10.0]
 /Users/luke.zappia/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
-  warnings.warn(message, FutureWarning)</code></pre>
+  warnings.warn(message, FutureWarning)
+R[write to console]: * The project and lockfile are out of sync -- use `renv::status()` for more details.</code></pre>
+<p class="timeit">
+Chunk time: 9.48 secs
+</p>
 <p>This is a dotplot of the mean expression of the ligand-receptor pair in each pair of cell types.</p>
 <pre class="r"><code>fig_dir &lt;- here(&quot;docs&quot;, &quot;figure&quot;, DOCNAME)
 fs::dir_create(fig_dir)
@@ -2648,6 +2699,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+9e20a9a
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-08
+</td>
+</tr>
 <tr>
 <td>
 7bd35b2
@@ -2685,6 +2747,9 @@ Luke Zappia
 </table>
 </div>
 </div>
+<p class="timeit">
+Chunk time: 0.05 secs
+</p>
 </div>
 <div id="heatmap" class="section level2" number="4.2">
 <h2 number="4.2"><span class="header-section-number">4.2</span> Heatmap</h2>
@@ -2700,9 +2765,13 @@ cellphonedb plot heatmap_plot \
     --count-network-name count_network.txt \
     --interaction-count-name interactions_count.txt \
     data/cellphonedb/test_meta.txt</code></pre>
-<pre><code>* Project &#39;~/Documents/Projects/interaction-tools&#39; loaded. [renv 0.9.3]
+<pre><code>* Project &#39;~/Documents/Projects/interaction-tools&#39; loaded. [renv 0.10.0]
 /Users/luke.zappia/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
-  warnings.warn(message, FutureWarning)</code></pre>
+  warnings.warn(message, FutureWarning)
+R[write to console]: * The project and lockfile are out of sync -- use `renv::status()` for more details.</code></pre>
+<p class="timeit">
+Chunk time: 6.03 secs
+</p>
 <div id="counts" class="section level3" number="4.2.1">
 <h3 number="4.2.1"><span class="header-section-number">4.2.1</span> Counts</h3>
 <p>This is a heatmap of the count of interactions between cell types.</p>
@@ -2741,6 +2810,17 @@ Date
 <tbody>
 <tr>
 <td>
+9e20a9a
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-08
+</td>
+</tr>
+<tr>
+<td>
 7bd35b2
 </td>
 <td>
@@ -2776,6 +2856,9 @@ Luke Zappia
 </table>
 </div>
 </div>
+<p class="timeit">
+Chunk time: 0.03 secs
+</p>
 </div>
 <div id="log-counts" class="section level3" number="4.2.2">
 <h3 number="4.2.2"><span class="header-section-number">4.2.2</span> Log-counts</h3>
@@ -2815,6 +2898,17 @@ Date
 <tbody>
 <tr>
 <td>
+9e20a9a
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-08
+</td>
+</tr>
+<tr>
+<td>
 7bd35b2
 </td>
 <td>
@@ -2850,6 +2944,9 @@ Luke Zappia
 </table>
 </div>
 </div>
+<p class="timeit">
+Chunk time: 0.03 secs
+</p>
 </div>
 <div id="count_network.txt" class="section level3" number="4.2.3">
 <h3 number="4.2.3"><span class="header-section-number">4.2.3</span> count_network.txt</h3>
@@ -2964,17 +3061,20 @@ skim(network)</code></pre>
 <td align="left">count</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">15.69</td>
-<td align="right">9.97</td>
+<td align="right">15.25</td>
+<td align="right">9.66</td>
 <td align="right">1</td>
-<td align="right">10.5</td>
+<td align="right">11.25</td>
 <td align="right">13</td>
-<td align="right">21</td>
-<td align="right">37</td>
+<td align="right">20</td>
+<td align="right">36</td>
 <td align="left">▂▇▂▁▂</td>
 </tr>
 </tbody>
 </table>
+<p class="timeit">
+Chunk time: 0.06 secs
+</p>
 </div>
 <div id="interactions_count.txt" class="section level3" number="4.2.4">
 <h3 number="4.2.4"><span class="header-section-number">4.2.4</span> interactions_count.txt</h3>
@@ -3078,17 +3178,20 @@ skim(interactions)</code></pre>
 <td align="left">all_sum</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">62.75</td>
-<td align="right">25</td>
-<td align="right">40</td>
-<td align="right">43</td>
-<td align="right">59.5</td>
-<td align="right">79.25</td>
-<td align="right">92</td>
+<td align="right">61</td>
+<td align="right">24.75</td>
+<td align="right">38</td>
+<td align="right">41.75</td>
+<td align="right">58</td>
+<td align="right">77.25</td>
+<td align="right">90</td>
 <td align="left">▇▁▁▃▃</td>
 </tr>
 </tbody>
 </table>
+<p class="timeit">
+Chunk time: 0.05 secs
+</p>
 </div>
 </div>
 </div>
@@ -3110,6 +3213,9 @@ kable(fromJSON(params))</code></pre>
 </tr>
 </tbody>
 </table>
+<p class="timeit">
+Chunk time: 0.01 secs
+</p>
 </div>
 <div id="output-files" class="section level2 unnumbered" number="">
 <h2 class="unnumbered" number="">Output files</h2>
@@ -3190,6 +3296,9 @@ kable(fromJSON(params))</code></pre>
 </tr>
 </tbody>
 </table>
+<p class="timeit">
+Chunk time: 0.06 secs
+</p>
 </div>
 <div id="session-information" class="section level2 unnumbered" number="">
 <h2 class="unnumbered" number="">Session information</h2>
@@ -3204,14 +3313,14 @@ kable(fromJSON(params))</code></pre>
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value                       
  version  R version 4.0.0 (2020-04-24)
- os       macOS Catalina 10.15.3      
+ os       macOS Catalina 10.15.4      
  system   x86_64, darwin17.0          
  ui       X11                         
  language (EN)                        
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Berlin               
- date     2020-05-08                  
+ date     2020-05-27                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  ! package     * version date       lib source            
@@ -3219,6 +3328,7 @@ kable(fromJSON(params))</code></pre>
  P backports     1.1.6   2020-04-05 [?] CRAN (R 4.0.0)    
  P base64enc     0.1-3   2015-07-28 [?] CRAN (R 4.0.0)    
  P base64url     1.4     2018-05-14 [?] standard (@1.4)   
+ P BiocManager   1.30.10 2019-11-16 [?] CRAN (R 4.0.0)    
  P broom         0.5.6   2020-04-20 [?] CRAN (R 4.0.0)    
  P cellranger    1.1.0   2016-07-27 [?] standard (@1.1.0) 
  P cli           2.0.2   2020-02-28 [?] CRAN (R 4.0.0)    
@@ -3239,7 +3349,7 @@ kable(fromJSON(params))</code></pre>
  P generics      0.0.2   2018-11-29 [?] standard (@0.0.2) 
  P ggplot2     * 3.3.0   2020-03-05 [?] CRAN (R 4.0.0)    
  P git2r         0.27.1  2020-05-03 [?] CRAN (R 4.0.0)    
- P glue          1.4.0   2020-04-03 [?] CRAN (R 4.0.0)    
+ P glue        * 1.4.0   2020-04-03 [?] CRAN (R 4.0.0)    
  P gtable        0.3.0   2019-03-25 [?] standard (@0.3.0) 
  P haven         2.2.0   2019-11-08 [?] standard (@2.2.0) 
  P here        * 0.1     2017-05-28 [?] standard (@0.1)   
@@ -3261,6 +3371,7 @@ kable(fromJSON(params))</code></pre>
  P modelr        0.1.7   2020-04-30 [?] CRAN (R 4.0.0)    
  P munsell       0.5.0   2018-06-12 [?] standard (@0.5.0) 
  P nlme          3.1-147 2020-04-13 [?] CRAN (R 4.0.0)    
+ P pander      * 0.6.3   2018-11-06 [?] CRAN (R 4.0.0)    
  P pillar        1.4.4   2020-05-05 [?] CRAN (R 4.0.0)    
  P pkgconfig     2.0.3   2019-09-22 [?] CRAN (R 4.0.0)    
  P prettyunits   1.1.1   2020-01-24 [?] CRAN (R 4.0.0)    
@@ -3271,7 +3382,7 @@ kable(fromJSON(params))</code></pre>
  P Rcpp          1.0.4.6 2020-04-09 [?] CRAN (R 4.0.0)    
  P readr       * 1.3.1   2018-12-21 [?] standard (@1.3.1) 
  P readxl        1.3.1   2019-03-13 [?] standard (@1.3.1) 
- P renv          0.9.3   2020-02-10 [?] CRAN (R 4.0.0)    
+   renv          0.10.0  2020-05-06 [1] CRAN (R 4.0.0)    
  P repr          1.1.0   2020-01-28 [?] CRAN (R 4.0.0)    
  P reprex        0.3.0   2019-05-16 [?] standard (@0.3.0) 
  P reticulate    1.15    2020-04-02 [?] CRAN (R 4.0.0)    
@@ -3287,7 +3398,7 @@ kable(fromJSON(params))</code></pre>
  P stringi       1.4.6   2020-02-17 [?] CRAN (R 4.0.0)    
  P stringr     * 1.4.0   2019-02-10 [?] CRAN (R 4.0.0)    
  P tibble      * 3.0.1   2020-04-20 [?] CRAN (R 4.0.0)    
- P tidyr       * 1.0.2   2020-01-24 [?] CRAN (R 4.0.0)    
+   tidyr       * 1.0.3   2020-05-07 [1] CRAN (R 4.0.0)    
  P tidyselect    1.0.0   2020-01-27 [?] CRAN (R 4.0.0)    
  P tidyverse   * 1.3.0   2019-11-21 [?] standard (@1.3.0) 
  P txtq          0.2.0   2019-10-15 [?] standard (@0.2.0) 
@@ -3300,10 +3411,14 @@ kable(fromJSON(params))</code></pre>
  P yaml          2.2.1   2020-02-01 [?] CRAN (R 4.0.0)    
 
 [1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
-[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpnH5XYo/renv-system-library
-[3] /Library/Frameworks/R.framework/Versions/4.0/Resources/library
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpeX3EJ1/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpoT5Igt/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpuyNmXR/renv-system-library
 
  P ── Loaded and on-disk path mismatch.</code></pre>
+<p class="timeit">
+Chunk time: 0.16 secs
+</p>
 </div>
 </div>
 </div>

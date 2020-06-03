@@ -12,6 +12,8 @@ suppressPackageStartupMessages({
     library("knitr")
     library("jsonlite")
     library("skimr")
+    library("pander")
+    library("glue")
     # Tidyverse
     library("tidyverse")
 })
@@ -19,6 +21,10 @@ suppressPackageStartupMessages({
 #==============================================================================#
 # ---- CONFLICTS ----
 #==============================================================================#
+
+suppressMessages({
+    conflict_prefer("filter", "dplyr")
+})
 
 #==============================================================================#
 # ---- KNITR ----
@@ -34,7 +40,13 @@ knitr::knit_hooks$set(timeit = function(before) {
         NOW <<- Sys.time()
     } else {
         print(paste("Stop:", Sys.time()))
-        print(Sys.time() - NOW)
+        runtime <- Sys.time() - NOW
+        print(runtime)
+        paste(
+            '<p class="timeit">',
+            "Chunk time:", round(runtime, 2), attr(runtime, "units"),
+            "</p>"
+        )
     }
 })
 
@@ -87,5 +99,6 @@ theme_set(theme_minimal())
 #==============================================================================#
 
 PATHS <- list(
-    cellphonedb_in = here("data", "cellphonedb")
+    cellphonedb_in = here("data", "cellphonedb"),
+    NicheNet_in    = here("data", "NicheNet")
 )

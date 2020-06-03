@@ -88,6 +88,7 @@ h6 {
 }
 </style>
 
+<link rel="stylesheet" href="custom.css" type="text/css" />
 
 
 
@@ -355,7 +356,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-06
+<strong>Last updated:</strong> 2020-05-27
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -386,16 +387,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreef76f84fb70f6989377377e8effc9f1f0522a6d90targetblankf76f84fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/f76f84fb70f6989377377e8effc9f1f0522a6d90" target="_blank">f76f84f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreefd22f252375d785d45a23eaeb4d21c178e6f7c4atargetblankfd22f25a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/fd22f252375d785d45a23eaeb4d21c178e6f7c4a" target="_blank">fd22f25</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreef76f84fb70f6989377377e8effc9f1f0522a6d90targetblankf76f84fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreefd22f252375d785d45a23eaeb4d21c178e6f7c4atargetblankfd22f25a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/f76f84fb70f6989377377e8effc9f1f0522a6d90" target="_blank">f76f84f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/fd22f252375d785d45a23eaeb4d21c178e6f7c4a" target="_blank">fd22f25</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -405,18 +406,21 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    .drake/
+    Ignored:    data/NicheNet/
     Ignored:    data/cellphonedb/
+    Ignored:    output/index.Rmd/
     Ignored:    renv/library/
     Ignored:    renv/python/
     Ignored:    renv/staging/
 
-Untracked files:
-    Untracked:  test.sh
-
 Unstaged changes:
-    Modified:   analysis/11-CellPhoneDB.Rmd
-    Modified:   code/setup.R
-    Modified:   renv.lock
+    Modified:   output/11-CellPhoneDB.Rmd/count_network.txt
+    Modified:   output/11-CellPhoneDB.Rmd/dotplot.png
+    Modified:   output/11-CellPhoneDB.Rmd/heatmap_counts.png
+    Modified:   output/11-CellPhoneDB.Rmd/heatmap_logcounts.png
+    Modified:   output/11-CellPhoneDB.Rmd/interactions_count.txt
+    Modified:   output/11-CellPhoneDB.Rmd/pvalues.txt
+    Modified:   output/11-CellPhoneDB.Rmd/significant_means.txt
 
 </code></pre>
 <p>
@@ -455,6 +459,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/7bd35b289898d50296c4e49470b8aa8b6e0e5396/docs/license.html" target="_blank">7bd35b2</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-06
+</td>
+<td>
+Rebuild cellphonedb
+</td>
+</tr>
 <tr>
 <td>
 html

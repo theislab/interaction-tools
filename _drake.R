@@ -7,7 +7,7 @@ library("here")
 library("tidyverse")
 
 #==============================================================================#
-# ---- Functions ----
+# ---- FUNCTIONS ----
 #==============================================================================#
 
 source(here("code", "output.R"))
@@ -31,10 +31,14 @@ plan <- drake_plan(
     ),
     index = target(
         workflowr::wflow_build(here(knitr_in("analysis/index.Rmd"))),
-        trigger = trigger(change = TRUE)
+        trigger = trigger(condition = TRUE)
     ),
     rmd11_CellPhoneDB = target(
         workflowr::wflow_build(here(knitr_in("analysis/11-CellPhoneDB.Rmd"))),
+        trigger = trigger(change = configs)
+    ),
+    rmd12_NicheNet = target(
+        workflowr::wflow_build(here(knitr_in("analysis/12-NicheNet.Rmd"))),
         trigger = trigger(change = configs)
     )
 )

@@ -1,0 +1,19 @@
+.r {
+    background-color: #E4E5ED;
+}
+
+.python {
+    background-color: #E4EDE4;
+}
+
+.bash {
+    background-color: #6D6D6D;
+    color: #E6E6E6;
+}
+
+.timeit {
+    font-style: italic;
+    font-size: small;
+    color: #929292;
+    float: right;
+}

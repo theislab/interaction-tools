@@ -1,0 +1,1034 @@
+---
+title: "NicheNet example"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, cache = FALSE}
+# Setup document
+source(here::here("code", "setup.R"))
+
+# Function dependencies
+invisible(drake::readd(download_link))
+```
+
+Introduction {.unnumbered}
+============
+
+In this document we are going to run through the example analysis for the
+**NicheNet** tool and have a look at the output it produces. More information
+about **NicheNet** can be found at https://github.com/saeyslab/nichenetr.
+
+```{r libraries}
+library("nichenetr")
+library("RColorBrewer")
+library("cowplot")
+library("ggpubr")
+library("circlize")
+
+conflict_prefer("get_legend", "cowplot")
+```
+
+Input
+=====
+
+**NicheNet** takes several inputs for different parts of the analysis. These
+include a matrix of ligand targets, a ligand-receptor network, network weights,
+an scRNA-seq dataset and a gene set of interest.
+
+Ligand-target matrix
+--------------------
+
+This matrix contains the prior potential that a particular ligand might regulate
+the expression of a specific target gene. Here is a snippet of the matrix:
+
+```{r input-ligand-target}
+# From https://zenodo.org/record/3260758/files/ligand_target_matrix.rds
+ligand_targets <- read_rds(
+    fs::path(PATHS$NicheNet_in, "ligand_target_matrix.Rds")
+)
+
+pander(ligand_targets[1:5, 1:5])
+```
+
+The full matrix has **`r nrow(ligand_targets)`** rows (targets) and
+**`r ncol(ligand_targets)`** columns (ligands).
+
+Ligand-receptor network
+-----------------------
+
+This is a database of ligand-receptor pairs with information about their source.
+
+```{r input-lr-network}
+# From https://zenodo.org/record/3260758/files/lr_network.rds
+lr_network <- read_rds(fs::path(PATHS$NicheNet_in, "lr_network.Rds"))
+
+skim(lr_network)
+```
+
+Gene-receptor network
+---------------------
+
+This is a database of gene-receptor pairs with information about their source.
+
+```{r input-gr-network}
+# From https://zenodo.org/record/3260758/files/gr_network.rds
+gr_network <- read_rds(fs::path(PATHS$NicheNet_in, "gr_network.Rds"))
+
+skim(gr_network)
+```
+
+Signalling network
+------------------
+
+This is a database of signalling interactions with information about their
+source.
+
+```{r input-sig-network}
+# From https://zenodo.org/record/3260758/files/signaling_network.rds
+sig_network <- read_rds(fs::path(PATHS$NicheNet_in, "signaling_network.Rds"))
+
+skim(sig_network)
+```
+
+Network weights
+---------------
+
+```{r input-weights}
+# From https://zenodo.org/record/3260758/files/weighted_networks.rds
+weighted_networks <- read_rds(
+    fs::path(PATHS$NicheNet_in, "weighted_networks.Rds")
+)
+```
+
+This is a list with **`r length(weighted_networks)`** items:
+`r glue_collapse(glue("**{names(weighted_networks)}**"), sep = ", ", last = " and ")`.
+
+### Ligand-receptor
+
+```{r input-weights-lr}
+skim(weighted_networks$lr_sig)
+```
+
+### Gene-receptor
+
+```{r input-weights-gr}
+skim(weighted_networks$gr)
+```
+
+Expression data
+---------------
+
+The example dataset is from cancer-associated fibroblasts (CAFs) in the head and
+neck squamous cell carcinoma (HNSCC) tumour microenvironment.
+
+```{r input-expression}
+# From https://zenodo.org/record/3260758/files/hnscc_expression.rds
+hnscc <- read_rds(fs::path(PATHS$NicheNet_in, "hnscc_expression.Rds"))
+```
+
+This dataset is provided as a list with **`r length(hnscc)` items:
+`r glue_collapse(glue("**{names(hnscc)}**"), sep = ", ", last = " and ")`.
+
+### Expression matrix
+
+The first item is the expression matrix.
+
+```{r input-expression-matrix}
+exprs_mat <- hnscc$expression
+
+pander(exprs_mat[1:5, 1:5])
+```
+
+The expression matrix has **`r nrow(exprs_mat)`** rows (cells) and
+**`r ncol(exprs_mat)`** columns (genes).
+
+### Sample information
+
+There is also some metadata about the cells.
+
+```{r input-expression-samples}
+sample_info <- hnscc$sample_info
+
+skim(sample_info)
+```
+
+### Expressed genes
+
+The final item is a vector of the names of expressed genes.
+
+```{r input-expression-genes}
+skim(hnscc$expressed_genes)
+```
+
+Gene set
+--------
+
+Because we are looking at how CAFs influence cancer growth we will use a
+signature for p-EMT.
+
+```{r input-geneset}
+# From https://zenodo.org/record/3260758/files/pemt_signature.txt
+geneset <- read_tsv(
+    fs::path(PATHS$NicheNet_in, "pemt_signature.txt"),
+    col_types = cols(
+        gene = col_character()
+    ),
+    col_names = "gene"
+) %>%
+    pull(gene) %>%
+    .[. %in% rownames(ligand_targets)]
+
+skim(geneset)
+```
+
+Define expressed genes
+======================
+
+The first step in the analysis is to define which genes are expressed in the
+sender and receiver cell populations. In this example the CAFs are defined to be
+the senders and tumour cells (from high quality tumours) are defined to be
+receivers.
+
+We also need to set a threshold for deciding a gene is "expressed". Here we use
+the following formula:
+
+$$Ea_i = log_2((\frac{1}{k}\sum_{i = 1}^{k} TPM_i) + 1) >= 4$$
+
+> **NOTE:** For UMI data (10x Chromium) the authors don't use this formula and
+> instead suggest a threshold of non-zero expression in at least 10% of cells.
+
+```{r expressed genes}
+# Low-quality tumours to remove
+tumours_remove <- c("HN10", "HN", "HN12", "HN13", "HN24", "HN7", "HN8", "HN23")
+
+CAF_ids <- sample_info %>%
+    filter(
+        `Lymph node` == 0 &
+            !(tumor %in% tumours_remove) &
+            `non-cancer cell type` == "CAF"
+    ) %>%
+    pull(cell)
+
+malignant_ids <- sample_info %>%
+    filter(
+        `Lymph node` == 0 &
+            !(tumor %in% tumours_remove) &
+            `classified  as cancer cell` == 1
+    ) %>%
+    pull(cell)
+
+expressed_sender <- exprs_mat[CAF_ids, ] %>%
+    apply(2, function(x) {10 * (2 ** x - 1)}) %>%
+    apply(2, function(x) {log2(mean(x) + 1)}) %>%
+    .[. >= 4] %>%
+    names()
+expressed_receiver <- exprs_mat[malignant_ids, ] %>%
+    apply(2, function(x) {10 * (2 ** x - 1)}) %>% 
+    apply(2, function(x) {log2(mean(x) + 1)}) %>%
+    .[. >= 4] %>%
+    names()
+```
+
+After this quality control we have selected **`r length(CAF_ids)`** CAFs
+(senders) and **`r length(malignant_ids)`** tumour cells (receivers). There are
+**`r length(expressed_sender)`** genes expressed in the sender cells and
+**`r length(expressed_receiver)`** genes expressed in the receiver cells.
+
+Background genes
+================
+
+We already have the gene set of interest that we want to look at but we also
+need to define a background set of genes. For this we use all genes expressed in
+the malignant (receiver) cells which are also in the ligand-target matrix.
+
+```{r background}
+background_genes <- expressed_receiver %>%
+    .[. %in% rownames(ligand_targets)]
+```
+
+This gives us a set of **`r length(background_genes)`** background genes.
+
+Potential ligands
+=================
+
+We determine a set of potential ligands by selection those that are expressed
+by CAFs (sender) and bind a receptor expressed in malignant cells (receiver).
+
+```{r ligands}
+ligands <- lr_network %>%
+    pull(from) %>%
+    unique()
+
+expressed_ligands <- intersect(ligands, expressed_sender)
+
+receptors <- lr_network %>%
+    pull(to) %>%
+    unique()
+
+expressed_receptors <- intersect(receptors, expressed_receiver)
+
+lr_network_expressed <- lr_network %>%
+    filter(
+        from %in% expressed_ligands &
+            to %in% expressed_receptors
+    )
+
+potential_ligands <- lr_network_expressed %>%
+    pull(from) %>%
+    unique()
+```
+
+The filtered database contains **`r nrow(lr_network_expressed)`** expressed
+ligand-receptor pairs with **`r length(potential_ligands)`** potential ligands.
+
+Ligand activity analysis
+========================
+
+Now we have all the input data sorted we can run **NicheNet**. The first
+analysis assesses ligand activity by calculating how well each CAF-ligand can
+predict that a gene belongs to the p-EMT gene set compared to the background
+genes.
+
+```{r activity}
+ligand_activities <- predict_ligand_activities(
+    geneset                    = geneset, 
+    background_expressed_genes = background_genes,
+    ligand_target_matrix       = ligand_targets,
+    potential_ligands          = potential_ligands
+)
+
+skim(ligand_activities)
+```
+
+There are various scores given as results here but the authors suggest using
+the Pearson correlation to select ligands. We select 20 ligands with highest
+correlation.
+
+```{r best-activity}
+best_ligands <- ligand_activities %>%
+    top_n(20, pearson) %>%
+    arrange(-pearson) %>%
+    pull(test_ligand)
+```
+
+These ligands are:
+`r glue_collapse(glue("**{best_ligands}**"), sep = ", ", last = " and ")`
+
+The choice of to use 20 ligands is somewhat arbitary and is likely to be
+different for different settings. For a real analysis the authors suggest
+choosing a threshold by looking at the distribution of correlations.
+
+```{r activity-plot}
+pearson_thresh <- ligand_activities %>%
+    top_n(20, pearson) %>%
+    pull(pearson) %>%
+    min()
+
+ggplot(ligand_activities, aes(x = pearson)) + 
+    geom_histogram(color = "black", fill = "darkorange")  +
+    geom_vline(
+        xintercept = pearson_thresh,
+        color      = "red",
+        linetype   = "dashed",
+        size       = 1
+    ) + 
+    labs(
+        x = "ligand activity (PCC)",
+        y = "# ligands"
+    ) +
+    theme_classic()
+```
+
+Infer target genes
+==================
+
+Once we have a set of active ligands we can look at the regulatory potential
+between ligands and downstream targets. We only look at interactions between the
+top 20 ligands and genes that belong to the gene set and are in the top 250
+most strongly predicted targets of one of the selected ligands. The targets are
+selected based on predictions in the general prior model so are not specific to
+this dataset. Genes that are not a top target of one of the selected ligands
+will not be shown.
+
+```{r active-links}
+active_links <- best_ligands %>%
+    lapply(
+        get_weighted_ligand_target_links,
+        geneset              = geneset,
+        ligand_target_matrix = ligand_targets,
+        n                    = 250
+    ) %>%
+    bind_rows()
+
+skim(active_links)
+```
+
+For visualisation potential scores are set to zero if they were below the 0.25
+quantile for top targets of that ligand in the ligand-target matrix.
+
+```{r target-heatmap}
+links_mat <- prepare_ligand_target_visualization(
+    ligand_target_df     = active_links,
+    ligand_target_matrix = ligand_targets,
+    cutoff               = 0.25
+)
+
+order_ligands <- intersect(best_ligands, colnames(links_mat)) %>% rev()
+order_targets <- active_links$target %>% unique()
+
+vis_ligand_target <- links_mat[order_targets, order_ligands] %>% t()
+
+ligand_target_heatmap <- vis_ligand_target %>%
+    make_heatmap_ggplot(
+        "Prioritized CAF-ligands",
+        "p-EMT genes in malignant cells",
+        color           = "purple",
+        legend_position = "top",
+        x_axis_position = "top",
+        legend_title    = "Regulatory potential"
+    ) +
+    scale_fill_gradient2(
+        low    = "whitesmoke",
+        high   = "purple",
+        breaks = c(0,0.005,0.01)
+    ) +
+    theme(axis.text.x = element_text(face = "italic"))
+
+ligand_target_heatmap
+```
+
+The cutoffs for visualisation are arbitary and the authors suggest testing
+several cutoffs. Considering more targets would identify more interactions but
+with less confidence. Lowering the quantil cutoff would result in a denser
+heatmap.
+
+Ligand-receptor network
+=======================
+
+A further analysis is to look at the interactions between ligands and receptors
+rather than downstream targets.
+
+```{r lr-network}
+lr_network_top <- lr_network %>%
+    filter(
+        from %in% best_ligands &
+            to %in% expressed_receptors
+    ) %>%
+    distinct(from, to)
+
+best_receptors <- lr_network_top %>%
+    pull(to) %>%
+    unique()
+
+lr_network_top <- weighted_networks$lr_sig %>%
+    filter(
+        from %in% best_ligands &
+            to %in% best_receptors
+    ) %>%
+    spread("from", "weight", fill = 0)
+
+lr_network_top_mat <- lr_network_top %>%
+    select(-to) %>%
+    as.matrix() %>%
+    magrittr::set_rownames(lr_network_top$to)
+
+dist_receptors   <- dist(lr_network_top_mat, method = "binary")
+hclust_receptors <- hclust(dist_receptors, method = "ward.D2")
+order_receptors  <- hclust_receptors$labels[hclust_receptors$order]
+
+dist_ligands            <- dist(lr_network_top_mat %>% t(), method = "binary")
+hclust_ligands          <- hclust(dist_ligands, method = "ward.D2")
+order_ligands_receptors <- hclust_ligands$labels[hclust_ligands$order]
+
+ligand_receptor_heatmap <-
+    lr_network_top_mat[order_receptors, order_ligands_receptors] %>%
+    t() %>%
+    make_heatmap_ggplot(
+        "Prioritized CAF-ligands",
+        "Receptors expressed by malignant cells",
+        color           = "mediumvioletred",
+        x_axis_position = "top",
+        legend_title    = "Prior interaction potential"
+    ) +
+    theme()
+
+ligand_receptor_heatmap
+```
+
+Combined heatmap (with expression)
+==================================
+
+**NicheNet** only considers expressed ligands but does not use their expression
+when ranking them, the ranking is only based on potential for regulation given
+prior knowledge. Here we make a combined heatmap that shows expression alongside
+regulatory potential.
+
+```{r combined-heatmap, fig.width = 13, fig.height = 7}
+ligand_pearson_matrix <- ligand_activities %>%
+    select(pearson) %>%
+    as.matrix() %>%
+    magrittr::set_rownames(ligand_activities$test_ligand)
+
+ligand_pearson_heatmap <- ligand_pearson_matrix[order_ligands, ] %>%
+    as.matrix(ncol = 1) %>%
+    magrittr::set_colnames("Pearson") %>%
+    make_heatmap_ggplot(
+        "Prioritized CAF-ligands",
+        "Ligand activity",
+        color           = "darkorange",
+        legend_position = "top",
+        x_axis_position = "top",
+        legend_title    = paste(
+            "Pearson correlation coefficient,",
+            "(target gene prediction ability)",
+            collapse = "\n"
+        )
+    )
+
+expression_CAF <- exprs_mat[CAF_ids, order_ligands] %>%
+    data.frame() %>%
+    rownames_to_column("cell") %>%
+    tbl_df() %>%
+    inner_join(
+        sample_info %>%
+            select(cell,tumor),
+        by =  "cell"
+    ) %>%
+    group_by(tumor) %>%
+    select(-cell) %>%
+    summarise_all(mean) %>%
+    gather("ligand", "exprs", -tumor) %>%
+    spread(tumor, exprs)
+    
+expression_CAF_mat <- expression_CAF %>%
+    select(-ligand) %>%
+    as.matrix() %>%
+    magrittr::set_rownames(expression_CAF$ligand)
+
+order_tumors = c("HN6", "HN20", "HN26", "HN28", "HN22", "HN25", 
+                 "HN5", "HN18", "HN17", "HN16")
+
+color <- colorRampPalette(rev(brewer.pal(n = 7, name = "RdYlBu")))(100)
+
+ligand_exprs_heatmap <- expression_CAF_mat[order_ligands, order_tumors] %>% 
+    make_heatmap_ggplot(
+        "Prioritized CAF-ligands",
+        "Tumor",
+        color           = color[100],
+        legend_position = "top",
+        x_axis_position = "top",
+        legend_title    = "Expression\n(averaged over\nsingle cells)"
+    ) +
+    theme(axis.text.y = element_text(face = "italic"))
+
+expression_targets <- exprs_mat[malignant_ids, geneset] %>%
+    data.frame() %>%
+    rownames_to_column("cell") %>%
+    tbl_df() %>%
+    inner_join(
+        sample_info %>%
+            select(cell, tumor),
+        by =  "cell"
+    ) %>%
+    group_by(tumor) %>%
+    select(-cell) %>%
+    summarise_all(mean) %>%
+    gather("target", "exprs", -tumor) %>%
+    spread(tumor, exprs)
+
+expression_targets_mat <- expression_targets %>%
+    select(-target) %>%
+    as.matrix() %>%
+    magrittr::set_rownames(expression_targets$target)
+
+targets_exprs_heatmap <- expression_targets_mat %>%
+    t() %>%
+    scale_quantile() %>%
+    .[order_tumors, order_targets] %>%
+    make_threecolor_heatmap_ggplot(
+        "Tumor",
+        "Target",
+        low_color       = color[1],
+        mid_color       = color[50],
+        mid             = 0.5,
+        high_color      = color[100],
+        legend_position = "top",
+        x_axis_position = "top" ,
+        legend_title    = "Scaled expression\n(averaged over\nsingle cells)"
+    ) +
+    theme(axis.text.x = element_text(face = "italic"))
+
+combined_heatmap <- plot_grid(
+    ligand_pearson_heatmap +
+        theme(
+            legend.position = "none",
+            axis.ticks      = element_blank(),
+            axis.title.x    = element_text()
+        ),
+    ligand_exprs_heatmap +
+        ylab("") +
+        theme(
+            legend.position = "none",
+            axis.ticks      = element_blank(),
+            axis.title.x    = element_text()
+        ),
+    ligand_target_heatmap +
+        ylab("") +
+        theme(
+            legend.position = "none",
+            axis.ticks      = element_blank()
+        ), 
+    NULL,
+    NULL,
+    targets_exprs_heatmap +
+        xlab("") +
+        theme(
+            legend.position = "none",
+            axis.ticks      = element_blank()
+        ), 
+    align       = "hv",
+    nrow        = 2,
+    rel_widths  = c(
+        1 + 4.5,
+        ncol(expression_CAF_mat),
+        ncol(vis_ligand_target)
+    ) - 2,
+    rel_heights = c(
+        length(order_ligands),
+        nrow(t(expression_targets_mat)) + 3
+    )
+) 
+
+legends <- plot_grid(
+    as_ggplot(get_legend(ligand_pearson_heatmap)),
+    as_ggplot(get_legend(ligand_exprs_heatmap)),
+    as_ggplot(get_legend(ligand_target_heatmap)),
+    as_ggplot(get_legend(targets_exprs_heatmap)),
+    nrow  = 2,
+    align = "h"
+)
+
+plot_grid(
+    combined_heatmap, 
+    legends, 
+    rel_heights = c(10, 2),
+    nrow        = 2,
+    align       = "hv"
+)
+```
+
+Signalling paths
+================
+
+**NicheNet** can also be used to infer the signalling paths between a ligands
+and targets of interest. This is done by looking at which transcription factors
+regulating the target are most closely downstream of the ligand. The pathway is
+confirmed by looking at the signalling database.
+
+```{r pathway}
+ligands_sel <- "TGFB3"
+targets_sel <- c("TGFBI", "LAMC2", "TNC")
+
+signalling_path <- get_ligand_signaling_path(
+    ligand_tf_matrix  = ligand_targets,
+    ligands_all       = ligands_sel,
+    targets_all       = targets_sel,
+    weighted_networks = weighted_networks
+)
+
+# Normalise edge weights for visualisation
+signalling_path_minmax     <- signalling_path
+signalling_path_minmax$sig <- signalling_path_minmax$sig %>%
+    mutate(weight = ((weight - min(weight)) /
+                         (max(weight) - min(weight))) + 0.75)
+signalling_path_minmax$gr  <- signalling_path_minmax$gr %>%
+    mutate(weight = ((weight - min(weight)) /
+                         (max(weight) - min(weight))) + 0.75)
+
+graph_minmax <- diagrammer_format_signaling_graph(
+    signaling_graph_list = signalling_path_minmax,
+    ligands_all          = ligands_sel,
+    targets_all          = targets_sel,
+    sig_color            = "indianred",
+    gr_color             = "steelblue"
+)
+
+DiagrammeR::render_graph(graph_minmax, layout = "tree")
+```
+
+We can also look at which data sources support the interactions in this network.
+Here are examples of the first few sources.
+
+```{r pathway-sources}
+path_sources <- infer_supporting_datasources(
+    signaling_graph_list = signalling_path,
+    lr_network           = lr_network,
+    sig_network          = sig_network,
+    gr_network           = gr_network
+)
+
+kable(head(path_sources, n = 10))
+```
+
+Gene set prediction
+===================
+
+**NicheNet** can also use the top-ranked ligands to predict whether a gene
+belongs to a gene set. This is done by training a random forest classification
+model that returns a probability for each gene.
+
+```{r geneset-prediction}
+k_folds  <- 3
+n_rounds <- 2
+
+pemt_predictions <- seq(n_rounds) %>%
+    lapply(
+        assess_rf_class_probabilities,
+        folds                      = k_folds,
+        geneset                    = geneset,
+        background_expressed_genes = background_genes,
+        ligands_oi                 = best_ligands,
+        ligand_target_matrix       = ligand_targets
+    )
+```
+
+This returns a list with **`r length(pemt_predictions)`** items. Here is a
+summary of the first item:
+
+`r skim(pemt_predictions[[1]])`
+
+We can then evaluate how well the calculated probabilites match up with the gene
+set assignments.
+
+```{r geneset-prediction-eval}
+prediction_performance <- pemt_predictions %>%
+    lapply(classification_evaluation_continuous_pred_wrapper) %>%
+    bind_rows() %>%
+    mutate(round = seq(1:nrow(.)))
+
+prediction_performance %>%
+    summarise(
+        AUROC   = mean(auroc),
+        AUPR    = mean(aupr),
+        Pearson = mean(pearson)
+    ) %>%
+    kable()
+
+prediction_performance_discrete <- pemt_predictions %>%
+    lapply(calculate_fraction_top_predicted, quantile_cutoff = 0.95) %>%
+    bind_rows() %>%
+    ungroup() %>%
+    mutate(round = rep(1:length(pemt_predictions), each = 2))
+
+pemt_frac <- prediction_performance_discrete %>%
+    filter(true_target) %>%
+    .$fraction_positive_predicted %>%
+    mean()
+
+nonpemt_frac <- prediction_performance_discrete %>%
+    filter(!true_target) %>%
+    .$fraction_positive_predicted %>%
+    mean()
+
+prediction_performance_fisher <- pemt_predictions %>%
+    lapply(calculate_fraction_top_predicted_fisher, quantile_cutoff = 0.95) %>%
+    unlist() %>%
+    mean()
+```
+
+We see that **`r round(pemt_frac * 100)`%** of p-EMT genes are classified as
+being part of the geneset and **`r round(nonpemt_frac * 100)`%** of non-p-EMT
+genes. A Fisher's exact test gives us a p-value of
+**`r prediction_performance_fisher`**.
+
+The following p-EMT genes were correctly predicted in every cross-validation
+round:
+
+```{r geneset-prediction-table}
+seq(length(pemt_predictions)) %>%
+    lapply(get_top_predicted_genes, pemt_predictions) %>%
+    reduce(full_join, by = c("gene", "true_target")) %>%
+    filter(true_target) %>%
+    kable()
+```
+
+Single-cell ligand activities
+=============================
+
+So far we have considered ligand activities for cell types but it is also
+possible to calculate ligand activities for individual cells.
+
+To reduce run time we only perform this analysis on a selection of 10 cells from
+a single tumour.
+
+```{r sc-activities}
+exprs_scaled <- exprs_mat %>%
+    .[malignant_ids, background_genes] %>%
+    scale_quantile()
+
+malignant_hn5_ids <- sample_info %>%
+    filter(tumor == "HN5") %>%
+    filter(`Lymph node` == 0) %>%
+    filter(`classified  as cancer cell` == 1) %>%
+    .$cell %>%
+    head(10)
+
+sc_ligand_activities <- predict_single_cell_ligand_activities(
+    cell_ids             = malignant_hn5_ids,
+    expression_scaled    = exprs_scaled,
+    ligand_target_matrix = ligand_targets,
+    potential_ligands    = potential_ligands
+)
+```
+
+Now that we have activities at the single-cell level they can be linked to other
+properties of cells. Here we score cells on their expression of the core p-EMT
+gene _TGFBI_. This is taken as a proxy for p-EMT activity and correlated with
+the calculated ligand activities. The correlation can be used to rank p-EMT
+inducing ligands.
+
+```{r score-cells}
+cell_scores <- tibble(
+    cell  = malignant_hn5_ids,
+    score = exprs_scaled[malignant_hn5_ids, "TGFBI"]
+)
+
+sc_ligand_activities_norm <- normalize_single_cell_ligand_activities(
+    sc_ligand_activities
+)
+
+correlations <- single_ligand_activity_score_regression(
+    sc_ligand_activities_norm,
+    cell_scores
+)
+
+skim(correlations)
+
+correlations %>%
+    arrange(-pearson_regression) %>%
+    select(ligand, pearson_regression) %>%
+    head() %>%
+    kable()
+
+inner_join(cell_scores, sc_ligand_activities_norm) %>%
+    ggplot(aes(score, TNC)) +
+    geom_point() +
+    geom_smooth(method = "lm")
+```
+
+Circos plots
+============
+
+An alternative way to visualise interactions is using a Circos plot.
+
+```{r circos, eval = FALSE, include = FALSE}
+endothelial_ids <- sample_info %>%
+    filter(
+        `Lymph node` == 0 &
+            !(tumor %in% tumours_remove) &
+            `non-cancer cell type` == "Endothelial"
+    ) %>%
+    pull(cell)
+
+ligand_exprs <- tibble(
+    ligand      = best_ligands, 
+    CAF         = exprs_mat[CAF_ids, best_ligands] %>%
+        apply(2, function(x) {10 * (2 ** x - 1)}) %>%
+        apply(2, function(x) {log2(mean(x) + 1)}),
+    endothelial = exprs_mat[endothelial_ids, best_ligands] %>%
+        apply(2, function(x) {10 * (2 ** x - 1)}) %>%
+        apply(2, function(x) {log2(mean(x) + 1)})
+)
+
+CAF_ligands <- ligand_exprs %>%
+    filter(CAF > endothelial + 2) %>%
+    pull(ligand)
+endothelial_ligands <- ligand_exprs %>%
+    filter(endothelial > CAF + 2) %>%
+    pull(ligand)
+general_ligands <- setdiff(best_ligands, c(CAF_ligands, endothelial_ligands))
+
+ligand_types <- tibble(
+    ligand_type = c(
+        rep("CAF-specific", times = CAF_ligands %>% length()),
+        rep("General", times = general_ligands %>% length()),
+        rep("Endothelial-specific", times = endothelial_ligands %>% length())
+    ),
+    ligand = c(CAF_ligands, general_ligands, endothelial_ligands)
+)
+
+cutoff_ligands <- active_links$weight %>% quantile(0.66)
+
+active_links_circos <- active_links %>%
+    filter(weight > cutoff_ligands)
+
+ligands_remove <- setdiff(
+    active_links$ligand %>% unique(),
+    active_links_circos$ligand %>% unique()
+)
+targets_remove <- setdiff(
+    active_links$target %>% unique(),
+    active_links_circos$target %>% unique()
+)
+  
+circos_links <- active_links %>%
+    inner_join(ligand_types) %>%
+    mutate(target_type = "p_emt") %>%
+    filter(
+        !target %in% targets_remove &
+            !ligand %in% ligands_remove
+    )
+
+grid_col_ligand <- c(
+    "General"              = "lawngreen",
+    "CAF-specific"         = "royalblue",
+    "Endothelial-specific" = "gold"
+)
+grid_col_target <- c("p_emt" = "tomato")
+
+grid_col_tbl_ligand <- tibble(
+    ligand_type       = grid_col_ligand %>% names(),
+    color_ligand_type = grid_col_ligand
+)
+grid_col_tbl_target <- tibble(
+    target_type       = grid_col_target %>% names(),
+    color_target_type = grid_col_target
+)
+
+circos_links <- circos_links %>%
+    mutate(ligand = paste(ligand," ")) %>%
+    inner_join(grid_col_tbl_ligand) %>%
+    inner_join(grid_col_tbl_target)
+links_circle <- circos_links %>% select(ligand, target, weight)
+
+ligand_color <- circos_links %>% distinct(ligand, color_ligand_type)
+grid_ligand_color <- ligand_color$color_ligand_type %>%
+    set_names(ligand_color$ligand)
+target_color <- circos_links %>% distinct(target, color_target_type)
+grid_target_color <- target_color$color_target_type %>%
+    set_names(target_color$target)
+
+grid_col <- c(grid_ligand_color, grid_target_color)
+
+transparency <- circos_links %>%
+    mutate(weight = (weight - min(weight)) / (max(weight) - min(weight))) %>%
+    mutate(transparency = 1 - weight) %>%
+    .$transparency
+
+target_order <- circos_links$target %>% unique()
+ligand_order <- c(
+    CAF_ligands,
+    general_ligands,
+    endothelial_ligands) %>%
+    c(paste(.," ")) %>%
+    intersect(circos_links$ligand)
+order <- c(ligand_order, target_order)
+
+width_same_cell_same_ligand_type <- 0.5
+width_different_cell <- 6
+width_ligand_target <- 15
+width_same_cell_same_target_type <- 0.5
+
+gaps <- c(
+    # width_ligand_target,
+    rep(
+        width_same_cell_same_ligand_type,
+        times = circos_links %>%
+            filter(ligand_type == "CAF-specific") %>%
+            distinct(ligand) %>%
+            nrow() - 1
+    ),
+    width_different_cell,
+    rep(
+        width_same_cell_same_ligand_type,
+        times = circos_links %>%
+            filter(ligand_type == "General") %>%
+            distinct(ligand) %>%
+            nrow() - 1
+    ),
+    width_different_cell,
+    rep(
+        width_same_cell_same_ligand_type,
+        times = max(circos_links %>%
+            filter(ligand_type == "Endothelial-specific") %>%
+            distinct(ligand) %>%
+            nrow() - 1, 1)
+    ), 
+    width_ligand_target,
+    rep(
+        width_same_cell_same_target_type,
+        times = circos_links %>%
+            filter(target_type == "p_emt") %>%
+            distinct(target) %>%
+            nrow() -1
+    ),
+    width_ligand_target
+)
+
+circos.par(gap.degree = gaps)
+chordDiagram(
+    links_circle,
+    directional       = 1,
+    order             = order,
+    # link.sort         = TRUE,
+    # link.decreasing   = FALSE,
+    # grid.col          = grid_col,
+    # transparency      = 0,
+    # diffHeight        = 0.005,
+    # direction.type    = c("diffHeight", "arrows"),
+    # link.arr.type     = "big.arrow",
+    # link.visible      = links_circle$weight >= cutoff_ligands,
+    # annotationTrack   = "grid", 
+    # preAllocateTracks = list(track.height = 0.075)
+)
+# we go back to the first track and customize sector labels
+circos.track(track.index = 1, panel.fun = function(x, y) {
+    circos.text(CELL_META$xcenter, CELL_META$ylim[1], CELL_META$sector.index,
+        facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.55), cex = 1)
+}, bg.border = NA) #
+```
+
+Summary {.unnumbered}
+=======
+
+Parameters {.unnumbered}
+----------
+
+This table describes parameters used and set in this document.
+
+```{r parameters}
+params <- list(
+    
+)
+params <- toJSON(params, pretty = TRUE)
+kable(fromJSON(params))
+```
+
+Output files {.unnumbered}
+------------
+
+This table describes the output files produced by this document. Right click
+and _Save Link As..._ to download the results.
+
+```{r output}
+write_tsv(ligand_activities, fs::path(OUT_DIR, "ligand_activities.tsv"))
+write_tsv(active_links, fs::path(OUT_DIR, "active_links.tsv"))
+
+kable(data.frame(
+    File = c(
+        download_link("parameters.json", OUT_DIR),
+        download_link("ligand_activities.tsv", OUT_DIR),
+        download_link("active_links.tsv", OUT_DIR)
+    ),
+    Description = c(
+        "Parameters set and used in this analysis",
+        "Ligand activites calculated by NicheNet",
+        "Active links between ligands and targets inferred by NicheNet"
+    )
+))
+```
+
+Session information {.unnumbered}
+-------------------
