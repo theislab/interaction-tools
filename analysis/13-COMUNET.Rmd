@@ -1,0 +1,690 @@
+---
+title: "COMUNET example"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, cache = FALSE}
+# Setup document
+source(here::here("code", "setup.R"))
+
+# Function dependencies
+invisible(drake::readd(download_link))
+```
+
+Introduction {.unnumbered}
+============
+
+In this document we are going to run through the example analysis for the
+**COMUNET** package and have a look at the output it produces. More information
+about **COMUNET** can be found at https://github.com/ScialdoneLab/COMUNET.
+
+```{r libraries}
+library("COMUNET")
+```
+
+Input
+=====
+
+The **COMUNET** package performs downstream analysis based on the results of 
+any algorithm which produces a matrix of weights representing the strength of
+interactions between two cell type from a ligand-receptor pair.
+
+For their tutorials the authors have used the output produced by
+**CellPhoneDB**.
+
+CellPhoneDB database
+--------------------
+
+We require two of the files which make up the **CellPhoneDB** database.
+
+### complex_input.csv
+
+This file contains information about the complexes in the **CellPhoneDB**
+database.
+
+```{r input-complex}
+complex_input <- read_csv(
+    fs::path(
+        PATHS$cellphonedb_in,
+        "database_v2.0.0",
+        "data",
+        "complex_input.csv"
+    ),
+    col_types = cols(
+        complex_name       = col_character(),
+        uniprot_1          = col_character(),
+        uniprot_2          = col_character(),
+        uniprot_3          = col_character(),
+        uniprot_4          = col_logical(),
+        transmembrane      = col_logical(),
+        peripheral         = col_logical(),
+        secreted           = col_logical(),
+        secreted_desc      = col_character(),
+        secreted_highlight = col_logical(),
+        receptor           = col_logical(),
+        receptor_desc      = col_character(),
+        integrin           = col_logical(),
+        other              = col_logical(),
+        other_desc         = col_character(),
+        pdb_id             = col_character(),
+        pdb_structure      = col_character(),
+        stoichiometry      = col_character(),
+        comments_complex   = col_character()
+    )
+) %>%
+    mutate(complex_name = gsub("_" , " " , complex_name))
+
+skim(complex_input)
+```
+
+### gene_input.csv
+
+This file contains information about the genes in the **CellPhoneDB** database.
+
+```{r input-gene}
+gene_input <- read_csv(
+    fs::path(
+        PATHS$cellphonedb_in,
+        "database_v2.0.0",
+        "data",
+        "gene_input.csv"
+    ),
+    col_types = cols(
+        gene_name   = col_character(),
+        uniprot     = col_character(),
+        hgnc_symbol = col_character(),
+        ensembl     = col_character()
+    )
+)
+
+skim(gene_input)
+```
+
+CellPhoneDB output
+------------------
+
+Output files from running **CellPhoneDB**
+
+### significant_means.txt
+
+Information about each ligand-receptor pair as well as scores for each pair of
+cell types calculated by **CellPhoneDB**.
+
+```{r input-means}
+means <- read_tsv(
+    fs::path(PATHS$COMUNET_in, "mouse", "significant_means.txt"),
+    col_types = cols(
+        .default = col_double(),
+        id_cp_interaction   = col_character(),
+        interacting_pair    = col_character(),
+        partner_a           = col_character(),
+        partner_b           = col_character(),
+        gene_a              = col_character(),
+        gene_b              = col_character(),
+        secreted            = col_logical(),
+        receptor_a          = col_logical(),
+        receptor_b          = col_logical(),
+        annotation_strategy = col_character(),
+        is_integrin         = col_logical()
+    )
+)
+
+skim(means)
+```
+
+Convert CellPhoneDB output
+==========================
+
+The first step is to convert the output from **CellPhoneDB** into the format
+used by **COMUNET**. Instead of the single matrix provided by **CellPhoneDB**,
+**COMUNET** needs a matrix for each ligand-receptor pair where the rows are
+sending cell types and the columns are receiving cell types.
+
+```{r convert}
+prepped_means <- means %>%
+    as.data.frame() %>%
+    distinct(interacting_pair, .keep_all = TRUE)
+rownames(prepped_means) <- prepped_means$interacting_pair
+
+interactions <- convert_CellPhoneDB_output(
+    CellPhoneDB_output = prepped_means,
+    complex_input      = complex_input,
+    gene_input         = gene_input
+)
+```
+
+The result of the conversion function is a list with
+**`r length(interactions)`** items.
+
+Weight array
+------------
+
+The first item is a three-dimensional array with the weights calculated by
+**CellPhoneDB**. There are **`r dim(interactions$weight_array)[3]`** of these
+matrices, here is an example of the first one.
+
+```{r convert-weights}
+pander(interactions$weight_array[, , 1])
+```
+
+Ligand-receptor pairs
+---------------------
+
+The second item contains information about ligand-receptor pairs.
+
+```{r convert-pairs}
+skim(interactions$ligand_receptor_pair_df)
+```
+
+Nodes
+-----
+
+The final item is a vector of the names of all the cell types:
+`r glue_collapse(glue("**{interactions$nodes}**"), sep = ", ")`
+
+Clustering interaction partners
+===============================
+
+The aim of this analysis is to find ligand-receptor pairs that interact in
+similar ways. This is done by clustering the communication graphs of the
+ligand-receptor pairs.
+
+```{r clustering}
+lrp_clusters <- lrp_clustering(
+    weight_array            = interactions$weight_array,
+    ligand_receptor_pair_df = interactions$ligand_receptor_pair_df,
+    nodes                   = interactions$nodes
+)
+```
+
+Output
+------
+
+This step produces a list with **`r length(lrp_clusters)`** items.
+
+### Dissimilarity matrix
+
+Matrix with distances between each ligand-receptor pair. Here is a small
+example.
+
+```{r clustering-dissim}
+pander(lrp_clusters$dissim_matrix[1:5, 1:5])
+```
+
+### Clusters
+
+Cluster assignments for each ligand-receptor pair.
+
+```{r clustering-clusters}
+kable(head(lrp_clusters$clusters))
+```
+
+### Cluster weight array
+
+The average interaction weights between cell types by cluster. There are
+**`r dim(lrp_clusters$weight_array_by_cluster)[3]`** of these matrices, here is
+an example of the first one. 
+
+```{r clustering-weights}
+pander(lrp_clusters$weight_array_by_cluster[, , 1])
+```
+
+Visualisation
+-------------
+
+We can visualise the results in different ways.
+
+### Heatmap
+
+We can plot a heatmap of the clustered ligand-receptor pairs.
+
+```{r clustering-heatmap}
+plot_cluster_heatmap(
+    dissim_matrix = lrp_clusters$dissim_matrix,
+    lrp_clusters  = lrp_clusters$clusters
+)
+```
+
+### UMAP
+
+We can also make a UMAP plot showing the pairs in a reduced dimensional space.
+
+```{r clustering-umap}
+plot_cluster_UMAP(
+    ligand_receptor_pair_df = interactions$ligand_receptor_pair_df,
+    dissim_matrix           = lrp_clusters$dissim_matrix,
+    lrp_clusters            = lrp_clusters$clusters
+)
+```
+
+### Communication pattern
+
+The average communication between cell types for each cluster can be shown as a
+graph. Here are examples for the first three clusters.
+
+```{r clustering-pattern}
+for(cluster_idx in c(1:3)){
+    cluster <- paste("cluster", cluster_idx)
+    plot_communication_graph(
+        LRP = cluster,
+        weight_array            = lrp_clusters$weight_array_by_cluster[, , cluster],
+        ligand_receptor_pair_df = interactions$ligand_receptor_pair_df,
+        nodes                   = interactions$nodes,
+        is_cluster              = TRUE
+    )
+}
+```
+
+### Pairs
+
+We can also look at the specific ligand-receptor pairs in a cluster.
+
+```{r clustering-pairs}
+for(cluster_idx in c(1:3)) {
+    plot_lig_rec(
+        cluster_of_interest     = cluster_idx,
+        lrp_clusters            = lrp_clusters$clusters,
+        ligand_receptor_pair_df = interactions$ligand_receptor_pair_df,
+        node_label_cex          = 0.5
+    )
+}
+```
+
+Pattern search
+==============
+
+**COMUNET** can also be used to search for specific patterns of interactions.
+Here we search for interactions from a specific cell type to all other cell
+types.
+
+First we construct a matrix describing the pattern we are interested in.
+
+```{r pattern}
+communicating_nodes <- c(
+    "exVE_to_EPI", "exVE_to_Mes", "exVE_to_TE", "exVE_to_emVE", "exVE_to_exVE"
+)
+
+pattern <- make_pattern_matrix(
+    communicating_nodes = communicating_nodes,
+    nodes               = interactions$nodes
+)
+
+pander(pattern)
+```
+
+We can also visualise this pattern to check it is correct.
+
+```{r pattern-vis}
+plot_communication_graph(
+    LRP = "My pattern of interest",
+    weight_array            = pattern,
+    ligand_receptor_pair_df = interactions$ligand_receptor_pair_df,
+    nodes                   = interactions$node,
+    is_pattern              = TRUE
+)
+```
+
+Now we can search for this pattern. The result is a dissimilarity to the search
+pattern for each ligand-receptor pair.
+
+```{r pattern-search}
+patterns <- pattern_search(
+    pattern_adj_matrix      = pattern,
+    weight_array            = interactions$weight_array,
+    ligand_receptor_pair_df = interactions$ligand_receptor_pair_df,
+    nodes                   = interactions$nodes
+)
+
+skim(patterns)
+```
+
+We can visualise examples of some ligand-receptor pairs along with their
+dissimilarity to the search pattern.
+
+```{r pattern-pairs}
+for (pair in c("IGF2:IGF2R", "EFNB1:EPHA4", "IGF2:IGF1R")) {
+    plot_communication_graph(
+        LRP                     = pair,
+        weight_array            = interactions$weight_array,
+        ligand_receptor_pair_df = interactions$ligand_receptor_pair_df,
+        nodes                   = interactions$node,
+        subtitle                = paste(
+            "dissimilarity:", patterns[pair,"dissimilarity"]
+        )
+    )    
+}
+```
+
+Comparative analysis
+====================
+
+We can also use **COMUNET** to compare the interaction network between two
+conditions. For this analysis we use a second dataset that includes AML samples
+before and after treatment.
+
+```{r read-AML}
+cond1 <- "AML328_d0"
+cond2 <- "AML328_d29"
+
+cond1_means <- read_tsv(
+    fs::path(PATHS$COMUNET_in, "AML", "means_d0.txt"),
+    col_types = cols(
+        .default = col_double(),
+        id_cp_interaction   = col_character(),
+        interacting_pair    = col_character(),
+        partner_a           = col_character(),
+        partner_b           = col_character(),
+        gene_a              = col_character(),
+        gene_b              = col_character(),
+        secreted            = col_logical(),
+        receptor_a          = col_logical(),
+        receptor_b          = col_logical(),
+        annotation_strategy = col_character(),
+        is_integrin         = col_logical()
+    )
+)
+
+cond2_means <- read_tsv(
+    fs::path(PATHS$COMUNET_in, "AML", "means_d29.txt"),
+    col_types = cols(
+        .default = col_double(),
+        id_cp_interaction   = col_character(),
+        interacting_pair    = col_character(),
+        partner_a           = col_character(),
+        partner_b           = col_character(),
+        gene_a              = col_character(),
+        gene_b              = col_character(),
+        secreted            = col_logical(),
+        receptor_a          = col_logical(),
+        receptor_b          = col_logical(),
+        annotation_strategy = col_character(),
+        is_integrin         = col_logical()
+    )
+)
+
+cond1_prepped_means <- cond1_means %>%
+    as.data.frame() %>%
+    distinct(interacting_pair, .keep_all = TRUE)
+rownames(cond1_prepped_means) <- cond1_prepped_means$interacting_pair
+
+cond2_prepped_means <- cond2_means %>%
+    as.data.frame() %>%
+    distinct(interacting_pair, .keep_all = TRUE)
+rownames(cond2_prepped_means) <- cond2_prepped_means$interacting_pair
+
+cond1_interactions <- convert_CellPhoneDB_output(
+    CellPhoneDB_output = cond1_prepped_means,
+    complex_input      = complex_input,
+    gene_input         = gene_input
+)
+
+cond2_interactions <- convert_CellPhoneDB_output(
+    CellPhoneDB_output = cond2_prepped_means,
+    complex_input      = complex_input,
+    gene_input         = gene_input
+)
+```
+
+First we check the overlap in ligand-receptor pairs in the two conditions.
+
+```{r overlap}
+cond1_pairs <- cond1_interactions$ligand_receptor_pair_df$pair
+cond2_pairs <- cond2_interactions$ligand_receptor_pair_df$pair
+
+inter <- intersect(cond1_pairs, cond2_pairs)
+cond1_only <- setdiff(cond1_pairs, cond2_pairs)
+cond2_only <- setdiff(cond2_pairs, cond1_pairs)
+```
+
+There are **`r length(inter)`** pairs present in both conditions,
+**`r length(cond1_only)`**, present only in the first condition and
+**`r length(cond2_only)`** present in only the second condition.
+
+Just because the pairs are present doesn't mean they are interacting in the same
+way. To find that out we need to run the analysis.
+
+```{r compare}
+result <- comparative_analysis(
+    cond1_weight_array            = cond1_interactions$weight_array,
+    cond2_weight_array            = cond2_interactions$weight_array,
+    cond1_ligand_receptor_pair_df = cond1_interactions$ligand_receptor_pair_df,
+    cond2_ligand_receptor_pair_df = cond2_interactions$ligand_receptor_pair_df,
+    cond1_nodes                   = cond1_interactions$nodes,
+    cond2_nodes                   = cond2_interactions$nodes,
+    cond1_name                    = cond1,
+    cond2_name                    = cond2
+)
+```
+
+Output
+------
+
+The output of the comparison function is a list with **`r length(result)`**
+items.
+
+### Pairs
+
+The first item describes the ligand-receptor pairs, which conditions that are
+present in and the dissimilarity between the conditions.
+
+```{r comparison-pairs}
+skim(result$sorted_LRP_df)
+```
+
+### Dissimilarity
+
+The second output is a dissimilarity matrix where the rows are ligand-receptor
+pairs in condition 1 and and the columns are ligand-receptor pairs in condition
+2.
+
+```{r comparison-dissim}
+pander(result$dissim_cond1_cond2[1:5, 1:5])
+```
+
+Visualisation
+-------------
+
+### Heatmap
+
+We can plot a heatmap of the dissimilarity between conditions.
+
+```{r comparison-heatmap}
+plot_dissimilarity_heatmaps(
+    dissim_cond1_cond2 = result$dissim_cond1_cond2,
+    sorted_LRP_df      = result$sorted_LRP_df,
+    cond1_name         = cond1,
+    cond2_name         = cond2
+)
+```
+
+### Graphs
+
+Graphs can be used to show the communication networks for a ligand-receptor
+pair. Let's compare the graphs between conditions for a set of example pairs.
+
+#### Most similar
+
+```{r comparison-most}
+most_similar <- result$sorted_LRP_df %>%
+    filter(
+        presence      == "shared",
+        dissimilarity == min(dissimilarity)
+    )
+```
+
+The most similar pair is **`r most_similar$pair`** with a dissimilarity of
+**`r most_similar$dissimilarity`**.
+
+```{r comparison-most-graph}
+plot_communication_graph(
+    LRP                     = most_similar$pair,
+    weight_array            = cond1_interactions$weight_array,
+    ligand_receptor_pair_df = cond1_interactions$ligand_receptor_pair_df,
+    nodes                   = cond1_interactions$node,
+    title                   = most_similar$pair,
+    subtitle                = cond1
+)
+
+plot_communication_graph(
+    LRP                     = most_similar$pair,
+    weight_array            = cond2_interactions$weight_array,
+    ligand_receptor_pair_df = cond2_interactions$ligand_receptor_pair_df,
+    nodes                   = cond2_interactions$node,
+    title                   = most_similar$pair,
+    subtitle                = cond2
+)
+```
+
+#### Least similar
+
+```{r comparison-least}
+least_similar <- result$sorted_LRP_df %>%
+    filter(
+        presence      == "shared",
+        dissimilarity == max(dissimilarity)
+    ) %>%
+    top_n(1, pair)
+```
+
+The least similar pair is **`r least_similar$pair`** with a dissimilarity of
+**`r least_similar$dissimilarity`**.
+
+```{r comparison-least-graph}
+plot_communication_graph(
+    LRP                     = least_similar$pair,
+    weight_array            = cond1_interactions$weight_array,
+    ligand_receptor_pair_df = cond1_interactions$ligand_receptor_pair_df,
+    nodes                   = cond1_interactions$node,
+    title                   = least_similar$pair,
+    subtitle                = cond1
+)
+
+plot_communication_graph(
+    LRP                     = least_similar$pair,
+    weight_array            = cond2_interactions$weight_array,
+    ligand_receptor_pair_df = cond2_interactions$ligand_receptor_pair_df,
+    nodes                   = cond2_interactions$node,
+    title                   = least_similar$pair,
+    subtitle                = cond2
+)
+```
+
+#### Condition 1 only
+
+An example of a pair only in condition 1 is **`r cond1_only[1]`**.
+
+```{r comparison-cond1-graph}
+plot_communication_graph(
+    LRP                     = cond1_only[1],
+    weight_array            = cond1_interactions$weight_array,
+    ligand_receptor_pair_df = cond1_interactions$ligand_receptor_pair_df,
+    nodes                   = cond1_interactions$node,
+    title                   = cond1_only[1],
+    subtitle                = cond1
+)
+
+plot_communication_graph(
+    LRP                     = cond1_only[1],
+    weight_array            = cond2_interactions$weight_array,
+    ligand_receptor_pair_df = cond2_interactions$ligand_receptor_pair_df,
+    nodes                   = cond2_interactions$node,
+    title                   = cond1_only[1],
+    subtitle                = cond2
+)
+```
+
+#### Condition 2 only
+
+An example of a pair only in condition 2 is **`r cond2_only[1]`**.
+
+```{r comparison-cond2-graph}
+plot_communication_graph(
+    LRP                     = cond2_only[1],
+    weight_array            = cond1_interactions$weight_array,
+    ligand_receptor_pair_df = cond1_interactions$ligand_receptor_pair_df,
+    nodes                   = cond1_interactions$node,
+    title                   = cond2_only[1],
+    subtitle                = cond1
+)
+
+plot_communication_graph(
+    LRP                     = cond2_only[1],
+    weight_array            = cond2_interactions$weight_array,
+    ligand_receptor_pair_df = cond2_interactions$ligand_receptor_pair_df,
+    nodes                   = cond2_interactions$node,
+    title                   = cond2_only[1],
+    subtitle                = cond2
+)
+```
+
+Summary {.unnumbered}
+=======
+
+Parameters {.unnumbered}
+----------
+
+This table describes parameters used and set in this document.
+
+```{r parameters}
+params <- list(
+    
+)
+params <- toJSON(params, pretty = TRUE)
+kable(fromJSON(params))
+```
+
+Output files {.unnumbered}
+------------
+
+This table describes the output files produced by this document. Right click
+and _Save Link As..._ to download the results.
+
+```{r output}
+lrp_clusters$dissim_matrix %>%
+    as.data.frame() %>%
+    rownames_to_column("Pair") %>%
+    write_tsv(fs::path(OUT_DIR, "cluster_dissimilarity.tsv"))
+
+tibble(Pair = names(lrp_clusters$clusters), Cluster = lrp_clusters$clusters) %>%
+    write_tsv(fs::path(OUT_DIR, "clusters.tsv"))
+
+write_rds(
+    lrp_clusters$weight_array_by_cluster,
+    fs::path(OUT_DIR, "cluster_weights.Rds")
+)
+
+write_tsv(patterns, fs::path(OUT_DIR, "patterns.tsv"))
+
+write_tsv(result$sorted_LRP_df, fs::path(OUT_DIR, "comparison_pairs.tsv"))
+
+result$dissim_cond1_cond2 %>%
+    as.data.frame() %>%
+    rownames_to_column("Condition1") %>%
+    write_tsv(fs::path(OUT_DIR, "comparison_dissimilarity.tsv"))
+
+kable(data.frame(
+    File = c(
+        download_link("parameters.json", OUT_DIR),
+        download_link("cluster_dissimilarity.tsv", OUT_DIR),
+        download_link("clusters.tsv", OUT_DIR),
+        download_link("cluster_weights.Rds", OUT_DIR),
+        download_link("patterns.tsv", OUT_DIR),
+        download_link("comparison_pairs.tsv", OUT_DIR),
+        download_link("comparison_dissimilarity.tsv", OUT_DIR)
+    ),
+    Description = c(
+        "Parameters set and used in this analysis",
+        "Cluster dissimilarity matrix",
+        "Cluster assignments for pairs",
+        "Cluster average weights array",
+        "Pattern dissimilarity for pairs",
+        "Comparison information about pairs",
+        "Comparison dissimilarity matrix"
+    )
+))
+```
+
+Session information {.unnumbered}
+-------------------

@@ -44,6 +44,25 @@
       "Source": "Bioconductor",
       "Hash": "2331d61d077a7a0a5afe8c907ea9106b"
     },
+    "COMUNET": {
+      "Package": "COMUNET",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "COMUNET",
+      "RemoteUsername": "ScialdoneLab",
+      "RemoteRef": "master",
+      "RemoteSha": "4fd4635c196fa597545b14c45ebf241aad252f76",
+      "RemoteSubdir": "COMUNET",
+      "Hash": "3dd3615300f2702c2e2d0a5a938a28ad"
+    },
+    "ComplexHeatmap": {
+      "Package": "ComplexHeatmap",
+      "Version": "2.4.2",
+      "Source": "Bioconductor",
+      "Hash": "4c0f31351812f9dbbeaf4da84b5e59f8"
+    },
     "DBI": {
       "Package": "DBI",
       "Version": "1.1.0",
@@ -78,6 +97,20 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "0537b6f1f38ea1fd514089192724bb6e"
+    },
+    "GenSA": {
+      "Package": "GenSA",
+      "Version": "1.1.7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e3e4f4efd13a67efd4cda2a9d7735982"
+    },
+    "GetoptLong": {
+      "Package": "GetoptLong",
+      "Version": "0.1.8",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "46b8630cdbdd348ce34d266777be529d"
     },
     "GlobalOptions": {
       "Package": "GlobalOptions",
@@ -139,6 +172,27 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "0feaa54a0bcf59d72eb758da748e0904"
+    },
+    "R.methodsS3": {
+      "Package": "R.methodsS3",
+      "Version": "1.8.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "23822a838096ceb132e5041c9a68c3ef"
+    },
+    "R.oo": {
+      "Package": "R.oo",
+      "Version": "1.23.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6be65e89d25f79fb4d147d65e19601e8"
+    },
+    "R.utils": {
+      "Package": "R.utils",
+      "Version": "2.9.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "63cdbbf467a00d0ed2aa3391f4918d6e"
     },
     "R6": {
       "Package": "R6",
@@ -228,6 +282,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "f153432c4ca15b937ccfaa40f167c892"
+    },
+    "SDMTools": {
+      "Package": "SDMTools",
+      "Version": "1.1-221.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "9541e2812cb63a7a927ee970b2b1c4d4"
     },
     "SQUAREM": {
       "Package": "SQUAREM",
@@ -431,6 +492,13 @@
       "RemoteSha": "0.7.0",
       "Hash": "08cf4045c149a0f0eaf405324c7495bd"
     },
+    "clue": {
+      "Package": "clue",
+      "Version": "0.3-57",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c4dcf2e9abe03e3f2c183bbe07461ddc"
+    },
     "cluster": {
       "Package": "cluster",
       "Version": "2.1.0",
@@ -559,6 +627,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "56abc5fbb1031d6eb69808a17af3d60e"
+    },
+    "dynamicTreeCut": {
+      "Package": "dynamicTreeCut",
+      "Version": "1.63-1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "11d27b7a5f49a221224f56134f06b1f9"
     },
     "e1071": {
       "Package": "e1071",
@@ -1394,6 +1469,20 @@
       "Repository": "CRAN",
       "Hash": "03b7076c234cb3331288919983326c55"
     },
+    "polyclip": {
+      "Package": "polyclip",
+      "Version": "1.10-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "cb167f328b3ada4ec5cf67a7df4c900a"
+    },
+    "polylabelr": {
+      "Package": "polylabelr",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "175f8058029901087c02217f7ea8f99c"
+    },
     "polynom": {
       "Package": "polynom",
       "Version": "1.4-0",
@@ -1579,6 +1668,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "4a9aecbe83639be364de13ffe0671bcf"
+    },
+    "rjson": {
+      "Package": "rjson",
+      "Version": "0.2.20",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7d597f982ee6263716b6a2f28efd29fa"
     },
     "rlang": {
       "Package": "rlang",
@@ -1840,6 +1936,13 @@
       "RemotePkgType": "macos",
       "RemoteSha": "0.2.0",
       "Hash": "92e5a36ad5b445e895a0f9b98db4d810"
+    },
+    "umap": {
+      "Package": "umap",
+      "Version": "0.2.5.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "24a9aefcf0c2dd15d05033082ee35039"
     },
     "utf8": {
       "Package": "utf8",

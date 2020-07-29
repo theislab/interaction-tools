@@ -40,6 +40,10 @@ plan <- drake_plan(
     rmd12_NicheNet = target(
         workflowr::wflow_build(here(knitr_in("analysis/12-NicheNet.Rmd"))),
         trigger = trigger(change = configs)
+    ),
+    rmd13_COMUNET = target(
+        workflowr::wflow_build(here(knitr_in("analysis/13-COMUNET.Rmd"))),
+        trigger = trigger(change = configs)
     )
 )
 

@@ -100,5 +100,6 @@ theme_set(theme_minimal())
 
 PATHS <- list(
     cellphonedb_in = here("data", "cellphonedb"),
-    NicheNet_in    = here("data", "NicheNet")
+    NicheNet_in    = here("data", "NicheNet"),
+    COMUNET_in     = here("data", "COMUNET")
 )
