@@ -1624,10 +1624,8 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "0.10.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "0d3f1c2b63e70b3d918246b4e2ca59b7"
+      "Version": "0.11.0",
+      "Source": "Repository"
     },
     "repr": {
       "Package": "repr",
@@ -1657,10 +1655,7 @@
     },
     "reticulate": {
       "Package": "reticulate",
-      "Version": "1.15",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "ba447f1ad910156609e8e37b52e752e3"
+      "Source": "Repository"
     },
     "rio": {
       "Package": "rio",
