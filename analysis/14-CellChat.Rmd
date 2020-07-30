@@ -22,10 +22,361 @@ about **CellChat** can be found at https://github.com/sqjin/CellChat.
 
 ```{r libraries}
 library("CellChat")
+library("ggalluvial")
 ```
 
 Input
 =====
+
+**CellChat** requires two user inputs: an expression matrix and either cell-type
+labels or a low-dimensional embedding. Here we use the label-based mode. The
+other inputs to **CellChat** are the ligand-receptor database and
+protein-protein interaction network included in the package.
+
+```{r load}
+load(fs::path(PATHS$CellChat_in, "data_wound_CellChat.rda"))
+```
+
+Expression matrix
+-----------------
+
+The expression matrix should be normalised with genes as rows and cells as
+columns. Here is a snippet of the example dataset:
+
+```{r input-expr}
+expr <- data_wound$data
+
+pander(as.matrix(expr[1:5, 1:5]))
+```
+
+The full matrix has **`r nrow(expr)`** rows (genes) and **`r ncol(expr)`**
+columns (cells).
+
+Labels
+------
+
+The second input is a `data.frame` with cell type labels for each cell.
+
+```{r input-labels}
+labels <- data.frame(
+    group     = data_wound$labels,
+    row.names = names(data_wound$labels)
+)
+group_size <- as.numeric(table(labels$group))
+
+skim(labels)
+```
+
+Database
+--------
+
+The database is available as a list. The tutorial suggests using only the
+interactions annotated with "Secreted Signalling".
+
+```{r input-database}
+CellChatDB <- CellChatDB.mouse
+CellChatDB <- subsetDB(CellChatDB, search = "Secreted Signaling")
+```
+
+The database list contains **`r length(CellChatDB)`** items: 
+`r glue_collapse(glue("**{names(CellChatDB)}**"), sep = ", ", last = " and ")`
+
+### Interaction
+
+The first item in the list is a `data.frame` with information about
+interactions.
+
+```{r input-database-interaction}
+skim(CellChatDB$interaction)
+```
+
+### Complex
+
+The second item contain information about complexes.
+
+```{r input-database-complex}
+skim(CellChatDB$complex)
+```
+
+### Cofactor
+
+The next item contains information about cofactors.
+
+```{r input-database-cofactor}
+skim(CellChatDB$cofactor)
+```
+
+### Gene info
+
+The final item in the database is gene annotation information.
+
+```{r input-database-geneinfo}
+skim(CellChatDB$geneInfo)
+```
+
+Network
+-------
+
+The network is a binary matrix showing interactions between proteins.
+
+```{r input-network}
+pander(as.matrix(PPI.mouse[1:5, 1:5]))
+```
+
+The full matrix has **`r nrow(PPI.mouse)`** rows and **`r ncol(PPI.mouse)`**
+columns.
+
+Create `CellChat` object
+========================
+
+**CellChat** uses a custom object which we can create from the expression matrix
+and labels. We also store the database here.
+
+```{r object}
+cellchat <- createCellChat(expr)
+cellchat <- addMeta(cellchat, meta = labels, meta.name = "labels")
+cellchat <- setIdent(cellchat, ident.use = "labels")
+cellchat@DB <- CellChatDB
+
+cellchat
+```
+
+Pre-processing
+==============
+
+Subset signalling genes
+-----------------------
+
+First we subset the object to select only the signalling genes that are listed
+in the database.
+
+```{r pre-subset}
+cellchat <- subsetData(cellchat)
+
+cellchat
+```
+
+Identify over-expression
+------------------------
+
+The next step is to identify over-expressed genes and interactions.
+Over-expressed genes are detected using a one-sided Wilcoxon test. Interactions
+are selected if either a ligand or receptor is over-expressed.
+
+```{r pre-over}
+cellchat <- identifyOverExpressedGenes(cellchat)
+cellchat <- identifyOverExpressedInteractions(cellchat)
+```
+
+This step has identified **`r length(cellchat@var.features)`** genes and
+**`r nrow(cellchat@LR$LRsig)`** interactions.
+
+Project data
+------------
+
+The gene expression data is then projected onto a protein-protein interaction
+network.
+
+```{r pre-project}
+cellchat <- projectData(cellchat, PPI.mouse)
+```
+
+Communication network inference
+===============================
+
+Compute communication probability
+---------------------------------
+
+At this stage we can now compute the communication probability and infer the
+communication network. The results are stored in the `net` slot of the
+`CellChat` object which contains three-dimensional arrays of probabilities and
+p-values for interactions between each pair of cell types for each interaction
+pair. Here are snippets of these arrays for the first interaction pair.
+
+```{r infer-probability}
+cellchat <- computeCommunProb(cellchat)
+
+pander(cellchat@net$prob[1:5, 1:5, 1])
+pander(cellchat@net$pval[1:5, 1:5, 1])
+```
+
+Infer pathway signalling
+------------------------
+
+We also compute the communication probabilities at the pathway level by
+summarising all ligand-receptor interactions associated with each pathway. The
+output is similar but now instead of interaction pairs we have pathways.
+
+```{r infer-pathway}
+cellchat <- computeCommunProbPathway(cellchat)
+
+pander(cellchat@netP$prob[1:5, 1:5, 1])
+```
+
+Aggregate network
+-----------------
+
+We can get an aggregated communication network by counting the number of links
+between cell types or summarising the communication probabilities. These results
+are stored as two-dimensional matrices.
+
+```{r infer-aggregate}
+cellchat <- aggregateNet(cellchat)
+
+pander(cellchat@net$count[1:5, 1:5])
+pander(cellchat@net$sum[1:5, 1:5])
+```
+
+Network analysis
+================
+
+**CellChat** can perform analysis on the communication network to better
+understand the roles of each cell type. Here we perform that analysis using the
+pathway scores. The output is a list with a set of metrics for cell type for
+each pathway.
+
+```{r network-analysis}
+cellchat <- netAnalysis_signalingRole(cellchat, slot.name = "netP")
+```
+
+The network metrics are:
+`r glue_collapse(glue("**{names(cellchat@netP$centr[[1]])}**"), sep = ", ", last = " and ")`
+
+Global patterns
+===============
+
+It may also be interesting to identify common communication patterns. We can do
+this for both outgoing and incoming patterns.
+
+```{r patterns}
+cellchat <- identifyCommunicationPatterns(cellchat, pattern = "outgoing", k = 5)
+cellchat <- identifyCommunicationPatterns(cellchat, pattern = "incoming", k = 5)
+```
+
+Manifold learning and classification
+====================================
+
+**CellChat** can identify groups of signalling pathways by embedding and
+clustering them.
+
+Functional similarity
+----------------------
+
+Functional similarity indicates that major senders and receivers are similar
+and can be interpreted as the two pathways or interaction pairs exhibiting
+similar and/or redundant roles. 
+
+The output is a similarity matrix, UMAP embedding and cluster assignments from
+$k$-means.
+
+```{r manifold-functional}
+cellchat <- computeNetSimilarity(cellchat, type = "functional", thresh = 0.25)
+cellchat <- netEmbedding(cellchat, type = "functional")
+cellchat <- netClustering(cellchat, type = "functional", k = 4)
+
+pander(cellchat@netP$similarity$functional$matrix[1:5,1:5])
+pander(cellchat@netP$similarity$functional$dr[1:5, ])
+cellchat@netP$similarity$functional$group
+```
+
+Structural similarity
+---------------------
+
+Structural similarity is used to compare the signalling network structure,
+without considering the similarity of senders and receivers.
+
+```{r manifold-structural}
+cellchat <- computeNetSimilarity(cellchat, type = "structural", thresh = 0.25)
+cellchat <- netEmbedding(cellchat, type = "structural")
+cellchat <- netClustering(cellchat, type = "structural", k = 4)
+
+pander(cellchat@netP$similarity$structural$matrix[1:5,1:5])
+pander(cellchat@netP$similarity$structural$dr[1:5, ])
+cellchat@netP$similarity$structural$group
+```
+
+Visualisation
+=============
+
+Signalling pathways
+-------------------
+
+### Hierarchy plot
+
+Here solid circles are sources and open circles are targets. Circle sizes are
+the number of cells in each group and lines are coloured according to the source
+with thicker lines indicating stronger signals.
+
+```{r vis-pathway-hierarchy}
+netVisual_aggregate(cellchat, "TGFb", vertex.receiver = 1:9, # groups to show
+                    vertex.size = group_size)
+```
+
+### Circle plot
+
+We can show a similar thing as a circle plot.
+
+```{r vis-pathway-circle}
+netVisual_aggregate(cellchat, "ncWNT", layout = "circle",
+                    vertex.size = group_size)
+```
+
+Pathway contribution
+--------------------
+
+Here we show the contribution of each interaction pair to a signalling pathway.
+
+```{r vis-contribution}
+netAnalysis_contribution(cellchat, "TGFb")
+```
+
+Signalling roles
+----------------
+
+For can look at the expected role for each cell type for a pathway based on the
+network analysis scores.
+
+```{r vis-roles}
+netVisual_signalingRole(cellchat, "TGFb", width = 16, height = 4,
+                        font.size = 10)
+```
+
+Communication patterns
+----------------------
+
+### River plot
+
+An alternative way to visualise the communication patterns is using a river
+plot.
+
+```{r vis-patterns-river}
+netAnalysis_river(cellchat, pattern = "outgoing")
+```
+
+### Dot plot
+
+Another alternative is a dot plot.
+
+```{r vis-patterns-dot}
+netAnalysis_dot(cellchat, pattern = "outgoing")
+```
+
+Embedding
+---------
+
+UMAP embedding of pathway similarity.
+
+```{r umap}
+netVisual_embedding(cellchat, type = "functional", pathway.remove.show = FALSE,
+                    label.size = 3.5)
+```
+
+### Zoom in
+
+```{r umap-zoom}
+netVisual_embeddingZoomIn(cellchat, type = "functional", nCol = 2)
+```
+
 
 Summary {.unnumbered}
 =======

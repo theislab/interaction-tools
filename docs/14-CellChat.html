@@ -432,7 +432,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-07-29
+<strong>Last updated:</strong> 2020-07-30
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -456,7 +456,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -523,16 +523,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreea91247a6f4b8fea4c2c69ec75f5cf46c5e7d4884targetblanka91247aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/a91247a6f4b8fea4c2c69ec75f5cf46c5e7d4884" target="_blank">a91247a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreef01744803e8182dfa5356d3f38543fed78292e13targetblankf017448a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/f01744803e8182dfa5356d3f38543fed78292e13" target="_blank">f017448</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreea91247a6f4b8fea4c2c69ec75f5cf46c5e7d4884targetblanka91247aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreef01744803e8182dfa5356d3f38543fed78292e13targetblankf017448a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/a91247a6f4b8fea4c2c69ec75f5cf46c5e7d4884" target="_blank">a91247a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/f01744803e8182dfa5356d3f38543fed78292e13" target="_blank">f017448</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -543,20 +543,18 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    .drake/
     Ignored:    data/COMUNET/
+    Ignored:    data/CellChat/
     Ignored:    data/NicheNet/
     Ignored:    data/cellphonedb/
+    Ignored:    output/14-CellChat.Rmd/
     Ignored:    output/index.Rmd/
     Ignored:    renv/library/
     Ignored:    renv/python/
     Ignored:    renv/staging/
 
-Untracked files:
-    Untracked:  analysis/14-CellChat.Rmd
-
 Unstaged changes:
-    Modified:   _drake.R
-    Modified:   renv.lock
-    Modified:   renv/activate.R
+    Modified:   analysis/14-CellChat.Rmd
+    Modified:   code/setup.R
 
 </code></pre>
 <p>
@@ -569,9 +567,69 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
+
 <p>
-There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/14-CellChat.Rmd</code>) and HTML (<code>docs/14-CellChat.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/f01744803e8182dfa5356d3f38543fed78292e13/analysis/14-CellChat.Rmd" target="_blank">f017448</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-29
+</td>
+<td>
+Setup CellChat
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/f01744803e8182dfa5356d3f38543fed78292e13/docs/14-CellChat.html" target="_blank">f017448</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-29
+</td>
+<td>
+Setup CellChat
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
@@ -584,13 +642,1644 @@ invisible(drake::readd(download_link))</code></pre>
 <div id="introduction" class="section level1 unnumbered" number="">
 <h1 class="unnumbered" number="">Introduction</h1>
 <p>In this document we are going to run through the example analysis for the <strong>CellChat</strong> package and have a look at the output it produces. More information about <strong>CellChat</strong> can be found at <a href="https://github.com/sqjin/CellChat" class="uri">https://github.com/sqjin/CellChat</a>.</p>
-<pre class="r"><code>library(&quot;CellChat&quot;)</code></pre>
+<pre class="r"><code>library(&quot;CellChat&quot;)
+library(&quot;ggalluvial&quot;)</code></pre>
 <p class="timeit">
-Chunk time: 2.68 secs
+Chunk time: 2.92 secs
 </p>
 </div>
 <div id="input" class="section level1" number="1">
 <h1 number="1"><span class="header-section-number">1</span> Input</h1>
+<p><strong>CellChat</strong> requires two user inputs: an expression matrix and either cell-type labels or a low-dimensional embedding. Here we use the label-based mode. The other inputs to <strong>CellChat</strong> are the ligand-receptor database and protein-protein interaction network included in the package.</p>
+<pre class="r"><code>load(fs::path(PATHS$CellChat_in, &quot;data_wound_CellChat.rda&quot;))</code></pre>
+<p class="timeit">
+Chunk time: 2 secs
+</p>
+<div id="expression-matrix" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Expression matrix</h2>
+<p>The expression matrix should be normalised with genes as rows and cells as columns. Here is a snippet of the example dataset:</p>
+<pre class="r"><code>expr &lt;- data_wound$data
+
+pander(as.matrix(expr[1:5, 1:5]))</code></pre>
+<table style="width:97%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="18%" />
+<col width="26%" />
+<col width="26%" />
+<col width="26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">AAACCTGAGATGTGGC</th>
+<th align="center">AAACCTGAGGTGTTAA</th>
+<th align="center">AAACCTGAGTATCTCG</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Xkr4</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Sox17</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Mrpl15</strong></td>
+<td align="center">0</td>
+<td align="center">1.724</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Lypla1</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Tcea1</strong></td>
+<td align="center">1.432</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<table style="width:71%;">
+<colgroup>
+<col width="18%" />
+<col width="26%" />
+<col width="26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">AAACCTGCAAAGCAAT</th>
+<th align="center">AAACCTGCAGCTTCGG</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Xkr4</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Sox17</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Mrpl15</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Lypla1</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Tcea1</strong></td>
+<td align="center">1.418</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.16 secs
+</p>
+<p>The full matrix has <strong>17090</strong> rows (genes) and <strong>21557</strong> columns (cells).</p>
+</div>
+<div id="labels" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Labels</h2>
+<p>The second input is a <code>data.frame</code> with cell type labels for each cell.</p>
+<pre class="r"><code>labels &lt;- data.frame(
+    group     = data_wound$labels,
+    row.names = names(data_wound$labels)
+)
+group_size &lt;- as.numeric(table(labels$group))
+
+skim(labels)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">labels</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">21557</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">group</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">25</td>
+<td align="left">FIB: 5073, FIB: 2817, FIB: 1957, FIB: 1323</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.07 secs
+</p>
+</div>
+<div id="database" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> Database</h2>
+<p>The database is available as a list. The tutorial suggests using only the interactions annotated with “Secreted Signalling”.</p>
+<pre class="r"><code>CellChatDB &lt;- CellChatDB.mouse
+CellChatDB &lt;- subsetDB(CellChatDB, search = &quot;Secreted Signaling&quot;)</code></pre>
+<p class="timeit">
+Chunk time: 0.18 secs
+</p>
+<p>The database list contains <strong>4</strong> items: <strong>interaction</strong>, <strong>complex</strong>, <strong>cofactor</strong> and <strong>geneInfo</strong></p>
+<div id="interaction" class="section level3" number="1.3.1">
+<h3 number="1.3.1"><span class="header-section-number">1.3.1</span> Interaction</h3>
+<p>The first item in the list is a <code>data.frame</code> with information about interactions.</p>
+<pre class="r"><code>skim(CellChatDB$interaction)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">CellChatDB$interaction</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">1211</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">11</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">11</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">interaction_name</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">21</td>
+<td align="right">0</td>
+<td align="right">1211</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">pathway_name</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">12</td>
+<td align="right">0</td>
+<td align="right">141</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">ligand</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">12</td>
+<td align="right">0</td>
+<td align="right">361</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">receptor</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">18</td>
+<td align="right">0</td>
+<td align="right">363</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">agonist</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">868</td>
+<td align="right">5</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">antagonist</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">18</td>
+<td align="right">755</td>
+<td align="right">11</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">co_A_receptor</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">25</td>
+<td align="right">829</td>
+<td align="right">9</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">co_I_receptor</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">27</td>
+<td align="right">724</td>
+<td align="right">10</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">evidence</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">12</td>
+<td align="right">45</td>
+<td align="right">0</td>
+<td align="right">376</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">annotation</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">18</td>
+<td align="right">18</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">interaction_name_2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">9</td>
+<td align="right">26</td>
+<td align="right">0</td>
+<td align="right">1211</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.09 secs
+</p>
+</div>
+<div id="complex" class="section level3" number="1.3.2">
+<h3 number="1.3.2"><span class="header-section-number">1.3.2</span> Complex</h3>
+<p>The second item contain information about complexes.</p>
+<pre class="r"><code>skim(CellChatDB$complex)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">CellChatDB$complex</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">155</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">subunit_1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">7</td>
+<td align="right">0</td>
+<td align="right">96</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">subunit_2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">7</td>
+<td align="right">0</td>
+<td align="right">70</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">subunit_3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">142</td>
+<td align="right">10</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">subunit_4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">154</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.06 secs
+</p>
+</div>
+<div id="cofactor" class="section level3" number="1.3.3">
+<h3 number="1.3.3"><span class="header-section-number">1.3.3</span> Cofactor</h3>
+<p>The next item contains information about cofactors.</p>
+<pre class="r"><code>skim(CellChatDB$cofactor)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">CellChatDB$cofactor</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">31</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">16</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">16</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">cofactor1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">25</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">cofactor2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">19</td>
+<td align="right">12</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">cofactor3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">22</td>
+<td align="right">9</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">cofactor4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">8</td>
+<td align="right">24</td>
+<td align="right">7</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">cofactor5</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">25</td>
+<td align="right">6</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">cofactor6</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">26</td>
+<td align="right">5</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">cofactor7</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">28</td>
+<td align="right">4</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">cofactor8</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">28</td>
+<td align="right">4</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">cofactor9</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">29</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">cofactor10</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">7</td>
+<td align="right">29</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">cofactor11</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">30</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">cofactor12</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">30</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">cofactor13</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">30</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">cofactor14</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">30</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">cofactor15</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">7</td>
+<td align="right">30</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">cofactor16</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">30</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.12 secs
+</p>
+</div>
+<div id="gene-info" class="section level3" number="1.3.4">
+<h3 number="1.3.4"><span class="header-section-number">1.3.4</span> Gene info</h3>
+<p>The final item in the database is gene annotation information.</p>
+<pre class="r"><code>skim(CellChatDB$geneInfo)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">CellChatDB$geneInfo</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">45544</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">6</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">6</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Symbol</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">16</td>
+<td align="right">0</td>
+<td align="right">45544</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Name</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="right">139</td>
+<td align="right">0</td>
+<td align="right">45528</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">EntrezGene.ID</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">45536</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Ensembl.Gene.ID</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">18</td>
+<td align="right">5</td>
+<td align="right">36640</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">HomoloGene.ID</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">18941</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">HGNC.ID</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">85</td>
+<td align="right">2</td>
+<td align="right">17932</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.27 secs
+</p>
+</div>
+</div>
+<div id="network" class="section level2" number="1.4">
+<h2 number="1.4"><span class="header-section-number">1.4</span> Network</h2>
+<p>The network is a binary matrix showing interactions between proteins.</p>
+<pre class="r"><code>pander(as.matrix(PPI.mouse[1:5, 1:5]))</code></pre>
+<table style="width:69%;">
+<colgroup>
+<col width="16%" />
+<col width="9%" />
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Cdh1</th>
+<th align="center">Bcl6b</th>
+<th align="center">Pparg</th>
+<th align="center">Raf1</th>
+<th align="center">Kat2b</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Cdh1</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Bcl6b</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Pparg</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Raf1</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Kat2b</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.01 secs
+</p>
+<p>The full matrix has <strong>557</strong> rows and <strong>557</strong> columns.</p>
+</div>
+</div>
+<div id="create-cellchat-object" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Create <code>CellChat</code> object</h1>
+<p><strong>CellChat</strong> uses a custom object which we can create from the expression matrix and labels. We also store the database here.</p>
+<pre class="r"><code>cellchat &lt;- createCellChat(expr)
+cellchat &lt;- addMeta(cellchat, meta = labels, meta.name = &quot;labels&quot;)
+cellchat &lt;- setIdent(cellchat, ident.use = &quot;labels&quot;)
+cellchat@DB &lt;- CellChatDB
+
+cellchat</code></pre>
+<pre><code>An object of class CellChat 
+ 17090 genes.
+ 21557 cells.</code></pre>
+<p class="timeit">
+Chunk time: 0.01 secs
+</p>
+</div>
+<div id="pre-processing" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Pre-processing</h1>
+<div id="subset-signalling-genes" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Subset signalling genes</h2>
+<p>First we subset the object to select only the signalling genes that are listed in the database.</p>
+<pre class="r"><code>cellchat &lt;- subsetData(cellchat)
+
+cellchat</code></pre>
+<pre><code>An object of class CellChat 
+ 17090 genes.
+ 21557 cells.</code></pre>
+<p class="timeit">
+Chunk time: 0.22 secs
+</p>
+</div>
+<div id="identify-over-expression" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Identify over-expression</h2>
+<p>The next step is to identify over-expressed genes and interactions. Over-expressed genes are detected using a one-sided Wilcoxon test. Interactions are selected if either a ligand or receptor is over-expressed.</p>
+<pre class="r"><code>cellchat &lt;- identifyOverExpressedGenes(cellchat)
+cellchat &lt;- identifyOverExpressedInteractions(cellchat)</code></pre>
+<p class="timeit">
+Chunk time: 8.53 mins
+</p>
+<p>This step has identified <strong>539</strong> genes and <strong>666</strong> interactions.</p>
+</div>
+<div id="project-data" class="section level2" number="3.3">
+<h2 number="3.3"><span class="header-section-number">3.3</span> Project data</h2>
+<p>The gene expression data is then projected onto a protein-protein interaction network.</p>
+<pre class="r"><code>cellchat &lt;- projectData(cellchat, PPI.mouse)</code></pre>
+<p class="timeit">
+Chunk time: 1.78 secs
+</p>
+</div>
+</div>
+<div id="communication-network-inference" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Communication network inference</h1>
+<div id="compute-communication-probability" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> Compute communication probability</h2>
+<p>At this stage we can now compute the communication probability and infer the communication network. The results are stored in the <code>net</code> slot of the <code>CellChat</code> object which contains three-dimensional arrays of probabilities and p-values for interactions between each pair of cell types for each interaction pair. Here are snippets of these arrays for the first interaction pair.</p>
+<pre class="r"><code>cellchat &lt;- computeCommunProb(cellchat)
+
+pander(cellchat@net$prob[1:5, 1:5, 1])</code></pre>
+<table style="width:89%;">
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="11%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">FIB-A</th>
+<th align="center">FIB-B</th>
+<th align="center">FIB-C</th>
+<th align="center">FIB-D</th>
+<th align="center">FIB-E</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>FIB-A</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1.186e-07</td>
+<td align="center">1.152e-06</td>
+<td align="center">5.496e-07</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>FIB-B</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>FIB-C</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">8.06e-08</td>
+<td align="center">7.834e-07</td>
+<td align="center">3.737e-07</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>FIB-D</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">7.92e-08</td>
+<td align="center">7.707e-07</td>
+<td align="center">3.676e-07</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>FIB-E</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">5.006e-08</td>
+<td align="center">4.868e-07</td>
+<td align="center">2.322e-07</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>pander(cellchat@net$pval[1:5, 1:5, 1])</code></pre>
+<table style="width:72%;">
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">FIB-A</th>
+<th align="center">FIB-B</th>
+<th align="center">FIB-C</th>
+<th align="center">FIB-D</th>
+<th align="center">FIB-E</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>FIB-A</strong></td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>FIB-B</strong></td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>FIB-C</strong></td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>FIB-D</strong></td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0.09</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>FIB-E</strong></td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0.22</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 5.03 mins
+</p>
+</div>
+<div id="infer-pathway-signalling" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> Infer pathway signalling</h2>
+<p>We also compute the communication probabilities at the pathway level by summarising all ligand-receptor interactions associated with each pathway. The output is similar but now instead of interaction pairs we have pathways.</p>
+<pre class="r"><code>cellchat &lt;- computeCommunProbPathway(cellchat)
+
+pander(cellchat@netP$prob[1:5, 1:5, 1])</code></pre>
+<table style="width:89%;">
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="11%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">FIB-A</th>
+<th align="center">FIB-B</th>
+<th align="center">FIB-C</th>
+<th align="center">FIB-D</th>
+<th align="center">FIB-E</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>FIB-A</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1.186e-07</td>
+<td align="center">1.152e-06</td>
+<td align="center">5.496e-07</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>FIB-B</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>FIB-C</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">8.06e-08</td>
+<td align="center">7.834e-07</td>
+<td align="center">3.737e-07</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>FIB-D</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">8.283e-08</td>
+<td align="center">1.577e-06</td>
+<td align="center">7.521e-07</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>FIB-E</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">5.867e-08</td>
+<td align="center">1.057e-06</td>
+<td align="center">5.043e-07</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 1.2 secs
+</p>
+</div>
+<div id="aggregate-network" class="section level2" number="4.3">
+<h2 number="4.3"><span class="header-section-number">4.3</span> Aggregate network</h2>
+<p>We can get an aggregated communication network by counting the number of links between cell types or summarising the communication probabilities. These results are stored as two-dimensional matrices.</p>
+<pre class="r"><code>cellchat &lt;- aggregateNet(cellchat)
+
+pander(cellchat@net$count[1:5, 1:5])</code></pre>
+<table style="width:72%;">
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">FIB-A</th>
+<th align="center">FIB-B</th>
+<th align="center">FIB-C</th>
+<th align="center">FIB-D</th>
+<th align="center">FIB-E</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>FIB-A</strong></td>
+<td align="center">5</td>
+<td align="center">3</td>
+<td align="center">6</td>
+<td align="center">8</td>
+<td align="center">8</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>FIB-B</strong></td>
+<td align="center">4</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>FIB-C</strong></td>
+<td align="center">5</td>
+<td align="center">2</td>
+<td align="center">4</td>
+<td align="center">6</td>
+<td align="center">8</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>FIB-D</strong></td>
+<td align="center">12</td>
+<td align="center">9</td>
+<td align="center">15</td>
+<td align="center">19</td>
+<td align="center">21</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>FIB-E</strong></td>
+<td align="center">15</td>
+<td align="center">13</td>
+<td align="center">20</td>
+<td align="center">25</td>
+<td align="center">29</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>pander(cellchat@net$sum[1:5, 1:5])</code></pre>
+<table style="width:100%;">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">FIB-A</th>
+<th align="center">FIB-B</th>
+<th align="center">FIB-C</th>
+<th align="center">FIB-D</th>
+<th align="center">FIB-E</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>FIB-A</strong></td>
+<td align="center">4.806e-06</td>
+<td align="center">7.669e-07</td>
+<td align="center">1.322e-06</td>
+<td align="center">4.156e-06</td>
+<td align="center">2.752e-06</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>FIB-B</strong></td>
+<td align="center">1.435e-05</td>
+<td align="center">3.489e-06</td>
+<td align="center">1.862e-06</td>
+<td align="center">2.748e-06</td>
+<td align="center">2.677e-06</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>FIB-C</strong></td>
+<td align="center">4.64e-06</td>
+<td align="center">2.509e-06</td>
+<td align="center">1.434e-06</td>
+<td align="center">3.339e-06</td>
+<td align="center">2.769e-06</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>FIB-D</strong></td>
+<td align="center">5.496e-05</td>
+<td align="center">0.0001328</td>
+<td align="center">7.748e-05</td>
+<td align="center">0.0001942</td>
+<td align="center">0.0001317</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>FIB-E</strong></td>
+<td align="center">2.67e-05</td>
+<td align="center">7.208e-05</td>
+<td align="center">4.105e-05</td>
+<td align="center">0.0001038</td>
+<td align="center">7.044e-05</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.05 secs
+</p>
+</div>
+</div>
+<div id="network-analysis" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Network analysis</h1>
+<p><strong>CellChat</strong> can perform analysis on the communication network to better understand the roles of each cell type. Here we perform that analysis using the pathway scores. The output is a list with a set of metrics for cell type for each pathway.</p>
+<pre class="r"><code>cellchat &lt;- netAnalysis_signalingRole(cellchat, slot.name = &quot;netP&quot;)</code></pre>
+<p class="timeit">
+Chunk time: 1.96 secs
+</p>
+<p>The network metrics are: <strong>outdeg</strong>, <strong>indeg</strong>, <strong>hub</strong>, <strong>authority</strong>, <strong>eigen</strong>, <strong>page_rank</strong>, <strong>betweenness</strong>, <strong>flowbet</strong> and <strong>info</strong></p>
+</div>
+<div id="global-patterns" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> Global patterns</h1>
+<p>It may also be interesting to identify common communication patterns. We can do this for both outgoing and incoming patterns.</p>
+<pre class="r"><code>cellchat &lt;- identifyCommunicationPatterns(cellchat, pattern = &quot;outgoing&quot;, k = 5)
+cellchat &lt;- identifyCommunicationPatterns(cellchat, pattern = &quot;incoming&quot;, k = 5)</code></pre>
+<img src="figure/14-CellChat.Rmd/patterns-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 7.9 secs
+</p>
+</div>
+<div id="manifold-learning-and-classification" class="section level1" number="7">
+<h1 number="7"><span class="header-section-number">7</span> Manifold learning and classification</h1>
+<p><strong>CellChat</strong> can identify groups of signalling pathways by embedding and clustering them.</p>
+<div id="functional-similarity" class="section level2" number="7.1">
+<h2 number="7.1"><span class="header-section-number">7.1</span> Functional similarity</h2>
+<p>Functional similarity indicates that major senders and receivers are similar and can be interpreted as the two pathways or interaction pairs exhibiting similar and/or redundant roles.</p>
+<p>The output is a similarity matrix, UMAP embedding and cluster assignments from <span class="math inline">\(k\)</span>-means.</p>
+<pre class="r"><code>cellchat &lt;- computeNetSimilarity(cellchat, type = &quot;functional&quot;, thresh = 0.25)
+cellchat &lt;- netEmbedding(cellchat, type = &quot;functional&quot;)
+cellchat &lt;- netClustering(cellchat, type = &quot;functional&quot;, k = 4)
+
+pander(cellchat@netP$similarity$functional$matrix[1:5,1:5])</code></pre>
+<table style="width:87%;">
+<colgroup>
+<col width="16%" />
+<col width="15%" />
+<col width="11%" />
+<col width="15%" />
+<col width="13%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">TGFb</th>
+<th align="center">ncWNT</th>
+<th align="center">EGF</th>
+<th align="center">PDGF</th>
+<th align="center">IGF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>TGFb</strong></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0.008282</td>
+<td align="center">0.03183</td>
+<td align="center">0.009311</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>ncWNT</strong></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>EGF</strong></td>
+<td align="center">0.008282</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0.08182</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>PDGF</strong></td>
+<td align="center">0.03183</td>
+<td align="center">0</td>
+<td align="center">0.08182</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>IGF</strong></td>
+<td align="center">0.009311</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>pander(cellchat@netP$similarity$functional$dr[1:5, ])</code></pre>
+<table style="width:44%;">
+<colgroup>
+<col width="16%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">UMAP1</th>
+<th align="center">UMAP2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>TGFb</strong></td>
+<td align="center">-2.057</td>
+<td align="center">7.281</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>ncWNT</strong></td>
+<td align="center">-0.6042</td>
+<td align="center">10.15</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>EGF</strong></td>
+<td align="center">-0.9521</td>
+<td align="center">10.94</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>PDGF</strong></td>
+<td align="center">-1.836</td>
+<td align="center">9.671</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>IGF</strong></td>
+<td align="center">-2.484</td>
+<td align="center">4.831</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>cellchat@netP$similarity$functional$group</code></pre>
+<pre><code>    TGFb    ncWNT      EGF     PDGF      IGF   APELIN      CCL     CXCL 
+       3        4        4        4        2        1        1        1 
+     MIF      IL1      CSF      TNF     SPP1   ANGPTL       MK      PTN 
+       3        1        3        3        2        2        2        2 
+     KIT    SEMA3      GAS GALECTIN     PROS 
+       1        2        4        4        4 </code></pre>
+<p class="timeit">
+Chunk time: 13.36 secs
+</p>
+</div>
+<div id="structural-similarity" class="section level2" number="7.2">
+<h2 number="7.2"><span class="header-section-number">7.2</span> Structural similarity</h2>
+<p>Structural similarity is used to compare the signalling network structure, without considering the similarity of senders and receivers.</p>
+<pre class="r"><code>cellchat &lt;- computeNetSimilarity(cellchat, type = &quot;structural&quot;, thresh = 0.25)
+cellchat &lt;- netEmbedding(cellchat, type = &quot;structural&quot;)
+cellchat &lt;- netClustering(cellchat, type = &quot;structural&quot;, k = 4)
+
+pander(cellchat@netP$similarity$structural$matrix[1:5,1:5])</code></pre>
+<table style="width:76%;">
+<colgroup>
+<col width="16%" />
+<col width="9%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">TGFb</th>
+<th align="center">ncWNT</th>
+<th align="center">EGF</th>
+<th align="center">PDGF</th>
+<th align="center">IGF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>TGFb</strong></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>ncWNT</strong></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0.3642</td>
+<td align="center">0.5772</td>
+<td align="center">0.3458</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>EGF</strong></td>
+<td align="center">0</td>
+<td align="center">0.3642</td>
+<td align="center">1</td>
+<td align="center">0.5978</td>
+<td align="center">0.5932</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>PDGF</strong></td>
+<td align="center">0</td>
+<td align="center">0.5772</td>
+<td align="center">0.5978</td>
+<td align="center">1</td>
+<td align="center">0.6122</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>IGF</strong></td>
+<td align="center">0</td>
+<td align="center">0.3458</td>
+<td align="center">0.5932</td>
+<td align="center">0.6122</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>pander(cellchat@netP$similarity$structural$dr[1:5, ])</code></pre>
+<table style="width:39%;">
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">UMAP1</th>
+<th align="center">UMAP2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>TGFb</strong></td>
+<td align="center">18.98</td>
+<td align="center">4.604</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>ncWNT</strong></td>
+<td align="center">29.88</td>
+<td align="center">19.12</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>EGF</strong></td>
+<td align="center">30.36</td>
+<td align="center">19.86</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>PDGF</strong></td>
+<td align="center">30.5</td>
+<td align="center">19.39</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>IGF</strong></td>
+<td align="center">29.47</td>
+<td align="center">19.91</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>cellchat@netP$similarity$structural$group</code></pre>
+<pre><code>    TGFb    ncWNT      EGF     PDGF      IGF   APELIN      CCL     CXCL 
+       2        1        1        1        1        3        4        3 
+     MIF      IL2      IL1      CSF      TNF    RANKL     SPP1   ANGPTL 
+       2        3        4        1        1        3        4        2 
+   ANGPT       MK      PTN      EDN      KIT    SEMA3      GAS GALECTIN 
+       3        2        2        3        3        1        3        4 
+    PROS 
+       3 </code></pre>
+<p class="timeit">
+Chunk time: 11.7 secs
+</p>
+</div>
+</div>
+<div id="visualisation" class="section level1" number="8">
+<h1 number="8"><span class="header-section-number">8</span> Visualisation</h1>
+<div id="signalling-pathways" class="section level2" number="8.1">
+<h2 number="8.1"><span class="header-section-number">8.1</span> Signalling pathways</h2>
+<div id="hierarchy-plot" class="section level3" number="8.1.1">
+<h3 number="8.1.1"><span class="header-section-number">8.1.1</span> Hierarchy plot</h3>
+<p>Here solid circles are sources and open circles are targets. Circle sizes are the number of cells in each group and lines are coloured according to the source with thicker lines indicating stronger signals.</p>
+<pre class="r"><code>netVisual_aggregate(cellchat, &quot;TGFb&quot;, vertex.receiver = 1:9, # groups to show
+                    vertex.size = group_size)</code></pre>
+<img src="figure/14-CellChat.Rmd/vis-pathway-hierarchy-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 0.39 secs
+</p>
+</div>
+<div id="circle-plot" class="section level3" number="8.1.2">
+<h3 number="8.1.2"><span class="header-section-number">8.1.2</span> Circle plot</h3>
+<p>We can show a similar thing as a circle plot.</p>
+<pre class="r"><code>netVisual_aggregate(cellchat, &quot;ncWNT&quot;, layout = &quot;circle&quot;,
+                    vertex.size = group_size)</code></pre>
+<img src="figure/14-CellChat.Rmd/vis-pathway-circle-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 0.2 secs
+</p>
+</div>
+</div>
+<div id="pathway-contribution" class="section level2" number="8.2">
+<h2 number="8.2"><span class="header-section-number">8.2</span> Pathway contribution</h2>
+<p>Here we show the contribution of each interaction pair to a signalling pathway.</p>
+<pre class="r"><code>netAnalysis_contribution(cellchat, &quot;TGFb&quot;)</code></pre>
+<img src="figure/14-CellChat.Rmd/vis-contribution-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 0.35 secs
+</p>
+</div>
+<div id="signalling-roles" class="section level2" number="8.3">
+<h2 number="8.3"><span class="header-section-number">8.3</span> Signalling roles</h2>
+<p>For can look at the expected role for each cell type for a pathway based on the network analysis scores.</p>
+<pre class="r"><code>netVisual_signalingRole(cellchat, &quot;TGFb&quot;, width = 16, height = 4,
+                        font.size = 10)</code></pre>
+<img src="figure/14-CellChat.Rmd/vis-roles-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 0.41 secs
+</p>
+</div>
+<div id="communication-patterns" class="section level2" number="8.4">
+<h2 number="8.4"><span class="header-section-number">8.4</span> Communication patterns</h2>
+<div id="river-plot" class="section level3" number="8.4.1">
+<h3 number="8.4.1"><span class="header-section-number">8.4.1</span> River plot</h3>
+<p>An alternative way to visualise the communication patterns is using a river plot.</p>
+<pre class="r"><code>netAnalysis_river(cellchat, pattern = &quot;outgoing&quot;)</code></pre>
+<img src="figure/14-CellChat.Rmd/vis-patterns-river-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 1.83 secs
+</p>
+</div>
+<div id="dot-plot" class="section level3" number="8.4.2">
+<h3 number="8.4.2"><span class="header-section-number">8.4.2</span> Dot plot</h3>
+<p>Another alternative is a dot plot.</p>
+<pre class="r"><code>netAnalysis_dot(cellchat, pattern = &quot;outgoing&quot;)</code></pre>
+<img src="figure/14-CellChat.Rmd/vis-patterns-dot-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 0.64 secs
+</p>
+</div>
+</div>
+<div id="embedding" class="section level2" number="8.5">
+<h2 number="8.5"><span class="header-section-number">8.5</span> Embedding</h2>
+<p>UMAP embedding of pathway similarity.</p>
+<pre class="r"><code>netVisual_embedding(cellchat, type = &quot;functional&quot;, pathway.remove.show = FALSE,
+                    label.size = 3.5)</code></pre>
+<img src="figure/14-CellChat.Rmd/umap-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 0.67 secs
+</p>
+<div id="zoom-in" class="section level3" number="8.5.1">
+<h3 number="8.5.1"><span class="header-section-number">8.5.1</span> Zoom in</h3>
+<pre class="r"><code>netVisual_embeddingZoomIn(cellchat, type = &quot;functional&quot;, nCol = 2)</code></pre>
+<img src="figure/14-CellChat.Rmd/umap-zoom-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 0.71 secs
+</p>
+</div>
+</div>
 </div>
 <div id="summary" class="section level1 unnumbered" number="">
 <h1 class="unnumbered" number="">Summary</h1>
@@ -663,7 +2352,7 @@ Chunk time: 0.02 secs
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Berlin               
- date     2020-07-29                  
+ date     2020-07-30                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  ! package        * version date       lib
@@ -680,9 +2369,9 @@ Chunk time: 0.02 secs
  P circlize         0.4.9   2020-04-30 [?]
  P cli              2.0.2   2020-02-28 [?]
    clue             0.3-57  2019-02-25 [1]
- P cluster          2.1.0   2019-06-19 [?]
+ P cluster          2.1.0   2019-06-19 [3]
    coda             0.19-3  2019-07-05 [1]
- P codetools        0.2-16  2018-12-24 [?]
+ P codetools        0.2-16  2018-12-24 [3]
  P colorspace       1.4-1   2019-03-18 [?]
  P ComplexHeatmap   2.5.4   2020-07-29 [?]
  P conflicted     * 1.0.4   2019-06-21 [?]
@@ -697,6 +2386,7 @@ Chunk time: 0.02 secs
  P ellipsis         0.3.0   2019-09-20 [?]
  P evaluate         0.14    2019-05-28 [?]
  P fansi            0.4.1   2020-01-08 [?]
+ P farver           2.0.3   2020-01-16 [?]
  P filelock         1.0.2   2018-10-05 [?]
    FNN              1.1.3   2019-02-15 [1]
  P forcats        * 0.5.0   2020-03-01 [?]
@@ -707,7 +2397,7 @@ Chunk time: 0.02 secs
    gdtools          0.2.2   2020-04-03 [1]
  P generics         0.0.2   2018-11-29 [?]
  P GetoptLong       0.1.8   2020-01-08 [?]
-   ggalluvial       0.12.0  2020-07-14 [1]
+   ggalluvial     * 0.12.0  2020-07-14 [1]
  P ggplot2        * 3.3.0   2020-03-05 [?]
    ggrepel          0.8.2   2020-03-08 [1]
  P git2r            0.27.1  2020-05-03 [?]
@@ -729,11 +2419,13 @@ Chunk time: 0.02 secs
    iterators        1.0.12  2019-07-26 [1]
  P jsonlite       * 1.6.1   2020-02-02 [?]
  P knitr          * 1.28    2020-02-06 [?]
+ P labeling         0.3     2014-08-23 [?]
  P later            1.0.0   2019-10-04 [?]
  P lattice          0.20-41 2020-04-02 [?]
  P lifecycle        0.2.0   2020-03-06 [?]
    listenv          0.8.0   2019-12-05 [1]
  P lubridate        1.7.8   2020-04-06 [?]
+   magick           2.4.0   2020-06-23 [3]
  P magrittr         1.5     2014-11-22 [?]
  P Matrix           1.2-18  2019-11-27 [?]
  P memoise          1.1.0   2017-04-21 [?]
@@ -790,6 +2482,7 @@ Chunk time: 0.02 secs
  P tidyverse      * 1.3.0   2019-11-21 [?]
  P txtq             0.2.0   2019-10-15 [?]
  P vctrs            0.2.4   2020-03-10 [?]
+ P whisker          0.4     2019-08-28 [?]
  P withr            2.2.0   2020-04-20 [?]
  P workflowr        1.6.2   2020-04-30 [?]
  P xfun             0.13    2020-04-13 [?]
@@ -832,6 +2525,7 @@ Chunk time: 0.02 secs
  CRAN (R 4.0.0)                          
  CRAN (R 4.0.0)                          
  CRAN (R 4.0.0)                          
+ CRAN (R 4.0.0)                          
  CRAN (R 4.0.1)                          
  CRAN (R 4.0.0)                          
  CRAN (R 4.0.2)                          
@@ -859,7 +2553,9 @@ Chunk time: 0.02 secs
  CRAN (R 4.0.0)                          
  CRAN (R 4.0.0)                          
  CRAN (R 4.0.0)                          
+ standard (@0.3)                         
  standard (@1.0.0)                       
+ CRAN (R 4.0.0)                          
  CRAN (R 4.0.0)                          
  CRAN (R 4.0.0)                          
  CRAN (R 4.0.0)                          
@@ -920,6 +2616,7 @@ Chunk time: 0.02 secs
  standard (@1.3.0)                       
  standard (@0.2.0)                       
  CRAN (R 4.0.0)                          
+ standard (@0.4)                         
  CRAN (R 4.0.0)                          
  CRAN (R 4.0.0)                          
  CRAN (R 4.0.0)                          
@@ -928,19 +2625,18 @@ Chunk time: 0.02 secs
  CRAN (R 4.0.0)                          
 
 [1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
-[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp7liN92/renv-system-library
-[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp8HZw8T/renv-system-library
-[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp6ERhSj/renv-system-library
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmphp5zWa/renv-system-library
+[3] /Library/Frameworks/R.framework/Versions/4.0/Resources/library
 
  P ── Loaded and on-disk path mismatch.</code></pre>
 <p class="timeit">
-Chunk time: 0.26 secs
+Chunk time: 0.38 secs
 </p>
 </div>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2VsbENoYXQgZXhhbXBsZSIKb3V0cHV0OiB3b3JrZmxvd3I6OndmbG93X2h0bWwKZWRpdG9yX29wdGlvbnM6CiAgY2h1bmtfb3V0cHV0X3R5cGU6IGNvbnNvbGUKLS0tCgpgYGB7ciBzZXR1cCwgY2FjaGUgPSBGQUxTRX0KIyBTZXR1cCBkb2N1bWVudApzb3VyY2UoaGVyZTo6aGVyZSgiY29kZSIsICJzZXR1cC5SIikpCgojIEZ1bmN0aW9uIGRlcGVuZGVuY2llcwppbnZpc2libGUoZHJha2U6OnJlYWRkKGRvd25sb2FkX2xpbmspKQpgYGAKCkludHJvZHVjdGlvbiB7LnVubnVtYmVyZWR9Cj09PT09PT09PT09PQoKSW4gdGhpcyBkb2N1bWVudCB3ZSBhcmUgZ29pbmcgdG8gcnVuIHRocm91Z2ggdGhlIGV4YW1wbGUgYW5hbHlzaXMgZm9yIHRoZQoqKkNlbGxDaGF0KiogcGFja2FnZSBhbmQgaGF2ZSBhIGxvb2sgYXQgdGhlIG91dHB1dCBpdCBwcm9kdWNlcy4gTW9yZSBpbmZvcm1hdGlvbgphYm91dCAqKkNlbGxDaGF0KiogY2FuIGJlIGZvdW5kIGF0IGh0dHBzOi8vZ2l0aHViLmNvbS9zcWppbi9DZWxsQ2hhdC4KCmBgYHtyIGxpYnJhcmllc30KbGlicmFyeSgiQ2VsbENoYXQiKQpgYGAKCklucHV0Cj09PT09CgpTdW1tYXJ5IHsudW5udW1iZXJlZH0KPT09PT09PQoKUGFyYW1ldGVycyB7LnVubnVtYmVyZWR9Ci0tLS0tLS0tLS0KClRoaXMgdGFibGUgZGVzY3JpYmVzIHBhcmFtZXRlcnMgdXNlZCBhbmQgc2V0IGluIHRoaXMgZG9jdW1lbnQuCgpgYGB7ciBwYXJhbWV0ZXJzfQpwYXJhbXMgPC0gbGlzdCgKICAgIAopCnBhcmFtcyA8LSB0b0pTT04ocGFyYW1zLCBwcmV0dHkgPSBUUlVFKQprYWJsZShmcm9tSlNPTihwYXJhbXMpKQpgYGAKCk91dHB1dCBmaWxlcyB7LnVubnVtYmVyZWR9Ci0tLS0tLS0tLS0tLQoKVGhpcyB0YWJsZSBkZXNjcmliZXMgdGhlIG91dHB1dCBmaWxlcyBwcm9kdWNlZCBieSB0aGlzIGRvY3VtZW50LiBSaWdodCBjbGljawphbmQgX1NhdmUgTGluayBBcy4uLl8gdG8gZG93bmxvYWQgdGhlIHJlc3VsdHMuCgpgYGB7ciBvdXRwdXR9CmthYmxlKGRhdGEuZnJhbWUoCiAgICBGaWxlID0gYygKICAgICAgICBkb3dubG9hZF9saW5rKCJwYXJhbWV0ZXJzLmpzb24iLCBPVVRfRElSKQogICAgKSwKICAgIERlc2NyaXB0aW9uID0gYygKICAgICAgICAiUGFyYW1ldGVycyBzZXQgYW5kIHVzZWQgaW4gdGhpcyBhbmFseXNpcyIKICAgICkKKSkKYGBgCgpTZXNzaW9uIGluZm9ybWF0aW9uIHsudW5udW1iZXJlZH0KLS0tLS0tLS0tLS0tLS0tLS0tLQo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2VsbENoYXQgZXhhbXBsZSIKb3V0cHV0OiB3b3JrZmxvd3I6OndmbG93X2h0bWwKZWRpdG9yX29wdGlvbnM6CiAgY2h1bmtfb3V0cHV0X3R5cGU6IGNvbnNvbGUKLS0tCgpgYGB7ciBzZXR1cCwgY2FjaGUgPSBGQUxTRX0KIyBTZXR1cCBkb2N1bWVudApzb3VyY2UoaGVyZTo6aGVyZSgiY29kZSIsICJzZXR1cC5SIikpCgojIEZ1bmN0aW9uIGRlcGVuZGVuY2llcwppbnZpc2libGUoZHJha2U6OnJlYWRkKGRvd25sb2FkX2xpbmspKQpgYGAKCkludHJvZHVjdGlvbiB7LnVubnVtYmVyZWR9Cj09PT09PT09PT09PQoKSW4gdGhpcyBkb2N1bWVudCB3ZSBhcmUgZ29pbmcgdG8gcnVuIHRocm91Z2ggdGhlIGV4YW1wbGUgYW5hbHlzaXMgZm9yIHRoZQoqKkNlbGxDaGF0KiogcGFja2FnZSBhbmQgaGF2ZSBhIGxvb2sgYXQgdGhlIG91dHB1dCBpdCBwcm9kdWNlcy4gTW9yZSBpbmZvcm1hdGlvbgphYm91dCAqKkNlbGxDaGF0KiogY2FuIGJlIGZvdW5kIGF0IGh0dHBzOi8vZ2l0aHViLmNvbS9zcWppbi9DZWxsQ2hhdC4KCmBgYHtyIGxpYnJhcmllc30KbGlicmFyeSgiQ2VsbENoYXQiKQpsaWJyYXJ5KCJnZ2FsbHV2aWFsIikKYGBgCgpJbnB1dAo9PT09PQoKKipDZWxsQ2hhdCoqIHJlcXVpcmVzIHR3byB1c2VyIGlucHV0czogYW4gZXhwcmVzc2lvbiBtYXRyaXggYW5kIGVpdGhlciBjZWxsLXR5cGUKbGFiZWxzIG9yIGEgbG93LWRpbWVuc2lvbmFsIGVtYmVkZGluZy4gSGVyZSB3ZSB1c2UgdGhlIGxhYmVsLWJhc2VkIG1vZGUuIFRoZQpvdGhlciBpbnB1dHMgdG8gKipDZWxsQ2hhdCoqIGFyZSB0aGUgbGlnYW5kLXJlY2VwdG9yIGRhdGFiYXNlIGFuZApwcm90ZWluLXByb3RlaW4gaW50ZXJhY3Rpb24gbmV0d29yayBpbmNsdWRlZCBpbiB0aGUgcGFja2FnZS4KCmBgYHtyIGxvYWR9CmxvYWQoZnM6OnBhdGgoUEFUSFMkQ2VsbENoYXRfaW4sICJkYXRhX3dvdW5kX0NlbGxDaGF0LnJkYSIpKQpgYGAKCkV4cHJlc3Npb24gbWF0cml4Ci0tLS0tLS0tLS0tLS0tLS0tCgpUaGUgZXhwcmVzc2lvbiBtYXRyaXggc2hvdWxkIGJlIG5vcm1hbGlzZWQgd2l0aCBnZW5lcyBhcyByb3dzIGFuZCBjZWxscyBhcwpjb2x1bW5zLiBIZXJlIGlzIGEgc25pcHBldCBvZiB0aGUgZXhhbXBsZSBkYXRhc2V0OgoKYGBge3IgaW5wdXQtZXhwcn0KZXhwciA8LSBkYXRhX3dvdW5kJGRhdGEKCnBhbmRlcihhcy5tYXRyaXgoZXhwclsxOjUsIDE6NV0pKQpgYGAKClRoZSBmdWxsIG1hdHJpeCBoYXMgKipgciBucm93KGV4cHIpYCoqIHJvd3MgKGdlbmVzKSBhbmQgKipgciBuY29sKGV4cHIpYCoqCmNvbHVtbnMgKGNlbGxzKS4KCkxhYmVscwotLS0tLS0KClRoZSBzZWNvbmQgaW5wdXQgaXMgYSBgZGF0YS5mcmFtZWAgd2l0aCBjZWxsIHR5cGUgbGFiZWxzIGZvciBlYWNoIGNlbGwuCgpgYGB7ciBpbnB1dC1sYWJlbHN9CmxhYmVscyA8LSBkYXRhLmZyYW1lKAogICAgZ3JvdXAgICAgID0gZGF0YV93b3VuZCRsYWJlbHMsCiAgICByb3cubmFtZXMgPSBuYW1lcyhkYXRhX3dvdW5kJGxhYmVscykKKQpncm91cF9zaXplIDwtIGFzLm51bWVyaWModGFibGUobGFiZWxzJGdyb3VwKSkKCnNraW0obGFiZWxzKQpgYGAKCkRhdGFiYXNlCi0tLS0tLS0tCgpUaGUgZGF0YWJhc2UgaXMgYXZhaWxhYmxlIGFzIGEgbGlzdC4gVGhlIHR1dG9yaWFsIHN1Z2dlc3RzIHVzaW5nIG9ubHkgdGhlCmludGVyYWN0aW9ucyBhbm5vdGF0ZWQgd2l0aCAiU2VjcmV0ZWQgU2lnbmFsbGluZyIuCgpgYGB7ciBpbnB1dC1kYXRhYmFzZX0KQ2VsbENoYXREQiA8LSBDZWxsQ2hhdERCLm1vdXNlCkNlbGxDaGF0REIgPC0gc3Vic2V0REIoQ2VsbENoYXREQiwgc2VhcmNoID0gIlNlY3JldGVkIFNpZ25hbGluZyIpCmBgYAoKVGhlIGRhdGFiYXNlIGxpc3QgY29udGFpbnMgKipgciBsZW5ndGgoQ2VsbENoYXREQilgKiogaXRlbXM6IApgciBnbHVlX2NvbGxhcHNlKGdsdWUoIioqe25hbWVzKENlbGxDaGF0REIpfSoqIiksIHNlcCA9ICIsICIsIGxhc3QgPSAiIGFuZCAiKWAKCiMjIyBJbnRlcmFjdGlvbgoKVGhlIGZpcnN0IGl0ZW0gaW4gdGhlIGxpc3QgaXMgYSBgZGF0YS5mcmFtZWAgd2l0aCBpbmZvcm1hdGlvbiBhYm91dAppbnRlcmFjdGlvbnMuCgpgYGB7ciBpbnB1dC1kYXRhYmFzZS1pbnRlcmFjdGlvbn0Kc2tpbShDZWxsQ2hhdERCJGludGVyYWN0aW9uKQpgYGAKCiMjIyBDb21wbGV4CgpUaGUgc2Vjb25kIGl0ZW0gY29udGFpbiBpbmZvcm1hdGlvbiBhYm91dCBjb21wbGV4ZXMuCgpgYGB7ciBpbnB1dC1kYXRhYmFzZS1jb21wbGV4fQpza2ltKENlbGxDaGF0REIkY29tcGxleCkKYGBgCgojIyMgQ29mYWN0b3IKClRoZSBuZXh0IGl0ZW0gY29udGFpbnMgaW5mb3JtYXRpb24gYWJvdXQgY29mYWN0b3JzLgoKYGBge3IgaW5wdXQtZGF0YWJhc2UtY29mYWN0b3J9CnNraW0oQ2VsbENoYXREQiRjb2ZhY3RvcikKYGBgCgojIyMgR2VuZSBpbmZvCgpUaGUgZmluYWwgaXRlbSBpbiB0aGUgZGF0YWJhc2UgaXMgZ2VuZSBhbm5vdGF0aW9uIGluZm9ybWF0aW9uLgoKYGBge3IgaW5wdXQtZGF0YWJhc2UtZ2VuZWluZm99CnNraW0oQ2VsbENoYXREQiRnZW5lSW5mbykKYGBgCgpOZXR3b3JrCi0tLS0tLS0KClRoZSBuZXR3b3JrIGlzIGEgYmluYXJ5IG1hdHJpeCBzaG93aW5nIGludGVyYWN0aW9ucyBiZXR3ZWVuIHByb3RlaW5zLgoKYGBge3IgaW5wdXQtbmV0d29ya30KcGFuZGVyKGFzLm1hdHJpeChQUEkubW91c2VbMTo1LCAxOjVdKSkKYGBgCgpUaGUgZnVsbCBtYXRyaXggaGFzICoqYHIgbnJvdyhQUEkubW91c2UpYCoqIHJvd3MgYW5kICoqYHIgbmNvbChQUEkubW91c2UpYCoqCmNvbHVtbnMuCgpDcmVhdGUgYENlbGxDaGF0YCBvYmplY3QKPT09PT09PT09PT09PT09PT09PT09PT09CgoqKkNlbGxDaGF0KiogdXNlcyBhIGN1c3RvbSBvYmplY3Qgd2hpY2ggd2UgY2FuIGNyZWF0ZSBmcm9tIHRoZSBleHByZXNzaW9uIG1hdHJpeAphbmQgbGFiZWxzLiBXZSBhbHNvIHN0b3JlIHRoZSBkYXRhYmFzZSBoZXJlLgoKYGBge3Igb2JqZWN0fQpjZWxsY2hhdCA8LSBjcmVhdGVDZWxsQ2hhdChleHByKQpjZWxsY2hhdCA8LSBhZGRNZXRhKGNlbGxjaGF0LCBtZXRhID0gbGFiZWxzLCBtZXRhLm5hbWUgPSAibGFiZWxzIikKY2VsbGNoYXQgPC0gc2V0SWRlbnQoY2VsbGNoYXQsIGlkZW50LnVzZSA9ICJsYWJlbHMiKQpjZWxsY2hhdEBEQiA8LSBDZWxsQ2hhdERCCgpjZWxsY2hhdApgYGAKClByZS1wcm9jZXNzaW5nCj09PT09PT09PT09PT09CgpTdWJzZXQgc2lnbmFsbGluZyBnZW5lcwotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKRmlyc3Qgd2Ugc3Vic2V0IHRoZSBvYmplY3QgdG8gc2VsZWN0IG9ubHkgdGhlIHNpZ25hbGxpbmcgZ2VuZXMgdGhhdCBhcmUgbGlzdGVkCmluIHRoZSBkYXRhYmFzZS4KCmBgYHtyIHByZS1zdWJzZXR9CmNlbGxjaGF0IDwtIHN1YnNldERhdGEoY2VsbGNoYXQpCgpjZWxsY2hhdApgYGAKCklkZW50aWZ5IG92ZXItZXhwcmVzc2lvbgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KClRoZSBuZXh0IHN0ZXAgaXMgdG8gaWRlbnRpZnkgb3Zlci1leHByZXNzZWQgZ2VuZXMgYW5kIGludGVyYWN0aW9ucy4KT3Zlci1leHByZXNzZWQgZ2VuZXMgYXJlIGRldGVjdGVkIHVzaW5nIGEgb25lLXNpZGVkIFdpbGNveG9uIHRlc3QuIEludGVyYWN0aW9ucwphcmUgc2VsZWN0ZWQgaWYgZWl0aGVyIGEgbGlnYW5kIG9yIHJlY2VwdG9yIGlzIG92ZXItZXhwcmVzc2VkLgoKYGBge3IgcHJlLW92ZXJ9CmNlbGxjaGF0IDwtIGlkZW50aWZ5T3ZlckV4cHJlc3NlZEdlbmVzKGNlbGxjaGF0KQpjZWxsY2hhdCA8LSBpZGVudGlmeU92ZXJFeHByZXNzZWRJbnRlcmFjdGlvbnMoY2VsbGNoYXQpCmBgYAoKVGhpcyBzdGVwIGhhcyBpZGVudGlmaWVkICoqYHIgbGVuZ3RoKGNlbGxjaGF0QHZhci5mZWF0dXJlcylgKiogZ2VuZXMgYW5kCioqYHIgbnJvdyhjZWxsY2hhdEBMUiRMUnNpZylgKiogaW50ZXJhY3Rpb25zLgoKUHJvamVjdCBkYXRhCi0tLS0tLS0tLS0tLQoKVGhlIGdlbmUgZXhwcmVzc2lvbiBkYXRhIGlzIHRoZW4gcHJvamVjdGVkIG9udG8gYSBwcm90ZWluLXByb3RlaW4gaW50ZXJhY3Rpb24KbmV0d29yay4KCmBgYHtyIHByZS1wcm9qZWN0fQpjZWxsY2hhdCA8LSBwcm9qZWN0RGF0YShjZWxsY2hhdCwgUFBJLm1vdXNlKQpgYGAKCkNvbW11bmljYXRpb24gbmV0d29yayBpbmZlcmVuY2UKPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoKQ29tcHV0ZSBjb21tdW5pY2F0aW9uIHByb2JhYmlsaXR5Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKQXQgdGhpcyBzdGFnZSB3ZSBjYW4gbm93IGNvbXB1dGUgdGhlIGNvbW11bmljYXRpb24gcHJvYmFiaWxpdHkgYW5kIGluZmVyIHRoZQpjb21tdW5pY2F0aW9uIG5ldHdvcmsuIFRoZSByZXN1bHRzIGFyZSBzdG9yZWQgaW4gdGhlIGBuZXRgIHNsb3Qgb2YgdGhlCmBDZWxsQ2hhdGAgb2JqZWN0IHdoaWNoIGNvbnRhaW5zIHRocmVlLWRpbWVuc2lvbmFsIGFycmF5cyBvZiBwcm9iYWJpbGl0aWVzIGFuZApwLXZhbHVlcyBmb3IgaW50ZXJhY3Rpb25zIGJldHdlZW4gZWFjaCBwYWlyIG9mIGNlbGwgdHlwZXMgZm9yIGVhY2ggaW50ZXJhY3Rpb24KcGFpci4gSGVyZSBhcmUgc25pcHBldHMgb2YgdGhlc2UgYXJyYXlzIGZvciB0aGUgZmlyc3QgaW50ZXJhY3Rpb24gcGFpci4KCmBgYHtyIGluZmVyLXByb2JhYmlsaXR5fQpjZWxsY2hhdCA8LSBjb21wdXRlQ29tbXVuUHJvYihjZWxsY2hhdCkKCnBhbmRlcihjZWxsY2hhdEBuZXQkcHJvYlsxOjUsIDE6NSwgMV0pCnBhbmRlcihjZWxsY2hhdEBuZXQkcHZhbFsxOjUsIDE6NSwgMV0pCmBgYAoKSW5mZXIgcGF0aHdheSBzaWduYWxsaW5nCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKV2UgYWxzbyBjb21wdXRlIHRoZSBjb21tdW5pY2F0aW9uIHByb2JhYmlsaXRpZXMgYXQgdGhlIHBhdGh3YXkgbGV2ZWwgYnkKc3VtbWFyaXNpbmcgYWxsIGxpZ2FuZC1yZWNlcHRvciBpbnRlcmFjdGlvbnMgYXNzb2NpYXRlZCB3aXRoIGVhY2ggcGF0aHdheS4gVGhlCm91dHB1dCBpcyBzaW1pbGFyIGJ1dCBub3cgaW5zdGVhZCBvZiBpbnRlcmFjdGlvbiBwYWlycyB3ZSBoYXZlIHBhdGh3YXlzLgoKYGBge3IgaW5mZXItcGF0aHdheX0KY2VsbGNoYXQgPC0gY29tcHV0ZUNvbW11blByb2JQYXRod2F5KGNlbGxjaGF0KQoKcGFuZGVyKGNlbGxjaGF0QG5ldFAkcHJvYlsxOjUsIDE6NSwgMV0pCmBgYAoKQWdncmVnYXRlIG5ldHdvcmsKLS0tLS0tLS0tLS0tLS0tLS0KCldlIGNhbiBnZXQgYW4gYWdncmVnYXRlZCBjb21tdW5pY2F0aW9uIG5ldHdvcmsgYnkgY291bnRpbmcgdGhlIG51bWJlciBvZiBsaW5rcwpiZXR3ZWVuIGNlbGwgdHlwZXMgb3Igc3VtbWFyaXNpbmcgdGhlIGNvbW11bmljYXRpb24gcHJvYmFiaWxpdGllcy4gVGhlc2UgcmVzdWx0cwphcmUgc3RvcmVkIGFzIHR3by1kaW1lbnNpb25hbCBtYXRyaWNlcy4KCmBgYHtyIGluZmVyLWFnZ3JlZ2F0ZX0KY2VsbGNoYXQgPC0gYWdncmVnYXRlTmV0KGNlbGxjaGF0KQoKcGFuZGVyKGNlbGxjaGF0QG5ldCRjb3VudFsxOjUsIDE6NV0pCnBhbmRlcihjZWxsY2hhdEBuZXQkc3VtWzE6NSwgMTo1XSkKYGBgCgpOZXR3b3JrIGFuYWx5c2lzCj09PT09PT09PT09PT09PT0KCioqQ2VsbENoYXQqKiBjYW4gcGVyZm9ybSBhbmFseXNpcyBvbiB0aGUgY29tbXVuaWNhdGlvbiBuZXR3b3JrIHRvIGJldHRlcgp1bmRlcnN0YW5kIHRoZSByb2xlcyBvZiBlYWNoIGNlbGwgdHlwZS4gSGVyZSB3ZSBwZXJmb3JtIHRoYXQgYW5hbHlzaXMgdXNpbmcgdGhlCnBhdGh3YXkgc2NvcmVzLiBUaGUgb3V0cHV0IGlzIGEgbGlzdCB3aXRoIGEgc2V0IG9mIG1ldHJpY3MgZm9yIGNlbGwgdHlwZSBmb3IKZWFjaCBwYXRod2F5LgoKYGBge3IgbmV0d29yay1hbmFseXNpc30KY2VsbGNoYXQgPC0gbmV0QW5hbHlzaXNfc2lnbmFsaW5nUm9sZShjZWxsY2hhdCwgc2xvdC5uYW1lID0gIm5ldFAiKQpgYGAKClRoZSBuZXR3b3JrIG1ldHJpY3MgYXJlOgpgciBnbHVlX2NvbGxhcHNlKGdsdWUoIioqe25hbWVzKGNlbGxjaGF0QG5ldFAkY2VudHJbWzFdXSl9KioiKSwgc2VwID0gIiwgIiwgbGFzdCA9ICIgYW5kICIpYAoKR2xvYmFsIHBhdHRlcm5zCj09PT09PT09PT09PT09PQoKSXQgbWF5IGFsc28gYmUgaW50ZXJlc3RpbmcgdG8gaWRlbnRpZnkgY29tbW9uIGNvbW11bmljYXRpb24gcGF0dGVybnMuIFdlIGNhbiBkbwp0aGlzIGZvciBib3RoIG91dGdvaW5nIGFuZCBpbmNvbWluZyBwYXR0ZXJucy4KCmBgYHtyIHBhdHRlcm5zfQpjZWxsY2hhdCA8LSBpZGVudGlmeUNvbW11bmljYXRpb25QYXR0ZXJucyhjZWxsY2hhdCwgcGF0dGVybiA9ICJvdXRnb2luZyIsIGsgPSA1KQpjZWxsY2hhdCA8LSBpZGVudGlmeUNvbW11bmljYXRpb25QYXR0ZXJucyhjZWxsY2hhdCwgcGF0dGVybiA9ICJpbmNvbWluZyIsIGsgPSA1KQpgYGAKCk1hbmlmb2xkIGxlYXJuaW5nIGFuZCBjbGFzc2lmaWNhdGlvbgo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KCioqQ2VsbENoYXQqKiBjYW4gaWRlbnRpZnkgZ3JvdXBzIG9mIHNpZ25hbGxpbmcgcGF0aHdheXMgYnkgZW1iZWRkaW5nIGFuZApjbHVzdGVyaW5nIHRoZW0uCgpGdW5jdGlvbmFsIHNpbWlsYXJpdHkKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKRnVuY3Rpb25hbCBzaW1pbGFyaXR5IGluZGljYXRlcyB0aGF0IG1ham9yIHNlbmRlcnMgYW5kIHJlY2VpdmVycyBhcmUgc2ltaWxhcgphbmQgY2FuIGJlIGludGVycHJldGVkIGFzIHRoZSB0d28gcGF0aHdheXMgb3IgaW50ZXJhY3Rpb24gcGFpcnMgZXhoaWJpdGluZwpzaW1pbGFyIGFuZC9vciByZWR1bmRhbnQgcm9sZXMuIAoKVGhlIG91dHB1dCBpcyBhIHNpbWlsYXJpdHkgbWF0cml4LCBVTUFQIGVtYmVkZGluZyBhbmQgY2x1c3RlciBhc3NpZ25tZW50cyBmcm9tCiRrJC1tZWFucy4KCmBgYHtyIG1hbmlmb2xkLWZ1bmN0aW9uYWx9CmNlbGxjaGF0IDwtIGNvbXB1dGVOZXRTaW1pbGFyaXR5KGNlbGxjaGF0LCB0eXBlID0gImZ1bmN0aW9uYWwiLCB0aHJlc2ggPSAwLjI1KQpjZWxsY2hhdCA8LSBuZXRFbWJlZGRpbmcoY2VsbGNoYXQsIHR5cGUgPSAiZnVuY3Rpb25hbCIpCmNlbGxjaGF0IDwtIG5ldENsdXN0ZXJpbmcoY2VsbGNoYXQsIHR5cGUgPSAiZnVuY3Rpb25hbCIsIGsgPSA0KQoKcGFuZGVyKGNlbGxjaGF0QG5ldFAkc2ltaWxhcml0eSRmdW5jdGlvbmFsJG1hdHJpeFsxOjUsMTo1XSkKcGFuZGVyKGNlbGxjaGF0QG5ldFAkc2ltaWxhcml0eSRmdW5jdGlvbmFsJGRyWzE6NSwgXSkKY2VsbGNoYXRAbmV0UCRzaW1pbGFyaXR5JGZ1bmN0aW9uYWwkZ3JvdXAKYGBgCgpTdHJ1Y3R1cmFsIHNpbWlsYXJpdHkKLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgpTdHJ1Y3R1cmFsIHNpbWlsYXJpdHkgaXMgdXNlZCB0byBjb21wYXJlIHRoZSBzaWduYWxsaW5nIG5ldHdvcmsgc3RydWN0dXJlLAp3aXRob3V0IGNvbnNpZGVyaW5nIHRoZSBzaW1pbGFyaXR5IG9mIHNlbmRlcnMgYW5kIHJlY2VpdmVycy4KCmBgYHtyIG1hbmlmb2xkLXN0cnVjdHVyYWx9CmNlbGxjaGF0IDwtIGNvbXB1dGVOZXRTaW1pbGFyaXR5KGNlbGxjaGF0LCB0eXBlID0gInN0cnVjdHVyYWwiLCB0aHJlc2ggPSAwLjI1KQpjZWxsY2hhdCA8LSBuZXRFbWJlZGRpbmcoY2VsbGNoYXQsIHR5cGUgPSAic3RydWN0dXJhbCIpCmNlbGxjaGF0IDwtIG5ldENsdXN0ZXJpbmcoY2VsbGNoYXQsIHR5cGUgPSAic3RydWN0dXJhbCIsIGsgPSA0KQoKcGFuZGVyKGNlbGxjaGF0QG5ldFAkc2ltaWxhcml0eSRzdHJ1Y3R1cmFsJG1hdHJpeFsxOjUsMTo1XSkKcGFuZGVyKGNlbGxjaGF0QG5ldFAkc2ltaWxhcml0eSRzdHJ1Y3R1cmFsJGRyWzE6NSwgXSkKY2VsbGNoYXRAbmV0UCRzaW1pbGFyaXR5JHN0cnVjdHVyYWwkZ3JvdXAKYGBgCgpWaXN1YWxpc2F0aW9uCj09PT09PT09PT09PT0KClNpZ25hbGxpbmcgcGF0aHdheXMKLS0tLS0tLS0tLS0tLS0tLS0tLQoKIyMjIEhpZXJhcmNoeSBwbG90CgpIZXJlIHNvbGlkIGNpcmNsZXMgYXJlIHNvdXJjZXMgYW5kIG9wZW4gY2lyY2xlcyBhcmUgdGFyZ2V0cy4gQ2lyY2xlIHNpemVzIGFyZQp0aGUgbnVtYmVyIG9mIGNlbGxzIGluIGVhY2ggZ3JvdXAgYW5kIGxpbmVzIGFyZSBjb2xvdXJlZCBhY2NvcmRpbmcgdG8gdGhlIHNvdXJjZQp3aXRoIHRoaWNrZXIgbGluZXMgaW5kaWNhdGluZyBzdHJvbmdlciBzaWduYWxzLgoKYGBge3IgdmlzLXBhdGh3YXktaGllcmFyY2h5fQpuZXRWaXN1YWxfYWdncmVnYXRlKGNlbGxjaGF0LCAiVEdGYiIsIHZlcnRleC5yZWNlaXZlciA9IDE6OSwgIyBncm91cHMgdG8gc2hvdwogICAgICAgICAgICAgICAgICAgIHZlcnRleC5zaXplID0gZ3JvdXBfc2l6ZSkKYGBgCgojIyMgQ2lyY2xlIHBsb3QKCldlIGNhbiBzaG93IGEgc2ltaWxhciB0aGluZyBhcyBhIGNpcmNsZSBwbG90LgoKYGBge3IgdmlzLXBhdGh3YXktY2lyY2xlfQpuZXRWaXN1YWxfYWdncmVnYXRlKGNlbGxjaGF0LCAibmNXTlQiLCBsYXlvdXQgPSAiY2lyY2xlIiwKICAgICAgICAgICAgICAgICAgICB2ZXJ0ZXguc2l6ZSA9IGdyb3VwX3NpemUpCmBgYAoKUGF0aHdheSBjb250cmlidXRpb24KLS0tLS0tLS0tLS0tLS0tLS0tLS0KCkhlcmUgd2Ugc2hvdyB0aGUgY29udHJpYnV0aW9uIG9mIGVhY2ggaW50ZXJhY3Rpb24gcGFpciB0byBhIHNpZ25hbGxpbmcgcGF0aHdheS4KCmBgYHtyIHZpcy1jb250cmlidXRpb259Cm5ldEFuYWx5c2lzX2NvbnRyaWJ1dGlvbihjZWxsY2hhdCwgIlRHRmIiKQpgYGAKClNpZ25hbGxpbmcgcm9sZXMKLS0tLS0tLS0tLS0tLS0tLQoKRm9yIGNhbiBsb29rIGF0IHRoZSBleHBlY3RlZCByb2xlIGZvciBlYWNoIGNlbGwgdHlwZSBmb3IgYSBwYXRod2F5IGJhc2VkIG9uIHRoZQpuZXR3b3JrIGFuYWx5c2lzIHNjb3Jlcy4KCmBgYHtyIHZpcy1yb2xlc30KbmV0VmlzdWFsX3NpZ25hbGluZ1JvbGUoY2VsbGNoYXQsICJUR0ZiIiwgd2lkdGggPSAxNiwgaGVpZ2h0ID0gNCwKICAgICAgICAgICAgICAgICAgICAgICAgZm9udC5zaXplID0gMTApCmBgYAoKQ29tbXVuaWNhdGlvbiBwYXR0ZXJucwotLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgojIyMgUml2ZXIgcGxvdAoKQW4gYWx0ZXJuYXRpdmUgd2F5IHRvIHZpc3VhbGlzZSB0aGUgY29tbXVuaWNhdGlvbiBwYXR0ZXJucyBpcyB1c2luZyBhIHJpdmVyCnBsb3QuCgpgYGB7ciB2aXMtcGF0dGVybnMtcml2ZXJ9Cm5ldEFuYWx5c2lzX3JpdmVyKGNlbGxjaGF0LCBwYXR0ZXJuID0gIm91dGdvaW5nIikKYGBgCgojIyMgRG90IHBsb3QKCkFub3RoZXIgYWx0ZXJuYXRpdmUgaXMgYSBkb3QgcGxvdC4KCmBgYHtyIHZpcy1wYXR0ZXJucy1kb3R9Cm5ldEFuYWx5c2lzX2RvdChjZWxsY2hhdCwgcGF0dGVybiA9ICJvdXRnb2luZyIpCmBgYAoKRW1iZWRkaW5nCi0tLS0tLS0tLQoKVU1BUCBlbWJlZGRpbmcgb2YgcGF0aHdheSBzaW1pbGFyaXR5LgoKYGBge3IgdW1hcH0KbmV0VmlzdWFsX2VtYmVkZGluZyhjZWxsY2hhdCwgdHlwZSA9ICJmdW5jdGlvbmFsIiwgcGF0aHdheS5yZW1vdmUuc2hvdyA9IEZBTFNFLAogICAgICAgICAgICAgICAgICAgIGxhYmVsLnNpemUgPSAzLjUpCmBgYAoKIyMjIFpvb20gaW4KCmBgYHtyIHVtYXAtem9vbX0KbmV0VmlzdWFsX2VtYmVkZGluZ1pvb21JbihjZWxsY2hhdCwgdHlwZSA9ICJmdW5jdGlvbmFsIiwgbkNvbCA9IDIpCmBgYAoKClN1bW1hcnkgey51bm51bWJlcmVkfQo9PT09PT09CgpQYXJhbWV0ZXJzIHsudW5udW1iZXJlZH0KLS0tLS0tLS0tLQoKVGhpcyB0YWJsZSBkZXNjcmliZXMgcGFyYW1ldGVycyB1c2VkIGFuZCBzZXQgaW4gdGhpcyBkb2N1bWVudC4KCmBgYHtyIHBhcmFtZXRlcnN9CnBhcmFtcyA8LSBsaXN0KAogICAgCikKcGFyYW1zIDwtIHRvSlNPTihwYXJhbXMsIHByZXR0eSA9IFRSVUUpCmthYmxlKGZyb21KU09OKHBhcmFtcykpCmBgYAoKT3V0cHV0IGZpbGVzIHsudW5udW1iZXJlZH0KLS0tLS0tLS0tLS0tCgpUaGlzIHRhYmxlIGRlc2NyaWJlcyB0aGUgb3V0cHV0IGZpbGVzIHByb2R1Y2VkIGJ5IHRoaXMgZG9jdW1lbnQuIFJpZ2h0IGNsaWNrCmFuZCBfU2F2ZSBMaW5rIEFzLi4uXyB0byBkb3dubG9hZCB0aGUgcmVzdWx0cy4KCmBgYHtyIG91dHB1dH0Ka2FibGUoZGF0YS5mcmFtZSgKICAgIEZpbGUgPSBjKAogICAgICAgIGRvd25sb2FkX2xpbmsoInBhcmFtZXRlcnMuanNvbiIsIE9VVF9ESVIpCiAgICApLAogICAgRGVzY3JpcHRpb24gPSBjKAogICAgICAgICJQYXJhbWV0ZXJzIHNldCBhbmQgdXNlZCBpbiB0aGlzIGFuYWx5c2lzIgogICAgKQopKQpgYGAKClNlc3Npb24gaW5mb3JtYXRpb24gey51bm51bWJlcmVkfQotLS0tLS0tLS0tLS0tLS0tLS0tCg==</div>
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
 TeX fonts only; see
