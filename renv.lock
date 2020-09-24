@@ -1964,6 +1964,18 @@
       "Repository": "CRAN",
       "Hash": "86e3c704ca4e498330d0d8730b437a4d"
     },
+    "talklr": {
+      "Package": "talklr",
+      "Version": "0.0.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "yuliangwang",
+      "RemoteRepo": "talklr",
+      "RemoteRef": "master",
+      "RemoteSha": "12584be119a2cac24ba2b5c24cc88f40f2e7a80a",
+      "Hash": "05a0b166cd0e195737c821609582b6ee"
+    },
     "testthat": {
       "Package": "testthat",
       "Version": "2.3.2",
