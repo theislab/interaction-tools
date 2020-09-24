@@ -1,0 +1,260 @@
+---
+title: "talklr example"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, cache = FALSE}
+# Setup document
+source(here::here("code", "setup.R"))
+
+# Function dependencies
+invisible(drake::readd(download_link))
+```
+
+Introduction {.unnumbered}
+============
+
+In this document we are going to run through the example analysis for the
+**talklr** package and have a look at the output it produces. More information
+about **talklr** can be found at https://github.com/yuliangwang/talklr.
+
+```{r libraries}
+library("talklr")
+library("dplyr")
+```
+
+Input
+=====
+
+Mean expression
+---------------
+
+The main input to **talklr** is a `data.frame` with mean expression values for
+each cell type. These should be normalised for sequencing depth but not gene
+length and must not be log-transformed.
+
+```{r input-expr}
+expr <- read.table(
+    system.file(
+        "extdata", "glom_normal_data.txt",
+        package = "talklr"
+    ),
+    header = TRUE,
+    sep    = "\t"
+)
+
+skim(expr)
+```
+
+There is also a second example dataset from another condition.
+
+```{r input-expr-fsgs}
+expr_fsgs <- read.table(
+    system.file(
+        "extdata", "glom_fsgs_data.txt",
+        package = "talklr"
+    ),
+    header = TRUE,
+    sep    = "\t"
+)
+
+skim(expr_fsgs)
+```
+
+Database
+--------
+
+A ligand-receptor database is included as part of the **talklr** package. This
+is used automatically during the analysis.
+
+```{r input-database}
+skim(talklr::receptor_ligand)
+```
+
+Single condition
+================
+
+Build network
+-------------
+
+The first step in a **talklr** analysis is to construct a network of
+ligand-receptor interactions and prioritise them using Kullback-Leibler
+divergence. The output is a `data.frame` with the ligand-receptor pairs, their
+expression in different cell types and the KL score.
+
+```{r single-network}
+lr_net <- make_expressed_net(
+    expr,
+    expressed_thresh = 4,
+    receptor_ligand,
+    KL_method = "product",
+    pseudo_count = 1
+)
+lr_net <- arrange(lr_net, desc(KL))
+
+skim(lr_net)
+```
+
+Visualise pairs
+---------------
+
+We can then visualise individual ligand-receptor pair interactions between cell
+types. Here are examples for the top two pairs.
+
+```{r single-vis}
+plot_lr_wiring(
+    ligand_exprs   = as.numeric(lr_net[1, 17:19]),
+    receptor_exprs = as.numeric(lr_net[1, 20:22]),
+    cell_labels    = c("podo","mesa","endo"),
+    thresh         = 0
+)
+
+plot_lr_wiring(
+    ligand_exprs   = as.numeric(lr_net[2, 17:19]),
+    receptor_exprs = as.numeric(lr_net[2, 20:22]),
+    cell_labels    = c("podo","mesa","endo"),
+    thresh         = 0
+)
+```
+
+DEG method
+----------
+
+Testing for differential expression can be used to select those pairs where both
+the ligand and receptor are "marker" genes for a cell type.
+
+```{r single-deg}
+lr_net_deg <- make_deg_net(
+    expr,
+    lr_net,
+    fc_thresh    = 3,
+    pseudo_count = 1
+)
+```
+
+There are **`r nrow(lr_net_deg)`** pairs selected using this method.
+
+Two conditions
+==============
+
+There is another mode in **talklr** that lets us compare between conditions.
+
+Gene selection
+--------------
+
+First we select genes that are expressed in at least one cell type in at least
+one of the conditions. We set a threshold of at least 4 in at least 1 cell type.
+
+```{r two-selection}
+expressed_norm <- rowSums(expr[, 2:ncol(expr)] > 4) >= 1
+expressed_fsgs <- rowSums(expr_fsgs[, 2:ncol(expr_fsgs)] > 4) >= 1
+expressed_genes <- expr$genes[expressed_norm | expressed_fsgs]
+```
+
+Build networks
+--------------
+
+We then build a network for each condition.
+
+```{r two-network}
+norm_net <- make_expressed_net_specify_expressed_genes(
+    expr,
+    expressed_genes,
+    receptor_ligand,
+    KL_method = "product"
+)
+
+fsgs_net <- make_expressed_net_specify_expressed_genes(
+    expr_fsgs,
+    expressed_genes,
+    receptor_ligand,
+    KL_method = "product"
+)
+```
+
+Compare conditions
+------------------
+
+Once we have the two conditions we can compare them to look at the differences.
+The result from this is similar to what we get for a single condition but with
+an extra column scoring the difference.
+
+```{r two-compare}
+norm_net$fsgs_vs_norm_KL <- disease_vs_normal_KL(
+    fsgs_net[, 17:19],
+    fsgs_net[, 20:22],
+    norm_net[, 17:19],
+    norm_net[, 20:22],
+    pseudo_count = 1,
+    method = "product"
+)
+
+perturbed_net <- arrange(norm_net, desc(fsgs_vs_norm_KL))
+
+skim(perturbed_net)
+```
+
+Visualise differences
+---------------------
+
+We can use the same plotting function to visualise the differences between the
+conditions.
+
+```{r two-vis}
+pair <- "CCL2_ACKR2"
+
+par(mfrow = c(1,2))
+par(mar = c(0.3, 0.3, 0.3, 0.3))
+
+plot_lr_wiring(
+    ligand_exprs   = as.numeric(norm_net[norm_net$Pair.Name == pair, 17:19]),
+    receptor_exprs = as.numeric(norm_net[norm_net$Pair.Name == pair, 20:22]),
+    cell_labels    = c("podo","mesa","endo"),
+    thresh         = 0
+) 
+
+plot_lr_wiring(
+    ligand_exprs   = as.numeric(fsgs_net[fsgs_net$Pair.Name == pair, 17:19]),
+    receptor_exprs = as.numeric(fsgs_net[fsgs_net$Pair.Name == pair, 20:22]),
+    cell_labels    = c("podo","mesa","endo"),
+    thresh         = 0
+)
+```
+
+Summary {.unnumbered}
+=======
+
+Parameters {.unnumbered}
+----------
+
+This table describes parameters used and set in this document.
+
+```{r parameters}
+params <- list(
+    
+)
+params <- toJSON(params, pretty = TRUE)
+kable(fromJSON(params))
+```
+
+Output files {.unnumbered}
+------------
+
+This table describes the output files produced by this document. Right click
+and _Save Link As..._ to download the results.
+
+```{r output}
+kable(data.frame(
+    File = c(
+        download_link("parameters.json", OUT_DIR)
+    ),
+    Description = c(
+        "Parameters set and used in this analysis"
+    )
+))
+```
+
+Session information {.unnumbered}
+-------------------

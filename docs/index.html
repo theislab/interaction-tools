@@ -356,7 +356,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-07-29
+<strong>Last updated:</strong> 2020-09-24
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -447,16 +447,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreea91247a6f4b8fea4c2c69ec75f5cf46c5e7d4884targetblanka91247aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/a91247a6f4b8fea4c2c69ec75f5cf46c5e7d4884" target="_blank">a91247a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree54b032de23d9457ec3df99e3f775e4cb534643cftargetblank54b032da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/54b032de23d9457ec3df99e3f775e4cb534643cf" target="_blank">54b032d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreea91247a6f4b8fea4c2c69ec75f5cf46c5e7d4884targetblanka91247aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree54b032de23d9457ec3df99e3f775e4cb534643cftargetblank54b032da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/a91247a6f4b8fea4c2c69ec75f5cf46c5e7d4884" target="_blank">a91247a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/54b032de23d9457ec3df99e3f775e4cb534643cf" target="_blank">54b032d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -467,20 +467,18 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    .drake/
     Ignored:    data/COMUNET/
+    Ignored:    data/CellChat/
     Ignored:    data/NicheNet/
     Ignored:    data/cellphonedb/
+    Ignored:    output/14-CellChat.Rmd/
+    Ignored:    output/15-talklr.Rmd/
     Ignored:    output/index.Rmd/
     Ignored:    renv/library/
     Ignored:    renv/python/
     Ignored:    renv/staging/
 
-Untracked files:
-    Untracked:  analysis/14-CellChat.Rmd
-
 Unstaged changes:
     Modified:   _drake.R
-    Modified:   renv.lock
-    Modified:   renv/activate.R
 
 </code></pre>
 <p>
@@ -519,6 +517,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/f01744803e8182dfa5356d3f38543fed78292e13/docs/index.html" target="_blank">f017448</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-29
+</td>
+<td>
+Setup CellChat
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -668,6 +683,8 @@ Start workflowr project.
 <li><a href="11-CellPhoneDB.html">CellPhoneDB example</a></li>
 <li><a href="12-NicheNet.html">NicheNet example</a></li>
 <li><a href="13-COMUNET.html">COMUNET example</a></li>
+<li><a href="14-CellChat.html">CellChat example</a></li>
+<li><a href="15-talklr.html">talklr example</a></li>
 </ol>
 <br>
 <p>
@@ -687,7 +704,7 @@ Start workflowr project.
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Berlin               
- date     2020-07-29                  
+ date     2020-09-24                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  ! package     * version date       lib source            
@@ -703,7 +720,7 @@ Start workflowr project.
  P fs            1.4.1   2020-04-04 [?] CRAN (R 4.0.0)    
  P git2r         0.27.1  2020-05-03 [?] CRAN (R 4.0.0)    
  P glue          1.4.0   2020-04-03 [?] CRAN (R 4.0.0)    
- P htmltools     0.4.0   2019-10-04 [?] standard (@0.4.0) 
+ P htmltools     0.5.0   2020-06-16 [?] CRAN (R 4.0.2)    
  P httpuv        1.5.2   2019-09-11 [?] standard (@1.5.2) 
  P jsonlite      1.6.1   2020-02-02 [?] CRAN (R 4.0.0)    
  P knitr         1.28    2020-02-06 [?] CRAN (R 4.0.0)    
@@ -714,7 +731,7 @@ Start workflowr project.
  P promises      1.1.0   2019-10-04 [?] standard (@1.1.0) 
  P R6            2.4.1   2019-11-12 [?] CRAN (R 4.0.0)    
  P Rcpp          1.0.4.6 2020-04-09 [?] CRAN (R 4.0.0)    
-   renv          0.11.0  2020-06-26 [1] CRAN (R 4.0.2)    
+ P renv          0.12.0  2020-08-28 [?] CRAN (R 4.0.2)    
  P reticulate    1.16    2020-05-27 [?] CRAN (R 4.0.2)    
  P rlang         0.4.6   2020-05-02 [?] CRAN (R 4.0.0)    
  P rmarkdown     2.1     2020-01-20 [?] CRAN (R 4.0.0)    
@@ -730,9 +747,9 @@ Start workflowr project.
  P yaml          2.2.1   2020-02-01 [?] CRAN (R 4.0.0)    
 
 [1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
-[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp7liN92/renv-system-library
-[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp8HZw8T/renv-system-library
-[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpPtSwsU/renv-system-library
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpX6ShKP/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpxejHow/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpPTSCZb/renv-system-library
 
  P ── Loaded and on-disk path mismatch.</code></pre>
 </div>

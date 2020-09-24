@@ -414,7 +414,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -423,7 +423,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -432,10 +432,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-07-30
+<strong>Last updated:</strong> 2020-09-24
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>interaction-tools/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -451,12 +451,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -523,16 +523,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreef01744803e8182dfa5356d3f38543fed78292e13targetblankf017448a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/f01744803e8182dfa5356d3f38543fed78292e13" target="_blank">f017448</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree54b032de23d9457ec3df99e3f775e4cb534643cftargetblank54b032da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/54b032de23d9457ec3df99e3f775e4cb534643cf" target="_blank">54b032d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreef01744803e8182dfa5356d3f38543fed78292e13targetblankf017448a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree54b032de23d9457ec3df99e3f775e4cb534643cftargetblank54b032da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/f01744803e8182dfa5356d3f38543fed78292e13" target="_blank">f017448</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/54b032de23d9457ec3df99e3f775e4cb534643cf" target="_blank">54b032d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -547,14 +547,14 @@ Ignored files:
     Ignored:    data/NicheNet/
     Ignored:    data/cellphonedb/
     Ignored:    output/14-CellChat.Rmd/
+    Ignored:    output/15-talklr.Rmd/
     Ignored:    output/index.Rmd/
     Ignored:    renv/library/
     Ignored:    renv/python/
     Ignored:    renv/staging/
 
 Unstaged changes:
-    Modified:   analysis/14-CellChat.Rmd
-    Modified:   code/setup.R
+    Modified:   _drake.R
 
 </code></pre>
 <p>
@@ -593,6 +593,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/b6db7b4fa421b0c2a52a5c96c28483df2d843a10/analysis/14-CellChat.Rmd" target="_blank">b6db7b4</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-30
+</td>
+<td>
+Add CellChat walkthrough
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/b6db7b4fa421b0c2a52a5c96c28483df2d843a10/docs/14-CellChat.html" target="_blank">b6db7b4</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-30
+</td>
+<td>
+Add CellChat walkthrough
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -645,7 +679,7 @@ invisible(drake::readd(download_link))</code></pre>
 <pre class="r"><code>library(&quot;CellChat&quot;)
 library(&quot;ggalluvial&quot;)</code></pre>
 <p class="timeit">
-Chunk time: 2.92 secs
+Chunk time: 2.93 secs
 </p>
 </div>
 <div id="input" class="section level1" number="1">
@@ -653,7 +687,7 @@ Chunk time: 2.92 secs
 <p><strong>CellChat</strong> requires two user inputs: an expression matrix and either cell-type labels or a low-dimensional embedding. Here we use the label-based mode. The other inputs to <strong>CellChat</strong> are the ligand-receptor database and protein-protein interaction network included in the package.</p>
 <pre class="r"><code>load(fs::path(PATHS$CellChat_in, &quot;data_wound_CellChat.rda&quot;))</code></pre>
 <p class="timeit">
-Chunk time: 2 secs
+Chunk time: 1.91 secs
 </p>
 <div id="expression-matrix" class="section level2" number="1.1">
 <h2 number="1.1"><span class="header-section-number">1.1</span> Expression matrix</h2>
@@ -752,7 +786,7 @@ pander(as.matrix(expr[1:5, 1:5]))</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.16 secs
+Chunk time: 0.14 secs
 </p>
 <p>The full matrix has <strong>17090</strong> rows (genes) and <strong>21557</strong> columns (cells).</p>
 </div>
@@ -827,7 +861,7 @@ skim(labels)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.07 secs
+Chunk time: 0.06 secs
 </p>
 </div>
 <div id="database" class="section level2" number="1.3">
@@ -836,7 +870,7 @@ Chunk time: 0.07 secs
 <pre class="r"><code>CellChatDB &lt;- CellChatDB.mouse
 CellChatDB &lt;- subsetDB(CellChatDB, search = &quot;Secreted Signaling&quot;)</code></pre>
 <p class="timeit">
-Chunk time: 0.18 secs
+Chunk time: 0.14 secs
 </p>
 <p>The database list contains <strong>4</strong> items: <strong>interaction</strong>, <strong>complex</strong>, <strong>cofactor</strong> and <strong>geneInfo</strong></p>
 <div id="interaction" class="section level3" number="1.3.1">
@@ -1008,7 +1042,7 @@ Chunk time: 0.18 secs
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.09 secs
+Chunk time: 0.07 secs
 </p>
 </div>
 <div id="complex" class="section level3" number="1.3.2">
@@ -1110,7 +1144,7 @@ Chunk time: 0.09 secs
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.06 secs
+Chunk time: 0.04 secs
 </p>
 </div>
 <div id="cofactor" class="section level3" number="1.3.3">
@@ -1332,7 +1366,7 @@ Chunk time: 0.06 secs
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.12 secs
+Chunk time: 0.08 secs
 </p>
 </div>
 <div id="gene-info" class="section level3" number="1.3.4">
@@ -1454,7 +1488,7 @@ Chunk time: 0.12 secs
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.27 secs
+Chunk time: 0.22 secs
 </p>
 </div>
 </div>
@@ -1558,7 +1592,7 @@ cellchat</code></pre>
  17090 genes.
  21557 cells.</code></pre>
 <p class="timeit">
-Chunk time: 0.22 secs
+Chunk time: 0.19 secs
 </p>
 </div>
 <div id="identify-over-expression" class="section level2" number="3.2">
@@ -1567,7 +1601,7 @@ Chunk time: 0.22 secs
 <pre class="r"><code>cellchat &lt;- identifyOverExpressedGenes(cellchat)
 cellchat &lt;- identifyOverExpressedInteractions(cellchat)</code></pre>
 <p class="timeit">
-Chunk time: 8.53 mins
+Chunk time: 4.16 mins
 </p>
 <p>This step has identified <strong>539</strong> genes and <strong>666</strong> interactions.</p>
 </div>
@@ -1576,7 +1610,7 @@ Chunk time: 8.53 mins
 <p>The gene expression data is then projected onto a protein-protein interaction network.</p>
 <pre class="r"><code>cellchat &lt;- projectData(cellchat, PPI.mouse)</code></pre>
 <p class="timeit">
-Chunk time: 1.78 secs
+Chunk time: 2.42 secs
 </p>
 </div>
 </div>
@@ -1714,7 +1748,7 @@ pander(cellchat@net$prob[1:5, 1:5, 1])</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 5.03 mins
+Chunk time: 4.72 mins
 </p>
 </div>
 <div id="infer-pathway-signalling" class="section level2" number="4.2">
@@ -1786,7 +1820,7 @@ pander(cellchat@netP$prob[1:5, 1:5, 1])</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 1.2 secs
+Chunk time: 1.11 secs
 </p>
 </div>
 <div id="aggregate-network" class="section level2" number="4.3">
@@ -1939,9 +1973,46 @@ Chunk time: 1.96 secs
 <p>It may also be interesting to identify common communication patterns. We can do this for both outgoing and incoming patterns.</p>
 <pre class="r"><code>cellchat &lt;- identifyCommunicationPatterns(cellchat, pattern = &quot;outgoing&quot;, k = 5)
 cellchat &lt;- identifyCommunicationPatterns(cellchat, pattern = &quot;incoming&quot;, k = 5)</code></pre>
-<img src="figure/14-CellChat.Rmd/patterns-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/14-CellChat.Rmd/patterns-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-patterns-1">
+Past versions of patterns-1.png
+</button>
+</p>
+<div id="fig-patterns-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b6db7b4
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 7.9 secs
+Chunk time: 7.29 secs
 </p>
 </div>
 <div id="manifold-learning-and-classification" class="section level1" number="7">
@@ -2019,11 +2090,11 @@ pander(cellchat@netP$similarity$functional$matrix[1:5,1:5])</code></pre>
 </tbody>
 </table>
 <pre class="r"><code>pander(cellchat@netP$similarity$functional$dr[1:5, ])</code></pre>
-<table style="width:44%;">
+<table style="width:39%;">
 <colgroup>
 <col width="16%" />
-<col width="13%" />
-<col width="13%" />
+<col width="11%" />
+<col width="11%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -2035,28 +2106,28 @@ pander(cellchat@netP$similarity$functional$matrix[1:5,1:5])</code></pre>
 <tbody>
 <tr class="odd">
 <td align="center"><strong>TGFb</strong></td>
-<td align="center">-2.057</td>
-<td align="center">7.281</td>
+<td align="center">14.88</td>
+<td align="center">4.317</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>ncWNT</strong></td>
-<td align="center">-0.6042</td>
-<td align="center">10.15</td>
+<td align="center">12.24</td>
+<td align="center">2.9</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>EGF</strong></td>
-<td align="center">-0.9521</td>
-<td align="center">10.94</td>
+<td align="center">13.16</td>
+<td align="center">2.988</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>PDGF</strong></td>
-<td align="center">-1.836</td>
-<td align="center">9.671</td>
+<td align="center">13.83</td>
+<td align="center">3.395</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>IGF</strong></td>
-<td align="center">-2.484</td>
-<td align="center">4.831</td>
+<td align="center">17.08</td>
+<td align="center">2.335</td>
 </tr>
 </tbody>
 </table>
@@ -2066,9 +2137,9 @@ pander(cellchat@netP$similarity$functional$matrix[1:5,1:5])</code></pre>
      MIF      IL1      CSF      TNF     SPP1   ANGPTL       MK      PTN 
        3        1        3        3        2        2        2        2 
      KIT    SEMA3      GAS GALECTIN     PROS 
-       1        2        4        4        4 </code></pre>
+       1        2        4        3        4 </code></pre>
 <p class="timeit">
-Chunk time: 13.36 secs
+Chunk time: 13.89 secs
 </p>
 </div>
 <div id="structural-similarity" class="section level2" number="7.2">
@@ -2142,11 +2213,11 @@ pander(cellchat@netP$similarity$structural$matrix[1:5,1:5])</code></pre>
 </tbody>
 </table>
 <pre class="r"><code>pander(cellchat@netP$similarity$structural$dr[1:5, ])</code></pre>
-<table style="width:39%;">
+<table style="width:42%;">
 <colgroup>
 <col width="16%" />
-<col width="11%" />
-<col width="11%" />
+<col width="12%" />
+<col width="12%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -2158,34 +2229,34 @@ pander(cellchat@netP$similarity$structural$matrix[1:5,1:5])</code></pre>
 <tbody>
 <tr class="odd">
 <td align="center"><strong>TGFb</strong></td>
-<td align="center">18.98</td>
-<td align="center">4.604</td>
+<td align="center">-9.726</td>
+<td align="center">4.938</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>ncWNT</strong></td>
-<td align="center">29.88</td>
-<td align="center">19.12</td>
+<td align="center">13.33</td>
+<td align="center">6.781</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>EGF</strong></td>
-<td align="center">30.36</td>
-<td align="center">19.86</td>
+<td align="center">14.15</td>
+<td align="center">7.796</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>PDGF</strong></td>
-<td align="center">30.5</td>
-<td align="center">19.39</td>
+<td align="center">13.74</td>
+<td align="center">7.399</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>IGF</strong></td>
-<td align="center">29.47</td>
-<td align="center">19.91</td>
+<td align="center">15.04</td>
+<td align="center">6.858</td>
 </tr>
 </tbody>
 </table>
 <pre class="r"><code>cellchat@netP$similarity$structural$group</code></pre>
 <pre><code>    TGFb    ncWNT      EGF     PDGF      IGF   APELIN      CCL     CXCL 
-       2        1        1        1        1        3        4        3 
+       2        4        1        1        1        3        4        3 
      MIF      IL2      IL1      CSF      TNF    RANKL     SPP1   ANGPTL 
        2        3        4        1        1        3        4        2 
    ANGPT       MK      PTN      EDN      KIT    SEMA3      GAS GALECTIN 
@@ -2193,7 +2264,7 @@ pander(cellchat@netP$similarity$structural$matrix[1:5,1:5])</code></pre>
     PROS 
        3 </code></pre>
 <p class="timeit">
-Chunk time: 11.7 secs
+Chunk time: 10.39 secs
 </p>
 </div>
 </div>
@@ -2206,9 +2277,46 @@ Chunk time: 11.7 secs
 <p>Here solid circles are sources and open circles are targets. Circle sizes are the number of cells in each group and lines are coloured according to the source with thicker lines indicating stronger signals.</p>
 <pre class="r"><code>netVisual_aggregate(cellchat, &quot;TGFb&quot;, vertex.receiver = 1:9, # groups to show
                     vertex.size = group_size)</code></pre>
-<img src="figure/14-CellChat.Rmd/vis-pathway-hierarchy-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/14-CellChat.Rmd/vis-pathway-hierarchy-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-vis-pathway-hierarchy-1">
+Past versions of vis-pathway-hierarchy-1.png
+</button>
+</p>
+<div id="fig-vis-pathway-hierarchy-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b6db7b4
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 0.39 secs
+Chunk time: 0.42 secs
 </p>
 </div>
 <div id="circle-plot" class="section level3" number="8.1.2">
@@ -2216,9 +2324,46 @@ Chunk time: 0.39 secs
 <p>We can show a similar thing as a circle plot.</p>
 <pre class="r"><code>netVisual_aggregate(cellchat, &quot;ncWNT&quot;, layout = &quot;circle&quot;,
                     vertex.size = group_size)</code></pre>
-<img src="figure/14-CellChat.Rmd/vis-pathway-circle-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/14-CellChat.Rmd/vis-pathway-circle-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-vis-pathway-circle-1">
+Past versions of vis-pathway-circle-1.png
+</button>
+</p>
+<div id="fig-vis-pathway-circle-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b6db7b4
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 0.2 secs
+Chunk time: 0.21 secs
 </p>
 </div>
 </div>
@@ -2226,9 +2371,46 @@ Chunk time: 0.2 secs
 <h2 number="8.2"><span class="header-section-number">8.2</span> Pathway contribution</h2>
 <p>Here we show the contribution of each interaction pair to a signalling pathway.</p>
 <pre class="r"><code>netAnalysis_contribution(cellchat, &quot;TGFb&quot;)</code></pre>
-<img src="figure/14-CellChat.Rmd/vis-contribution-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/14-CellChat.Rmd/vis-contribution-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-vis-contribution-1">
+Past versions of vis-contribution-1.png
+</button>
+</p>
+<div id="fig-vis-contribution-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b6db7b4
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 0.35 secs
+Chunk time: 0.28 secs
 </p>
 </div>
 <div id="signalling-roles" class="section level2" number="8.3">
@@ -2236,9 +2418,46 @@ Chunk time: 0.35 secs
 <p>For can look at the expected role for each cell type for a pathway based on the network analysis scores.</p>
 <pre class="r"><code>netVisual_signalingRole(cellchat, &quot;TGFb&quot;, width = 16, height = 4,
                         font.size = 10)</code></pre>
-<img src="figure/14-CellChat.Rmd/vis-roles-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/14-CellChat.Rmd/vis-roles-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-vis-roles-1">
+Past versions of vis-roles-1.png
+</button>
+</p>
+<div id="fig-vis-roles-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b6db7b4
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 0.41 secs
+Chunk time: 0.38 secs
 </p>
 </div>
 <div id="communication-patterns" class="section level2" number="8.4">
@@ -2247,18 +2466,92 @@ Chunk time: 0.41 secs
 <h3 number="8.4.1"><span class="header-section-number">8.4.1</span> River plot</h3>
 <p>An alternative way to visualise the communication patterns is using a river plot.</p>
 <pre class="r"><code>netAnalysis_river(cellchat, pattern = &quot;outgoing&quot;)</code></pre>
-<img src="figure/14-CellChat.Rmd/vis-patterns-river-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/14-CellChat.Rmd/vis-patterns-river-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-vis-patterns-river-1">
+Past versions of vis-patterns-river-1.png
+</button>
+</p>
+<div id="fig-vis-patterns-river-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b6db7b4
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 1.83 secs
+Chunk time: 1.32 secs
 </p>
 </div>
 <div id="dot-plot" class="section level3" number="8.4.2">
 <h3 number="8.4.2"><span class="header-section-number">8.4.2</span> Dot plot</h3>
 <p>Another alternative is a dot plot.</p>
 <pre class="r"><code>netAnalysis_dot(cellchat, pattern = &quot;outgoing&quot;)</code></pre>
-<img src="figure/14-CellChat.Rmd/vis-patterns-dot-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/14-CellChat.Rmd/vis-patterns-dot-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-vis-patterns-dot-1">
+Past versions of vis-patterns-dot-1.png
+</button>
+</p>
+<div id="fig-vis-patterns-dot-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b6db7b4
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 0.64 secs
+Chunk time: 0.62 secs
 </p>
 </div>
 </div>
@@ -2267,16 +2560,90 @@ Chunk time: 0.64 secs
 <p>UMAP embedding of pathway similarity.</p>
 <pre class="r"><code>netVisual_embedding(cellchat, type = &quot;functional&quot;, pathway.remove.show = FALSE,
                     label.size = 3.5)</code></pre>
-<img src="figure/14-CellChat.Rmd/umap-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/14-CellChat.Rmd/umap-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-umap-1">
+Past versions of umap-1.png
+</button>
+</p>
+<div id="fig-umap-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b6db7b4
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 0.67 secs
+Chunk time: 0.51 secs
 </p>
 <div id="zoom-in" class="section level3" number="8.5.1">
 <h3 number="8.5.1"><span class="header-section-number">8.5.1</span> Zoom in</h3>
 <pre class="r"><code>netVisual_embeddingZoomIn(cellchat, type = &quot;functional&quot;, nCol = 2)</code></pre>
-<img src="figure/14-CellChat.Rmd/umap-zoom-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/14-CellChat.Rmd/umap-zoom-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-umap-zoom-1">
+Past versions of umap-zoom-1.png
+</button>
+</p>
+<div id="fig-umap-zoom-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b6db7b4
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 0.71 secs
+Chunk time: 0.64 secs
 </p>
 </div>
 </div>
@@ -2329,7 +2696,7 @@ Chunk time: 0.01 secs
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.02 secs
+Chunk time: 0.01 secs
 </p>
 </div>
 <div id="session-information" class="section level2 unnumbered" number="">
@@ -2352,7 +2719,7 @@ Chunk time: 0.02 secs
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Berlin               
- date     2020-07-30                  
+ date     2020-09-24                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  ! package        * version date       lib
@@ -2369,9 +2736,9 @@ Chunk time: 0.02 secs
  P circlize         0.4.9   2020-04-30 [?]
  P cli              2.0.2   2020-02-28 [?]
    clue             0.3-57  2019-02-25 [1]
- P cluster          2.1.0   2019-06-19 [3]
+ P cluster          2.1.0   2019-06-19 [?]
    coda             0.19-3  2019-07-05 [1]
- P codetools        0.2-16  2018-12-24 [3]
+ P codetools        0.2-16  2018-12-24 [?]
  P colorspace       1.4-1   2019-03-18 [?]
  P ComplexHeatmap   2.5.4   2020-07-29 [?]
  P conflicted     * 1.0.4   2019-06-21 [?]
@@ -2410,7 +2777,7 @@ Chunk time: 0.02 secs
  P here           * 0.1     2017-05-28 [?]
  P highr            0.8     2019-03-20 [?]
  P hms              0.5.3   2020-01-08 [?]
- P htmltools        0.4.0   2019-10-04 [?]
+ P htmltools        0.5.0   2020-06-16 [?]
  P httpuv           1.5.2   2019-09-11 [?]
  P httr             1.4.1   2019-08-05 [?]
  P igraph           1.2.5   2020-03-19 [?]
@@ -2425,7 +2792,6 @@ Chunk time: 0.02 secs
  P lifecycle        0.2.0   2020-03-06 [?]
    listenv          0.8.0   2019-12-05 [1]
  P lubridate        1.7.8   2020-04-06 [?]
-   magick           2.4.0   2020-06-23 [3]
  P magrittr         1.5     2014-11-22 [?]
  P Matrix           1.2-18  2019-11-27 [?]
  P memoise          1.1.0   2017-04-21 [?]
@@ -2451,7 +2817,7 @@ Chunk time: 0.02 secs
  P readr          * 1.3.1   2018-12-21 [?]
  P readxl           1.3.1   2019-03-13 [?]
    registry         0.5-1   2019-03-05 [1]
-   renv             0.11.0  2020-06-26 [1]
+ P renv             0.12.0  2020-08-28 [?]
  P repr             1.1.0   2020-01-28 [?]
  P reprex           0.3.0   2019-05-16 [?]
  P reshape2         1.4.4   2020-04-09 [?]
@@ -2544,7 +2910,7 @@ Chunk time: 0.02 secs
  standard (@0.1)                         
  standard (@0.8)                         
  CRAN (R 4.0.0)                          
- standard (@0.4.0)                       
+ CRAN (R 4.0.2)                          
  standard (@1.5.2)                       
  standard (@1.4.1)                       
  CRAN (R 4.0.0)                          
@@ -2555,7 +2921,6 @@ Chunk time: 0.02 secs
  CRAN (R 4.0.0)                          
  standard (@0.3)                         
  standard (@1.0.0)                       
- CRAN (R 4.0.0)                          
  CRAN (R 4.0.0)                          
  CRAN (R 4.0.0)                          
  CRAN (R 4.0.0)                          
@@ -2625,12 +2990,13 @@ Chunk time: 0.02 secs
  CRAN (R 4.0.0)                          
 
 [1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
-[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmphp5zWa/renv-system-library
-[3] /Library/Frameworks/R.framework/Versions/4.0/Resources/library
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpX6ShKP/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpxejHow/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpTCcVdD/renv-system-library
 
  P ── Loaded and on-disk path mismatch.</code></pre>
 <p class="timeit">
-Chunk time: 0.38 secs
+Chunk time: 0.32 secs
 </p>
 </div>
 </div>
