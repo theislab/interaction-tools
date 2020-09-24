@@ -48,6 +48,10 @@ plan <- drake_plan(
     rmd14_CellChat = target(
         workflowr::wflow_build(here(knitr_in("analysis/14-CellChat.Rmd"))),
         trigger = trigger(change = configs)
+    ),
+    rmd15_talklr = target(
+        workflowr::wflow_build(here(knitr_in("analysis/15-talklr.Rmd"))),
+        trigger = trigger(change = configs)
     )
 )
 
