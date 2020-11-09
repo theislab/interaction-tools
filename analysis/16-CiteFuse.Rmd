@@ -1,0 +1,66 @@
+---
+title: "CiteFuse example"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, cache = FALSE}
+# Setup document
+source(here::here("code", "setup.R"))
+
+# Function dependencies
+invisible(drake::readd(download_link))
+```
+
+Introduction {.unnumbered}
+============
+
+In this document we are going to run through the example analysis for the **CiteFuse** package and have a look at the output it produces.
+This package is primarily for analysing CITE-seq data but it's cell-cell interaction function also works with regular scRNA-seq.
+More information about **CiteFuse** can be found at https://github.com/SydneyBioX/CiteFuse/.
+
+```{r libraries}
+
+```
+
+Input
+=====
+
+
+
+Summary {.unnumbered}
+=======
+
+Parameters {.unnumbered}
+----------
+
+This table describes parameters used and set in this document.
+
+```{r parameters}
+params <- list(
+    
+)
+params <- toJSON(params, pretty = TRUE)
+kable(fromJSON(params))
+```
+
+Output files {.unnumbered}
+------------
+
+This table describes the output files produced by this document. Right click
+and _Save Link As..._ to download the results.
+
+```{r output}
+kable(data.frame(
+    File = c(
+        download_link("parameters.json", OUT_DIR)
+    ),
+    Description = c(
+        "Parameters set and used in this analysis"
+    )
+))
+```
+
+Session information {.unnumbered}
+-------------------
