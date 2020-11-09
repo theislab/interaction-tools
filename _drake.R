@@ -52,6 +52,10 @@ plan <- drake_plan(
     rmd15_talklr = target(
         workflowr::wflow_build(here(knitr_in("analysis/15-talklr.Rmd"))),
         trigger = trigger(change = configs)
+    ),
+    rmd16_CiteFuse = target(
+        workflowr::wflow_build(here(knitr_in("analysis/16-CiteFuse.Rmd"))),
+        trigger = trigger(change = configs)
     )
 )
 
