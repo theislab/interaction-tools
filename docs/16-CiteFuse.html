@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>CiteFuse example</title>
+
+<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Interaction tools</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/lazappi/interaction-tools">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">CiteFuse example</h1>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-11-09
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>interaction-tools/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20191213code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20191213)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20191213code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20191213)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree70de07fd953f2081d7e50e5bdb7f7dde269b022etargetblank70de07fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/70de07fd953f2081d7e50e5bdb7f7dde269b022e" target="_blank">70de07f</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree70de07fd953f2081d7e50e5bdb7f7dde269b022etargetblank70de07fa" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/70de07fd953f2081d7e50e5bdb7f7dde269b022e" target="_blank">70de07f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    .drake/
+    Ignored:    data/COMUNET/
+    Ignored:    data/CellChat/
+    Ignored:    data/NicheNet/
+    Ignored:    data/cellphonedb/
+    Ignored:    output/14-CellChat.Rmd/
+    Ignored:    output/15-talklr.Rmd/
+    Ignored:    output/16-CiteFuse.Rmd/
+    Ignored:    output/index.Rmd/
+    Ignored:    renv/library/
+    Ignored:    renv/python/
+    Ignored:    renv/staging/
+
+Unstaged changes:
+    Modified:   _drake.R
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/16-CiteFuse.Rmd</code>) and HTML (<code>docs/16-CiteFuse.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/70de07fd953f2081d7e50e5bdb7f7dde269b022e/analysis/16-CiteFuse.Rmd" target="_blank">70de07f</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-09
+</td>
+<td>
+Add CiteFuse tutorial
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/bb91bf53cbdf45ba4d66c0feea23f6f8a494f3b3/analysis/16-CiteFuse.Rmd" target="_blank">bb91bf5</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-09
+</td>
+<td>
+Create CiteFuse document
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code># Setup document
+source(here::here(&quot;code&quot;, &quot;setup.R&quot;))
+
+# Function dependencies
+invisible(drake::readd(download_link))</code></pre>
+<div id="introduction" class="section level1 unnumbered" number="">
+<h1 class="unnumbered" number="">Introduction</h1>
+<p>In this document we are going to run through the example analysis for the <strong>CiteFuse</strong> package and have a look at the output it produces. This package is primarily for analysing CITE-seq data but it’s cell-cell interaction function also works with regular scRNA-seq. More information about <strong>CiteFuse</strong> can be found at <a href="https://github.com/SydneyBioX/CiteFuse/" class="uri">https://github.com/SydneyBioX/CiteFuse/</a>.</p>
+<pre class="r"><code>library(&quot;CiteFuse&quot;)</code></pre>
+<p class="timeit">
+Chunk time: 5.42 secs
+</p>
+</div>
+<div id="input" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Input</h1>
+<div id="expression" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Expression</h2>
+<p>The main input for CiteFuse is provided as a list of matrices:</p>
+<pre class="r"><code>data(&quot;CITEseq_example&quot;, package = &quot;CiteFuse&quot;)</code></pre>
+<p class="timeit">
+Chunk time: 0.26 secs
+</p>
+<p>The list contains <strong>3</strong> items: <strong>RNA</strong>, <strong>ADT</strong> and <strong>HTO</strong></p>
+<p>For this example we will just use the RNA matrix.</p>
+<pre class="r"><code>pander(as.matrix(CITEseq_example$RNA[1:5, 1:5]))</code></pre>
+<table>
+<caption>Table continues below</caption>
+<colgroup>
+<col width="27%" />
+<col width="24%" />
+<col width="24%" />
+<col width="24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">AAGCCGCGTTGTCTTT</th>
+<th align="center">GATCGCGGTTATCGGT</th>
+<th align="center">GGCTGGTAGAGGTTAT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>hg19_AL627309.1</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>hg19_AL669831.5</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>hg19_FAM87B</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>hg19_LINC00115</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>hg19_FAM41C</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<table style="width:83%;">
+<colgroup>
+<col width="30%" />
+<col width="26%" />
+<col width="26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">CTACACCCAATAGCAA</th>
+<th align="center">ACAGCTACAGATCGGA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>hg19_AL627309.1</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>hg19_AL669831.5</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>hg19_FAM87B</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>hg19_LINC00115</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>hg19_FAM41C</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.15 secs
+</p>
+<p>The full matrix has <strong>19521</strong> rows (genes) and <strong>500</strong> columns (cells).</p>
+</div>
+<div id="ligand-receptor-pairs" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Ligand-receptor pairs</h2>
+<p>The other thing we need is a set of ligand-receptor pairs. For this example we use a subset provided with the package as a matrix. Because we are only use the RNA data we need to add a prefix to the receptor column.</p>
+<pre class="r"><code>data(&quot;lr_pair_subset&quot;, package = &quot;CiteFuse&quot;)
+
+# Modify the pair names because we are using just RNA
+modified_lr_pairs &lt;- lr_pair_subset
+modified_lr_pairs[, 2] &lt;- paste0(&quot;hg19_&quot;, modified_lr_pairs[, 2])
+
+pander(as.matrix(modified_lr_pairs[1:5, 1:2]))</code></pre>
+<table style="width:39%;">
+<colgroup>
+<col width="19%" />
+<col width="19%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="center">hg19_IL17RA</td>
+<td align="center">hg19_CD45</td>
+</tr>
+<tr class="even">
+<td align="center">hg19_FAS</td>
+<td align="center">hg19_CD11b</td>
+</tr>
+<tr class="odd">
+<td align="center">hg19_GZMK</td>
+<td align="center">hg19_CD62L</td>
+</tr>
+<tr class="even">
+<td align="center">hg19_CD40LG</td>
+<td align="center">hg19_CD11b</td>
+</tr>
+<tr class="odd">
+<td align="center">hg19_FLT3LG</td>
+<td align="center">hg19_CD62L</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.01 secs
+</p>
+<p>The matrix has <strong>50</strong> rows (pairs) and <strong>2</strong> columns.</p>
+</div>
+</div>
+<div id="pre-processing" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Pre-processing</h1>
+<p>The first step is to create a <code>SingleCellExperiment</code> object to hold the expression data.</p>
+<pre class="r"><code>sce &lt;- preprocessing(CITEseq_example$RNA)
+
+sce</code></pre>
+<pre><code>class: SingleCellExperiment 
+dim: 19521 500 
+metadata(0):
+assays(1): counts
+rownames(19521): hg19_AL627309.1 hg19_AL669831.5 ... hg19_MT-ND6
+  hg19_MT-CYB
+rowData names(0):
+colnames(500): AAGCCGCGTTGTCTTT GATCGCGGTTATCGGT ... TTGGCAACACTAGTAC
+  GCTGCGAGTTGTGGCC
+colData names(0):
+reducedDimNames(0):
+altExpNames(0):</code></pre>
+<p class="timeit">
+Chunk time: 0.26 secs
+</p>
+<p>The dataset has <strong>19521</strong> genes and <strong>500</strong> cells.</p>
+</div>
+<div id="normalisation" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Normalisation</h1>
+<p>Next we normalise the expression values. This is done in two steps where the <strong>scater</strong> <code>logNormCounts()</code> is used to correct for sequencing depth and log-transform before a min-max transformation is applied.</p>
+<pre class="r"><code>sce &lt;- scater::logNormCounts(sce)
+
+sce &lt;- normaliseExprs(
+    sce,
+    altExp_name = &quot;none&quot;,
+    exprs_value = &quot;logcounts&quot;,
+    transform   = &quot;minMax&quot;
+)
+
+sce</code></pre>
+<pre><code>class: SingleCellExperiment 
+dim: 19521 500 
+metadata(0):
+assays(3): counts logcounts minMax
+rownames(19521): hg19_AL627309.1 hg19_AL669831.5 ... hg19_MT-ND6
+  hg19_MT-CYB
+rowData names(0):
+colnames(500): AAGCCGCGTTGTCTTT GATCGCGGTTATCGGT ... TTGGCAACACTAGTAC
+  GCTGCGAGTTGTGGCC
+colData names(1): sizeFactor
+reducedDimNames(0):
+altExpNames(0):</code></pre>
+<p class="timeit">
+Chunk time: 3.99 secs
+</p>
+</div>
+<div id="clustering" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Clustering</h1>
+<p>This example dataset doesn’t come with cluster labels. In the original dataset they perform clustering on the combined CITE-seq data, but here we will quickly cluster just the RNA.</p>
+<blockquote>
+<p>**NOTE: This may not give ideal clusters and could be the cause of any weirdness in the following sections.</p>
+</blockquote>
+<pre class="r"><code>sce &lt;- scater::runPCA(sce)
+graph &lt;- scran::buildSNNGraph(sce, k=10, use.dimred = &quot;PCA&quot;)
+clusters &lt;- igraph::cluster_louvain(graph)$membership</code></pre>
+<p class="timeit">
+Chunk time: 0.62 secs
+</p>
+<p>This gives us <strong>6</strong> clusters.</p>
+</div>
+<div id="testing" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Testing</h1>
+<p>Once the data is normalised and clustered we can perform the test for ligand-receptor activity.</p>
+<pre class="r"><code># Modify the pair names because we are using just RNA
+modified_lr_pairs &lt;- lr_pair_subset
+modified_lr_pairs[, 2] &lt;- paste0(&quot;hg19_&quot;, modified_lr_pairs[, 2])
+
+sce &lt;- ligandReceptorTest(
+    sce,
+    ligandReceptor_list = modified_lr_pairs,
+    cluster             = factor(clusters),
+    RNA_exprs_value     = &quot;minMax&quot;,
+    use_alt_exp         = FALSE,
+    num_permute         = 1000
+)</code></pre>
+<pre><code>100 ......200 ......300 ......400 ......500 ......600 ......700 ......800 ......900 ......1000 ......</code></pre>
+<p class="timeit">
+Chunk time: 37.78 secs
+</p>
+</div>
+<div id="visualisation" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> Visualisation</h1>
+<p>Let’s have a look at the results.</p>
+<div id="heatmap" class="section level2" number="6.1">
+<h2 number="6.1"><span class="header-section-number">6.1</span> Heatmap</h2>
+<p>Heatmap of p-values for ligand-receptor pairs.</p>
+<pre class="r"><code>visLigandReceptor(
+    sce,
+    type = &quot;pval_heatmap&quot;,
+    receptor_type = &quot;RNA&quot;
+)</code></pre>
+<img src="figure/16-CiteFuse.Rmd/heatmap-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 0.41 secs
+</p>
+</div>
+<div id="dot-plot" class="section level2" number="6.2">
+<h2 number="6.2"><span class="header-section-number">6.2</span> Dot plot</h2>
+<p>Dot plot of p-values for ligand-receptor pairs.</p>
+<pre class="r"><code>visLigandReceptor(
+    sce,
+    type = &quot;pval_dotplot&quot;,
+    receptor_type = &quot;RNA&quot;
+)</code></pre>
+<img src="figure/16-CiteFuse.Rmd/dotplot-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 0.68 secs
+</p>
+</div>
+<div id="cluster-network" class="section level2" number="6.3">
+<h2 number="6.3"><span class="header-section-number">6.3</span> Cluster network</h2>
+<p>Network of interactions between clusters.</p>
+<pre class="r"><code>visLigandReceptor(
+    sce,
+    type = &quot;group_network&quot;,
+    receptor_type = &quot;RNA&quot;
+)</code></pre>
+<img src="figure/16-CiteFuse.Rmd/network-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 0.13 secs
+</p>
+</div>
+<div id="cluster-heatmap" class="section level2" number="6.4">
+<h2 number="6.4"><span class="header-section-number">6.4</span> Cluster heatmap</h2>
+<p>Heatmap of interactions between clusters.</p>
+<pre class="r"><code>visLigandReceptor(
+    sce,
+    type = &quot;group_heatmap&quot;,
+    receptor_type = &quot;RNA&quot;
+)</code></pre>
+<img src="figure/16-CiteFuse.Rmd/cluster-network-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 0.12 secs
+</p>
+</div>
+<div id="ligand-receptor-network" class="section level2" number="6.5">
+<h2 number="6.5"><span class="header-section-number">6.5</span> Ligand-receptor network</h2>
+<p>Network of ligands and receptors. Here the nodes are ligands and receptors and the edges are interactions between clusters.</p>
+<pre class="r"><code>visLigandReceptor(
+    sce,
+    type = &quot;lr_network&quot;,
+    receptor_type = &quot;RNA&quot;
+)</code></pre>
+<img src="figure/16-CiteFuse.Rmd/lr-network-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 0.31 secs
+</p>
+</div>
+</div>
+<div id="summary" class="section level1 unnumbered" number="">
+<h1 class="unnumbered" number="">Summary</h1>
+<div id="parameters" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number="">Parameters</h2>
+<p>This table describes parameters used and set in this document.</p>
+<pre class="r"><code>params &lt;- list(
+    
+)
+params &lt;- toJSON(params, pretty = TRUE)
+kable(fromJSON(params))</code></pre>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.01 secs
+</p>
+</div>
+<div id="output-files" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number="">Output files</h2>
+<p>This table describes the output files produced by this document. Right click and <em>Save Link As…</em> to download the results.</p>
+<pre class="r"><code>kable(data.frame(
+    File = c(
+        download_link(&quot;parameters.json&quot;, OUT_DIR)
+    ),
+    Description = c(
+        &quot;Parameters set and used in this analysis&quot;
+    )
+))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="NA/raw/master/output/16-CiteFuse.Rmd/parameters.json">parameters.json</a></td>
+<td align="left">Parameters set and used in this analysis</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.02 secs
+</p>
+</div>
+<div id="session-information" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number="">Session information</h2>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessioninfo::session_info()</code></pre>
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value                       
+ version  R version 4.0.0 (2020-04-24)
+ os       macOS Catalina 10.15.7      
+ system   x86_64, darwin17.0          
+ ui       X11                         
+ language (EN)                        
+ collate  en_US.UTF-8                 
+ ctype    en_US.UTF-8                 
+ tz       Europe/Berlin               
+ date     2020-11-09                  
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ ! package              * version  date       lib source            
+ P alluvial               0.1-2    2016-09-09 [?] CRAN (R 4.0.2)    
+ P assertthat             0.2.1    2019-03-21 [?] CRAN (R 4.0.0)    
+ P backports              1.1.6    2020-04-05 [?] CRAN (R 4.0.0)    
+ P base64enc              0.1-3    2015-07-28 [?] CRAN (R 4.0.0)    
+ P base64url              1.4      2018-05-14 [?] standard (@1.4)   
+ P beeswarm               0.2.3    2016-04-25 [?] CRAN (R 4.0.2)    
+   Biobase                2.48.0   2020-04-27 [1] Bioconductor      
+   BiocGenerics           0.34.0   2020-04-27 [1] Bioconductor      
+ P BiocNeighbors          1.6.0    2020-04-27 [?] Bioconductor      
+ P BiocParallel           1.22.0   2020-04-27 [?] Bioconductor      
+ P BiocSingular           1.4.0    2020-04-27 [?] Bioconductor      
+   bitops                 1.0-6    2013-08-17 [1] CRAN (R 4.0.0)    
+ P broom                  0.5.6    2020-04-20 [?] CRAN (R 4.0.0)    
+ P cellranger             1.1.0    2016-07-27 [?] standard (@1.1.0) 
+ P CiteFuse             * 1.0.0    2020-04-27 [?] Bioconductor      
+ P cli                    2.0.2    2020-02-28 [?] CRAN (R 4.0.0)    
+ P colorspace             1.4-1    2019-03-18 [?] standard (@1.4-1) 
+ P conflicted           * 1.0.4    2019-06-21 [?] standard (@1.0.4) 
+ P cowplot                1.0.0    2019-07-11 [?] CRAN (R 4.0.0)    
+ P crayon                 1.3.4    2017-09-16 [?] CRAN (R 4.0.0)    
+ P DBI                    1.1.0    2019-12-15 [?] CRAN (R 4.0.0)    
+ P dbplyr                 1.4.3    2020-04-19 [?] CRAN (R 4.0.0)    
+ P dbscan                 1.1-5    2019-10-23 [?] CRAN (R 4.0.2)    
+ P DelayedArray           0.14.1   2020-07-14 [?] Bioconductor      
+ P DelayedMatrixStats     1.10.1   2020-07-03 [?] Bioconductor      
+ P digest                 0.6.25   2020-02-23 [?] CRAN (R 4.0.0)    
+ P dplyr                * 0.8.5    2020-03-07 [?] CRAN (R 4.0.0)    
+   dqrng                  0.2.1    2019-05-17 [1] CRAN (R 4.0.0)    
+ P drake                  7.12.0   2020-03-25 [?] CRAN (R 4.0.0)    
+ P edgeR                  3.30.3   2020-06-02 [?] Bioconductor      
+ P ellipsis               0.3.0    2019-09-20 [?] CRAN (R 4.0.0)    
+ P evaluate               0.14     2019-05-28 [?] standard (@0.14)  
+ P ExPosition             2.8.23   2019-01-07 [?] CRAN (R 4.0.2)    
+ P fansi                  0.4.1    2020-01-08 [?] CRAN (R 4.0.0)    
+ P farver                 2.0.3    2020-01-16 [?] CRAN (R 4.0.0)    
+ P filelock               1.0.2    2018-10-05 [?] CRAN (R 4.0.0)    
+ P forcats              * 0.5.0    2020-03-01 [?] CRAN (R 4.0.0)    
+ P fs                   * 1.4.1    2020-04-04 [?] CRAN (R 4.0.0)    
+ P generics               0.0.2    2018-11-29 [?] standard (@0.0.2) 
+ P GenomeInfoDb           1.24.2   2020-06-15 [?] Bioconductor      
+ P GenomeInfoDbData       1.2.3    2020-11-09 [?] Bioconductor      
+ P GenomicRanges          1.40.0   2020-04-27 [?] Bioconductor      
+ P ggbeeswarm             0.6.0    2017-08-07 [?] CRAN (R 4.0.2)    
+ P ggforce                0.3.2    2020-06-23 [?] CRAN (R 4.0.2)    
+ P ggplot2              * 3.3.0    2020-03-05 [?] CRAN (R 4.0.0)    
+ P ggraph                 2.0.3    2020-05-20 [?] CRAN (R 4.0.2)    
+   ggrepel                0.8.2    2020-03-08 [1] CRAN (R 4.0.0)    
+   ggridges               0.5.2    2020-01-12 [1] CRAN (R 4.0.0)    
+ P git2r                  0.27.1   2020-05-03 [?] CRAN (R 4.0.0)    
+ P glue                 * 1.4.0    2020-04-03 [?] CRAN (R 4.0.0)    
+ P graphlayouts           0.7.1    2020-10-26 [?] CRAN (R 4.0.2)    
+   gridExtra              2.3      2017-09-09 [1] CRAN (R 4.0.0)    
+ P gtable                 0.3.0    2019-03-25 [?] standard (@0.3.0) 
+ P haven                  2.2.0    2019-11-08 [?] standard (@2.2.0) 
+ P heatmap.plus           1.3      2012-10-29 [?] CRAN (R 4.0.2)    
+ P here                 * 0.1      2017-05-28 [?] standard (@0.1)   
+ P highr                  0.8      2019-03-20 [?] standard (@0.8)   
+ P hms                    0.5.3    2020-01-08 [?] CRAN (R 4.0.0)    
+ P htmltools              0.5.0    2020-06-16 [?] CRAN (R 4.0.2)    
+ P httpuv                 1.5.2    2019-09-11 [?] standard (@1.5.2) 
+ P httr                   1.4.1    2019-08-05 [?] standard (@1.4.1) 
+ P igraph                 1.2.5    2020-03-19 [?] CRAN (R 4.0.0)    
+   IRanges                2.22.2   2020-05-21 [1] Bioconductor      
+   irlba                  2.3.3    2019-02-05 [1] CRAN (R 4.0.0)    
+ P jsonlite             * 1.6.1    2020-02-02 [?] CRAN (R 4.0.0)    
+ P kernlab                0.9-29   2019-11-12 [?] CRAN (R 4.0.2)    
+ P knitr                * 1.28     2020-02-06 [?] CRAN (R 4.0.0)    
+ P labeling               0.3      2014-08-23 [?] standard (@0.3)   
+ P later                  1.0.0    2019-10-04 [?] standard (@1.0.0) 
+ P lattice                0.20-41  2020-04-02 [?] CRAN (R 4.0.0)    
+ P lifecycle              0.2.0    2020-03-06 [?] CRAN (R 4.0.0)    
+ P limma                  3.44.1   2020-04-28 [?] Bioconductor      
+ P locfit                 1.5-9.4  2020-03-25 [?] CRAN (R 4.0.2)    
+ P lubridate              1.7.8    2020-04-06 [?] CRAN (R 4.0.0)    
+ P magrittr               1.5      2014-11-22 [?] CRAN (R 4.0.0)    
+ P MASS                   7.3-51.6 2020-04-26 [?] CRAN (R 4.0.0)    
+ P Matrix                 1.2-18   2019-11-27 [?] standard (@1.2-18)
+   matrixStats            0.56.0   2020-03-13 [1] CRAN (R 4.0.2)    
+ P memoise                1.1.0    2017-04-21 [?] standard (@1.1.0) 
+ P mixtools               1.2.0    2020-02-07 [?] CRAN (R 4.0.2)    
+ P modelr                 0.1.7    2020-04-30 [?] CRAN (R 4.0.0)    
+ P munsell                0.5.0    2018-06-12 [?] standard (@0.5.0) 
+ P nlme                   3.1-147  2020-04-13 [?] CRAN (R 4.0.0)    
+ P pander               * 0.6.3    2018-11-06 [?] CRAN (R 4.0.0)    
+ P pheatmap               1.0.12   2019-01-04 [?] CRAN (R 4.0.0)    
+ P pillar                 1.4.4    2020-05-05 [?] CRAN (R 4.0.0)    
+ P pkgconfig              2.0.3    2019-09-22 [?] CRAN (R 4.0.0)    
+ P plyr                   1.8.6    2020-03-03 [?] CRAN (R 4.0.0)    
+ P polyclip               1.10-0   2019-03-14 [?] CRAN (R 4.0.0)    
+ P prettyGraphs           2.1.6    2018-12-18 [?] CRAN (R 4.0.2)    
+ P prettyunits            1.1.1    2020-01-24 [?] CRAN (R 4.0.0)    
+ P progress               1.2.2    2019-05-16 [?] CRAN (R 4.0.0)    
+ P promises               1.1.0    2019-10-04 [?] standard (@1.1.0) 
+ P propr                  4.2.6    2019-12-16 [?] CRAN (R 4.0.2)    
+ P purrr                * 0.3.4    2020-04-17 [?] CRAN (R 4.0.0)    
+ P R6                     2.4.1    2019-11-12 [?] CRAN (R 4.0.0)    
+   randomForest           4.6-14   2018-03-25 [1] CRAN (R 4.0.0)    
+ P RColorBrewer           1.1-2    2014-12-07 [?] standard (@1.1-2) 
+ P Rcpp                   1.0.4.6  2020-04-09 [?] CRAN (R 4.0.0)    
+ P RCurl                  1.98-1.2 2020-04-18 [?] CRAN (R 4.0.2)    
+ P readr                * 1.3.1    2018-12-21 [?] standard (@1.3.1) 
+ P readxl                 1.3.1    2019-03-13 [?] standard (@1.3.1) 
+ P renv                   0.12.0   2020-08-28 [?] CRAN (R 4.0.2)    
+ P repr                   1.1.0    2020-01-28 [?] CRAN (R 4.0.0)    
+ P reprex                 0.3.0    2019-05-16 [?] standard (@0.3.0) 
+ P reshape2               1.4.4    2020-04-09 [?] CRAN (R 4.0.0)    
+ P reticulate             1.16     2020-05-27 [?] CRAN (R 4.0.2)    
+ P rhdf5                  2.32.4   2020-10-05 [?] Bioconductor      
+ P Rhdf5lib               1.10.1   2020-07-09 [?] Bioconductor      
+ P rlang                  0.4.6    2020-05-02 [?] CRAN (R 4.0.0)    
+ P rmarkdown              2.1      2020-01-20 [?] CRAN (R 4.0.0)    
+ P rprojroot              1.3-2    2018-01-03 [?] CRAN (R 4.0.0)    
+ P rstudioapi             0.11     2020-02-07 [?] CRAN (R 4.0.0)    
+   rsvd                   1.0.3    2020-02-17 [1] CRAN (R 4.0.0)    
+   Rtsne                  0.15     2018-11-10 [1] CRAN (R 4.0.0)    
+ P rvest                  0.3.5    2019-11-08 [?] standard (@0.3.5) 
+   S4Vectors              0.26.1   2020-05-16 [1] Bioconductor      
+ P scales                 1.1.0    2019-11-18 [?] standard (@1.1.0) 
+ P scater                 1.16.2   2020-06-26 [?] Bioconductor      
+ P scran                  1.16.0   2020-04-27 [?] Bioconductor      
+ P segmented              1.3-0    2020-10-27 [?] CRAN (R 4.0.2)    
+ P sessioninfo            1.1.1    2018-11-05 [?] CRAN (R 4.0.0)    
+ P SingleCellExperiment   1.10.1   2020-04-28 [?] Bioconductor      
+ P skimr                * 2.1.1    2020-04-16 [?] CRAN (R 4.0.0)    
+ P SNFtool                2.3.0    2018-04-24 [?] CRAN (R 4.0.2)    
+   statmod                1.4.34   2020-02-17 [1] CRAN (R 4.0.0)    
+ P storr                  1.2.1    2018-10-18 [?] standard (@1.2.1) 
+ P stringi                1.4.6    2020-02-17 [?] CRAN (R 4.0.0)    
+ P stringr              * 1.4.0    2019-02-10 [?] CRAN (R 4.0.0)    
+ P SummarizedExperiment   1.18.2   2020-07-14 [?] Bioconductor      
+ P survival               3.2-3    2020-06-13 [?] CRAN (R 4.0.2)    
+ P tibble               * 3.0.1    2020-04-20 [?] CRAN (R 4.0.0)    
+ P tidygraph              1.2.0    2020-05-12 [?] CRAN (R 4.0.2)    
+ P tidyr                * 1.0.3    2020-05-07 [?] CRAN (R 4.0.0)    
+ P tidyselect             1.0.0    2020-01-27 [?] CRAN (R 4.0.0)    
+ P tidyverse            * 1.3.0    2019-11-21 [?] standard (@1.3.0) 
+ P tweenr                 1.0.1    2018-12-14 [?] CRAN (R 4.0.2)    
+ P txtq                   0.2.0    2019-10-15 [?] standard (@0.2.0) 
+   uwot                   0.1.8    2020-03-16 [1] CRAN (R 4.0.0)    
+ P vctrs                  0.2.4    2020-03-10 [?] CRAN (R 4.0.0)    
+ P vipor                  0.4.5    2017-03-22 [?] CRAN (R 4.0.2)    
+   viridis                0.5.1    2018-03-29 [1] CRAN (R 4.0.0)    
+ P viridisLite            0.3.0    2018-02-01 [?] standard (@0.3.0) 
+ P whisker                0.4      2019-08-28 [?] standard (@0.4)   
+ P withr                  2.2.0    2020-04-20 [?] CRAN (R 4.0.0)    
+ P workflowr              1.6.2    2020-04-30 [?] CRAN (R 4.0.0)    
+ P xfun                   0.13     2020-04-13 [?] CRAN (R 4.0.0)    
+ P xml2                   1.3.2    2020-04-23 [?] CRAN (R 4.0.0)    
+ P XVector                0.28.0   2020-04-27 [?] Bioconductor      
+ P yaml                   2.2.1    2020-02-01 [?] CRAN (R 4.0.0)    
+ P zlibbioc               1.34.0   2020-04-27 [?] Bioconductor      
+
+[1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpDkCGRZ/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpQ2XEQW/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpHyGSJl/renv-system-library
+
+ P ── Loaded and on-disk path mismatch.</code></pre>
+<p class="timeit">
+Chunk time: 0.3 secs
+</p>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2l0ZUZ1c2UgZXhhbXBsZSIKb3V0cHV0OiB3b3JrZmxvd3I6OndmbG93X2h0bWwKZWRpdG9yX29wdGlvbnM6CiAgY2h1bmtfb3V0cHV0X3R5cGU6IGNvbnNvbGUKLS0tCgpgYGB7ciBzZXR1cCwgY2FjaGUgPSBGQUxTRX0KIyBTZXR1cCBkb2N1bWVudApzb3VyY2UoaGVyZTo6aGVyZSgiY29kZSIsICJzZXR1cC5SIikpCgojIEZ1bmN0aW9uIGRlcGVuZGVuY2llcwppbnZpc2libGUoZHJha2U6OnJlYWRkKGRvd25sb2FkX2xpbmspKQpgYGAKCkludHJvZHVjdGlvbiB7LnVubnVtYmVyZWR9Cj09PT09PT09PT09PQoKSW4gdGhpcyBkb2N1bWVudCB3ZSBhcmUgZ29pbmcgdG8gcnVuIHRocm91Z2ggdGhlIGV4YW1wbGUgYW5hbHlzaXMgZm9yIHRoZSAqKkNpdGVGdXNlKiogcGFja2FnZSBhbmQgaGF2ZSBhIGxvb2sgYXQgdGhlIG91dHB1dCBpdCBwcm9kdWNlcy4KVGhpcyBwYWNrYWdlIGlzIHByaW1hcmlseSBmb3IgYW5hbHlzaW5nIENJVEUtc2VxIGRhdGEgYnV0IGl0J3MgY2VsbC1jZWxsIGludGVyYWN0aW9uIGZ1bmN0aW9uIGFsc28gd29ya3Mgd2l0aCByZWd1bGFyIHNjUk5BLXNlcS4KTW9yZSBpbmZvcm1hdGlvbiBhYm91dCAqKkNpdGVGdXNlKiogY2FuIGJlIGZvdW5kIGF0IGh0dHBzOi8vZ2l0aHViLmNvbS9TeWRuZXlCaW9YL0NpdGVGdXNlLy4KCmBgYHtyIGxpYnJhcmllc30KbGlicmFyeSgiQ2l0ZUZ1c2UiKQpgYGAKCklucHV0Cj09PT09CgpFeHByZXNzaW9uCi0tLS0tLS0tLS0KClRoZSBtYWluIGlucHV0IGZvciBDaXRlRnVzZSBpcyBwcm92aWRlZCBhcyBhIGxpc3Qgb2YgbWF0cmljZXM6CgpgYGB7ciBleHByZXNzaW9ufQpkYXRhKCJDSVRFc2VxX2V4YW1wbGUiLCBwYWNrYWdlID0gIkNpdGVGdXNlIikKYGBgCgpUaGUgbGlzdCBjb250YWlucyAqKmByIGxlbmd0aChDSVRFc2VxX2V4YW1wbGUpYCoqIGl0ZW1zOiAKYHIgZ2x1ZV9jb2xsYXBzZShnbHVlKCIqKntuYW1lcyhDSVRFc2VxX2V4YW1wbGUpfSoqIiksIHNlcCA9ICIsICIsIGxhc3QgPSAiIGFuZCAiKWAKCkZvciB0aGlzIGV4YW1wbGUgd2Ugd2lsbCBqdXN0IHVzZSB0aGUgUk5BIG1hdHJpeC4KCmBgYHtyIGV4cHJlc3Npb24tcm5hfQpwYW5kZXIoYXMubWF0cml4KENJVEVzZXFfZXhhbXBsZSRSTkFbMTo1LCAxOjVdKSkKYGBgCgpUaGUgZnVsbCBtYXRyaXggaGFzICoqYHIgbnJvdyhDSVRFc2VxX2V4YW1wbGUkUk5BKWAqKiByb3dzIChnZW5lcykgYW5kICoqYHIgbmNvbChDSVRFc2VxX2V4YW1wbGUkUk5BKWAqKiBjb2x1bW5zIChjZWxscykuCgpMaWdhbmQtcmVjZXB0b3IgcGFpcnMKLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgpUaGUgb3RoZXIgdGhpbmcgd2UgbmVlZCBpcyBhIHNldCBvZiBsaWdhbmQtcmVjZXB0b3IgcGFpcnMuCkZvciB0aGlzIGV4YW1wbGUgd2UgdXNlIGEgc3Vic2V0IHByb3ZpZGVkIHdpdGggdGhlIHBhY2thZ2UgYXMgYSBtYXRyaXguCkJlY2F1c2Ugd2UgYXJlIG9ubHkgdXNlIHRoZSBSTkEgZGF0YSB3ZSBuZWVkIHRvIGFkZCBhIHByZWZpeCB0byB0aGUgcmVjZXB0b3IgY29sdW1uLgoKYGBge3IgbHItcGFpcnN9CmRhdGEoImxyX3BhaXJfc3Vic2V0IiwgcGFja2FnZSA9ICJDaXRlRnVzZSIpCgojIE1vZGlmeSB0aGUgcGFpciBuYW1lcyBiZWNhdXNlIHdlIGFyZSB1c2luZyBqdXN0IFJOQQptb2RpZmllZF9scl9wYWlycyA8LSBscl9wYWlyX3N1YnNldAptb2RpZmllZF9scl9wYWlyc1ssIDJdIDwtIHBhc3RlMCgiaGcxOV8iLCBtb2RpZmllZF9scl9wYWlyc1ssIDJdKQoKcGFuZGVyKGFzLm1hdHJpeChtb2RpZmllZF9scl9wYWlyc1sxOjUsIDE6Ml0pKQpgYGAKClRoZSBtYXRyaXggaGFzICoqYHIgbnJvdyhscl9wYWlyX3N1YnNldClgKiogcm93cyAocGFpcnMpIGFuZCAqKmByIG5jb2wobHJfcGFpcl9zdWJzZXQpYCoqIGNvbHVtbnMuCgpQcmUtcHJvY2Vzc2luZwo9PT09PT09PT09PT09PQoKVGhlIGZpcnN0IHN0ZXAgaXMgdG8gY3JlYXRlIGEgYFNpbmdsZUNlbGxFeHBlcmltZW50YCBvYmplY3QgdG8gaG9sZCB0aGUKZXhwcmVzc2lvbiBkYXRhLgoKYGBge3Igc2NlfQpzY2UgPC0gcHJlcHJvY2Vzc2luZyhDSVRFc2VxX2V4YW1wbGUkUk5BKQoKc2NlCmBgYAoKVGhlIGRhdGFzZXQgaGFzICoqYHIgbnJvdyhzY2UpYCoqIGdlbmVzIGFuZCAqKmByIG5jb2woc2NlKWAqKiBjZWxscy4KCk5vcm1hbGlzYXRpb24KPT09PT09PT09PT09PQoKTmV4dCB3ZSBub3JtYWxpc2UgdGhlIGV4cHJlc3Npb24gdmFsdWVzLgpUaGlzIGlzIGRvbmUgaW4gdHdvIHN0ZXBzIHdoZXJlIHRoZSAqKnNjYXRlcioqIGBsb2dOb3JtQ291bnRzKClgIGlzIHVzZWQgdG8gY29ycmVjdCBmb3Igc2VxdWVuY2luZyBkZXB0aCBhbmQgbG9nLXRyYW5zZm9ybSBiZWZvcmUgYSBtaW4tbWF4IHRyYW5zZm9ybWF0aW9uIGlzIGFwcGxpZWQuIAoKYGBge3Igbm9ybWFsaXNhdGlvbn0Kc2NlIDwtIHNjYXRlcjo6bG9nTm9ybUNvdW50cyhzY2UpCgpzY2UgPC0gbm9ybWFsaXNlRXhwcnMoCiAgICBzY2UsCiAgICBhbHRFeHBfbmFtZSA9ICJub25lIiwKICAgIGV4cHJzX3ZhbHVlID0gImxvZ2NvdW50cyIsCiAgICB0cmFuc2Zvcm0gICA9ICJtaW5NYXgiCikKCnNjZQpgYGAKCkNsdXN0ZXJpbmcKPT09PT09PT09PQoKVGhpcyBleGFtcGxlIGRhdGFzZXQgZG9lc24ndCBjb21lIHdpdGggY2x1c3RlciBsYWJlbHMuCkluIHRoZSBvcmlnaW5hbCBkYXRhc2V0IHRoZXkgcGVyZm9ybSBjbHVzdGVyaW5nIG9uIHRoZSBjb21iaW5lZCBDSVRFLXNlcSBkYXRhLCBidXQgaGVyZSB3ZSB3aWxsIHF1aWNrbHkgY2x1c3RlciBqdXN0IHRoZSBSTkEuCgo+ICoqTk9URTogVGhpcyBtYXkgbm90IGdpdmUgaWRlYWwgY2x1c3RlcnMgYW5kIGNvdWxkIGJlIHRoZSBjYXVzZSBvZiBhbnkgd2VpcmRuZXNzIGluIHRoZSBmb2xsb3dpbmcgc2VjdGlvbnMuCgpgYGB7ciBjbHVzdGVyaW5nfQpzY2UgPC0gc2NhdGVyOjpydW5QQ0Eoc2NlKQpncmFwaCA8LSBzY3Jhbjo6YnVpbGRTTk5HcmFwaChzY2UsIGs9MTAsIHVzZS5kaW1yZWQgPSAiUENBIikKY2x1c3RlcnMgPC0gaWdyYXBoOjpjbHVzdGVyX2xvdXZhaW4oZ3JhcGgpJG1lbWJlcnNoaXAKYGBgCgpUaGlzIGdpdmVzIHVzICoqYHIgbGVuZ3RoKHVuaXF1ZShjbHVzdGVycykpYCoqIGNsdXN0ZXJzLgoKVGVzdGluZwo9PT09PT09CgpPbmNlIHRoZSBkYXRhIGlzIG5vcm1hbGlzZWQgYW5kIGNsdXN0ZXJlZCB3ZSBjYW4gcGVyZm9ybSB0aGUgdGVzdCBmb3IgbGlnYW5kLXJlY2VwdG9yIGFjdGl2aXR5LgoKYGBge3IgdGVzdH0KIyBNb2RpZnkgdGhlIHBhaXIgbmFtZXMgYmVjYXVzZSB3ZSBhcmUgdXNpbmcganVzdCBSTkEKbW9kaWZpZWRfbHJfcGFpcnMgPC0gbHJfcGFpcl9zdWJzZXQKbW9kaWZpZWRfbHJfcGFpcnNbLCAyXSA8LSBwYXN0ZTAoImhnMTlfIiwgbW9kaWZpZWRfbHJfcGFpcnNbLCAyXSkKCnNjZSA8LSBsaWdhbmRSZWNlcHRvclRlc3QoCiAgICBzY2UsCiAgICBsaWdhbmRSZWNlcHRvcl9saXN0ID0gbW9kaWZpZWRfbHJfcGFpcnMsCiAgICBjbHVzdGVyICAgICAgICAgICAgID0gZmFjdG9yKGNsdXN0ZXJzKSwKICAgIFJOQV9leHByc192YWx1ZSAgICAgPSAibWluTWF4IiwKICAgIHVzZV9hbHRfZXhwICAgICAgICAgPSBGQUxTRSwKICAgIG51bV9wZXJtdXRlICAgICAgICAgPSAxMDAwCikKYGBgCgpWaXN1YWxpc2F0aW9uCj09PT09PT09PT09PT0KCkxldCdzIGhhdmUgYSBsb29rIGF0IHRoZSByZXN1bHRzLgoKSGVhdG1hcAotLS0tLS0tCgpIZWF0bWFwIG9mIHAtdmFsdWVzIGZvciBsaWdhbmQtcmVjZXB0b3IgcGFpcnMuCgpgYGB7ciBoZWF0bWFwfQp2aXNMaWdhbmRSZWNlcHRvcigKICAgIHNjZSwKICAgIHR5cGUgPSAicHZhbF9oZWF0bWFwIiwKICAgIHJlY2VwdG9yX3R5cGUgPSAiUk5BIgopCmBgYAoKRG90IHBsb3QKLS0tLS0tLS0KCkRvdCBwbG90IG9mIHAtdmFsdWVzIGZvciBsaWdhbmQtcmVjZXB0b3IgcGFpcnMuCgpgYGB7ciBkb3RwbG90fQp2aXNMaWdhbmRSZWNlcHRvcigKICAgIHNjZSwKICAgIHR5cGUgPSAicHZhbF9kb3RwbG90IiwKICAgIHJlY2VwdG9yX3R5cGUgPSAiUk5BIgopCmBgYAoKQ2x1c3RlciBuZXR3b3JrCi0tLS0tLS0tLS0tLS0tLQoKTmV0d29yayBvZiBpbnRlcmFjdGlvbnMgYmV0d2VlbiBjbHVzdGVycy4KCmBgYHtyIG5ldHdvcmt9CnZpc0xpZ2FuZFJlY2VwdG9yKAogICAgc2NlLAogICAgdHlwZSA9ICJncm91cF9uZXR3b3JrIiwKICAgIHJlY2VwdG9yX3R5cGUgPSAiUk5BIgopCmBgYAoKQ2x1c3RlciBoZWF0bWFwCi0tLS0tLS0tLS0tLS0tLQoKSGVhdG1hcCBvZiBpbnRlcmFjdGlvbnMgYmV0d2VlbiBjbHVzdGVycy4KCmBgYHtyIGNsdXN0ZXItbmV0d29ya30KdmlzTGlnYW5kUmVjZXB0b3IoCiAgICBzY2UsCiAgICB0eXBlID0gImdyb3VwX2hlYXRtYXAiLAogICAgcmVjZXB0b3JfdHlwZSA9ICJSTkEiCikKYGBgCgpMaWdhbmQtcmVjZXB0b3IgbmV0d29yawotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKTmV0d29yayBvZiBsaWdhbmRzIGFuZCByZWNlcHRvcnMuIEhlcmUgdGhlIG5vZGVzIGFyZSBsaWdhbmRzIGFuZCByZWNlcHRvcnMgYW5kIHRoZSBlZGdlcyBhcmUgaW50ZXJhY3Rpb25zIGJldHdlZW4gY2x1c3RlcnMuCgpgYGB7ciBsci1uZXR3b3JrfQp2aXNMaWdhbmRSZWNlcHRvcigKICAgIHNjZSwKICAgIHR5cGUgPSAibHJfbmV0d29yayIsCiAgICByZWNlcHRvcl90eXBlID0gIlJOQSIKKQpgYGAKClN1bW1hcnkgey51bm51bWJlcmVkfQo9PT09PT09CgpQYXJhbWV0ZXJzIHsudW5udW1iZXJlZH0KLS0tLS0tLS0tLQoKVGhpcyB0YWJsZSBkZXNjcmliZXMgcGFyYW1ldGVycyB1c2VkIGFuZCBzZXQgaW4gdGhpcyBkb2N1bWVudC4KCmBgYHtyIHBhcmFtZXRlcnN9CnBhcmFtcyA8LSBsaXN0KAogICAgCikKcGFyYW1zIDwtIHRvSlNPTihwYXJhbXMsIHByZXR0eSA9IFRSVUUpCmthYmxlKGZyb21KU09OKHBhcmFtcykpCmBgYAoKT3V0cHV0IGZpbGVzIHsudW5udW1iZXJlZH0KLS0tLS0tLS0tLS0tCgpUaGlzIHRhYmxlIGRlc2NyaWJlcyB0aGUgb3V0cHV0IGZpbGVzIHByb2R1Y2VkIGJ5IHRoaXMgZG9jdW1lbnQuIFJpZ2h0IGNsaWNrCmFuZCBfU2F2ZSBMaW5rIEFzLi4uXyB0byBkb3dubG9hZCB0aGUgcmVzdWx0cy4KCmBgYHtyIG91dHB1dH0Ka2FibGUoZGF0YS5mcmFtZSgKICAgIEZpbGUgPSBjKAogICAgICAgIGRvd25sb2FkX2xpbmsoInBhcmFtZXRlcnMuanNvbiIsIE9VVF9ESVIpCiAgICApLAogICAgRGVzY3JpcHRpb24gPSBjKAogICAgICAgICJQYXJhbWV0ZXJzIHNldCBhbmQgdXNlZCBpbiB0aGlzIGFuYWx5c2lzIgogICAgKQopKQpgYGAKClNlc3Npb24gaW5mb3JtYXRpb24gey51bm51bWJlcmVkfQotLS0tLS0tLS0tLS0tLS0tLS0tCg==</div>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("16-CiteFuse.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
