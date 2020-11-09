@@ -21,13 +21,189 @@ This package is primarily for analysing CITE-seq data but it's cell-cell interac
 More information about **CiteFuse** can be found at https://github.com/SydneyBioX/CiteFuse/.
 
 ```{r libraries}
-
+library("CiteFuse")
 ```
 
 Input
 =====
 
+Expression
+----------
 
+The main input for CiteFuse is provided as a list of matrices:
+
+```{r expression}
+data("CITEseq_example", package = "CiteFuse")
+```
+
+The list contains **`r length(CITEseq_example)`** items: 
+`r glue_collapse(glue("**{names(CITEseq_example)}**"), sep = ", ", last = " and ")`
+
+For this example we will just use the RNA matrix.
+
+```{r expression-rna}
+pander(as.matrix(CITEseq_example$RNA[1:5, 1:5]))
+```
+
+The full matrix has **`r nrow(CITEseq_example$RNA)`** rows (genes) and **`r ncol(CITEseq_example$RNA)`** columns (cells).
+
+Ligand-receptor pairs
+---------------------
+
+The other thing we need is a set of ligand-receptor pairs.
+For this example we use a subset provided with the package as a matrix.
+Because we are only use the RNA data we need to add a prefix to the receptor column.
+
+```{r lr-pairs}
+data("lr_pair_subset", package = "CiteFuse")
+
+# Modify the pair names because we are using just RNA
+modified_lr_pairs <- lr_pair_subset
+modified_lr_pairs[, 2] <- paste0("hg19_", modified_lr_pairs[, 2])
+
+pander(as.matrix(modified_lr_pairs[1:5, 1:2]))
+```
+
+The matrix has **`r nrow(lr_pair_subset)`** rows (pairs) and **`r ncol(lr_pair_subset)`** columns.
+
+Pre-processing
+==============
+
+The first step is to create a `SingleCellExperiment` object to hold the
+expression data.
+
+```{r sce}
+sce <- preprocessing(CITEseq_example$RNA)
+
+sce
+```
+
+The dataset has **`r nrow(sce)`** genes and **`r ncol(sce)`** cells.
+
+Normalisation
+=============
+
+Next we normalise the expression values.
+This is done in two steps where the **scater** `logNormCounts()` is used to correct for sequencing depth and log-transform before a min-max transformation is applied. 
+
+```{r normalisation}
+sce <- scater::logNormCounts(sce)
+
+sce <- normaliseExprs(
+    sce,
+    altExp_name = "none",
+    exprs_value = "logcounts",
+    transform   = "minMax"
+)
+
+sce
+```
+
+Clustering
+==========
+
+This example dataset doesn't come with cluster labels.
+In the original dataset they perform clustering on the combined CITE-seq data, but here we will quickly cluster just the RNA.
+
+> **NOTE: This may not give ideal clusters and could be the cause of any weirdness in the following sections.
+
+```{r clustering}
+sce <- scater::runPCA(sce)
+graph <- scran::buildSNNGraph(sce, k=10, use.dimred = "PCA")
+clusters <- igraph::cluster_louvain(graph)$membership
+```
+
+This gives us **`r length(unique(clusters))`** clusters.
+
+Testing
+=======
+
+Once the data is normalised and clustered we can perform the test for ligand-receptor activity.
+
+```{r test}
+# Modify the pair names because we are using just RNA
+modified_lr_pairs <- lr_pair_subset
+modified_lr_pairs[, 2] <- paste0("hg19_", modified_lr_pairs[, 2])
+
+sce <- ligandReceptorTest(
+    sce,
+    ligandReceptor_list = modified_lr_pairs,
+    cluster             = factor(clusters),
+    RNA_exprs_value     = "minMax",
+    use_alt_exp         = FALSE,
+    num_permute         = 1000
+)
+```
+
+Visualisation
+=============
+
+Let's have a look at the results.
+
+Heatmap
+-------
+
+Heatmap of p-values for ligand-receptor pairs.
+
+```{r heatmap}
+visLigandReceptor(
+    sce,
+    type = "pval_heatmap",
+    receptor_type = "RNA"
+)
+```
+
+Dot plot
+--------
+
+Dot plot of p-values for ligand-receptor pairs.
+
+```{r dotplot}
+visLigandReceptor(
+    sce,
+    type = "pval_dotplot",
+    receptor_type = "RNA"
+)
+```
+
+Cluster network
+---------------
+
+Network of interactions between clusters.
+
+```{r network}
+visLigandReceptor(
+    sce,
+    type = "group_network",
+    receptor_type = "RNA"
+)
+```
+
+Cluster heatmap
+---------------
+
+Heatmap of interactions between clusters.
+
+```{r cluster-network}
+visLigandReceptor(
+    sce,
+    type = "group_heatmap",
+    receptor_type = "RNA"
+)
+```
+
+Ligand-receptor network
+-----------------------
+
+Network of ligands and receptors. Here the nodes are ligands and receptors and the edges are interactions between clusters.
+
+```{r lr-network}
+visLigandReceptor(
+    sce,
+    type = "lr_network",
+    receptor_type = "RNA"
+)
+```
 
 Summary {.unnumbered}
 =======
