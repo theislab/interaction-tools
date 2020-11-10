@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>celltalker example</title>
+
+<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Interaction tools</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/lazappi/interaction-tools">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">celltalker example</h1>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-11-10
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>interaction-tools/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20191213code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20191213)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20191213code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20191213)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree4e1d47f273952758567541a354f0d2ef2847b6d6targetblank4e1d47fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/4e1d47f273952758567541a354f0d2ef2847b6d6" target="_blank">4e1d47f</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree4e1d47f273952758567541a354f0d2ef2847b6d6targetblank4e1d47fa" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/4e1d47f273952758567541a354f0d2ef2847b6d6" target="_blank">4e1d47f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    .drake/
+    Ignored:    data/COMUNET/
+    Ignored:    data/CellChat/
+    Ignored:    data/NicheNet/
+    Ignored:    data/cellphonedb/
+    Ignored:    data/celltalker/
+    Ignored:    output/14-CellChat.Rmd/
+    Ignored:    output/15-talklr.Rmd/
+    Ignored:    output/16-CiteFuse.Rmd/
+    Ignored:    output/17-scTHI.Rmd/
+    Ignored:    output/18-celltalker.Rmd/
+    Ignored:    output/index.Rmd/
+    Ignored:    renv/library/
+    Ignored:    renv/python/
+    Ignored:    renv/staging/
+
+Unstaged changes:
+    Modified:   _drake.R
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/18-celltalker.Rmd</code>) and HTML (<code>docs/18-celltalker.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/4e1d47f273952758567541a354f0d2ef2847b6d6/analysis/18-celltalker.Rmd" target="_blank">4e1d47f</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-10
+</td>
+<td>
+Add celltalker tutorial
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code># Setup document
+source(here::here(&quot;code&quot;, &quot;setup.R&quot;))
+
+# Function dependencies
+invisible(drake::readd(download_link))</code></pre>
+<div id="introduction" class="section level1 unnumbered" number="">
+<h1 class="unnumbered" number="">Introduction</h1>
+<p>In this document we are going to run through the example analysis for the <strong>celltalker</strong> package and have a look at the output it produces. More information about <strong>celltalker</strong> can be found at <a href="https://github.com/arc85/celltalker" class="uri">https://github.com/arc85/celltalker</a>.</p>
+<pre class="r"><code>library(&quot;celltalker&quot;)</code></pre>
+<p class="timeit">
+Chunk time: 0.13 secs
+</p>
+</div>
+<div id="input" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Input</h1>
+<div id="expression" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Expression</h2>
+<p>The main input to <strong>celltalker</strong> is an expression matrix for a set of samples (3 PBMC samples and 3 tonsil samples) from GEO accession GSE139324. We create this by reading in the raw <strong>Cell Ranger</strong> output files and storing them as a <code>Seurat</code> object.</p>
+<blockquote>
+<p><strong>Note:</strong> It is not entirely clear from the <strong>celltalker</strong> tutorial exactly which samples to use so these results may differ from what is show there.</p>
+</blockquote>
+<pre class="r"><code>data_paths &lt;- fs::dir_ls(here(&quot;data&quot;, &quot;celltalker&quot;))
+names(data_paths) &lt;- c(&quot;pbmc1&quot;, &quot;pbmc2&quot;, &quot;pbmc3&quot;, &quot;tonsil1&quot;, &quot;tonsil2&quot;,
+                       &quot;tonsil3&quot;)
+
+raw_data &lt;- Seurat::Read10X(data_paths)
+metadata &lt;- data.frame(
+    Sample = stringr::str_remove(colnames(raw_data), &quot;_[A-Z-0-9]+&quot;)
+)
+metadata$Tissue &lt;- stringr::str_remove(metadata$Sample, &quot;[0-9]&quot;)
+rownames(metadata) &lt;- colnames(raw_data)
+
+seurat &lt;- Seurat::CreateSeuratObject(counts = raw_data, meta.data = metadata)
+
+seurat</code></pre>
+<pre><code>An object of class Seurat 
+33694 features across 15524 samples within 1 assay 
+Active assay: RNA (33694 features, 0 variable features)</code></pre>
+<p class="timeit">
+Chunk time: 14.21 secs
+</p>
+</div>
+<div id="ligand-receptor-pairs" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Ligand-receptor pairs</h2>
+<p><strong>celltalker</strong> includes a set of ligand-receptor pairs.</p>
+<pre class="r"><code>skim(ramilowski_pairs)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">ramilowski_pairs</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">2557</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ligand</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">708</td>
+<td align="left">CAL: 41, GNA: 38, FN1: 28, CAL: 22</td>
+</tr>
+<tr class="even">
+<td align="left">receptor</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">691</td>
+<td align="left">ITG: 67, ITG: 35, EGF: 32, LRP: 31</td>
+</tr>
+<tr class="odd">
+<td align="left">pair</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2557</td>
+<td align="left">A2M: 1, AAN: 1, AAN: 1, ACE: 1</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.07 secs
+</p>
+</div>
+</div>
+<div id="seurat-analysis" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> <strong>Seurat</strong> analysis</h1>
+<p>We first need to perform a standard <strong>Seurat</strong> analysis to get clusters and cell type labels. Most of the details are skipped over here.</p>
+<div id="clustering" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Clustering</h2>
+<pre class="r"><code>set.seed(02221989)
+
+seurat &lt;- Seurat::NormalizeData(seurat)
+seurat &lt;- Seurat::FindVariableFeatures(seurat)
+seurat &lt;- Seurat::ScaleData(seurat)
+seurat &lt;- Seurat::RunPCA(seurat, verbose = FALSE)
+seurat &lt;- Seurat::RunUMAP(seurat, reduction = &quot;pca&quot;, dims = 1:15,
+                          verbose = FALSE)
+seurat &lt;- Seurat::FindNeighbors(seurat, reduction = &quot;pca&quot;, dims = 1:15,
+                                verbose = FALSE)
+seurat &lt;- Seurat::FindClusters(seurat, resolution = 0.5, verbose = FALSE)
+
+p1 &lt;- Seurat::DimPlot(seurat, reduction = &quot;umap&quot;, group.by = &quot;Sample&quot;)
+p2 &lt;- Seurat::DimPlot(seurat, reduction = &quot;umap&quot;, group.by = &quot;Tissue&quot;)
+p3 &lt;- Seurat::DimPlot(seurat, reduction = &quot;umap&quot;, group.by = &quot;RNA_snn_res.0.5&quot;,
+                      label = TRUE) +
+    Seurat::NoLegend()
+
+cowplot::plot_grid(p1, p2, p3)</code></pre>
+<img src="figure/18-celltalker.Rmd/seurat-cluster-1.png" width="960" style="display: block; margin: auto;" />
+<p class="timeit">
+Chunk time: 45.63 secs
+</p>
+</div>
+<div id="labels" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Labels</h2>
+<pre class="r"><code>Seurat::FeaturePlot(seurat, reduction = &quot;umap&quot;,
+                    features = c(&quot;CD3D&quot;, &quot;CD8A&quot;, &quot;CD4&quot;, &quot;CD14&quot;, &quot;MS4A1&quot;,
+                                 &quot;FCGR3A&quot;, &quot;IL3RA&quot;))</code></pre>
+<p><img src="figure/18-celltalker.Rmd/seurat-labels-1.png" width="960" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Add metadata for cell types
+cell_types &lt;- vector(&quot;logical&quot;, length = ncol(seurat))
+names(cell_types) &lt;- colnames(seurat)
+
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  &quot;0&quot;] &lt;- &quot;CD4 T conv&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  &quot;1&quot;] &lt;- &quot;CD4 T conv&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  &quot;2&quot;] &lt;- &quot;B cells&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  &quot;3&quot;] &lt;- &quot;B cells&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  &quot;4&quot;] &lt;- &quot;CD14 monocytes&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  &quot;5&quot;] &lt;- &quot;CD8&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  &quot;6&quot;] &lt;- &quot;CD4 T conv&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  &quot;7&quot;] &lt;- &quot;CD4 T conv&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  &quot;8&quot;] &lt;- &quot;B cells&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  &quot;9&quot;] &lt;- &quot;B cells&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == &quot;10&quot;] &lt;- &quot;NK cells&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == &quot;11&quot;] &lt;- &quot;CD8&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == &quot;12&quot;] &lt;- &quot;Plasma&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == &quot;13&quot;] &lt;- &quot;CD14 monocytes&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == &quot;14&quot;] &lt;- &quot;CD16 monocytes&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == &quot;15&quot;] &lt;- &quot;PDC&quot;
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == &quot;16&quot;] &lt;- &quot;RBCs&quot;
+
+seurat[[&quot;CellType&quot;]] &lt;- cell_types
+
+# Remove red blood cells
+rbc_cells &lt;- names(cell_types)[seurat@meta.data$RNA_snn_res.0.5 == &quot;16&quot;]
+seurat &lt;- seurat [, !colnames(seurat) %in% rbc_cells]</code></pre>
+<p class="timeit">
+Chunk time: 7.76 secs
+</p>
+</div>
+</div>
+<div id="select-pairs" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Select pairs</h1>
+<p>Before scoring interaction we first select a set of ligand-receptor pairs to look at. First we check which genes are present in the dataset and then we select those were the ligand or receptor is an up-regulated marker gene for one of the tissue types.</p>
+<pre class="r"><code>ligands   &lt;- as.character(unique(ramilowski_pairs$ligand))
+receptors &lt;- as.character(unique(ramilowski_pairs$receptor))
+
+ligands_present   &lt;- rownames(seurat)[rownames(seurat) %in% ligands]
+receptors_present &lt;- rownames(seurat)[rownames(seurat) %in% receptors]
+lr_present &lt;- union(ligands_present, receptors_present)
+
+Seurat::Idents(seurat) &lt;- &quot;Tissue&quot;
+markers &lt;- Seurat::FindAllMarkers(seurat, assay=&quot;RNA&quot;, features = lr_present,
+                                  only.pos = TRUE, verbose = FALSE)
+
+lr_sel &lt;- unique(markers$gene)
+
+interactions_sel &lt;- rbind(
+    ramilowski_pairs[ramilowski_pairs$ligand   %in% lr_sel, ],
+    ramilowski_pairs[ramilowski_pairs$receptor %in% lr_sel, ]
+)</code></pre>
+<p class="timeit">
+Chunk time: 2.05 secs
+</p>
+<p>This process selects <strong>61</strong> ligands and receptors and <strong>241</strong> interaction pairs.</p>
+</div>
+<div id="rearrange-data" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Rearrange data</h1>
+<p><strong>celltalker</strong> requires the input data in a specific structure. Helpfully it provides some useful functions to make this easier.</p>
+<div id="expression-matrices" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> Expression matrices</h2>
+<p>The first data structure is a nested data frame with expression matrices for the selected ligands and receptors for each group, sample, and cluster.</p>
+<pre class="r"><code>expr_mat &lt;- Seurat::GetAssayData(seurat, slot = &quot;counts&quot;)
+clusters &lt;- seurat@meta.data$CellType
+tissues  &lt;- seurat@meta.data$Tissue
+samples  &lt;- seurat@meta.data$Sample
+
+lr_matrices &lt;- reshape_matrices(
+    count.matrix          = expr_mat,
+    clusters              = clusters,
+    groups                = tissues,
+    replicates            = samples,
+    ligands.and.receptors = interactions_sel
+)
+
+# There is a big where the next step fails if there are some clusters that
+# aren&#39;t present in all groups. Add dummy values to avoid this.
+dummy &lt;- pull(unnest(lr_matrices, cols = &quot;samples&quot;))[[1]][[1]][0, ]
+lr_matrices$samples[[2]]$expr.matrices &lt;- map(
+    lr_matrices$samples[[2]]$expr.matrices, function(.exp_mats) {
+        missing &lt;- unique(clusters[!(clusters %in% names(.exp_mats))])
+        for (cluster in missing) {
+            .exp_mats[[cluster]] &lt;- dummy
+        }
+        .exp_mats
+    }
+)
+
+skim(lr_matrices)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">lr_matrices</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">list</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">group</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: list</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">n_unique</th>
+<th align="right">min_length</th>
+<th align="right">max_length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">samples</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>skim(unnest(lr_matrices, cols = &quot;samples&quot;))</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">unnest(lr_matrices, cols …</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">6</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">list</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">group</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">sample</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="right">7</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: list</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">n_unique</th>
+<th align="right">min_length</th>
+<th align="right">max_length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">expr.matrices</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">8</td>
+<td align="right">8</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 1.15 secs
+</p>
+</div>
+<div id="expressed-ligands-and-receptors" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> Expressed ligands and receptors</h2>
+<p>From the nested expression matrices we then create a similar structure which contains the ligands and receptors that are expressed in each group/cluster combination.</p>
+<pre class="r"><code>lr_expressed &lt;- create_lig_rec_tib(
+    exp.tib               = lr_matrices,
+    clusters              = clusters,
+    groups                = tissues,
+    replicates            = samples,
+    cells.reqd            = 10,
+    freq.pos.reqd         = 0.5,
+    ligands.and.receptors = interactions_sel
+)
+
+skim(lr_expressed)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">lr_expressed</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">list</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">group</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: list</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">n_unique</th>
+<th align="right">min_length</th>
+<th align="right">max_length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">lig.rec.exp</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>skim(unnest(lr_expressed[1, 2], cols = &quot;lig.rec.exp&quot;))</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">unnest(lr_expressed[1, 2]…</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">8</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">list</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">cluster.id</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">14</td>
+<td align="right">0</td>
+<td align="right">8</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: list</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">n_unique</th>
+<th align="right">min_length</th>
+<th align="right">max_length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ligands.and.receptors</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 1.01 secs
+</p>
+</div>
+</div>
+<div id="interactions" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Interactions</h1>
+<div id="putative-interactions" class="section level2" number="5.1">
+<h2 number="5.1"><span class="header-section-number">5.1</span> Putative interactions</h2>
+<p>With this data structure we can now look for putative interactions.</p>
+<pre class="r"><code>putative_interactions &lt;- putative_interactions(
+    ligand.receptor.tibble = lr_expressed,
+    clusters               = clusters,
+    groups                 = tissues,
+    freq.group.in.cluster  = 0.05,
+    ligands.and.receptors  = interactions_sel
+)
+
+skim(putative_interactions)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">putative_interactions</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">list</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">group</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: list</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">n_unique</th>
+<th align="right">min_length</th>
+<th align="right">max_length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">lig_rec_list</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">302</td>
+<td align="right">304</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 1.48 secs
+</p>
+<p>The nested data frame returned by this function contains lists of the active ligands and receptors for each cell type in each group.</p>
+</div>
+<div id="unique-interactions" class="section level2" number="5.2">
+<h2 number="5.2"><span class="header-section-number">5.2</span> Unique interactions</h2>
+<p>The next step identifies interactions that are unique to each group.</p>
+<pre class="r"><code>unique_interactions &lt;- unique_interactions(
+    putative_interactions,
+    group1 = &quot;pbmc&quot;,
+    group2 = &quot;tonsil&quot;,
+    interactions_sel
+)
+
+skim(unique_interactions)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">unique_interactions</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">list</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">comparison</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: list</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">n_unique</th>
+<th align="right">min_length</th>
+<th align="right">max_length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ligands.and.receptors</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">22</td>
+<td align="right">186</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.05 secs
+</p>
+<p>This gives use the ligands and receptors that are unique to each group as well as those they have in common.</p>
+</div>
+</div>
+<div id="visualisation" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> Visualisation</h1>
+<div id="circos-plot" class="section level2" number="6.1">
+<h2 number="6.1"><span class="header-section-number">6.1</span> Circos plot</h2>
+<div id="pbmc" class="section level3" number="6.1.1">
+<h3 number="6.1.1"><span class="header-section-number">6.1.1</span> PBMC</h3>
+<pre class="r"><code>pbmc_lr           &lt;- pull(unique_interactions[1, 2])[[1]]
+pbmc_interactions &lt;- pull(putative_interactions[1, 2])[[1]][pbmc_lr]
+
+circos_plot(interactions = pbmc_interactions, clusters = clusters)</code></pre>
+<p><img src="figure/18-celltalker.Rmd/vis-circos-pbmc-1.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;Plotted interactions&quot;</code></pre>
+<p class="timeit">
+Chunk time: 1.19 secs
+</p>
+</div>
+<div id="tonsil" class="section level3" number="6.1.2">
+<h3 number="6.1.2"><span class="header-section-number">6.1.2</span> Tonsil</h3>
+<pre class="r"><code>tonsil_lr           &lt;- pull(unique_interactions[2, 2])[[1]]
+tonsil_interactions &lt;- pull(putative_interactions[2, 2])[[1]][tonsil_lr]
+
+circos_plot(interactions = tonsil_interactions, clusters = clusters)</code></pre>
+<p><img src="figure/18-celltalker.Rmd/vis-circos-tonsil-1.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;Plotted interactions&quot;</code></pre>
+<p class="timeit">
+Chunk time: 0.38 secs
+</p>
+</div>
+</div>
+</div>
+<div id="summary" class="section level1 unnumbered" number="">
+<h1 class="unnumbered" number="">Summary</h1>
+<div id="parameters" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number="">Parameters</h2>
+<p>This table describes parameters used and set in this document.</p>
+<pre class="r"><code>params &lt;- list(
+    
+)
+params &lt;- toJSON(params, pretty = TRUE)
+kable(fromJSON(params))</code></pre>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.01 secs
+</p>
+</div>
+<div id="output-files" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number="">Output files</h2>
+<p>This table describes the output files produced by this document. Right click and <em>Save Link As…</em> to download the results.</p>
+<pre class="r"><code>kable(data.frame(
+    File = c(
+        download_link(&quot;parameters.json&quot;, OUT_DIR)
+    ),
+    Description = c(
+        &quot;Parameters set and used in this analysis&quot;
+    )
+))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="NA/raw/master/output/18-celltalker.Rmd/parameters.json">parameters.json</a></td>
+<td align="left">Parameters set and used in this analysis</td>
+</tr>
+</tbody>
+</table>
+<p class="timeit">
+Chunk time: 0.01 secs
+</p>
+</div>
+<div id="session-information" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number="">Session information</h2>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessioninfo::session_info()</code></pre>
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value                       
+ version  R version 4.0.0 (2020-04-24)
+ os       macOS Catalina 10.15.7      
+ system   x86_64, darwin17.0          
+ ui       X11                         
+ language (EN)                        
+ collate  en_US.UTF-8                 
+ ctype    en_US.UTF-8                 
+ tz       Europe/Berlin               
+ date     2020-11-10                  
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ ! package        * version    date       lib source                           
+   abind            1.4-5      2016-07-21 [1] CRAN (R 4.0.0)                   
+ P assertthat       0.2.1      2019-03-21 [?] CRAN (R 4.0.0)                   
+ P backports        1.1.6      2020-04-05 [?] CRAN (R 4.0.0)                   
+ P base64enc        0.1-3      2015-07-28 [?] CRAN (R 4.0.0)                   
+ P base64url        1.4        2018-05-14 [?] standard (@1.4)                  
+ P broom            0.5.6      2020-04-20 [?] CRAN (R 4.0.0)                   
+ P cellranger       1.1.0      2016-07-27 [?] standard (@1.1.0)                
+ P celltalker     * 0.0.3.9000 2020-11-10 [?] Github (arc85/celltalker@533b28e)
+ P circlize       * 0.4.9      2020-04-30 [?] CRAN (R 4.0.0)                   
+ P cli              2.0.2      2020-02-28 [?] CRAN (R 4.0.0)                   
+ P cluster          2.1.0      2019-06-19 [?] CRAN (R 4.0.0)                   
+ P codetools        0.2-16     2018-12-24 [?] CRAN (R 4.0.0)                   
+ P colorspace       1.4-1      2019-03-18 [?] standard (@1.4-1)                
+ P conflicted     * 1.0.4      2019-06-21 [?] standard (@1.0.4)                
+ P cowplot          1.0.0      2019-07-11 [?] CRAN (R 4.0.0)                   
+ P crayon           1.3.4      2017-09-16 [?] CRAN (R 4.0.0)                   
+ P data.table       1.12.8     2019-12-09 [?] CRAN (R 4.0.1)                   
+ P DBI              1.1.0      2019-12-15 [?] CRAN (R 4.0.0)                   
+ P dbplyr           1.4.3      2020-04-19 [?] CRAN (R 4.0.0)                   
+   deldir           0.1-28     2020-07-15 [1] CRAN (R 4.0.2)                   
+ P digest           0.6.25     2020-02-23 [?] CRAN (R 4.0.0)                   
+ P dplyr          * 0.8.5      2020-03-07 [?] CRAN (R 4.0.0)                   
+ P drake            7.12.0     2020-03-25 [?] CRAN (R 4.0.0)                   
+ P ellipsis         0.3.0      2019-09-20 [?] CRAN (R 4.0.0)                   
+ P evaluate         0.14       2019-05-28 [?] standard (@0.14)                 
+ P fansi            0.4.1      2020-01-08 [?] CRAN (R 4.0.0)                   
+ P farver           2.0.3      2020-01-16 [?] CRAN (R 4.0.0)                   
+   fastmap          1.0.1      2019-10-08 [1] CRAN (R 4.0.2)                   
+ P filelock         1.0.2      2018-10-05 [?] CRAN (R 4.0.0)                   
+ P fitdistrplus     1.0-14     2019-01-23 [?] CRAN (R 4.0.0)                   
+ P forcats        * 0.5.0      2020-03-01 [?] CRAN (R 4.0.0)                   
+ P fs             * 1.4.1      2020-04-04 [?] CRAN (R 4.0.0)                   
+ P future           1.17.0     2020-04-18 [?] CRAN (R 4.0.1)                   
+ P future.apply     1.5.0      2020-04-17 [?] CRAN (R 4.0.0)                   
+ P generics         0.0.2      2018-11-29 [?] standard (@0.0.2)                
+ P ggplot2        * 3.3.0      2020-03-05 [?] CRAN (R 4.0.0)                   
+   ggrepel          0.8.2      2020-03-08 [1] CRAN (R 4.0.0)                   
+   ggridges         0.5.2      2020-01-12 [1] CRAN (R 4.0.0)                   
+ P git2r            0.27.1     2020-05-03 [?] CRAN (R 4.0.0)                   
+ P GlobalOptions    0.1.1      2019-09-30 [?] CRAN (R 4.0.0)                   
+   globals          0.12.5     2019-12-07 [1] CRAN (R 4.0.0)                   
+ P glue           * 1.4.0      2020-04-03 [?] CRAN (R 4.0.0)                   
+   goftest          1.2-2      2019-12-02 [1] CRAN (R 4.0.2)                   
+   gridExtra        2.3        2017-09-09 [1] CRAN (R 4.0.0)                   
+ P gtable           0.3.0      2019-03-25 [?] standard (@0.3.0)                
+ P haven            2.2.0      2019-11-08 [?] standard (@2.2.0)                
+ P here           * 0.1        2017-05-28 [?] standard (@0.1)                  
+ P highr            0.8        2019-03-20 [?] standard (@0.8)                  
+ P hms              0.5.3      2020-01-08 [?] CRAN (R 4.0.0)                   
+ P htmltools        0.5.0      2020-06-16 [?] CRAN (R 4.0.2)                   
+   htmlwidgets      1.5.1      2019-10-08 [1] CRAN (R 4.0.0)                   
+ P httpuv           1.5.2      2019-09-11 [?] standard (@1.5.2)                
+ P httr             1.4.1      2019-08-05 [?] standard (@1.4.1)                
+   ica              1.0-2      2018-05-24 [1] CRAN (R 4.0.0)                   
+ P igraph           1.2.5      2020-03-19 [?] CRAN (R 4.0.0)                   
+   irlba            2.3.3      2019-02-05 [1] CRAN (R 4.0.0)                   
+ P jsonlite       * 1.6.1      2020-02-02 [?] CRAN (R 4.0.0)                   
+ P KernSmooth       2.23-17    2020-04-26 [?] CRAN (R 4.0.0)                   
+ P knitr          * 1.28       2020-02-06 [?] CRAN (R 4.0.0)                   
+ P labeling         0.3        2014-08-23 [?] standard (@0.3)                  
+ P later            1.0.0      2019-10-04 [?] standard (@1.0.0)                
+ P lattice          0.20-41    2020-04-02 [?] CRAN (R 4.0.0)                   
+ P lazyeval         0.2.2      2019-03-15 [?] standard (@0.2.2)                
+   leiden           0.3.3      2020-02-04 [1] CRAN (R 4.0.0)                   
+ P lifecycle        0.2.0      2020-03-06 [?] CRAN (R 4.0.0)                   
+ P limma            3.44.1     2020-04-28 [?] Bioconductor                     
+   listenv          0.8.0      2019-12-05 [1] CRAN (R 4.0.0)                   
+   lmtest           0.9-37     2019-04-30 [1] CRAN (R 4.0.0)                   
+   lsei             1.2-0.1    2020-05-06 [1] CRAN (R 4.0.0)                   
+ P lubridate        1.7.8      2020-04-06 [?] CRAN (R 4.0.0)                   
+ P magrittr         1.5        2014-11-22 [?] CRAN (R 4.0.0)                   
+ P MASS             7.3-51.6   2020-04-26 [?] CRAN (R 4.0.0)                   
+ P Matrix           1.2-18     2019-11-27 [?] standard (@1.2-18)               
+   matrixStats      0.56.0     2020-03-13 [1] CRAN (R 4.0.2)                   
+ P memoise          1.1.0      2017-04-21 [?] standard (@1.1.0)                
+ P mgcv             1.8-31     2019-11-09 [?] standard (@1.8-31)               
+ P mime             0.9        2020-02-04 [?] CRAN (R 4.0.0)                   
+   miniUI           0.1.1.1    2018-05-18 [1] CRAN (R 4.0.2)                   
+ P modelr           0.1.7      2020-04-30 [?] CRAN (R 4.0.0)                   
+ P munsell          0.5.0      2018-06-12 [?] standard (@0.5.0)                
+ P nlme             3.1-147    2020-04-13 [?] CRAN (R 4.0.0)                   
+   npsurv           0.4-0.1    2020-05-06 [1] CRAN (R 4.0.0)                   
+ P pander         * 0.6.3      2018-11-06 [?] CRAN (R 4.0.0)                   
+ P patchwork        1.0.0      2019-12-01 [?] CRAN (R 4.0.0)                   
+   pbapply          1.4-2      2019-08-31 [1] CRAN (R 4.0.0)                   
+ P pillar           1.4.4      2020-05-05 [?] CRAN (R 4.0.0)                   
+ P pkgconfig        2.0.3      2019-09-22 [?] CRAN (R 4.0.0)                   
+   plotly           4.9.2.1    2020-04-04 [1] CRAN (R 4.0.0)                   
+ P plyr             1.8.6      2020-03-03 [?] CRAN (R 4.0.0)                   
+   png              0.1-7      2013-12-03 [1] CRAN (R 4.0.0)                   
+ P polyclip         1.10-0     2019-03-14 [?] CRAN (R 4.0.0)                   
+ P prettyunits      1.1.1      2020-01-24 [?] CRAN (R 4.0.0)                   
+ P progress         1.2.2      2019-05-16 [?] CRAN (R 4.0.0)                   
+ P promises         1.1.0      2019-10-04 [?] standard (@1.1.0)                
+ P purrr          * 0.3.4      2020-04-17 [?] CRAN (R 4.0.0)                   
+ P R6               2.4.1      2019-11-12 [?] CRAN (R 4.0.0)                   
+   RANN             2.6.1      2019-01-08 [1] CRAN (R 4.0.0)                   
+ P RColorBrewer     1.1-2      2014-12-07 [?] standard (@1.1-2)                
+ P Rcpp             1.0.4.6    2020-04-09 [?] CRAN (R 4.0.0)                   
+   RcppAnnoy        0.0.16     2020-03-08 [1] CRAN (R 4.0.0)                   
+ P readr          * 1.3.1      2018-12-21 [?] standard (@1.3.1)                
+ P readxl           1.3.1      2019-03-13 [?] standard (@1.3.1)                
+ P renv             0.12.0     2020-08-28 [?] CRAN (R 4.0.2)                   
+ P repr             1.1.0      2020-01-28 [?] CRAN (R 4.0.0)                   
+ P reprex           0.3.0      2019-05-16 [?] standard (@0.3.0)                
+ P reshape2         1.4.4      2020-04-09 [?] CRAN (R 4.0.0)                   
+ P reticulate       1.16       2020-05-27 [?] CRAN (R 4.0.2)                   
+ P rlang            0.4.6      2020-05-02 [?] CRAN (R 4.0.0)                   
+ P rmarkdown        2.1        2020-01-20 [?] CRAN (R 4.0.0)                   
+   ROCR             1.0-11     2020-05-02 [1] CRAN (R 4.0.0)                   
+ P rpart            4.1-15     2019-04-12 [?] CRAN (R 4.0.0)                   
+ P rprojroot        1.3-2      2018-01-03 [?] CRAN (R 4.0.0)                   
+   RSpectra         0.16-0     2019-12-01 [1] CRAN (R 4.0.0)                   
+ P rstudioapi       0.11       2020-02-07 [?] CRAN (R 4.0.0)                   
+   rsvd             1.0.3      2020-02-17 [1] CRAN (R 4.0.0)                   
+   Rtsne            0.15       2018-11-10 [1] CRAN (R 4.0.0)                   
+ P rvest            0.3.5      2019-11-08 [?] standard (@0.3.5)                
+ P scales           1.1.0      2019-11-18 [?] standard (@1.1.0)                
+ P sctransform      0.3.1      2020-10-08 [?] CRAN (R 4.0.2)                   
+ P sessioninfo      1.1.1      2018-11-05 [?] CRAN (R 4.0.0)                   
+ P Seurat           3.2.2      2020-09-26 [?] CRAN (R 4.0.2)                   
+ P shape            1.4.4      2018-02-07 [?] CRAN (R 4.0.0)                   
+ P shiny            1.5.0      2020-06-23 [?] CRAN (R 4.0.2)                   
+ P skimr          * 2.1.1      2020-04-16 [?] CRAN (R 4.0.0)                   
+   spatstat         1.64-1     2020-05-12 [1] CRAN (R 4.0.2)                   
+   spatstat.data    1.4-3      2020-01-26 [1] CRAN (R 4.0.2)                   
+   spatstat.utils   1.17-0     2020-02-07 [1] CRAN (R 4.0.2)                   
+ P storr            1.2.1      2018-10-18 [?] standard (@1.2.1)                
+ P stringi          1.4.6      2020-02-17 [?] CRAN (R 4.0.0)                   
+ P stringr        * 1.4.0      2019-02-10 [?] CRAN (R 4.0.0)                   
+ P survival         3.2-3      2020-06-13 [?] CRAN (R 4.0.2)                   
+   tensor           1.5        2012-05-05 [1] CRAN (R 4.0.2)                   
+ P tibble         * 3.0.1      2020-04-20 [?] CRAN (R 4.0.0)                   
+ P tidyr          * 1.0.3      2020-05-07 [?] CRAN (R 4.0.0)                   
+ P tidyselect       1.0.0      2020-01-27 [?] CRAN (R 4.0.0)                   
+ P tidyverse      * 1.3.0      2019-11-21 [?] standard (@1.3.0)                
+ P txtq             0.2.0      2019-10-15 [?] standard (@0.2.0)                
+   uwot             0.1.8      2020-03-16 [1] CRAN (R 4.0.0)                   
+ P vctrs            0.2.4      2020-03-10 [?] CRAN (R 4.0.0)                   
+ P viridisLite      0.3.0      2018-02-01 [?] standard (@0.3.0)                
+ P whisker          0.4        2019-08-28 [?] standard (@0.4)                  
+ P withr            2.2.0      2020-04-20 [?] CRAN (R 4.0.0)                   
+ P workflowr        1.6.2      2020-04-30 [?] CRAN (R 4.0.0)                   
+ P xfun             0.13       2020-04-13 [?] CRAN (R 4.0.0)                   
+ P xml2             1.3.2      2020-04-23 [?] CRAN (R 4.0.0)                   
+   xtable           1.8-4      2019-04-21 [1] CRAN (R 4.0.2)                   
+ P yaml             2.2.1      2020-02-01 [?] CRAN (R 4.0.0)                   
+   zoo              1.8-8      2020-05-02 [1] CRAN (R 4.0.0)                   
+
+[1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpDkCGRZ/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp6fXpOy/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmphHRsPg/renv-system-library
+
+ P ── Loaded and on-disk path mismatch.</code></pre>
+<p class="timeit">
+Chunk time: 0.3 secs
+</p>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiY2VsbHRhbGtlciBleGFtcGxlIgpvdXRwdXQ6IHdvcmtmbG93cjo6d2Zsb3dfaHRtbAplZGl0b3Jfb3B0aW9uczoKICBjaHVua19vdXRwdXRfdHlwZTogY29uc29sZQotLS0KCmBgYHtyIHNldHVwLCBjYWNoZSA9IEZBTFNFfQojIFNldHVwIGRvY3VtZW50CnNvdXJjZShoZXJlOjpoZXJlKCJjb2RlIiwgInNldHVwLlIiKSkKCiMgRnVuY3Rpb24gZGVwZW5kZW5jaWVzCmludmlzaWJsZShkcmFrZTo6cmVhZGQoZG93bmxvYWRfbGluaykpCmBgYAoKSW50cm9kdWN0aW9uIHsudW5udW1iZXJlZH0KPT09PT09PT09PT09CgpJbiB0aGlzIGRvY3VtZW50IHdlIGFyZSBnb2luZyB0byBydW4gdGhyb3VnaCB0aGUgZXhhbXBsZSBhbmFseXNpcyBmb3IgdGhlICoqY2VsbHRhbGtlcioqIHBhY2thZ2UgYW5kIGhhdmUgYSBsb29rIGF0IHRoZSBvdXRwdXQgaXQgcHJvZHVjZXMuCk1vcmUgaW5mb3JtYXRpb24gYWJvdXQgKipjZWxsdGFsa2VyKiogY2FuIGJlIGZvdW5kIGF0IGh0dHBzOi8vZ2l0aHViLmNvbS9hcmM4NS9jZWxsdGFsa2VyLgoKYGBge3IgbGlicmFyaWVzfQpsaWJyYXJ5KCJjZWxsdGFsa2VyIikKYGBgCgpJbnB1dAo9PT09PQoKRXhwcmVzc2lvbgotLS0tLS0tLS0tCgpUaGUgbWFpbiBpbnB1dCB0byAqKmNlbGx0YWxrZXIqKiBpcyBhbiBleHByZXNzaW9uIG1hdHJpeCBmb3IgYSBzZXQgb2Ygc2FtcGxlcyAoMyBQQk1DIHNhbXBsZXMgYW5kIDMgdG9uc2lsIHNhbXBsZXMpIGZyb20gR0VPIGFjY2Vzc2lvbiBHU0UxMzkzMjQuCldlIGNyZWF0ZSB0aGlzIGJ5IHJlYWRpbmcgaW4gdGhlIHJhdyAqKkNlbGwgUmFuZ2VyKiogb3V0cHV0IGZpbGVzIGFuZCBzdG9yaW5nIHRoZW0gYXMgYSBgU2V1cmF0YCBvYmplY3QuCgo+ICoqTm90ZToqKiBJdCBpcyBub3QgZW50aXJlbHkgY2xlYXIgZnJvbSB0aGUgKipjZWxsdGFsa2VyKiogdHV0b3JpYWwgZXhhY3RseSB3aGljaCBzYW1wbGVzIHRvIHVzZSBzbyB0aGVzZSByZXN1bHRzIG1heSBkaWZmZXIgZnJvbSB3aGF0IGlzIHNob3cgdGhlcmUuCgpgYGB7ciBpbnB1dC1leHByZXNzaW9ufQpkYXRhX3BhdGhzIDwtIGZzOjpkaXJfbHMoaGVyZSgiZGF0YSIsICJjZWxsdGFsa2VyIikpCm5hbWVzKGRhdGFfcGF0aHMpIDwtIGMoInBibWMxIiwgInBibWMyIiwgInBibWMzIiwgInRvbnNpbDEiLCAidG9uc2lsMiIsCiAgICAgICAgICAgICAgICAgICAgICAgInRvbnNpbDMiKQoKcmF3X2RhdGEgPC0gU2V1cmF0OjpSZWFkMTBYKGRhdGFfcGF0aHMpCm1ldGFkYXRhIDwtIGRhdGEuZnJhbWUoCiAgICBTYW1wbGUgPSBzdHJpbmdyOjpzdHJfcmVtb3ZlKGNvbG5hbWVzKHJhd19kYXRhKSwgIl9bQS1aLTAtOV0rIikKKQptZXRhZGF0YSRUaXNzdWUgPC0gc3RyaW5ncjo6c3RyX3JlbW92ZShtZXRhZGF0YSRTYW1wbGUsICJbMC05XSIpCnJvd25hbWVzKG1ldGFkYXRhKSA8LSBjb2xuYW1lcyhyYXdfZGF0YSkKCnNldXJhdCA8LSBTZXVyYXQ6OkNyZWF0ZVNldXJhdE9iamVjdChjb3VudHMgPSByYXdfZGF0YSwgbWV0YS5kYXRhID0gbWV0YWRhdGEpCgpzZXVyYXQKYGBgCgpMaWdhbmQtcmVjZXB0b3IgcGFpcnMKLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgoqKmNlbGx0YWxrZXIqKiBpbmNsdWRlcyBhIHNldCBvZiBsaWdhbmQtcmVjZXB0b3IgcGFpcnMuCgpgYGB7ciBpbnB1dC1sci1wYWlyc30Kc2tpbShyYW1pbG93c2tpX3BhaXJzKQpgYGAKCioqU2V1cmF0KiogYW5hbHlzaXMKPT09PT09PT09PT09PT09PT09PQoKV2UgZmlyc3QgbmVlZCB0byBwZXJmb3JtIGEgc3RhbmRhcmQgKipTZXVyYXQqKiBhbmFseXNpcyB0byBnZXQgY2x1c3RlcnMgYW5kIGNlbGwgdHlwZSBsYWJlbHMuCk1vc3Qgb2YgdGhlIGRldGFpbHMgYXJlIHNraXBwZWQgb3ZlciBoZXJlLgoKQ2x1c3RlcmluZwotLS0tLS0tLS0tCgpgYGB7ciBzZXVyYXQtY2x1c3Rlcn0Kc2V0LnNlZWQoMDIyMjE5ODkpCgpzZXVyYXQgPC0gU2V1cmF0OjpOb3JtYWxpemVEYXRhKHNldXJhdCkKc2V1cmF0IDwtIFNldXJhdDo6RmluZFZhcmlhYmxlRmVhdHVyZXMoc2V1cmF0KQpzZXVyYXQgPC0gU2V1cmF0OjpTY2FsZURhdGEoc2V1cmF0KQpzZXVyYXQgPC0gU2V1cmF0OjpSdW5QQ0Eoc2V1cmF0LCB2ZXJib3NlID0gRkFMU0UpCnNldXJhdCA8LSBTZXVyYXQ6OlJ1blVNQVAoc2V1cmF0LCByZWR1Y3Rpb24gPSAicGNhIiwgZGltcyA9IDE6MTUsCiAgICAgICAgICAgICAgICAgICAgICAgICAgdmVyYm9zZSA9IEZBTFNFKQpzZXVyYXQgPC0gU2V1cmF0OjpGaW5kTmVpZ2hib3JzKHNldXJhdCwgcmVkdWN0aW9uID0gInBjYSIsIGRpbXMgPSAxOjE1LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZlcmJvc2UgPSBGQUxTRSkKc2V1cmF0IDwtIFNldXJhdDo6RmluZENsdXN0ZXJzKHNldXJhdCwgcmVzb2x1dGlvbiA9IDAuNSwgdmVyYm9zZSA9IEZBTFNFKQoKcDEgPC0gU2V1cmF0OjpEaW1QbG90KHNldXJhdCwgcmVkdWN0aW9uID0gInVtYXAiLCBncm91cC5ieSA9ICJTYW1wbGUiKQpwMiA8LSBTZXVyYXQ6OkRpbVBsb3Qoc2V1cmF0LCByZWR1Y3Rpb24gPSAidW1hcCIsIGdyb3VwLmJ5ID0gIlRpc3N1ZSIpCnAzIDwtIFNldXJhdDo6RGltUGxvdChzZXVyYXQsIHJlZHVjdGlvbiA9ICJ1bWFwIiwgZ3JvdXAuYnkgPSAiUk5BX3Nubl9yZXMuMC41IiwKICAgICAgICAgICAgICAgICAgICAgIGxhYmVsID0gVFJVRSkgKwogICAgU2V1cmF0OjpOb0xlZ2VuZCgpCgpjb3dwbG90OjpwbG90X2dyaWQocDEsIHAyLCBwMykKYGBgCgpMYWJlbHMKLS0tLS0tCgpgYGB7ciBzZXVyYXQtbGFiZWxzfQpTZXVyYXQ6OkZlYXR1cmVQbG90KHNldXJhdCwgcmVkdWN0aW9uID0gInVtYXAiLAogICAgICAgICAgICAgICAgICAgIGZlYXR1cmVzID0gYygiQ0QzRCIsICJDRDhBIiwgIkNENCIsICJDRDE0IiwgIk1TNEExIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkZDR1IzQSIsICJJTDNSQSIpKQoKIyBBZGQgbWV0YWRhdGEgZm9yIGNlbGwgdHlwZXMKY2VsbF90eXBlcyA8LSB2ZWN0b3IoImxvZ2ljYWwiLCBsZW5ndGggPSBuY29sKHNldXJhdCkpCm5hbWVzKGNlbGxfdHlwZXMpIDwtIGNvbG5hbWVzKHNldXJhdCkKCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gICIwIl0gPC0gIkNENCBUIGNvbnYiCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gICIxIl0gPC0gIkNENCBUIGNvbnYiCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gICIyIl0gPC0gIkIgY2VsbHMiCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gICIzIl0gPC0gIkIgY2VsbHMiCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gICI0Il0gPC0gIkNEMTQgbW9ub2N5dGVzIgpjZWxsX3R5cGVzW3NldXJhdEBtZXRhLmRhdGEkUk5BX3Nubl9yZXMuMC41ID09ICAiNSJdIDwtICJDRDgiCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gICI2Il0gPC0gIkNENCBUIGNvbnYiCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gICI3Il0gPC0gIkNENCBUIGNvbnYiCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gICI4Il0gPC0gIkIgY2VsbHMiCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gICI5Il0gPC0gIkIgY2VsbHMiCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gIjEwIl0gPC0gIk5LIGNlbGxzIgpjZWxsX3R5cGVzW3NldXJhdEBtZXRhLmRhdGEkUk5BX3Nubl9yZXMuMC41ID09ICIxMSJdIDwtICJDRDgiCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gIjEyIl0gPC0gIlBsYXNtYSIKY2VsbF90eXBlc1tzZXVyYXRAbWV0YS5kYXRhJFJOQV9zbm5fcmVzLjAuNSA9PSAiMTMiXSA8LSAiQ0QxNCBtb25vY3l0ZXMiCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gIjE0Il0gPC0gIkNEMTYgbW9ub2N5dGVzIgpjZWxsX3R5cGVzW3NldXJhdEBtZXRhLmRhdGEkUk5BX3Nubl9yZXMuMC41ID09ICIxNSJdIDwtICJQREMiCmNlbGxfdHlwZXNbc2V1cmF0QG1ldGEuZGF0YSRSTkFfc25uX3Jlcy4wLjUgPT0gIjE2Il0gPC0gIlJCQ3MiCgpzZXVyYXRbWyJDZWxsVHlwZSJdXSA8LSBjZWxsX3R5cGVzCgojIFJlbW92ZSByZWQgYmxvb2QgY2VsbHMKcmJjX2NlbGxzIDwtIG5hbWVzKGNlbGxfdHlwZXMpW3NldXJhdEBtZXRhLmRhdGEkUk5BX3Nubl9yZXMuMC41ID09ICIxNiJdCnNldXJhdCA8LSBzZXVyYXQgWywgIWNvbG5hbWVzKHNldXJhdCkgJWluJSByYmNfY2VsbHNdCmBgYAoKU2VsZWN0IHBhaXJzCj09PT09PT09PT09PQoKQmVmb3JlIHNjb3JpbmcgaW50ZXJhY3Rpb24gd2UgZmlyc3Qgc2VsZWN0IGEgc2V0IG9mIGxpZ2FuZC1yZWNlcHRvciBwYWlycyB0byBsb29rIGF0LgpGaXJzdCB3ZSBjaGVjayB3aGljaCBnZW5lcyBhcmUgcHJlc2VudCBpbiB0aGUgZGF0YXNldCBhbmQgdGhlbiB3ZSBzZWxlY3QgdGhvc2Ugd2VyZSB0aGUgbGlnYW5kIG9yIHJlY2VwdG9yIGlzIGFuIHVwLXJlZ3VsYXRlZCBtYXJrZXIgZ2VuZSBmb3Igb25lIG9mIHRoZSB0aXNzdWUgdHlwZXMuCgpgYGB7ciBzZWxlY3R9CmxpZ2FuZHMgICA8LSBhcy5jaGFyYWN0ZXIodW5pcXVlKHJhbWlsb3dza2lfcGFpcnMkbGlnYW5kKSkKcmVjZXB0b3JzIDwtIGFzLmNoYXJhY3Rlcih1bmlxdWUocmFtaWxvd3NraV9wYWlycyRyZWNlcHRvcikpCgpsaWdhbmRzX3ByZXNlbnQgICA8LSByb3duYW1lcyhzZXVyYXQpW3Jvd25hbWVzKHNldXJhdCkgJWluJSBsaWdhbmRzXQpyZWNlcHRvcnNfcHJlc2VudCA8LSByb3duYW1lcyhzZXVyYXQpW3Jvd25hbWVzKHNldXJhdCkgJWluJSByZWNlcHRvcnNdCmxyX3ByZXNlbnQgPC0gdW5pb24obGlnYW5kc19wcmVzZW50LCByZWNlcHRvcnNfcHJlc2VudCkKClNldXJhdDo6SWRlbnRzKHNldXJhdCkgPC0gIlRpc3N1ZSIKbWFya2VycyA8LSBTZXVyYXQ6OkZpbmRBbGxNYXJrZXJzKHNldXJhdCwgYXNzYXk9IlJOQSIsIGZlYXR1cmVzID0gbHJfcHJlc2VudCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG9ubHkucG9zID0gVFJVRSwgdmVyYm9zZSA9IEZBTFNFKQoKbHJfc2VsIDwtIHVuaXF1ZShtYXJrZXJzJGdlbmUpCgppbnRlcmFjdGlvbnNfc2VsIDwtIHJiaW5kKAogICAgcmFtaWxvd3NraV9wYWlyc1tyYW1pbG93c2tpX3BhaXJzJGxpZ2FuZCAgICVpbiUgbHJfc2VsLCBdLAogICAgcmFtaWxvd3NraV9wYWlyc1tyYW1pbG93c2tpX3BhaXJzJHJlY2VwdG9yICVpbiUgbHJfc2VsLCBdCikKYGBgCgpUaGlzIHByb2Nlc3Mgc2VsZWN0cyAqKmByIGxlbmd0aChscl9zZWwpYCoqIGxpZ2FuZHMgYW5kIHJlY2VwdG9ycyBhbmQgKipgciBucm93KGludGVyYWN0aW9uc19zZWwpYCoqIGludGVyYWN0aW9uIHBhaXJzLgoKUmVhcnJhbmdlIGRhdGEKPT09PT09PT09PT09PT0KCioqY2VsbHRhbGtlcioqIHJlcXVpcmVzIHRoZSBpbnB1dCBkYXRhIGluIGEgc3BlY2lmaWMgc3RydWN0dXJlLgpIZWxwZnVsbHkgaXQgcHJvdmlkZXMgc29tZSB1c2VmdWwgZnVuY3Rpb25zIHRvIG1ha2UgdGhpcyBlYXNpZXIuCgpFeHByZXNzaW9uIG1hdHJpY2VzCi0tLS0tLS0tLS0tLS0tLS0tLS0KClRoZSBmaXJzdCBkYXRhIHN0cnVjdHVyZSBpcyBhIG5lc3RlZCBkYXRhIGZyYW1lIHdpdGggZXhwcmVzc2lvbiBtYXRyaWNlcyBmb3IgdGhlIHNlbGVjdGVkIGxpZ2FuZHMgYW5kIHJlY2VwdG9ycyBmb3IgZWFjaCBncm91cCwgc2FtcGxlLCBhbmQgY2x1c3Rlci4KCmBgYHtyIHJlYXJyYW5nZS1leHByZXNzaW9ufQpleHByX21hdCA8LSBTZXVyYXQ6OkdldEFzc2F5RGF0YShzZXVyYXQsIHNsb3QgPSAiY291bnRzIikKY2x1c3RlcnMgPC0gc2V1cmF0QG1ldGEuZGF0YSRDZWxsVHlwZQp0aXNzdWVzICA8LSBzZXVyYXRAbWV0YS5kYXRhJFRpc3N1ZQpzYW1wbGVzICA8LSBzZXVyYXRAbWV0YS5kYXRhJFNhbXBsZQoKbHJfbWF0cmljZXMgPC0gcmVzaGFwZV9tYXRyaWNlcygKICAgIGNvdW50Lm1hdHJpeCAgICAgICAgICA9IGV4cHJfbWF0LAogICAgY2x1c3RlcnMgICAgICAgICAgICAgID0gY2x1c3RlcnMsCiAgICBncm91cHMgICAgICAgICAgICAgICAgPSB0aXNzdWVzLAogICAgcmVwbGljYXRlcyAgICAgICAgICAgID0gc2FtcGxlcywKICAgIGxpZ2FuZHMuYW5kLnJlY2VwdG9ycyA9IGludGVyYWN0aW9uc19zZWwKKQoKIyBUaGVyZSBpcyBhIGJpZyB3aGVyZSB0aGUgbmV4dCBzdGVwIGZhaWxzIGlmIHRoZXJlIGFyZSBzb21lIGNsdXN0ZXJzIHRoYXQKIyBhcmVuJ3QgcHJlc2VudCBpbiBhbGwgZ3JvdXBzLiBBZGQgZHVtbXkgdmFsdWVzIHRvIGF2b2lkIHRoaXMuCmR1bW15IDwtIHB1bGwodW5uZXN0KGxyX21hdHJpY2VzLCBjb2xzID0gInNhbXBsZXMiKSlbWzFdXVtbMV1dWzAsIF0KbHJfbWF0cmljZXMkc2FtcGxlc1tbMl1dJGV4cHIubWF0cmljZXMgPC0gbWFwKAogICAgbHJfbWF0cmljZXMkc2FtcGxlc1tbMl1dJGV4cHIubWF0cmljZXMsIGZ1bmN0aW9uKC5leHBfbWF0cykgewogICAgICAgIG1pc3NpbmcgPC0gdW5pcXVlKGNsdXN0ZXJzWyEoY2x1c3RlcnMgJWluJSBuYW1lcyguZXhwX21hdHMpKV0pCiAgICAgICAgZm9yIChjbHVzdGVyIGluIG1pc3NpbmcpIHsKICAgICAgICAgICAgLmV4cF9tYXRzW1tjbHVzdGVyXV0gPC0gZHVtbXkKICAgICAgICB9CiAgICAgICAgLmV4cF9tYXRzCiAgICB9CikKCnNraW0obHJfbWF0cmljZXMpCnNraW0odW5uZXN0KGxyX21hdHJpY2VzLCBjb2xzID0gInNhbXBsZXMiKSkKYGBgCgpFeHByZXNzZWQgbGlnYW5kcyBhbmQgcmVjZXB0b3JzCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCkZyb20gdGhlIG5lc3RlZCBleHByZXNzaW9uIG1hdHJpY2VzIHdlIHRoZW4gY3JlYXRlIGEgc2ltaWxhciBzdHJ1Y3R1cmUgd2hpY2ggY29udGFpbnMgdGhlIGxpZ2FuZHMgYW5kIHJlY2VwdG9ycyB0aGF0IGFyZSBleHByZXNzZWQgaW4gZWFjaCBncm91cC9jbHVzdGVyIGNvbWJpbmF0aW9uLgoKYGBge3IgcmVhcnJhbmdlLWxyfQpscl9leHByZXNzZWQgPC0gY3JlYXRlX2xpZ19yZWNfdGliKAogICAgZXhwLnRpYiAgICAgICAgICAgICAgID0gbHJfbWF0cmljZXMsCiAgICBjbHVzdGVycyAgICAgICAgICAgICAgPSBjbHVzdGVycywKICAgIGdyb3VwcyAgICAgICAgICAgICAgICA9IHRpc3N1ZXMsCiAgICByZXBsaWNhdGVzICAgICAgICAgICAgPSBzYW1wbGVzLAogICAgY2VsbHMucmVxZCAgICAgICAgICAgID0gMTAsCiAgICBmcmVxLnBvcy5yZXFkICAgICAgICAgPSAwLjUsCiAgICBsaWdhbmRzLmFuZC5yZWNlcHRvcnMgPSBpbnRlcmFjdGlvbnNfc2VsCikKCnNraW0obHJfZXhwcmVzc2VkKQpza2ltKHVubmVzdChscl9leHByZXNzZWRbMSwgMl0sIGNvbHMgPSAibGlnLnJlYy5leHAiKSkKYGBgCgpJbnRlcmFjdGlvbnMKPT09PT09PT09PT09CgpQdXRhdGl2ZSBpbnRlcmFjdGlvbnMKLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgpXaXRoIHRoaXMgZGF0YSBzdHJ1Y3R1cmUgd2UgY2FuIG5vdyBsb29rIGZvciBwdXRhdGl2ZSBpbnRlcmFjdGlvbnMuCgpgYGB7ciBpbnRlcmFjdGlvbnMtcHV0YXRpdmV9CnB1dGF0aXZlX2ludGVyYWN0aW9ucyA8LSBwdXRhdGl2ZV9pbnRlcmFjdGlvbnMoCiAgICBsaWdhbmQucmVjZXB0b3IudGliYmxlID0gbHJfZXhwcmVzc2VkLAogICAgY2x1c3RlcnMgICAgICAgICAgICAgICA9IGNsdXN0ZXJzLAogICAgZ3JvdXBzICAgICAgICAgICAgICAgICA9IHRpc3N1ZXMsCiAgICBmcmVxLmdyb3VwLmluLmNsdXN0ZXIgID0gMC4wNSwKICAgIGxpZ2FuZHMuYW5kLnJlY2VwdG9ycyAgPSBpbnRlcmFjdGlvbnNfc2VsCikKCnNraW0ocHV0YXRpdmVfaW50ZXJhY3Rpb25zKQpgYGAKClRoZSBuZXN0ZWQgZGF0YSBmcmFtZSByZXR1cm5lZCBieSB0aGlzIGZ1bmN0aW9uIGNvbnRhaW5zIGxpc3RzIG9mIHRoZSBhY3RpdmUgbGlnYW5kcyBhbmQgcmVjZXB0b3JzIGZvciBlYWNoIGNlbGwgdHlwZSBpbiBlYWNoIGdyb3VwLgoKVW5pcXVlIGludGVyYWN0aW9ucwotLS0tLS0tLS0tLS0tLS0tLS0tCgpUaGUgbmV4dCBzdGVwIGlkZW50aWZpZXMgaW50ZXJhY3Rpb25zIHRoYXQgYXJlIHVuaXF1ZSB0byBlYWNoIGdyb3VwLgoKYGBge3IgaW50ZXJhY3Rpb25zLXVuaXF1ZX0KdW5pcXVlX2ludGVyYWN0aW9ucyA8LSB1bmlxdWVfaW50ZXJhY3Rpb25zKAogICAgcHV0YXRpdmVfaW50ZXJhY3Rpb25zLAogICAgZ3JvdXAxID0gInBibWMiLAogICAgZ3JvdXAyID0gInRvbnNpbCIsCiAgICBpbnRlcmFjdGlvbnNfc2VsCikKCnNraW0odW5pcXVlX2ludGVyYWN0aW9ucykKYGBgCgpUaGlzIGdpdmVzIHVzZSB0aGUgbGlnYW5kcyBhbmQgcmVjZXB0b3JzIHRoYXQgYXJlIHVuaXF1ZSB0byBlYWNoIGdyb3VwIGFzIHdlbGwgYXMgdGhvc2UgdGhleSBoYXZlIGluIGNvbW1vbi4KClZpc3VhbGlzYXRpb24KPT09PT09PT09PT09PQoKQ2lyY29zIHBsb3QKLS0tLS0tLS0tLS0KCiMjIyBQQk1DCgpgYGB7ciB2aXMtY2lyY29zLXBibWN9CnBibWNfbHIgICAgICAgICAgIDwtIHB1bGwodW5pcXVlX2ludGVyYWN0aW9uc1sxLCAyXSlbWzFdXQpwYm1jX2ludGVyYWN0aW9ucyA8LSBwdWxsKHB1dGF0aXZlX2ludGVyYWN0aW9uc1sxLCAyXSlbWzFdXVtwYm1jX2xyXQoKY2lyY29zX3Bsb3QoaW50ZXJhY3Rpb25zID0gcGJtY19pbnRlcmFjdGlvbnMsIGNsdXN0ZXJzID0gY2x1c3RlcnMpCmBgYAoKIyMjIFRvbnNpbAoKYGBge3IgdmlzLWNpcmNvcy10b25zaWx9CnRvbnNpbF9sciAgICAgICAgICAgPC0gcHVsbCh1bmlxdWVfaW50ZXJhY3Rpb25zWzIsIDJdKVtbMV1dCnRvbnNpbF9pbnRlcmFjdGlvbnMgPC0gcHVsbChwdXRhdGl2ZV9pbnRlcmFjdGlvbnNbMiwgMl0pW1sxXV1bdG9uc2lsX2xyXQoKY2lyY29zX3Bsb3QoaW50ZXJhY3Rpb25zID0gdG9uc2lsX2ludGVyYWN0aW9ucywgY2x1c3RlcnMgPSBjbHVzdGVycykKYGBgCgpTdW1tYXJ5IHsudW5udW1iZXJlZH0KPT09PT09PQoKUGFyYW1ldGVycyB7LnVubnVtYmVyZWR9Ci0tLS0tLS0tLS0KClRoaXMgdGFibGUgZGVzY3JpYmVzIHBhcmFtZXRlcnMgdXNlZCBhbmQgc2V0IGluIHRoaXMgZG9jdW1lbnQuCgpgYGB7ciBwYXJhbWV0ZXJzfQpwYXJhbXMgPC0gbGlzdCgKICAgIAopCnBhcmFtcyA8LSB0b0pTT04ocGFyYW1zLCBwcmV0dHkgPSBUUlVFKQprYWJsZShmcm9tSlNPTihwYXJhbXMpKQpgYGAKCk91dHB1dCBmaWxlcyB7LnVubnVtYmVyZWR9Ci0tLS0tLS0tLS0tLQoKVGhpcyB0YWJsZSBkZXNjcmliZXMgdGhlIG91dHB1dCBmaWxlcyBwcm9kdWNlZCBieSB0aGlzIGRvY3VtZW50LiBSaWdodCBjbGljawphbmQgX1NhdmUgTGluayBBcy4uLl8gdG8gZG93bmxvYWQgdGhlIHJlc3VsdHMuCgpgYGB7ciBvdXRwdXR9CmthYmxlKGRhdGEuZnJhbWUoCiAgICBGaWxlID0gYygKICAgICAgICBkb3dubG9hZF9saW5rKCJwYXJhbWV0ZXJzLmpzb24iLCBPVVRfRElSKQogICAgKSwKICAgIERlc2NyaXB0aW9uID0gYygKICAgICAgICAiUGFyYW1ldGVycyBzZXQgYW5kIHVzZWQgaW4gdGhpcyBhbmFseXNpcyIKICAgICkKKSkKYGBgCgpTZXNzaW9uIGluZm9ybWF0aW9uIHsudW5udW1iZXJlZH0KLS0tLS0tLS0tLS0tLS0tLS0tLQo=</div>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("18-celltalker.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

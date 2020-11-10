@@ -60,6 +60,10 @@ plan <- drake_plan(
     rmd17_scTHI = target(
         workflowr::wflow_build(here(knitr_in("analysis/17-scTHI.Rmd"))),
         trigger = trigger(change = configs)
+    ),
+    rmd18_celltalker = target(
+        workflowr::wflow_build(here(knitr_in("analysis/18-celltalker.Rmd"))),
+        trigger = trigger(change = configs)
     )
 )
 
