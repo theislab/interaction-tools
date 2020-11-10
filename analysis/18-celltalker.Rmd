@@ -1,0 +1,319 @@
+---
+title: "celltalker example"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, cache = FALSE}
+# Setup document
+source(here::here("code", "setup.R"))
+
+# Function dependencies
+invisible(drake::readd(download_link))
+```
+
+Introduction {.unnumbered}
+============
+
+In this document we are going to run through the example analysis for the **celltalker** package and have a look at the output it produces.
+More information about **celltalker** can be found at https://github.com/arc85/celltalker.
+
+```{r libraries}
+library("celltalker")
+```
+
+Input
+=====
+
+Expression
+----------
+
+The main input to **celltalker** is an expression matrix for a set of samples (3 PBMC samples and 3 tonsil samples) from GEO accession GSE139324.
+We create this by reading in the raw **Cell Ranger** output files and storing them as a `Seurat` object.
+
+> **Note:** It is not entirely clear from the **celltalker** tutorial exactly which samples to use so these results may differ from what is show there.
+
+```{r input-expression}
+data_paths <- fs::dir_ls(here("data", "celltalker"))
+names(data_paths) <- c("pbmc1", "pbmc2", "pbmc3", "tonsil1", "tonsil2",
+                       "tonsil3")
+
+raw_data <- Seurat::Read10X(data_paths)
+metadata <- data.frame(
+    Sample = stringr::str_remove(colnames(raw_data), "_[A-Z-0-9]+")
+)
+metadata$Tissue <- stringr::str_remove(metadata$Sample, "[0-9]")
+rownames(metadata) <- colnames(raw_data)
+
+seurat <- Seurat::CreateSeuratObject(counts = raw_data, meta.data = metadata)
+
+seurat
+```
+
+Ligand-receptor pairs
+---------------------
+
+**celltalker** includes a set of ligand-receptor pairs.
+
+```{r input-lr-pairs}
+skim(ramilowski_pairs)
+```
+
+**Seurat** analysis
+===================
+
+We first need to perform a standard **Seurat** analysis to get clusters and cell type labels.
+Most of the details are skipped over here.
+
+Clustering
+----------
+
+```{r seurat-cluster}
+set.seed(02221989)
+
+seurat <- Seurat::NormalizeData(seurat)
+seurat <- Seurat::FindVariableFeatures(seurat)
+seurat <- Seurat::ScaleData(seurat)
+seurat <- Seurat::RunPCA(seurat, verbose = FALSE)
+seurat <- Seurat::RunUMAP(seurat, reduction = "pca", dims = 1:15,
+                          verbose = FALSE)
+seurat <- Seurat::FindNeighbors(seurat, reduction = "pca", dims = 1:15,
+                                verbose = FALSE)
+seurat <- Seurat::FindClusters(seurat, resolution = 0.5, verbose = FALSE)
+
+p1 <- Seurat::DimPlot(seurat, reduction = "umap", group.by = "Sample")
+p2 <- Seurat::DimPlot(seurat, reduction = "umap", group.by = "Tissue")
+p3 <- Seurat::DimPlot(seurat, reduction = "umap", group.by = "RNA_snn_res.0.5",
+                      label = TRUE) +
+    Seurat::NoLegend()
+
+cowplot::plot_grid(p1, p2, p3)
+```
+
+Labels
+------
+
+```{r seurat-labels}
+Seurat::FeaturePlot(seurat, reduction = "umap",
+                    features = c("CD3D", "CD8A", "CD4", "CD14", "MS4A1",
+                                 "FCGR3A", "IL3RA"))
+
+# Add metadata for cell types
+cell_types <- vector("logical", length = ncol(seurat))
+names(cell_types) <- colnames(seurat)
+
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  "0"] <- "CD4 T conv"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  "1"] <- "CD4 T conv"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  "2"] <- "B cells"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  "3"] <- "B cells"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  "4"] <- "CD14 monocytes"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  "5"] <- "CD8"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  "6"] <- "CD4 T conv"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  "7"] <- "CD4 T conv"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  "8"] <- "B cells"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 ==  "9"] <- "B cells"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == "10"] <- "NK cells"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == "11"] <- "CD8"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == "12"] <- "Plasma"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == "13"] <- "CD14 monocytes"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == "14"] <- "CD16 monocytes"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == "15"] <- "PDC"
+cell_types[seurat@meta.data$RNA_snn_res.0.5 == "16"] <- "RBCs"
+
+seurat[["CellType"]] <- cell_types
+
+# Remove red blood cells
+rbc_cells <- names(cell_types)[seurat@meta.data$RNA_snn_res.0.5 == "16"]
+seurat <- seurat [, !colnames(seurat) %in% rbc_cells]
+```
+
+Select pairs
+============
+
+Before scoring interaction we first select a set of ligand-receptor pairs to look at.
+First we check which genes are present in the dataset and then we select those were the ligand or receptor is an up-regulated marker gene for one of the tissue types.
+
+```{r select}
+ligands   <- as.character(unique(ramilowski_pairs$ligand))
+receptors <- as.character(unique(ramilowski_pairs$receptor))
+
+ligands_present   <- rownames(seurat)[rownames(seurat) %in% ligands]
+receptors_present <- rownames(seurat)[rownames(seurat) %in% receptors]
+lr_present <- union(ligands_present, receptors_present)
+
+Seurat::Idents(seurat) <- "Tissue"
+markers <- Seurat::FindAllMarkers(seurat, assay="RNA", features = lr_present,
+                                  only.pos = TRUE, verbose = FALSE)
+
+lr_sel <- unique(markers$gene)
+
+interactions_sel <- rbind(
+    ramilowski_pairs[ramilowski_pairs$ligand   %in% lr_sel, ],
+    ramilowski_pairs[ramilowski_pairs$receptor %in% lr_sel, ]
+)
+```
+
+This process selects **`r length(lr_sel)`** ligands and receptors and **`r nrow(interactions_sel)`** interaction pairs.
+
+Rearrange data
+==============
+
+**celltalker** requires the input data in a specific structure.
+Helpfully it provides some useful functions to make this easier.
+
+Expression matrices
+-------------------
+
+The first data structure is a nested data frame with expression matrices for the selected ligands and receptors for each group, sample, and cluster.
+
+```{r rearrange-expression}
+expr_mat <- Seurat::GetAssayData(seurat, slot = "counts")
+clusters <- seurat@meta.data$CellType
+tissues  <- seurat@meta.data$Tissue
+samples  <- seurat@meta.data$Sample
+
+lr_matrices <- reshape_matrices(
+    count.matrix          = expr_mat,
+    clusters              = clusters,
+    groups                = tissues,
+    replicates            = samples,
+    ligands.and.receptors = interactions_sel
+)
+
+# There is a big where the next step fails if there are some clusters that
+# aren't present in all groups. Add dummy values to avoid this.
+dummy <- pull(unnest(lr_matrices, cols = "samples"))[[1]][[1]][0, ]
+lr_matrices$samples[[2]]$expr.matrices <- map(
+    lr_matrices$samples[[2]]$expr.matrices, function(.exp_mats) {
+        missing <- unique(clusters[!(clusters %in% names(.exp_mats))])
+        for (cluster in missing) {
+            .exp_mats[[cluster]] <- dummy
+        }
+        .exp_mats
+    }
+)
+
+skim(lr_matrices)
+skim(unnest(lr_matrices, cols = "samples"))
+```
+
+Expressed ligands and receptors
+-------------------------------
+
+From the nested expression matrices we then create a similar structure which contains the ligands and receptors that are expressed in each group/cluster combination.
+
+```{r rearrange-lr}
+lr_expressed <- create_lig_rec_tib(
+    exp.tib               = lr_matrices,
+    clusters              = clusters,
+    groups                = tissues,
+    replicates            = samples,
+    cells.reqd            = 10,
+    freq.pos.reqd         = 0.5,
+    ligands.and.receptors = interactions_sel
+)
+
+skim(lr_expressed)
+skim(unnest(lr_expressed[1, 2], cols = "lig.rec.exp"))
+```
+
+Interactions
+============
+
+Putative interactions
+---------------------
+
+With this data structure we can now look for putative interactions.
+
+```{r interactions-putative}
+putative_interactions <- putative_interactions(
+    ligand.receptor.tibble = lr_expressed,
+    clusters               = clusters,
+    groups                 = tissues,
+    freq.group.in.cluster  = 0.05,
+    ligands.and.receptors  = interactions_sel
+)
+
+skim(putative_interactions)
+```
+
+The nested data frame returned by this function contains lists of the active ligands and receptors for each cell type in each group.
+
+Unique interactions
+-------------------
+
+The next step identifies interactions that are unique to each group.
+
+```{r interactions-unique}
+unique_interactions <- unique_interactions(
+    putative_interactions,
+    group1 = "pbmc",
+    group2 = "tonsil",
+    interactions_sel
+)
+
+skim(unique_interactions)
+```
+
+This gives use the ligands and receptors that are unique to each group as well as those they have in common.
+
+Visualisation
+=============
+
+Circos plot
+-----------
+
+### PBMC
+
+```{r vis-circos-pbmc}
+pbmc_lr           <- pull(unique_interactions[1, 2])[[1]]
+pbmc_interactions <- pull(putative_interactions[1, 2])[[1]][pbmc_lr]
+
+circos_plot(interactions = pbmc_interactions, clusters = clusters)
+```
+
+### Tonsil
+
+```{r vis-circos-tonsil}
+tonsil_lr           <- pull(unique_interactions[2, 2])[[1]]
+tonsil_interactions <- pull(putative_interactions[2, 2])[[1]][tonsil_lr]
+
+circos_plot(interactions = tonsil_interactions, clusters = clusters)
+```
+
+Summary {.unnumbered}
+=======
+
+Parameters {.unnumbered}
+----------
+
+This table describes parameters used and set in this document.
+
+```{r parameters}
+params <- list(
+    
+)
+params <- toJSON(params, pretty = TRUE)
+kable(fromJSON(params))
+```
+
+Output files {.unnumbered}
+------------
+
+This table describes the output files produced by this document. Right click
+and _Save Link As..._ to download the results.
+
+```{r output}
+kable(data.frame(
+    File = c(
+        download_link("parameters.json", OUT_DIR)
+    ),
+    Description = c(
+        "Parameters set and used in this analysis"
+    )
+))
+```
+
+Session information {.unnumbered}
+-------------------
