@@ -26,6 +26,140 @@ library("scTHI")
 Input
 =====
 
+Expression
+----------
+
+The **scTHI** tutorial contains a pre-processed dataset from a glioma sample.
+The sample has been filtered, transformed to log TPM and quantile normalised.
+
+```{r input-expression}
+data("H3K27", package = "scTHI.data")
+
+pander(as.matrix(H3K27[1:5, 1:5]))
+```
+
+The matrix has **`r nrow(H3K27)`** rows (pairs) and **`r ncol(H3K27)`** columns.
+
+Metadata
+--------
+
+We are also provided with a data frame of metadata information.
+
+```{r input-metadata}
+data("H3K27.meta", package = "scTHI.data")
+
+skim(H3K27.meta)
+```
+
+The most important column here contains the cell type labels.
+
+```{r input-types}
+table(H3K27.meta$Type)
+```
+
+Selection
+=========
+
+For the tutorial we only use the immune cells and a subset of the malignant cells.
+
+```{r select}
+malignant <- rownames(H3K27.meta)[H3K27.meta$Type == "Malignant"][1:100]
+immune    <- rownames(H3K27.meta)[H3K27.meta$Type == "Immune cell"]
+```
+
+Testing
+=======
+
+We now pass the input to the scoring function which uses an internal database of ligand-receptor pairs.
+The score considers the average expression of each pair but also the percentage of cells that express each ligand/receptor.
+Genes are only considered to be expressed if they are in the top 10 percent of genes in a cell.
+A p-value for each interaction is computed using a permutation test.
+
+```{r scoring}
+output <- scTHI_score(
+    expMat          = H3K27,
+    cellCusterA     = malignant,
+    cellCusterB     = immune,
+    cellCusterAName = "Malignant",
+    cellCusterBName = "Immune",
+    topRank         = 10,
+    PValue          = TRUE,
+    pvalueCutoff    = 0.05,
+    nPermu          = 10,
+    ncore           = 1
+)
+```
+
+The output is a list with **`r length(output)`** items: 
+`r glue_collapse(glue("**{names(output)}**"), sep = ", ", last = " and ")`
+
+Most of these are the inputs we provided but the scores are available in the
+**result** item.
+
+```{r results}
+skim(output$result)
+```
+
+Visualisation
+=============
+
+Scores
+------
+
+We can visualise a bar plot of the scores for the significant pairs.
+
+```{r vis-scores}
+scTHI_plotResult(
+    scTHIresult = output,
+    cexNames    = 0.7,
+    plotType    = "score"
+)
+```
+
+Expression
+----------
+
+This bar plot shows the percentage of cells in each cluster that express each partner in the interaction.
+
+```{r vis-expression}
+scTHI_plotResult(
+    scTHIresult = output,
+    cexNames    = 0.7,
+    plotType    = "pair"
+)
+```
+
+t-SNE
+-----
+
+We can also look at where cells lie in a t-SNE embedding.
+
+### Cluster
+
+Here the cells are coloured by the selected clusters.
+
+```{r vis-tsne-cluster}
+output <- scTHI_runTsne(scTHIresult = output)
+
+scTHI_plotCluster(
+    scTHIresult = output,
+    cexPoint    = 0.8,
+    legendPos   = "bottomleft"
+)
+```
+
+### Interactions
+
+We can also plot the expression of specific pairs we are interested in.
+
+```{r vis-tsne-interaction}
+scTHI_plotPairs(
+    scTHIresult       = output,
+    cexPoint          = 0.8,
+    interactionToplot = "THY1_ITGAX:ITGB2"
+)
+```
+
 Summary {.unnumbered}
 =======
 
