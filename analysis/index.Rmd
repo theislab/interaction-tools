@@ -4,14 +4,35 @@ site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
     toc: false
+    number_sections: false
 editor_options:
   chunk_output_type: console
 ---
 
-# Table of contents {.unnumbered}
+This site contains information about computational tools for identifying ligand-receptor interactions from single-cell RNA-sequencing data and examples of how they are used.
+For the most part this involves working through the tutorials and vignettes provided by the package authors.
+
+## Table of contents
 
 ```{r toc, include = FALSE}
 toc <- workflowr::wflow_toc()
 ```
 
 `r paste(toc, collapse = "\n")`
+
+## Acknowledgements
+
+As well as the authors of the various analysis packages we would like to acknowledge the authors of all the packages used to build this website particularly **[{workflowr}][workflowr]**, **[{drake}][drake]**, **[{rmarkdown}][rmarkdown]**, **[{knitr}][knitr]** and the various **[{tidyverse}][tidyverse]** packages.
+
+## Licensing
+
+The text for this website is covered by a [Creative Commons Attribution 4.0 International (CC BY 4.0) license][CC-BY] and the code by the [MIT license][MIT].
+Code in the various packages, tutorials and examples may be covered by other licenses so please refer to those for details.
+
+[workflowr]: https://jdblischak.github.io/workflowr/ "workflowr package website"
+[drake]: https://books.ropensci.org/drake/ "The drake R package user manual"
+[rmarkdown]: https://rmarkdown.rstudio.com/ "R Markdown website"
+[knitr]: https://yihui.org/knitr/ "knitr package website"
+[tidyverse]: https://www.tidyverse.org/ "Tidyverse website"
+[CC-BY]: https://creativecommons.org/licenses/by/4.0/ "Creative Commons Attribution 4.0 International (CC BY 4.0) license"
+[MIT]: https://choosealicense.com/licenses/mit/ "MIT license"
