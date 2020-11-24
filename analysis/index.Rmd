@@ -9,6 +9,10 @@ editor_options:
   chunk_output_type: console
 ---
 
+```{r setup, include = FALSE, cache = FALSE}
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
 This site contains information about computational tools for identifying ligand-receptor interactions from single-cell RNA-sequencing data and examples of how they are used.
 For the most part this involves working through the tutorials and vignettes provided by the package authors.
 
