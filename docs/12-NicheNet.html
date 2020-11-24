@@ -34,8 +34,6 @@
 <script src="site_libs/viz-1.8.2/viz.js"></script>
 <link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="site_libs/grViz-binding-1.0.5/grViz.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -362,40 +360,13 @@ div.tocify {
 
 
 
+<div id="nav-placeholder"></div>
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Interaction tools</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="license.html">License</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/lazappi/interaction-tools">
-    <span class="fa fa-github"></span>
-     
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar-content.html");
+});
+</script>
 
 <div class="fluid-row" id="header">
 
@@ -436,7 +407,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-27
+<strong>Last updated:</strong> 2020-11-24
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -527,16 +498,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreefd22f252375d785d45a23eaeb4d21c178e6f7c4atargetblankfd22f25a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/fd22f252375d785d45a23eaeb4d21c178e6f7c4a" target="_blank">fd22f25</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree0333fe338ef08f0c7d43a9b4e271a49de2880d12targetblank0333fe3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/0333fe338ef08f0c7d43a9b4e271a49de2880d12" target="_blank">0333fe3</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreefd22f252375d785d45a23eaeb4d21c178e6f7c4atargetblankfd22f25a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree0333fe338ef08f0c7d43a9b4e271a49de2880d12targetblank0333fe3a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/fd22f252375d785d45a23eaeb4d21c178e6f7c4a" target="_blank">fd22f25</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/0333fe338ef08f0c7d43a9b4e271a49de2880d12" target="_blank">0333fe3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -546,21 +517,24 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    .drake/
+    Ignored:    data/COMUNET/
+    Ignored:    data/CellChat/
+    Ignored:    data/ICELLNET/
     Ignored:    data/NicheNet/
     Ignored:    data/cellphonedb/
+    Ignored:    data/celltalker/
+    Ignored:    output/14-CellChat.Rmd/
+    Ignored:    output/15-talklr.Rmd/
+    Ignored:    output/16-CiteFuse.Rmd/
+    Ignored:    output/17-scTHI.Rmd/
+    Ignored:    output/18-celltalker.Rmd/
     Ignored:    output/index.Rmd/
     Ignored:    renv/library/
     Ignored:    renv/python/
     Ignored:    renv/staging/
 
 Unstaged changes:
-    Modified:   output/11-CellPhoneDB.Rmd/count_network.txt
-    Modified:   output/11-CellPhoneDB.Rmd/dotplot.png
-    Modified:   output/11-CellPhoneDB.Rmd/heatmap_counts.png
-    Modified:   output/11-CellPhoneDB.Rmd/heatmap_logcounts.png
-    Modified:   output/11-CellPhoneDB.Rmd/interactions_count.txt
-    Modified:   output/11-CellPhoneDB.Rmd/pvalues.txt
-    Modified:   output/11-CellPhoneDB.Rmd/significant_means.txt
+    Modified:   _drake.R
 
 </code></pre>
 <p>
@@ -599,6 +573,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/3feea4cdca67af4628301c4c51dc51626ceecd65/docs/12-NicheNet.html" target="_blank">3feea4c</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-27
+</td>
+<td>
+Add chunk timing to documents
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -724,7 +715,7 @@ library(&quot;circlize&quot;)
 
 conflict_prefer(&quot;get_legend&quot;, &quot;cowplot&quot;)</code></pre>
 <p class="timeit">
-Chunk time: 1.6 secs
+Chunk time: 2.15 secs
 </p>
 </div>
 <div id="input" class="section level1" number="1">
@@ -802,7 +793,7 @@ pander(ligand_targets[1:5, 1:5])</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 1.2 secs
+Chunk time: 1.22 secs
 </p>
 <p>The full matrix has <strong>25345</strong> rows (targets) and <strong>688</strong> columns (ligands).</p>
 </div>
@@ -908,7 +899,7 @@ skim(lr_network)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.12 secs
+Chunk time: 0.13 secs
 </p>
 </div>
 <div id="gene-receptor-network" class="section level2" number="1.3">
@@ -1013,7 +1004,7 @@ skim(gr_network)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 11.86 secs
+Chunk time: 12.47 secs
 </p>
 </div>
 <div id="signalling-network" class="section level2" number="1.4">
@@ -1118,7 +1109,7 @@ skim(sig_network)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 11.78 secs
+Chunk time: 13.08 secs
 </p>
 </div>
 <div id="network-weights" class="section level2" number="1.5">
@@ -1128,7 +1119,7 @@ weighted_networks &lt;- read_rds(
     fs::path(PATHS$NicheNet_in, &quot;weighted_networks.Rds&quot;)
 )</code></pre>
 <p class="timeit">
-Chunk time: 2.93 secs
+Chunk time: 3.41 secs
 </p>
 <p>This is a list with <strong>2</strong> items: <strong>lr_sig</strong> and <strong>gr</strong>.</p>
 <div id="ligand-receptor" class="section level3" number="1.5.1">
@@ -1246,7 +1237,7 @@ Chunk time: 2.93 secs
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 3.27 secs
+Chunk time: 3.39 secs
 </p>
 </div>
 <div id="gene-receptor" class="section level3" number="1.5.2">
@@ -1364,7 +1355,7 @@ Chunk time: 3.27 secs
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 3.46 secs
+Chunk time: 3.84 secs
 </p>
 </div>
 </div>
@@ -1374,7 +1365,7 @@ Chunk time: 3.46 secs
 <pre class="r"><code># From https://zenodo.org/record/3260758/files/hnscc_expression.rds
 hnscc &lt;- read_rds(fs::path(PATHS$NicheNet_in, &quot;hnscc_expression.Rds&quot;))</code></pre>
 <p class="timeit">
-Chunk time: 5.14 secs
+Chunk time: 5.84 secs
 </p>
 <p>This dataset is provided as a list with <strong>3 items: </strong>expression<strong>, </strong>sample_info** and <strong>expressed_genes</strong>.</p>
 <div id="expression-matrix" class="section level3" number="1.6.1">
@@ -1737,7 +1728,7 @@ skim(geneset)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.06 secs
+Chunk time: 0.07 secs
 </p>
 </div>
 </div>
@@ -1779,7 +1770,7 @@ expressed_receiver &lt;- exprs_mat[malignant_ids, ] %&gt;%
     .[. &gt;= 4] %&gt;%
     names()</code></pre>
 <p class="timeit">
-Chunk time: 7.18 secs
+Chunk time: 7.43 secs
 </p>
 <p>After this quality control we have selected <strong>404</strong> CAFs (senders) and <strong>1388</strong> tumour cells (receivers). There are <strong>6706</strong> genes expressed in the sender cells and <strong>6351</strong> genes expressed in the receiver cells.</p>
 </div>
@@ -1789,7 +1780,7 @@ Chunk time: 7.18 secs
 <pre class="r"><code>background_genes &lt;- expressed_receiver %&gt;%
     .[. %in% rownames(ligand_targets)]</code></pre>
 <p class="timeit">
-Chunk time: 0.01 secs
+Chunk time: 0 secs
 </p>
 <p>This gives us a set of <strong>6072</strong> background genes.</p>
 </div>
@@ -1961,7 +1952,7 @@ skim(ligand_activities)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 8.41 secs
+Chunk time: 8.79 secs
 </p>
 <p>There are various scores given as results here but the authors suggest using the Pearson correlation to select ligands. We select 20 ligands with highest correlation.</p>
 <pre class="r"><code>best_ligands &lt;- ligand_activities %&gt;%
@@ -1969,7 +1960,7 @@ Chunk time: 8.41 secs
     arrange(-pearson) %&gt;%
     pull(test_ligand)</code></pre>
 <p class="timeit">
-Chunk time: 0 secs
+Chunk time: 0.01 secs
 </p>
 <p>These ligands are: <strong>PTHLH</strong>, <strong>CXCL12</strong>, <strong>AGT</strong>, <strong>TGFB3</strong>, <strong>IL6</strong>, <strong>INHBA</strong>, <strong>ADAM17</strong>, <strong>TNC</strong>, <strong>CTGF</strong>, <strong>FN1</strong>, <strong>BMP5</strong>, <strong>IL24</strong>, <strong>CXCL11</strong>, <strong>MMP9</strong>, <strong>COL4A1</strong>, <strong>PSEN1</strong>, <strong>CXCL9</strong>, <strong>VCAM1</strong>, <strong>CXCL2</strong> and <strong>SEMA5A</strong></p>
 <p>The choice of to use 20 ligands is somewhat arbitary and is likely to be different for different settings. For a real analysis the authors suggest choosing a threshold by looking at the distribution of correlations.</p>
@@ -2030,7 +2021,7 @@ Luke Zappia
 </div>
 </div>
 <p class="timeit">
-Chunk time: 0.34 secs
+Chunk time: 0.38 secs
 </p>
 </div>
 <div id="infer-target-genes" class="section level1" number="6">
@@ -2158,7 +2149,7 @@ skim(active_links)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.22 secs
+Chunk time: 0.18 secs
 </p>
 <p>For visualisation potential scores are set to zero if they were below the 0.25 quantile for top targets of that ligand in the ligand-target matrix.</p>
 <pre class="r"><code>links_mat &lt;- prepare_ligand_target_visualization(
@@ -2228,7 +2219,7 @@ Luke Zappia
 </div>
 </div>
 <p class="timeit">
-Chunk time: 0.86 secs
+Chunk time: 0.98 secs
 </p>
 <p>The cutoffs for visualisation are arbitary and the authors suggest testing several cutoffs. Considering more targets would identify more interactions but with less confidence. Lowering the quantil cutoff would result in a denser heatmap.</p>
 </div>
@@ -2514,7 +2505,7 @@ Luke Zappia
 </div>
 </div>
 <p class="timeit">
-Chunk time: 2.46 secs
+Chunk time: 2.67 secs
 </p>
 </div>
 <div id="signalling-paths" class="section level1" number="9">
@@ -2551,7 +2542,7 @@ DiagrammeR::render_graph(graph_minmax, layout = &quot;tree&quot;)</code></pre>
 <div id="htmlwidget-4a11aa07d6792e289e6c" style="width:960px;height:768px;" class="grViz html-widget"></div>
 <script type="application/json" data-for="htmlwidget-4a11aa07d6792e289e6c">{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"CDK1\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"9,8!\"] \n  \"2\" [label = \"ESR1\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"27,6!\"] \n  \"3\" [label = \"FOS\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"31.5,5!\"] \n  \"4\" [label = \"JUN\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"30,4!\"] \n  \"5\" [label = \"SMAD2\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"27,7!\"] \n  \"6\" [label = \"SMAD3\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"23.5,3!\"] \n  \"7\" [label = \"SOX9\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"26.5,2!\"] \n  \"8\" [label = \"TGFB3\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#CD5C5C\", pos = \"8,8!\"] \n  \"9\" [label = \"TGFBR1\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"3,2!\"] \n  \"10\" [label = \"TGFBR2\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"5.5,1!\"] \n  \"11\" [label = \"TP53\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#7F7F7F\", pos = \"44,2!\"] \n  \"12\" [label = \"TGFBI\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#4682B4\", pos = \"53,1!\"] \n  \"13\" [label = \"TNC\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#4682B4\", pos = \"22.5,1!\"] \n  \"14\" [label = \"LAMC2\", style = \"filled\", width = \"0.75\", fontcolor = \"white\", fillcolor = \"#4682B4\", pos = \"33.5,1!\"] \n\"1\"->\"2\" [penwidth = \"0.814943618815127\", color = \"indianred\"] \n\"1\"->\"3\" [penwidth = \"0.869739690278899\", color = \"indianred\"] \n\"1\"->\"4\" [penwidth = \"0.913173915295903\", color = \"indianred\"] \n\"1\"->\"6\" [penwidth = \"0.75\", color = \"indianred\"] \n\"1\"->\"10\" [penwidth = \"1.25692543491003\", color = \"indianred\"] \n\"1\"->\"11\" [penwidth = \"1.25006116769321\", color = \"indianred\"] \n\"2\"->\"3\" [penwidth = \"1.25240012751204\", color = \"indianred\"] \n\"2\"->\"4\" [penwidth = \"1.1568807530515\", color = \"indianred\"] \n\"2\"->\"5\" [penwidth = \"1.14285956394859\", color = \"indianred\"] \n\"2\"->\"6\" [penwidth = \"1.42907536977704\", color = \"indianred\"] \n\"2\"->\"7\" [penwidth = \"0.893581003849813\", color = \"indianred\"] \n\"2\"->\"10\" [penwidth = \"0.898239570882218\", color = \"indianred\"] \n\"2\"->\"11\" [penwidth = \"1.14209528166143\", color = \"indianred\"] \n\"3\"->\"2\" [penwidth = \"1.1447883106913\", color = \"indianred\"] \n\"3\"->\"4\" [penwidth = \"1.11906351468039\", color = \"indianred\"] \n\"3\"->\"5\" [penwidth = \"1.09427700028501\", color = \"indianred\"] \n\"3\"->\"6\" [penwidth = \"1.17096216916331\", color = \"indianred\"] \n\"3\"->\"11\" [penwidth = \"0.897159861380588\", color = \"indianred\"] \n\"4\"->\"3\" [penwidth = \"1.21275033730909\", color = \"indianred\"] \n\"4\"->\"6\" [penwidth = \"1.1946589631163\", color = \"indianred\"] \n\"4\"->\"10\" [penwidth = \"0.84498584935393\", color = \"indianred\"] \n\"4\"->\"11\" [penwidth = \"0.921628475069415\", color = \"indianred\"] \n\"5\"->\"2\" [penwidth = \"1.08360875753039\", color = \"indianred\"] \n\"5\"->\"3\" [penwidth = \"1.13231102539343\", color = \"indianred\"] \n\"5\"->\"4\" [penwidth = \"1.009873255081\", color = \"indianred\"] \n\"5\"->\"6\" [penwidth = \"1.4167215749261\", color = \"indianred\"] \n\"5\"->\"7\" [penwidth = \"1.30886659245309\", color = \"indianred\"] \n\"5\"->\"9\" [penwidth = \"1.1130372327655\", color = \"indianred\"] \n\"5\"->\"10\" [penwidth = \"1.38632098703726\", color = \"indianred\"] \n\"5\"->\"11\" [penwidth = \"1.0282454120515\", color = \"indianred\"] \n\"6\"->\"2\" [penwidth = \"1.2328829085436\", color = \"indianred\"] \n\"6\"->\"3\" [penwidth = \"1.1881418490859\", color = \"indianred\"] \n\"6\"->\"4\" [penwidth = \"1.05485794472667\", color = \"indianred\"] \n\"6\"->\"5\" [penwidth = \"1.29186450962171\", color = \"indianred\"] \n\"6\"->\"7\" [penwidth = \"1.06499342557543\", color = \"indianred\"] \n\"6\"->\"9\" [penwidth = \"1.27067588530684\", color = \"indianred\"] \n\"6\"->\"10\" [penwidth = \"1.15290849817578\", color = \"indianred\"] \n\"6\"->\"11\" [penwidth = \"0.940749394116088\", color = \"indianred\"] \n\"7\"->\"2\" [penwidth = \"0.790009054516044\", color = \"indianred\"] \n\"7\"->\"5\" [penwidth = \"0.982486378003499\", color = \"indianred\"] \n\"7\"->\"6\" [penwidth = \"0.884124356552715\", color = \"indianred\"] \n\"8\"->\"5\" [penwidth = \"0.956868906462128\", color = \"indianred\"] \n\"8\"->\"6\" [penwidth = \"0.971275311052981\", color = \"indianred\"] \n\"8\"->\"9\" [penwidth = \"1.40508169100421\", color = \"indianred\"] \n\"8\"->\"10\" [penwidth = \"1.45450953845243\", color = \"indianred\"] \n\"9\"->\"5\" [penwidth = \"1.39685725465003\", color = \"indianred\"] \n\"9\"->\"6\" [penwidth = \"1.40153938425828\", color = \"indianred\"] \n\"9\"->\"10\" [penwidth = \"1.43035054741386\", color = \"indianred\"] \n\"10\"->\"1\" [penwidth = \"1.27571366531811\", color = \"indianred\"] \n\"10\"->\"2\" [penwidth = \"0.818978164877864\", color = \"indianred\"] \n\"10\"->\"4\" [penwidth = \"0.780164509757753\", color = \"indianred\"] \n\"10\"->\"5\" [penwidth = \"1.31449253512821\", color = \"indianred\"] \n\"10\"->\"6\" [penwidth = \"1.2871832236806\", color = \"indianred\"] \n\"10\"->\"9\" [penwidth = \"1.75\", color = \"indianred\"] \n\"11\"->\"1\" [penwidth = \"1.15193373038827\", color = \"indianred\"] \n\"11\"->\"2\" [penwidth = \"1.08356153481461\", color = \"indianred\"] \n\"11\"->\"3\" [penwidth = \"0.958872244302078\", color = \"indianred\"] \n\"11\"->\"4\" [penwidth = \"0.946227834428359\", color = \"indianred\"] \n\"11\"->\"6\" [penwidth = \"0.985319729480381\", color = \"indianred\"] \n\"2\"->\"12\" [penwidth = \"1.56804184171716\", color = \"steelblue\"] \n\"2\"->\"13\" [penwidth = \"0.927124786649569\", color = \"steelblue\"] \n\"3\"->\"14\" [penwidth = \"1.05114789543356\", color = \"steelblue\"] \n\"3\"->\"12\" [penwidth = \"1.0313816417039\", color = \"steelblue\"] \n\"3\"->\"13\" [penwidth = \"0.983581251692347\", color = \"steelblue\"] \n\"4\"->\"14\" [penwidth = \"1.02366417561658\", color = \"steelblue\"] \n\"4\"->\"12\" [penwidth = \"0.75\", color = \"steelblue\"] \n\"4\"->\"13\" [penwidth = \"1.52769824761689\", color = \"steelblue\"] \n\"5\"->\"14\" [penwidth = \"0.989948432817242\", color = \"steelblue\"] \n\"5\"->\"12\" [penwidth = \"0.946545877853133\", color = \"steelblue\"] \n\"5\"->\"13\" [penwidth = \"1.19175050903839\", color = \"steelblue\"] \n\"6\"->\"14\" [penwidth = \"1.40983490139672\", color = \"steelblue\"] \n\"6\"->\"12\" [penwidth = \"0.946545877853133\", color = \"steelblue\"] \n\"6\"->\"13\" [penwidth = \"1.75\", color = \"steelblue\"] \n\"7\"->\"14\" [penwidth = \"0.914830937636554\", color = \"steelblue\"] \n\"7\"->\"12\" [penwidth = \"0.946545877853133\", color = \"steelblue\"] \n\"7\"->\"13\" [penwidth = \"0.931624788263285\", color = \"steelblue\"] \n\"11\"->\"14\" [penwidth = \"1.51066872036671\", color = \"steelblue\"] \n\"11\"->\"12\" [penwidth = \"1.25185959241407\", color = \"steelblue\"] \n\"11\"->\"13\" [penwidth = \"1.05227131582542\", color = \"steelblue\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="timeit">
-Chunk time: 4.88 secs
+Chunk time: 4.97 secs
 </p>
 <p>We can also look at which data sources support the interactions in this network. Here are examples of the first few sources.</p>
 <pre class="r"><code>path_sources &lt;- infer_supporting_datasources(
@@ -2646,7 +2637,7 @@ kable(head(path_sources, n = 10))</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 7.95 secs
+Chunk time: 8.07 secs
 </p>
 </div>
 <div id="gene-set-prediction" class="section level1" number="10">
@@ -2665,7 +2656,7 @@ pemt_predictions &lt;- seq(n_rounds) %&gt;%
         ligand_target_matrix       = ligand_targets
     )</code></pre>
 <p class="timeit">
-Chunk time: 28.94 secs
+Chunk time: 33.61 secs
 </p>
 <p>This returns a list with <strong>2</strong> items. Here is a summary of the first item:</p>
 <table>
@@ -2844,7 +2835,7 @@ prediction_performance_fisher &lt;- pemt_predictions %&gt;%
     unlist() %&gt;%
     mean()</code></pre>
 <p class="timeit">
-Chunk time: 0.11 secs
+Chunk time: 0.14 secs
 </p>
 <p>We see that <strong>26%</strong> of p-EMT genes are classified as being part of the geneset and <strong>5%</strong> of non-p-EMT genes. A Fisher’s exact test gives us a p-value of <strong>8.3865289^{-11}</strong>.</p>
 <p>The following p-EMT genes were correctly predicted in every cross-validation round:</p>
@@ -3052,7 +3043,7 @@ Chunk time: 0.11 secs
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.02 secs
+Chunk time: 0.03 secs
 </p>
 </div>
 <div id="single-cell-ligand-activities" class="section level1" number="11">
@@ -3077,7 +3068,7 @@ sc_ligand_activities &lt;- predict_single_cell_ligand_activities(
     potential_ligands    = potential_ligands
 )</code></pre>
 <p class="timeit">
-Chunk time: 1.42 mins
+Chunk time: 1.67 mins
 </p>
 <p>Now that we have activities at the single-cell level they can be linked to other properties of cells. Here we score cells on their expression of the core p-EMT gene <em>TGFBI</em>. This is taken as a proxy for p-EMT activity and correlated with the calculated ligand activities. The correlation can be used to rank p-EMT inducing ligands.</p>
 <pre class="r"><code>cell_scores &lt;- tibble(
@@ -3421,7 +3412,7 @@ Luke Zappia
 </div>
 </div>
 <p class="timeit">
-Chunk time: 0.96 secs
+Chunk time: 1.23 secs
 </p>
 </div>
 <div id="circos-plots" class="section level1" number="12">
@@ -3491,7 +3482,7 @@ kable(data.frame(
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.04 secs
+Chunk time: 0.2 secs
 </p>
 </div>
 <div id="session-information" class="section level2 unnumbered" number="">
@@ -3507,14 +3498,14 @@ Chunk time: 0.04 secs
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value                       
  version  R version 4.0.0 (2020-04-24)
- os       macOS Catalina 10.15.4      
+ os       macOS Catalina 10.15.7      
  system   x86_64, darwin17.0          
  ui       X11                         
  language (EN)                        
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Berlin               
- date     2020-05-27                  
+ date     2020-11-24                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  ! package       * version    date       lib
@@ -3524,11 +3515,10 @@ Chunk time: 0.04 secs
  P backports       1.1.6      2020-04-05 [?]
  P base64enc       0.1-3      2015-07-28 [?]
  P base64url       1.4        2018-05-14 [?]
- P BiocManager     1.30.10    2019-11-16 [?]
    bitops          1.0-6      2013-08-17 [1]
  P broom           0.5.6      2020-04-20 [?]
-   car             3.0-7      2020-03-11 [1]
-   carData         3.0-3      2019-11-16 [1]
+ P car             3.0-7      2020-03-11 [?]
+ P carData         3.0-3      2019-11-16 [?]
    caret           6.0-86     2020-03-20 [1]
    caTools         1.18.0     2020-01-17 [1]
  P cellranger      1.1.0      2016-07-27 [?]
@@ -3537,16 +3527,16 @@ Chunk time: 0.04 secs
  P class           7.3-17     2020-04-26 [?]
  P cli             2.0.2      2020-02-28 [?]
  P cluster         2.1.0      2019-06-19 [?]
- P codetools       0.2-16     2018-12-24 [?]
+ P codetools       0.2-18     2020-11-04 [?]
  P colorspace      1.4-1      2019-03-18 [?]
  P conflicted    * 1.0.4      2019-06-21 [?]
  P cowplot       * 1.0.0      2019-07-11 [?]
  P crayon          1.3.4      2017-09-16 [?]
  P curl            4.3        2019-12-02 [?]
-   data.table      1.12.8     2019-12-09 [1]
+ P data.table      1.12.8     2019-12-09 [?]
  P DBI             1.1.0      2019-12-15 [?]
  P dbplyr          1.4.3      2020-04-19 [?]
-   DiagrammeR      1.0.5      2020-01-16 [1]
+ P DiagrammeR      1.0.5      2020-01-16 [?]
  P digest          0.6.25     2020-02-23 [?]
  P dplyr         * 0.8.5      2020-03-07 [?]
  P drake           7.12.0     2020-03-25 [?]
@@ -3569,7 +3559,7 @@ Chunk time: 0.04 secs
  P git2r           0.27.1     2020-05-03 [?]
  P GlobalOptions   0.1.1      2019-09-30 [?]
  P glue          * 1.4.0      2020-04-03 [?]
-   gower           0.2.1      2019-05-14 [1]
+ P gower           0.2.1      2019-05-14 [?]
    gridExtra       2.3        2017-09-09 [1]
  P gtable          0.3.0      2019-03-25 [?]
  P haven           2.2.0      2019-11-08 [?]
@@ -3577,8 +3567,8 @@ Chunk time: 0.04 secs
  P highr           0.8        2019-03-20 [?]
    Hmisc           4.4-0      2020-03-23 [1]
  P hms             0.5.3      2020-01-08 [?]
-   htmlTable       1.13.3     2019-12-04 [1]
- P htmltools       0.4.0      2019-10-04 [?]
+ P htmlTable       1.13.3     2019-12-04 [?]
+ P htmltools       0.5.0      2020-06-16 [?]
    htmlwidgets     1.5.1      2019-10-08 [1]
  P httpuv          1.5.2      2019-09-11 [?]
  P httr            1.4.1      2019-08-05 [?]
@@ -3594,7 +3584,7 @@ Chunk time: 0.04 secs
    latticeExtra    0.6-29     2019-12-19 [1]
    lava            1.6.7      2020-03-05 [1]
  P lifecycle       0.2.0      2020-03-06 [?]
-   limma           3.44.1     2020-04-28 [1]
+ P limma           3.44.1     2020-04-28 [?]
  P lubridate       1.7.8      2020-04-06 [?]
  P magrittr        1.5        2014-11-22 [?]
  P MASS            7.3-51.6   2020-04-26 [?]
@@ -3625,19 +3615,19 @@ Chunk time: 0.04 secs
  P Rcpp            1.0.4.6    2020-04-09 [?]
  P readr         * 1.3.1      2018-12-21 [?]
  P readxl          1.3.1      2019-03-13 [?]
-   recipes         0.1.12     2020-05-01 [1]
-   renv            0.10.0     2020-05-06 [1]
+ P recipes         0.1.12     2020-05-01 [?]
+ P renv            0.12.0     2020-08-28 [?]
  P repr            1.1.0      2020-01-28 [?]
  P reprex          0.3.0      2019-05-16 [?]
  P reshape2        1.4.4      2020-04-09 [?]
- P reticulate      1.15       2020-04-02 [?]
+ P reticulate      1.16       2020-05-27 [?]
    rio             0.5.16     2018-11-26 [1]
  P rlang           0.4.6      2020-05-02 [?]
  P rmarkdown       2.1        2020-01-20 [?]
    ROCR            1.0-11     2020-05-02 [1]
  P rpart           4.1-15     2019-04-12 [?]
  P rprojroot       1.3-2      2018-01-03 [?]
-   rstatix         0.5.0      2020-04-28 [1]
+ P rstatix         0.5.0      2020-04-28 [?]
  P rstudioapi      0.11       2020-02-07 [?]
  P rvest           0.3.5      2019-11-08 [?]
  P scales          1.1.0      2019-11-18 [?]
@@ -3647,9 +3637,9 @@ Chunk time: 0.04 secs
  P storr           1.2.1      2018-10-18 [?]
  P stringi         1.4.6      2020-02-17 [?]
  P stringr       * 1.4.0      2019-02-10 [?]
- P survival        3.1-12     2020-04-10 [?]
+ P survival        3.2-7      2020-09-28 [?]
  P tibble        * 3.0.1      2020-04-20 [?]
-   tidyr         * 1.0.3      2020-05-07 [1]
+ P tidyr         * 1.0.3      2020-05-07 [?]
  P tidyselect      1.0.0      2020-01-27 [?]
  P tidyverse     * 1.3.0      2019-11-21 [?]
    timeDate        3043.102   2018-02-21 [1]
@@ -3676,20 +3666,19 @@ Chunk time: 0.04 secs
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
- CRAN (R 4.0.0)                     
  standard (@1.1.0)                  
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
- CRAN (R 4.0.0)                     
+ CRAN (R 4.0.2)                     
  standard (@1.4-1)                  
  standard (@1.0.4)                  
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
- CRAN (R 4.0.0)                     
+ CRAN (R 4.0.1)                     
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
@@ -3724,7 +3713,7 @@ Chunk time: 0.04 secs
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
- standard (@0.4.0)                  
+ CRAN (R 4.0.2)                     
  CRAN (R 4.0.0)                     
  standard (@1.5.2)                  
  standard (@1.4.1)                  
@@ -3772,11 +3761,11 @@ Chunk time: 0.04 secs
  standard (@1.3.1)                  
  standard (@1.3.1)                  
  CRAN (R 4.0.0)                     
- CRAN (R 4.0.0)                     
+ CRAN (R 4.0.2)                     
  CRAN (R 4.0.0)                     
  standard (@0.3.0)                  
  CRAN (R 4.0.0)                     
- CRAN (R 4.0.0)                     
+ CRAN (R 4.0.2)                     
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
@@ -3793,7 +3782,7 @@ Chunk time: 0.04 secs
  standard (@1.2.1)                  
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
- CRAN (R 4.0.0)                     
+ CRAN (R 4.0.2)                     
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
  CRAN (R 4.0.0)                     
@@ -3811,9 +3800,9 @@ Chunk time: 0.04 secs
  CRAN (R 4.0.0)                     
 
 [1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
-[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpeX3EJ1/renv-system-library
-[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpoT5Igt/renv-system-library
-[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpeuqxaX/renv-system-library
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpOqMPdA/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpqYMqtc/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpS7cMys/renv-system-library
 
  P ── Loaded and on-disk path mismatch.</code></pre>
 <p class="timeit">

@@ -30,8 +30,6 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -358,40 +356,13 @@ div.tocify {
 
 
 
+<div id="nav-placeholder"></div>
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Interaction tools</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="license.html">License</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/lazappi/interaction-tools">
-    <span class="fa fa-github"></span>
-     
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar-content.html");
+});
+</script>
 
 <div class="fluid-row" id="header">
 
@@ -432,7 +403,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-27
+<strong>Last updated:</strong> 2020-11-24
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -523,16 +494,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreefd22f252375d785d45a23eaeb4d21c178e6f7c4atargetblankfd22f25a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/fd22f252375d785d45a23eaeb4d21c178e6f7c4a" target="_blank">fd22f25</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree0333fe338ef08f0c7d43a9b4e271a49de2880d12targetblank0333fe3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/0333fe338ef08f0c7d43a9b4e271a49de2880d12" target="_blank">0333fe3</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreefd22f252375d785d45a23eaeb4d21c178e6f7c4atargetblankfd22f25a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree0333fe338ef08f0c7d43a9b4e271a49de2880d12targetblank0333fe3a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/fd22f252375d785d45a23eaeb4d21c178e6f7c4a" target="_blank">fd22f25</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/0333fe338ef08f0c7d43a9b4e271a49de2880d12" target="_blank">0333fe3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -542,21 +513,24 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    .drake/
+    Ignored:    data/COMUNET/
+    Ignored:    data/CellChat/
+    Ignored:    data/ICELLNET/
     Ignored:    data/NicheNet/
     Ignored:    data/cellphonedb/
+    Ignored:    data/celltalker/
+    Ignored:    output/14-CellChat.Rmd/
+    Ignored:    output/15-talklr.Rmd/
+    Ignored:    output/16-CiteFuse.Rmd/
+    Ignored:    output/17-scTHI.Rmd/
+    Ignored:    output/18-celltalker.Rmd/
     Ignored:    output/index.Rmd/
     Ignored:    renv/library/
     Ignored:    renv/python/
     Ignored:    renv/staging/
 
 Unstaged changes:
-    Modified:   output/11-CellPhoneDB.Rmd/count_network.txt
-    Modified:   output/11-CellPhoneDB.Rmd/dotplot.png
-    Modified:   output/11-CellPhoneDB.Rmd/heatmap_counts.png
-    Modified:   output/11-CellPhoneDB.Rmd/heatmap_logcounts.png
-    Modified:   output/11-CellPhoneDB.Rmd/interactions_count.txt
-    Modified:   output/11-CellPhoneDB.Rmd/pvalues.txt
-    Modified:   output/11-CellPhoneDB.Rmd/significant_means.txt
+    Modified:   _drake.R
 
 </code></pre>
 <p>
@@ -595,6 +569,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/3feea4cdca67af4628301c4c51dc51626ceecd65/docs/11-CellPhoneDB.html" target="_blank">3feea4c</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-27
+</td>
+<td>
+Add chunk timing to documents
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -837,7 +828,7 @@ skim(meta)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.13 secs
+Chunk time: 0.1 secs
 </p>
 </div>
 <div id="test_counts.txt" class="section level2" number="1.2">
@@ -1071,7 +1062,7 @@ skim(counts)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.19 secs
+Chunk time: 0.25 secs
 </p>
 <p>The small test dataset contains 17198 genes and 17198 cells.</p>
 </div>
@@ -1087,32 +1078,30 @@ cellphonedb method statistical_analysis \
     --threads 1 \
     data/cellphonedb/test_meta.txt \
     data/cellphonedb/test_counts.txt</code></pre>
-<pre><code>[ ][APP][27/05/20-12:15:50][WARNING] Latest local available version is `v2.0.0`, using it
-[ ][APP][27/05/20-12:15:50][WARNING] User selected downloaded database `v2.0.0` is available, using it
-[ ][CORE][27/05/20-12:15:50][INFO] Initializing SqlAlchemy CellPhoneDB Core
-[ ][CORE][27/05/20-12:15:50][INFO] Using custom database at /Users/luke.zappia/.cpdb/releases/v2.0.0/cellphone.db
-[ ][APP][27/05/20-12:15:50][INFO] Launching Method cpdb_statistical_analysis_local_method_launcher
-[ ][APP][27/05/20-12:15:50][INFO] Launching Method _set_paths
-[ ][APP][27/05/20-12:15:50][WARNING] Output directory (output/11-cellphonedb.Rmd) exist and is not empty. Result can overwrite old results
-[ ][APP][27/05/20-12:15:50][INFO] Launching Method _load_meta_counts
-[ ][CORE][27/05/20-12:15:50][INFO] Launching Method cpdb_statistical_analysis_launcher
-[ ][CORE][27/05/20-12:15:50][INFO] Launching Method _counts_validations
-[ ][CORE][27/05/20-12:15:50][INFO] [Cluster Statistical Analysis Simple] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
-[ ][CORE][27/05/20-12:15:50][INFO] Running Simple Prefilters
-[ ][CORE][27/05/20-12:15:51][INFO] Running Real Simple Analysis
-[ ][CORE][27/05/20-12:15:51][INFO] Running Statistical Analysis
-/Users/luke.zappia/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
-  warnings.warn(message, FutureWarning)
-[ ][CORE][27/05/20-12:17:16][INFO] Building Pvalues result
-[ ][CORE][27/05/20-12:17:18][INFO] Building Simple results
-[ ][CORE][27/05/20-12:17:18][INFO] [Cluster Statistical Analysis Complex] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
-[ ][CORE][27/05/20-12:17:18][INFO] Running Complex Prefilters
-[ ][CORE][27/05/20-12:17:20][INFO] Running Real Complex Analysis
-[ ][CORE][27/05/20-12:17:20][INFO] Running Statistical Analysis
-[ ][CORE][27/05/20-12:19:06][INFO] Building Pvalues result
-[ ][CORE][27/05/20-12:19:07][INFO] Building Complex results</code></pre>
+<pre><code>[ ][APP][24/11/20-12:21:19][WARNING] Latest local available version is `v2.0.0`, using it
+[ ][APP][24/11/20-12:21:19][WARNING] User selected downloaded database `v2.0.0` is available, using it
+[ ][CORE][24/11/20-12:21:19][INFO] Initializing SqlAlchemy CellPhoneDB Core
+[ ][CORE][24/11/20-12:21:19][INFO] Using custom database at /Users/luke.zappia/.cpdb/releases/v2.0.0/cellphone.db
+[ ][APP][24/11/20-12:21:19][INFO] Launching Method cpdb_statistical_analysis_local_method_launcher
+[ ][APP][24/11/20-12:21:19][INFO] Launching Method _set_paths
+[ ][APP][24/11/20-12:21:19][WARNING] Output directory (output/11-cellphonedb.Rmd) exist and is not empty. Result can overwrite old results
+[ ][APP][24/11/20-12:21:19][INFO] Launching Method _load_meta_counts
+[ ][CORE][24/11/20-12:21:19][INFO] Launching Method cpdb_statistical_analysis_launcher
+[ ][CORE][24/11/20-12:21:19][INFO] Launching Method _counts_validations
+[ ][CORE][24/11/20-12:21:20][INFO] [Cluster Statistical Analysis Simple] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
+[ ][CORE][24/11/20-12:21:20][INFO] Running Simple Prefilters
+[ ][CORE][24/11/20-12:21:20][INFO] Running Real Simple Analysis
+[ ][CORE][24/11/20-12:21:20][INFO] Running Statistical Analysis
+[ ][CORE][24/11/20-12:22:47][INFO] Building Pvalues result
+[ ][CORE][24/11/20-12:22:49][INFO] Building Simple results
+[ ][CORE][24/11/20-12:22:50][INFO] [Cluster Statistical Analysis Complex] Threshold:0.1 Iterations:1000 Debug-seed:-1 Threads:1 Precision:3
+[ ][CORE][24/11/20-12:22:50][INFO] Running Complex Prefilters
+[ ][CORE][24/11/20-12:22:51][INFO] Running Real Complex Analysis
+[ ][CORE][24/11/20-12:22:51][INFO] Running Statistical Analysis
+[ ][CORE][24/11/20-12:24:41][INFO] Building Pvalues result
+[ ][CORE][24/11/20-12:24:43][INFO] Building Complex results</code></pre>
 <p class="timeit">
-Chunk time: 3.32 mins
+Chunk time: 3.47 mins
 </p>
 </div>
 <div id="output" class="section level1" number="3">
@@ -1344,7 +1333,7 @@ skim(deconvoluted)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.11 secs
+Chunk time: 0.12 secs
 </p>
 </div>
 <div id="means.txt" class="section level2" number="3.2">
@@ -1772,7 +1761,7 @@ skim(means)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.2 secs
+Chunk time: 0.21 secs
 </p>
 <p>It includes information about each ligand-receptor pair as well as scores for each pair of cell types.</p>
 </div>
@@ -2010,7 +1999,7 @@ skim(pvalues)</code></pre>
 <td align="right">0.77</td>
 <td align="right">0.39</td>
 <td align="right">0.00</td>
-<td align="right">0.55</td>
+<td align="right">0.56</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -2020,7 +2009,7 @@ skim(pvalues)</code></pre>
 <td align="left">Myeloid|NKcells_1</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">0.84</td>
+<td align="right">0.83</td>
 <td align="right">0.34</td>
 <td align="right">0.00</td>
 <td align="right">1.00</td>
@@ -2046,7 +2035,7 @@ skim(pvalues)</code></pre>
 <td align="left">NKcells_0|Myeloid</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">0.86</td>
+<td align="right">0.85</td>
 <td align="right">0.33</td>
 <td align="right">0.00</td>
 <td align="right">1.00</td>
@@ -2062,7 +2051,7 @@ skim(pvalues)</code></pre>
 <td align="right">0.71</td>
 <td align="right">0.38</td>
 <td align="right">0.00</td>
-<td align="right">0.33</td>
+<td align="right">0.34</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -2075,7 +2064,7 @@ skim(pvalues)</code></pre>
 <td align="right">0.81</td>
 <td align="right">0.34</td>
 <td align="right">0.00</td>
-<td align="right">0.69</td>
+<td align="right">0.70</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -2201,7 +2190,7 @@ skim(pvalues)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.18 secs
+Chunk time: 0.21 secs
 </p>
 </div>
 <div id="significant_means.txt" class="section level2" number="3.4">
@@ -2422,13 +2411,13 @@ skim(sig_means)</code></pre>
 <td align="left">rank</td>
 <td align="right">0</td>
 <td align="right">1.00</td>
+<td align="right">0.64</td>
+<td align="right">0.55</td>
+<td align="right">0.06</td>
+<td align="right">0.06</td>
 <td align="right">0.69</td>
-<td align="right">0.58</td>
-<td align="right">0.06</td>
-<td align="right">0.06</td>
-<td align="right">1.25</td>
-<td align="right">1.25</td>
-<td align="right">1.25</td>
+<td align="right">1.19</td>
+<td align="right">1.19</td>
 <td align="left">▇▁▁▁▇</td>
 </tr>
 <tr class="even">
@@ -2472,42 +2461,42 @@ skim(sig_means)</code></pre>
 </tr>
 <tr class="odd">
 <td align="left">Myeloid|Tcells</td>
-<td align="right">179</td>
-<td align="right">0.06</td>
-<td align="right">1.97</td>
-<td align="right">0.72</td>
+<td align="right">180</td>
+<td align="right">0.05</td>
+<td align="right">1.95</td>
+<td align="right">0.75</td>
 <td align="right">1.11</td>
 <td align="right">1.37</td>
-<td align="right">2.18</td>
-<td align="right">2.60</td>
+<td align="right">1.77</td>
+<td align="right">2.71</td>
 <td align="right">2.94</td>
-<td align="left">▇▁▂▃▅</td>
+<td align="left">▇▁▂▂▅</td>
 </tr>
 <tr class="even">
 <td align="left">NKcells_0|Myeloid</td>
-<td align="right">180</td>
-<td align="right">0.05</td>
-<td align="right">1.14</td>
+<td align="right">179</td>
+<td align="right">0.06</td>
+<td align="right">1.18</td>
 <td align="right">0.43</td>
 <td align="right">0.61</td>
-<td align="right">0.91</td>
-<td align="right">1.04</td>
-<td align="right">1.24</td>
+<td align="right">0.92</td>
+<td align="right">1.11</td>
+<td align="right">1.43</td>
 <td align="right">2.00</td>
-<td align="left">▃▇▂▁▃</td>
+<td align="left">▃▇▂▂▃</td>
 </tr>
 <tr class="odd">
 <td align="left">NKcells_0|NKcells_0</td>
-<td align="right">178</td>
+<td align="right">179</td>
 <td align="right">0.06</td>
-<td align="right">0.52</td>
-<td align="right">0.38</td>
+<td align="right">0.51</td>
+<td align="right">0.40</td>
 <td align="right">0.12</td>
-<td align="right">0.23</td>
-<td align="right">0.42</td>
-<td align="right">0.71</td>
+<td align="right">0.22</td>
+<td align="right">0.25</td>
+<td align="right">0.73</td>
 <td align="right">1.19</td>
-<td align="left">▇▁▃▁▂</td>
+<td align="left">▇▁▂▁▂</td>
 </tr>
 <tr class="even">
 <td align="left">NKcells_0|NKcells_1</td>
@@ -2524,68 +2513,68 @@ skim(sig_means)</code></pre>
 </tr>
 <tr class="odd">
 <td align="left">NKcells_0|Tcells</td>
-<td align="right">181</td>
-<td align="right">0.05</td>
-<td align="right">1.17</td>
-<td align="right">0.54</td>
+<td align="right">182</td>
+<td align="right">0.04</td>
+<td align="right">1.12</td>
+<td align="right">0.56</td>
 <td align="right">0.59</td>
-<td align="right">0.88</td>
-<td align="right">1.04</td>
-<td align="right">1.43</td>
+<td align="right">0.81</td>
+<td align="right">0.96</td>
+<td align="right">1.27</td>
 <td align="right">2.34</td>
-<td align="left">▇▃▃▁▂</td>
+<td align="left">▇▃▂▁▂</td>
 </tr>
 <tr class="even">
 <td align="left">NKcells_1|Myeloid</td>
-<td align="right">189</td>
-<td align="right">0.01</td>
+<td align="right">187</td>
+<td align="right">0.02</td>
+<td align="right">1.45</td>
+<td align="right">0.44</td>
 <td align="right">0.95</td>
-<td align="right">NA</td>
-<td align="right">0.95</td>
-<td align="right">0.95</td>
-<td align="right">0.95</td>
-<td align="right">0.95</td>
-<td align="right">0.95</td>
-<td align="left">▁▁▇▁▁</td>
+<td align="right">1.28</td>
+<td align="right">1.60</td>
+<td align="right">1.69</td>
+<td align="right">1.79</td>
+<td align="left">▇▁▁▇▇</td>
 </tr>
 <tr class="odd">
 <td align="left">NKcells_1|NKcells_0</td>
-<td align="right">184</td>
-<td align="right">0.03</td>
-<td align="right">1.08</td>
-<td align="right">0.82</td>
+<td align="right">182</td>
+<td align="right">0.04</td>
+<td align="right">1.20</td>
+<td align="right">1.00</td>
 <td align="right">0.22</td>
-<td align="right">0.46</td>
+<td align="right">0.30</td>
 <td align="right">0.98</td>
-<td align="right">1.47</td>
-<td align="right">2.39</td>
-<td align="left">▇▇▁▃▃</td>
+<td align="right">1.81</td>
+<td align="right">2.86</td>
+<td align="left">▇▅▂▁▅</td>
 </tr>
 <tr class="even">
 <td align="left">NKcells_1|NKcells_1</td>
-<td align="right">186</td>
-<td align="right">0.02</td>
-<td align="right">1.55</td>
-<td align="right">1.08</td>
+<td align="right">185</td>
+<td align="right">0.03</td>
+<td align="right">1.49</td>
+<td align="right">0.95</td>
 <td align="right">0.39</td>
-<td align="right">0.75</td>
-<td align="right">1.67</td>
+<td align="right">0.87</td>
+<td align="right">1.25</td>
 <td align="right">2.48</td>
 <td align="right">2.48</td>
-<td align="left">▃▃▁▁▇</td>
+<td align="left">▃▃▃▁▇</td>
 </tr>
 <tr class="odd">
 <td align="left">NKcells_1|Tcells</td>
-<td align="right">185</td>
+<td align="right">184</td>
 <td align="right">0.03</td>
-<td align="right">1.52</td>
-<td align="right">0.63</td>
+<td align="right">1.62</td>
+<td align="right">0.61</td>
 <td align="right">0.76</td>
-<td align="right">1.33</td>
-<td align="right">1.49</td>
-<td align="right">1.55</td>
+<td align="right">1.37</td>
+<td align="right">1.52</td>
+<td align="right">1.96</td>
 <td align="right">2.50</td>
-<td align="left">▃▃▇▁▃</td>
+<td align="left">▃▃▇▃▃</td>
 </tr>
 <tr class="even">
 <td align="left">Tcells|Myeloid</td>
@@ -2615,16 +2604,16 @@ skim(sig_means)</code></pre>
 </tr>
 <tr class="even">
 <td align="left">Tcells|NKcells_1</td>
-<td align="right">186</td>
+<td align="right">187</td>
 <td align="right">0.02</td>
-<td align="right">1.72</td>
-<td align="right">0.77</td>
-<td align="right">0.76</td>
-<td align="right">1.29</td>
+<td align="right">2.04</td>
+<td align="right">0.53</td>
+<td align="right">1.46</td>
 <td align="right">1.81</td>
-<td align="right">2.25</td>
+<td align="right">2.17</td>
+<td align="right">2.33</td>
 <td align="right">2.50</td>
-<td align="left">▃▁▃▁▇</td>
+<td align="left">▇▁▁▇▇</td>
 </tr>
 <tr class="odd">
 <td align="left">Tcells|Tcells</td>
@@ -2642,7 +2631,7 @@ skim(sig_means)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.17 secs
+Chunk time: 0.21 secs
 </p>
 </div>
 </div>
@@ -2659,12 +2648,8 @@ cellphonedb plot dot_plot \
     --pvalues-path output/11-CellPhoneDB.Rmd/pvalues.txt \
     --output-path output/11-CellPhoneDB.Rmd/ \
     --output-name dotplot.png</code></pre>
-<pre><code>* Project &#39;~/Documents/Projects/interaction-tools&#39; loaded. [renv 0.10.0]
-/Users/luke.zappia/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
-  warnings.warn(message, FutureWarning)
-R[write to console]: * The project and lockfile are out of sync -- use `renv::status()` for more details.</code></pre>
 <p class="timeit">
-Chunk time: 9.48 secs
+Chunk time: 8.94 secs
 </p>
 <p>This is a dotplot of the mean expression of the ligand-receptor pair in each pair of cell types.</p>
 <pre class="r"><code>fig_dir &lt;- here(&quot;docs&quot;, &quot;figure&quot;, DOCNAME)
@@ -2699,6 +2684,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+3feea4c
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
 <tr>
 <td>
 9e20a9a
@@ -2765,12 +2761,8 @@ cellphonedb plot heatmap_plot \
     --count-network-name count_network.txt \
     --interaction-count-name interactions_count.txt \
     data/cellphonedb/test_meta.txt</code></pre>
-<pre><code>* Project &#39;~/Documents/Projects/interaction-tools&#39; loaded. [renv 0.10.0]
-/Users/luke.zappia/Documents/Projects/interaction-tools/renv/python/condaenvs/renv-python/lib/python3.6/site-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.cluster.k_means_ module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.cluster. Anything that cannot be imported from sklearn.cluster is now part of the private API.
-  warnings.warn(message, FutureWarning)
-R[write to console]: * The project and lockfile are out of sync -- use `renv::status()` for more details.</code></pre>
 <p class="timeit">
-Chunk time: 6.03 secs
+Chunk time: 4.88 secs
 </p>
 <div id="counts" class="section level3" number="4.2.1">
 <h3 number="4.2.1"><span class="header-section-number">4.2.1</span> Counts</h3>
@@ -2808,6 +2800,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+3feea4c
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
 <tr>
 <td>
 9e20a9a
@@ -2857,7 +2860,7 @@ Luke Zappia
 </div>
 </div>
 <p class="timeit">
-Chunk time: 0.03 secs
+Chunk time: 0.04 secs
 </p>
 </div>
 <div id="log-counts" class="section level3" number="4.2.2">
@@ -2898,6 +2901,17 @@ Date
 <tbody>
 <tr>
 <td>
+3feea4c
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+<tr>
+<td>
 9e20a9a
 </td>
 <td>
@@ -2945,7 +2959,7 @@ Luke Zappia
 </div>
 </div>
 <p class="timeit">
-Chunk time: 0.03 secs
+Chunk time: 0.04 secs
 </p>
 </div>
 <div id="count_network.txt" class="section level3" number="4.2.3">
@@ -3061,19 +3075,19 @@ skim(network)</code></pre>
 <td align="left">count</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">15.25</td>
-<td align="right">9.66</td>
+<td align="right">15.62</td>
+<td align="right">9.78</td>
 <td align="right">1</td>
-<td align="right">11.25</td>
-<td align="right">13</td>
-<td align="right">20</td>
-<td align="right">36</td>
+<td align="right">10.5</td>
+<td align="right">14</td>
+<td align="right">19</td>
+<td align="right">37</td>
 <td align="left">▂▇▂▁▂</td>
 </tr>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.06 secs
+Chunk time: 0.07 secs
 </p>
 </div>
 <div id="interactions_count.txt" class="section level3" number="4.2.4">
@@ -3178,19 +3192,19 @@ skim(interactions)</code></pre>
 <td align="left">all_sum</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">61</td>
-<td align="right">24.75</td>
-<td align="right">38</td>
-<td align="right">41.75</td>
-<td align="right">58</td>
-<td align="right">77.25</td>
-<td align="right">90</td>
+<td align="right">62.5</td>
+<td align="right">24.8</td>
+<td align="right">41</td>
+<td align="right">42.5</td>
+<td align="right">58.5</td>
+<td align="right">78.5</td>
+<td align="right">92</td>
 <td align="left">▇▁▁▃▃</td>
 </tr>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.05 secs
+Chunk time: 0.06 secs
 </p>
 </div>
 </div>
@@ -3297,7 +3311,7 @@ Chunk time: 0.01 secs
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.06 secs
+Chunk time: 0.08 secs
 </p>
 </div>
 <div id="session-information" class="section level2 unnumbered" number="">
@@ -3313,14 +3327,14 @@ Chunk time: 0.06 secs
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value                       
  version  R version 4.0.0 (2020-04-24)
- os       macOS Catalina 10.15.4      
+ os       macOS Catalina 10.15.7      
  system   x86_64, darwin17.0          
  ui       X11                         
  language (EN)                        
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Berlin               
- date     2020-05-27                  
+ date     2020-11-24                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  ! package     * version date       lib source            
@@ -3328,7 +3342,6 @@ Chunk time: 0.06 secs
  P backports     1.1.6   2020-04-05 [?] CRAN (R 4.0.0)    
  P base64enc     0.1-3   2015-07-28 [?] CRAN (R 4.0.0)    
  P base64url     1.4     2018-05-14 [?] standard (@1.4)   
- P BiocManager   1.30.10 2019-11-16 [?] CRAN (R 4.0.0)    
  P broom         0.5.6   2020-04-20 [?] CRAN (R 4.0.0)    
  P cellranger    1.1.0   2016-07-27 [?] standard (@1.1.0) 
  P cli           2.0.2   2020-02-28 [?] CRAN (R 4.0.0)    
@@ -3355,7 +3368,7 @@ Chunk time: 0.06 secs
  P here        * 0.1     2017-05-28 [?] standard (@0.1)   
  P highr         0.8     2019-03-20 [?] standard (@0.8)   
  P hms           0.5.3   2020-01-08 [?] CRAN (R 4.0.0)    
- P htmltools     0.4.0   2019-10-04 [?] standard (@0.4.0) 
+ P htmltools     0.5.0   2020-06-16 [?] CRAN (R 4.0.2)    
  P httpuv        1.5.2   2019-09-11 [?] standard (@1.5.2) 
  P httr          1.4.1   2019-08-05 [?] standard (@1.4.1) 
  P igraph        1.2.5   2020-03-19 [?] CRAN (R 4.0.0)    
@@ -3382,10 +3395,10 @@ Chunk time: 0.06 secs
  P Rcpp          1.0.4.6 2020-04-09 [?] CRAN (R 4.0.0)    
  P readr       * 1.3.1   2018-12-21 [?] standard (@1.3.1) 
  P readxl        1.3.1   2019-03-13 [?] standard (@1.3.1) 
-   renv          0.10.0  2020-05-06 [1] CRAN (R 4.0.0)    
+ P renv          0.12.0  2020-08-28 [?] CRAN (R 4.0.2)    
  P repr          1.1.0   2020-01-28 [?] CRAN (R 4.0.0)    
  P reprex        0.3.0   2019-05-16 [?] standard (@0.3.0) 
- P reticulate    1.15    2020-04-02 [?] CRAN (R 4.0.0)    
+ P reticulate    1.16    2020-05-27 [?] CRAN (R 4.0.2)    
  P rlang         0.4.6   2020-05-02 [?] CRAN (R 4.0.0)    
  P rmarkdown     2.1     2020-01-20 [?] CRAN (R 4.0.0)    
  P rprojroot     1.3-2   2018-01-03 [?] CRAN (R 4.0.0)    
@@ -3398,7 +3411,7 @@ Chunk time: 0.06 secs
  P stringi       1.4.6   2020-02-17 [?] CRAN (R 4.0.0)    
  P stringr     * 1.4.0   2019-02-10 [?] CRAN (R 4.0.0)    
  P tibble      * 3.0.1   2020-04-20 [?] CRAN (R 4.0.0)    
-   tidyr       * 1.0.3   2020-05-07 [1] CRAN (R 4.0.0)    
+ P tidyr       * 1.0.3   2020-05-07 [?] CRAN (R 4.0.0)    
  P tidyselect    1.0.0   2020-01-27 [?] CRAN (R 4.0.0)    
  P tidyverse   * 1.3.0   2019-11-21 [?] standard (@1.3.0) 
  P txtq          0.2.0   2019-10-15 [?] standard (@0.2.0) 
@@ -3411,13 +3424,13 @@ Chunk time: 0.06 secs
  P yaml          2.2.1   2020-02-01 [?] CRAN (R 4.0.0)    
 
 [1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
-[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpeX3EJ1/renv-system-library
-[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpoT5Igt/renv-system-library
-[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpuyNmXR/renv-system-library
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpOqMPdA/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpqYMqtc/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpHPTw6W/renv-system-library
 
  P ── Loaded and on-disk path mismatch.</code></pre>
 <p class="timeit">
-Chunk time: 0.16 secs
+Chunk time: 0.19 secs
 </p>
 </div>
 </div>

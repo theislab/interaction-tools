@@ -11,6 +11,7 @@ library("tidyverse")
 #==============================================================================#
 
 source(here("code", "output.R"))
+source(here("code", "render.R"))
 
 #==============================================================================#
 # ---- PLAN ----
@@ -21,14 +22,12 @@ plan <- drake_plan(
         workflowr = read_lines(here(file_in("_workflowr.yml"))),
         site      = read_lines(here(file_in("analysis/_site.yml")))
     ),
-    about = target(
-        workflowr::wflow_build(here(knitr_in("analysis/about.Rmd"))),
-        trigger = trigger(change = configs)
+    navbar_content = target(
+        make_navbar_html(
+            here(file_out("docs/navbar-content.html"))
+        )
     ),
-    license = target(
-        workflowr::wflow_build(here(knitr_in("analysis/license.Rmd"))),
-        trigger = trigger(change = configs)
-    ),
+    navbar = readr::read_lines(here(file_in("analysis/_navbar.html"))),
     index = target(
         workflowr::wflow_build(here(knitr_in("analysis/index.Rmd"))),
         trigger = trigger(condition = TRUE)

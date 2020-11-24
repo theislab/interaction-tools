@@ -282,40 +282,13 @@ $(document).ready(function () {
 
 
 
+<div id="nav-placeholder"></div>
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Interaction tools</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="license.html">License</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/lazappi/interaction-tools">
-    <span class="fa fa-github"></span>
-     
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar-content.html");
+});
+</script>
 
 <div class="fluid-row" id="header">
 
@@ -356,7 +329,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-11-10
+<strong>Last updated:</strong> 2020-11-24
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -447,16 +420,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree4e1d47f273952758567541a354f0d2ef2847b6d6targetblank4e1d47fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/4e1d47f273952758567541a354f0d2ef2847b6d6" target="_blank">4e1d47f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree0333fe338ef08f0c7d43a9b4e271a49de2880d12targetblank0333fe3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/0333fe338ef08f0c7d43a9b4e271a49de2880d12" target="_blank">0333fe3</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree4e1d47f273952758567541a354f0d2ef2847b6d6targetblank4e1d47fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree0333fe338ef08f0c7d43a9b4e271a49de2880d12targetblank0333fe3a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/4e1d47f273952758567541a354f0d2ef2847b6d6" target="_blank">4e1d47f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/0333fe338ef08f0c7d43a9b4e271a49de2880d12" target="_blank">0333fe3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -468,6 +441,7 @@ Ignored files:
     Ignored:    .drake/
     Ignored:    data/COMUNET/
     Ignored:    data/CellChat/
+    Ignored:    data/ICELLNET/
     Ignored:    data/NicheNet/
     Ignored:    data/cellphonedb/
     Ignored:    data/celltalker/
@@ -483,6 +457,13 @@ Ignored files:
 
 Unstaged changes:
     Modified:   _drake.R
+    Modified:   output/11-CellPhoneDB.Rmd/count_network.txt
+    Modified:   output/11-CellPhoneDB.Rmd/dotplot.png
+    Modified:   output/11-CellPhoneDB.Rmd/heatmap_counts.png
+    Modified:   output/11-CellPhoneDB.Rmd/heatmap_logcounts.png
+    Modified:   output/11-CellPhoneDB.Rmd/interactions_count.txt
+    Modified:   output/11-CellPhoneDB.Rmd/pvalues.txt
+    Modified:   output/11-CellPhoneDB.Rmd/significant_means.txt
 
 </code></pre>
 <p>
@@ -521,6 +502,57 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/903c6b4d5d6c913ebf3688418a56260ed1fb63e8/analysis/index.Rmd" target="_blank">903c6b4</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-24
+</td>
+<td>
+Use HTML navbar
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/c6b67b8b17a985097cab898485475d5d7565579e/analysis/index.Rmd" target="_blank">c6b67b8</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-24
+</td>
+<td>
+Update index, README, LICENSE
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/b305bfe20482f530c0acefe883046da2ff9c6b87/docs/index.html" target="_blank">b305bfe</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-10
+</td>
+<td>
+Add celltalker to drake
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -732,8 +764,9 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<div id="table-of-contents" class="section level1 unnumbered" number="">
-<h1 class="unnumbered" number="">Table of contents</h1>
+<p>This site contains information about computational tools for identifying ligand-receptor interactions from single-cell RNA-sequencing data and examples of how they are used. For the most part this involves working through the tutorials and vignettes provided by the package authors.</p>
+<div id="table-of-contents" class="section level2">
+<h2>Table of contents</h2>
 <ol style="list-style-type: decimal">
 <li><a href="11-CellPhoneDB.html">CellPhoneDB example</a></li>
 <li><a href="12-NicheNet.html">NicheNet example</a></li>
@@ -742,7 +775,17 @@ Start workflowr project.
 <li><a href="15-talklr.html">talklr example</a></li>
 <li><a href="16-CiteFuse.html">CiteFuse example</a></li>
 <li><a href="17-scTHI.html">scTHI example</a></li>
+<li><a href="18-celltalker.html">celltalker example</a></li>
+<li><a href="index.html">Home</a></li>
 </ol>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2>Acknowledgements</h2>
+<p>As well as the authors of the various analysis packages we would like to acknowledge the authors of all the packages used to build this website particularly <strong><a href="https://jdblischak.github.io/workflowr/" title="workflowr package website">{workflowr}</a></strong>, <strong><a href="https://books.ropensci.org/drake/" title="The drake R package user manual">{drake}</a></strong>, <strong><a href="https://rmarkdown.rstudio.com/" title="R Markdown website">{rmarkdown}</a></strong>, <strong><a href="https://yihui.org/knitr/" title="knitr package website">{knitr}</a></strong> and the various <strong><a href="https://www.tidyverse.org/" title="Tidyverse website">{tidyverse}</a></strong> packages.</p>
+</div>
+<div id="licensing" class="section level2">
+<h2>Licensing</h2>
+<p>The text for this website is covered by a <a href="https://creativecommons.org/licenses/by/4.0/" title="Creative Commons Attribution 4.0 International (CC BY 4.0) license">Creative Commons Attribution 4.0 International (CC BY 4.0) license</a> and the code by the <a href="https://choosealicense.com/licenses/mit/" title="MIT license">MIT license</a>. Code in the various packages, tutorials and examples may be covered by other licenses so please refer to those for details.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -761,7 +804,7 @@ Start workflowr project.
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Berlin               
- date     2020-11-10                  
+ date     2020-11-24                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  ! package     * version date       lib source            
@@ -804,15 +847,15 @@ Start workflowr project.
  P yaml          2.2.1   2020-02-01 [?] CRAN (R 4.0.0)    
 
 [1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
-[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpDkCGRZ/renv-system-library
-[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp6fXpOy/renv-system-library
-[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpOV1TTP/renv-system-library
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpOqMPdA/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpqYMqtc/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpigIWfP/renv-system-library
 
  P ── Loaded and on-disk path mismatch.</code></pre>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSG9tZSIKc2l0ZTogd29ya2Zsb3dyOjp3Zmxvd19zaXRlCm91dHB1dDoKICB3b3JrZmxvd3I6OndmbG93X2h0bWw6CiAgICB0b2M6IGZhbHNlCmVkaXRvcl9vcHRpb25zOgogIGNodW5rX291dHB1dF90eXBlOiBjb25zb2xlCi0tLQoKIyBUYWJsZSBvZiBjb250ZW50cyB7LnVubnVtYmVyZWR9CgpgYGB7ciB0b2MsIGluY2x1ZGUgPSBGQUxTRX0KdG9jIDwtIHdvcmtmbG93cjo6d2Zsb3dfdG9jKCkKYGBgCgpgciBwYXN0ZSh0b2MsIGNvbGxhcHNlID0gIlxuIilgCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSG9tZSIKc2l0ZTogd29ya2Zsb3dyOjp3Zmxvd19zaXRlCm91dHB1dDoKICB3b3JrZmxvd3I6OndmbG93X2h0bWw6CiAgICB0b2M6IGZhbHNlCiAgICBudW1iZXJfc2VjdGlvbnM6IGZhbHNlCmVkaXRvcl9vcHRpb25zOgogIGNodW5rX291dHB1dF90eXBlOiBjb25zb2xlCi0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGUgPSBGQUxTRSwgY2FjaGUgPSBGQUxTRX0KaHRtbHRvb2xzOjp0YWdMaXN0KHJtYXJrZG93bjo6aHRtbF9kZXBlbmRlbmN5X2ZvbnRfYXdlc29tZSgpKQpgYGAKClRoaXMgc2l0ZSBjb250YWlucyBpbmZvcm1hdGlvbiBhYm91dCBjb21wdXRhdGlvbmFsIHRvb2xzIGZvciBpZGVudGlmeWluZyBsaWdhbmQtcmVjZXB0b3IgaW50ZXJhY3Rpb25zIGZyb20gc2luZ2xlLWNlbGwgUk5BLXNlcXVlbmNpbmcgZGF0YSBhbmQgZXhhbXBsZXMgb2YgaG93IHRoZXkgYXJlIHVzZWQuCkZvciB0aGUgbW9zdCBwYXJ0IHRoaXMgaW52b2x2ZXMgd29ya2luZyB0aHJvdWdoIHRoZSB0dXRvcmlhbHMgYW5kIHZpZ25ldHRlcyBwcm92aWRlZCBieSB0aGUgcGFja2FnZSBhdXRob3JzLgoKIyMgVGFibGUgb2YgY29udGVudHMKCmBgYHtyIHRvYywgaW5jbHVkZSA9IEZBTFNFfQp0b2MgPC0gd29ya2Zsb3dyOjp3Zmxvd190b2MoKQpgYGAKCmByIHBhc3RlKHRvYywgY29sbGFwc2UgPSAiXG4iKWAKCiMjIEFja25vd2xlZGdlbWVudHMKCkFzIHdlbGwgYXMgdGhlIGF1dGhvcnMgb2YgdGhlIHZhcmlvdXMgYW5hbHlzaXMgcGFja2FnZXMgd2Ugd291bGQgbGlrZSB0byBhY2tub3dsZWRnZSB0aGUgYXV0aG9ycyBvZiBhbGwgdGhlIHBhY2thZ2VzIHVzZWQgdG8gYnVpbGQgdGhpcyB3ZWJzaXRlIHBhcnRpY3VsYXJseSAqKlt7d29ya2Zsb3dyfV1bd29ya2Zsb3dyXSoqLCAqKlt7ZHJha2V9XVtkcmFrZV0qKiwgKipbe3JtYXJrZG93bn1dW3JtYXJrZG93bl0qKiwgKipbe2tuaXRyfV1ba25pdHJdKiogYW5kIHRoZSB2YXJpb3VzICoqW3t0aWR5dmVyc2V9XVt0aWR5dmVyc2VdKiogcGFja2FnZXMuCgojIyBMaWNlbnNpbmcKClRoZSB0ZXh0IGZvciB0aGlzIHdlYnNpdGUgaXMgY292ZXJlZCBieSBhIFtDcmVhdGl2ZSBDb21tb25zIEF0dHJpYnV0aW9uIDQuMCBJbnRlcm5hdGlvbmFsIChDQyBCWSA0LjApIGxpY2Vuc2VdW0NDLUJZXSBhbmQgdGhlIGNvZGUgYnkgdGhlIFtNSVQgbGljZW5zZV1bTUlUXS4KQ29kZSBpbiB0aGUgdmFyaW91cyBwYWNrYWdlcywgdHV0b3JpYWxzIGFuZCBleGFtcGxlcyBtYXkgYmUgY292ZXJlZCBieSBvdGhlciBsaWNlbnNlcyBzbyBwbGVhc2UgcmVmZXIgdG8gdGhvc2UgZm9yIGRldGFpbHMuCgpbd29ya2Zsb3dyXTogaHR0cHM6Ly9qZGJsaXNjaGFrLmdpdGh1Yi5pby93b3JrZmxvd3IvICJ3b3JrZmxvd3IgcGFja2FnZSB3ZWJzaXRlIgpbZHJha2VdOiBodHRwczovL2Jvb2tzLnJvcGVuc2NpLm9yZy9kcmFrZS8gIlRoZSBkcmFrZSBSIHBhY2thZ2UgdXNlciBtYW51YWwiCltybWFya2Rvd25dOiBodHRwczovL3JtYXJrZG93bi5yc3R1ZGlvLmNvbS8gIlIgTWFya2Rvd24gd2Vic2l0ZSIKW2tuaXRyXTogaHR0cHM6Ly95aWh1aS5vcmcva25pdHIvICJrbml0ciBwYWNrYWdlIHdlYnNpdGUiClt0aWR5dmVyc2VdOiBodHRwczovL3d3dy50aWR5dmVyc2Uub3JnLyAiVGlkeXZlcnNlIHdlYnNpdGUiCltDQy1CWV06IGh0dHBzOi8vY3JlYXRpdmVjb21tb25zLm9yZy9saWNlbnNlcy9ieS80LjAvICJDcmVhdGl2ZSBDb21tb25zIEF0dHJpYnV0aW9uIDQuMCBJbnRlcm5hdGlvbmFsIChDQyBCWSA0LjApIGxpY2Vuc2UiCltNSVRdOiBodHRwczovL2Nob29zZWFsaWNlbnNlLmNvbS9saWNlbnNlcy9taXQvICJNSVQgbGljZW5zZSIK</div>
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
 TeX fonts only; see

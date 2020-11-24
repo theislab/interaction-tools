@@ -30,8 +30,6 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -358,40 +356,13 @@ div.tocify {
 
 
 
+<div id="nav-placeholder"></div>
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Interaction tools</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="license.html">License</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/lazappi/interaction-tools">
-    <span class="fa fa-github"></span>
-     
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar-content.html");
+});
+</script>
 
 <div class="fluid-row" id="header">
 
@@ -432,7 +403,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-11-10
+<strong>Last updated:</strong> 2020-11-24
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -523,16 +494,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree4e1d47f273952758567541a354f0d2ef2847b6d6targetblank4e1d47fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/4e1d47f273952758567541a354f0d2ef2847b6d6" target="_blank">4e1d47f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreec6b67b8b17a985097cab898485475d5d7565579etargetblankc6b67b8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/c6b67b8b17a985097cab898485475d5d7565579e" target="_blank">c6b67b8</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree4e1d47f273952758567541a354f0d2ef2847b6d6targetblank4e1d47fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstreec6b67b8b17a985097cab898485475d5d7565579etargetblankc6b67b8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/4e1d47f273952758567541a354f0d2ef2847b6d6" target="_blank">4e1d47f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/c6b67b8b17a985097cab898485475d5d7565579e" target="_blank">c6b67b8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -544,6 +515,7 @@ Ignored files:
     Ignored:    .drake/
     Ignored:    data/COMUNET/
     Ignored:    data/CellChat/
+    Ignored:    data/ICELLNET/
     Ignored:    data/NicheNet/
     Ignored:    data/cellphonedb/
     Ignored:    data/celltalker/
@@ -557,8 +529,14 @@ Ignored files:
     Ignored:    renv/python/
     Ignored:    renv/staging/
 
+Untracked files:
+    Untracked:  analysis/_navbar.html
+    Untracked:  code/render.R
+
 Unstaged changes:
     Modified:   _drake.R
+    Modified:   analysis/_site.yml
+    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -599,6 +577,23 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/b305bfe20482f530c0acefe883046da2ff9c6b87/docs/18-celltalker.html" target="_blank">b305bfe</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-10
+</td>
+<td>
+Add celltalker to drake
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
@@ -631,7 +626,7 @@ invisible(drake::readd(download_link))</code></pre>
 <p>In this document we are going to run through the example analysis for the <strong>celltalker</strong> package and have a look at the output it produces. More information about <strong>celltalker</strong> can be found at <a href="https://github.com/arc85/celltalker" class="uri">https://github.com/arc85/celltalker</a>.</p>
 <pre class="r"><code>library(&quot;celltalker&quot;)</code></pre>
 <p class="timeit">
-Chunk time: 0.13 secs
+Chunk time: 0.15 secs
 </p>
 </div>
 <div id="input" class="section level1" number="1">
@@ -660,7 +655,7 @@ seurat</code></pre>
 33694 features across 15524 samples within 1 assay 
 Active assay: RNA (33694 features, 0 variable features)</code></pre>
 <p class="timeit">
-Chunk time: 14.21 secs
+Chunk time: 15.36 secs
 </p>
 </div>
 <div id="ligand-receptor-pairs" class="section level2" number="1.2">
@@ -744,7 +739,7 @@ Chunk time: 14.21 secs
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.07 secs
+Chunk time: 0.09 secs
 </p>
 </div>
 </div>
@@ -772,9 +767,46 @@ p3 &lt;- Seurat::DimPlot(seurat, reduction = &quot;umap&quot;, group.by = &quot;
     Seurat::NoLegend()
 
 cowplot::plot_grid(p1, p2, p3)</code></pre>
-<img src="figure/18-celltalker.Rmd/seurat-cluster-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/18-celltalker.Rmd/seurat-cluster-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-seurat-cluster-1">
+Past versions of seurat-cluster-1.png
+</button>
+</p>
+<div id="fig-seurat-cluster-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b305bfe
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 45.63 secs
+Chunk time: 52.39 secs
 </p>
 </div>
 <div id="labels" class="section level2" number="2.2">
@@ -783,6 +815,43 @@ Chunk time: 45.63 secs
                     features = c(&quot;CD3D&quot;, &quot;CD8A&quot;, &quot;CD4&quot;, &quot;CD14&quot;, &quot;MS4A1&quot;,
                                  &quot;FCGR3A&quot;, &quot;IL3RA&quot;))</code></pre>
 <p><img src="figure/18-celltalker.Rmd/seurat-labels-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-seurat-labels-1">
+Past versions of seurat-labels-1.png
+</button>
+</p>
+<div id="fig-seurat-labels-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b305bfe
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Add metadata for cell types
 cell_types &lt;- vector(&quot;logical&quot;, length = ncol(seurat))
 names(cell_types) &lt;- colnames(seurat)
@@ -811,7 +880,7 @@ seurat[[&quot;CellType&quot;]] &lt;- cell_types
 rbc_cells &lt;- names(cell_types)[seurat@meta.data$RNA_snn_res.0.5 == &quot;16&quot;]
 seurat &lt;- seurat [, !colnames(seurat) %in% rbc_cells]</code></pre>
 <p class="timeit">
-Chunk time: 7.76 secs
+Chunk time: 8.66 secs
 </p>
 </div>
 </div>
@@ -836,7 +905,7 @@ interactions_sel &lt;- rbind(
     ramilowski_pairs[ramilowski_pairs$receptor %in% lr_sel, ]
 )</code></pre>
 <p class="timeit">
-Chunk time: 2.05 secs
+Chunk time: 2.04 secs
 </p>
 <p>This process selects <strong>61</strong> ligands and receptors and <strong>241</strong> interaction pairs.</p>
 </div>
@@ -1067,7 +1136,7 @@ skim(lr_matrices)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 1.15 secs
+Chunk time: 1.06 secs
 </p>
 </div>
 <div id="expressed-ligands-and-receptors" class="section level2" number="4.2">
@@ -1268,7 +1337,7 @@ skim(lr_expressed)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 1.01 secs
+Chunk time: 1.08 secs
 </p>
 </div>
 </div>
@@ -1378,7 +1447,7 @@ skim(putative_interactions)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 1.48 secs
+Chunk time: 1.31 secs
 </p>
 <p>The nested data frame returned by this function contains lists of the active ligands and receptors for each cell type in each group.</p>
 </div>
@@ -1485,7 +1554,7 @@ skim(unique_interactions)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.05 secs
+Chunk time: 0.04 secs
 </p>
 <p>This gives use the ligands and receptors that are unique to each group as well as those they have in common.</p>
 </div>
@@ -1501,9 +1570,46 @@ pbmc_interactions &lt;- pull(putative_interactions[1, 2])[[1]][pbmc_lr]
 
 circos_plot(interactions = pbmc_interactions, clusters = clusters)</code></pre>
 <p><img src="figure/18-celltalker.Rmd/vis-circos-pbmc-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-vis-circos-pbmc-1">
+Past versions of vis-circos-pbmc-1.png
+</button>
+</p>
+<div id="fig-vis-circos-pbmc-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b305bfe
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>[1] &quot;Plotted interactions&quot;</code></pre>
 <p class="timeit">
-Chunk time: 1.19 secs
+Chunk time: 1.49 secs
 </p>
 </div>
 <div id="tonsil" class="section level3" number="6.1.2">
@@ -1513,9 +1619,46 @@ tonsil_interactions &lt;- pull(putative_interactions[2, 2])[[1]][tonsil_lr]
 
 circos_plot(interactions = tonsil_interactions, clusters = clusters)</code></pre>
 <p><img src="figure/18-celltalker.Rmd/vis-circos-tonsil-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-vis-circos-tonsil-1">
+Past versions of vis-circos-tonsil-1.png
+</button>
+</p>
+<div id="fig-vis-circos-tonsil-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+b305bfe
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>[1] &quot;Plotted interactions&quot;</code></pre>
 <p class="timeit">
-Chunk time: 0.38 secs
+Chunk time: 0.46 secs
 </p>
 </div>
 </div>
@@ -1591,7 +1734,7 @@ Chunk time: 0.01 secs
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Berlin               
- date     2020-11-10                  
+ date     2020-11-24                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  ! package        * version    date       lib source                           
@@ -1606,7 +1749,7 @@ Chunk time: 0.01 secs
  P circlize       * 0.4.9      2020-04-30 [?] CRAN (R 4.0.0)                   
  P cli              2.0.2      2020-02-28 [?] CRAN (R 4.0.0)                   
  P cluster          2.1.0      2019-06-19 [?] CRAN (R 4.0.0)                   
- P codetools        0.2-16     2018-12-24 [?] CRAN (R 4.0.0)                   
+ P codetools        0.2-18     2020-11-04 [?] CRAN (R 4.0.2)                   
  P colorspace       1.4-1      2019-03-18 [?] standard (@1.4-1)                
  P conflicted     * 1.0.4      2019-06-21 [?] standard (@1.0.4)                
  P cowplot          1.0.0      2019-07-11 [?] CRAN (R 4.0.0)                   
@@ -1725,7 +1868,7 @@ Chunk time: 0.01 secs
  P storr            1.2.1      2018-10-18 [?] standard (@1.2.1)                
  P stringi          1.4.6      2020-02-17 [?] CRAN (R 4.0.0)                   
  P stringr        * 1.4.0      2019-02-10 [?] CRAN (R 4.0.0)                   
- P survival         3.2-3      2020-06-13 [?] CRAN (R 4.0.2)                   
+ P survival         3.2-7      2020-09-28 [?] CRAN (R 4.0.2)                   
    tensor           1.5        2012-05-05 [1] CRAN (R 4.0.2)                   
  P tibble         * 3.0.1      2020-04-20 [?] CRAN (R 4.0.0)                   
  P tidyr          * 1.0.3      2020-05-07 [?] CRAN (R 4.0.0)                   
@@ -1745,13 +1888,13 @@ Chunk time: 0.01 secs
    zoo              1.8-8      2020-05-02 [1] CRAN (R 4.0.0)                   
 
 [1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
-[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpDkCGRZ/renv-system-library
-[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp6fXpOy/renv-system-library
-[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmphHRsPg/renv-system-library
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpOqMPdA/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpGqapVJ/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpgtsH80/renv-system-library
 
  P ── Loaded and on-disk path mismatch.</code></pre>
 <p class="timeit">
-Chunk time: 0.3 secs
+Chunk time: 0.32 secs
 </p>
 </div>
 </div>

@@ -30,8 +30,6 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -358,40 +356,13 @@ div.tocify {
 
 
 
+<div id="nav-placeholder"></div>
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Interaction tools</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="license.html">License</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/lazappi/interaction-tools">
-    <span class="fa fa-github"></span>
-     
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar-content.html");
+});
+</script>
 
 <div class="fluid-row" id="header">
 
@@ -432,7 +403,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-11-10
+<strong>Last updated:</strong> 2020-11-24
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -523,16 +494,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree89d25036138a487390fef1ce677695355b6a7fdetargetblank89d2503a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/89d25036138a487390fef1ce677695355b6a7fde" target="_blank">89d2503</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree0333fe338ef08f0c7d43a9b4e271a49de2880d12targetblank0333fe3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="http://github.com/lazappi/iteraction-tools/tree/0333fe338ef08f0c7d43a9b4e271a49de2880d12" target="_blank">0333fe3</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree89d25036138a487390fef1ce677695355b6a7fdetargetblank89d2503a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpgithubcomlazappiiteractiontoolstree0333fe338ef08f0c7d43a9b4e271a49de2880d12targetblank0333fe3a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/89d25036138a487390fef1ce677695355b6a7fde" target="_blank">89d2503</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="http://github.com/lazappi/iteraction-tools/tree/0333fe338ef08f0c7d43a9b4e271a49de2880d12" target="_blank">0333fe3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -544,12 +515,15 @@ Ignored files:
     Ignored:    .drake/
     Ignored:    data/COMUNET/
     Ignored:    data/CellChat/
+    Ignored:    data/ICELLNET/
     Ignored:    data/NicheNet/
     Ignored:    data/cellphonedb/
+    Ignored:    data/celltalker/
     Ignored:    output/14-CellChat.Rmd/
     Ignored:    output/15-talklr.Rmd/
     Ignored:    output/16-CiteFuse.Rmd/
     Ignored:    output/17-scTHI.Rmd/
+    Ignored:    output/18-celltalker.Rmd/
     Ignored:    output/index.Rmd/
     Ignored:    renv/library/
     Ignored:    renv/python/
@@ -557,6 +531,13 @@ Ignored files:
 
 Unstaged changes:
     Modified:   _drake.R
+    Modified:   output/11-CellPhoneDB.Rmd/count_network.txt
+    Modified:   output/11-CellPhoneDB.Rmd/dotplot.png
+    Modified:   output/11-CellPhoneDB.Rmd/heatmap_counts.png
+    Modified:   output/11-CellPhoneDB.Rmd/heatmap_logcounts.png
+    Modified:   output/11-CellPhoneDB.Rmd/interactions_count.txt
+    Modified:   output/11-CellPhoneDB.Rmd/pvalues.txt
+    Modified:   output/11-CellPhoneDB.Rmd/significant_means.txt
 
 </code></pre>
 <p>
@@ -595,6 +576,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="http://github.com/lazappi/iteraction-tools/blob/38ee3227613a5ce84529753e97732b2bbd8e3ceb/docs/17-scTHI.html" target="_blank">38ee322</a>
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-10
+</td>
+<td>
+Add scTHI to drake
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -646,7 +644,7 @@ invisible(drake::readd(download_link))</code></pre>
 <p>In this document we are going to run through the example analysis for the <strong>scTHI</strong> package and have a look at the output it produces. More information about <strong>scTHI</strong> can be found at <a href="https://github.com/miccec/scTHI" class="uri">https://github.com/miccec/scTHI</a>.</p>
 <pre class="r"><code>library(&quot;scTHI&quot;)</code></pre>
 <p class="timeit">
-Chunk time: 0.14 secs
+Chunk time: 0.15 secs
 </p>
 </div>
 <div id="input" class="section level1" number="1">
@@ -748,7 +746,7 @@ pander(as.matrix(H3K27[1:5, 1:5]))</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 2.57 secs
+Chunk time: 2.81 secs
 </p>
 <p>The matrix has <strong>21673</strong> rows (pairs) and <strong>527</strong> columns.</p>
 </div>
@@ -903,7 +901,7 @@ skim(H3K27.meta)</code></pre>
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.12 secs
+Chunk time: 0.16 secs
 </p>
 <p>The most important column here contains the cell type labels.</p>
 <pre class="r"><code>table(H3K27.meta$Type)</code></pre>
@@ -921,7 +919,7 @@ Chunk time: 0 secs
 <pre class="r"><code>malignant &lt;- rownames(H3K27.meta)[H3K27.meta$Type == &quot;Malignant&quot;][1:100]
 immune    &lt;- rownames(H3K27.meta)[H3K27.meta$Type == &quot;Immune cell&quot;]</code></pre>
 <p class="timeit">
-Chunk time: 0 secs
+Chunk time: 0.01 secs
 </p>
 </div>
 <div id="testing" class="section level1" number="3">
@@ -947,7 +945,7 @@ Chunk time: 0 secs
 [13] &quot;THY1_ITGB2:ITGAM&quot; &quot;VCAN_TLR2&quot;        &quot;HLA-A_LILRB1&quot;     &quot;CHAD_ITGB1&quot;      
 [17] &quot;APP_LRP1&quot;         &quot;APP_NCSTN&quot;       </code></pre>
 <p class="timeit">
-Chunk time: 39.28 secs
+Chunk time: 40.87 secs
 </p>
 <p>The output is a list with <strong>4</strong> items: <strong>result</strong>, <strong>expMat</strong>, <strong>Malignant</strong> and <strong>Immune</strong></p>
 <p>Most of these are the inputs we provided but the scores are available in the <strong>result</strong> item.</p>
@@ -1156,7 +1154,7 @@ Chunk time: 39.28 secs
 </tbody>
 </table>
 <p class="timeit">
-Chunk time: 0.11 secs
+Chunk time: 0.09 secs
 </p>
 </div>
 <div id="visualisation" class="section level1" number="4">
@@ -1169,9 +1167,46 @@ Chunk time: 0.11 secs
     cexNames    = 0.7,
     plotType    = &quot;score&quot;
 )</code></pre>
-<img src="figure/17-scTHI.Rmd/vis-scores-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/17-scTHI.Rmd/vis-scores-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-vis-scores-1">
+Past versions of vis-scores-1.png
+</button>
+</p>
+<div id="fig-vis-scores-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+38ee322
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 0.16 secs
+Chunk time: 0.15 secs
 </p>
 </div>
 <div id="expression-1" class="section level2" number="4.2">
@@ -1182,9 +1217,46 @@ Chunk time: 0.16 secs
     cexNames    = 0.7,
     plotType    = &quot;pair&quot;
 )</code></pre>
-<img src="figure/17-scTHI.Rmd/vis-expression-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/17-scTHI.Rmd/vis-expression-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-vis-expression-1">
+Past versions of vis-expression-1.png
+</button>
+</p>
+<div id="fig-vis-expression-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+38ee322
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 0.08 secs
+Chunk time: 0.1 secs
 </p>
 </div>
 <div id="t-sne" class="section level2" number="4.3">
@@ -1200,9 +1272,46 @@ scTHI_plotCluster(
     cexPoint    = 0.8,
     legendPos   = &quot;bottomleft&quot;
 )</code></pre>
-<img src="figure/17-scTHI.Rmd/vis-tsne-cluster-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/17-scTHI.Rmd/vis-tsne-cluster-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-vis-tsne-cluster-1">
+Past versions of vis-tsne-cluster-1.png
+</button>
+</p>
+<div id="fig-vis-tsne-cluster-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+38ee322
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 7.64 secs
+Chunk time: 12.06 secs
 </p>
 </div>
 <div id="interactions" class="section level3" number="4.3.2">
@@ -1213,9 +1322,46 @@ Chunk time: 7.64 secs
     cexPoint          = 0.8,
     interactionToplot = &quot;THY1_ITGAX:ITGB2&quot;
 )</code></pre>
-<img src="figure/17-scTHI.Rmd/vis-tsne-interaction-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="figure/17-scTHI.Rmd/vis-tsne-interaction-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-vis-tsne-interaction-1">
+Past versions of vis-tsne-interaction-1.png
+</button>
+</p>
+<div id="fig-vis-tsne-interaction-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+38ee322
+</td>
+<td>
+Luke Zappia
+</td>
+<td>
+2020-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p class="timeit">
-Chunk time: 0.19 secs
+Chunk time: 0.2 secs
 </p>
 </div>
 </div>
@@ -1291,7 +1437,7 @@ Chunk time: 0.01 secs
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Berlin               
- date     2020-11-10                  
+ date     2020-11-24                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  ! package      * version date       lib source            
@@ -1384,13 +1530,13 @@ Chunk time: 0.01 secs
  P yaml           2.2.1   2020-02-01 [?] CRAN (R 4.0.0)    
 
 [1] /Users/luke.zappia/Documents/Projects/interaction-tools/renv/library/R-4.0/x86_64-apple-darwin17.0
-[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpDkCGRZ/renv-system-library
-[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpkN9ZNa/renv-system-library
-[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp6qESsA/renv-system-library
+[2] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpOqMPdA/renv-system-library
+[3] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/RtmpqYMqtc/renv-system-library
+[4] /private/var/folders/rj/60lhr791617422kqvh0r4vy40000gn/T/Rtmp7wtwHE/renv-system-library
 
  P ── Loaded and on-disk path mismatch.</code></pre>
 <p class="timeit">
-Chunk time: 0.17 secs
+Chunk time: 0.16 secs
 </p>
 </div>
 </div>
